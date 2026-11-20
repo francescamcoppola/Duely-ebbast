@@ -11,21 +11,21 @@
     ],
   },
   "files": [
-    { "kind": "folder", "path": "DuelyProject", "target-membership": [ "DuelyProject" ] },
-    { "path": "PrivacyInfo.xcprivacy", "target-membership": [ "DuelyProject/resources" ] },
+    { "kind": "folder", "path": "DuelyProject", "target-membership": [ "Scadenzsly" ] },
+    { "path": "PrivacyInfo.xcprivacy", "target-membership": [ "Scadenzsly/resources" ] },
     {
       "kind": "group",
       "name": "Products",
       "children": [
-        { "path": "<PRODUCTS>/DuelyProject.app", "id": "DC45040230ACA2C900F0B01C", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/Scadenzsly.app", "id": "DC45040230ACA2C900F0B01C", "type": "wrapper.application", "index": false },
       ],
     },
   ],
   "targets": [
     {
-      "name": "DuelyProject",
+      "name": "Scadenzsly",
       "id": "DC45040130ACA2C900F0B01C",
-      "product": "Products/DuelyProject.app",
+      "product": "Products/Scadenzsly.app",
       "product-type": "application",
       "build-phases": [
         "compile-sources",
@@ -37,7 +37,7 @@
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "1",
-        "DEVELOPMENT_TEAM": "534FGD64GF",
+        "DEVELOPMENT_TEAM": "JHJ2Y32G4L",
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation": "YES",
@@ -45,13 +45,13 @@
         "INFOPLIST_KEY_UILaunchScreen_Generation": "YES",
         "INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad": "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight",
         "INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone": "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight",
-        "IPHONEOS_DEPLOYMENT_TARGET": "27.0",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.6",
         "LD_RUNPATH_SEARCH_PATHS": [
           "$(inherited)",
           "@executable_path/Frameworks",
         ],
         "MARKETING_VERSION": "1.0",
-        "PRODUCT_BUNDLE_IDENTIFIER": "com.diegotamez.DuelyProject",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.francescamariacoppola.Duely",
         "PRODUCT_NAME": "$(TARGET_NAME)",
         "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
         "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
