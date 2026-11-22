@@ -12,6 +12,7 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
 
 @main
 struct DuelyProjectApp: App {
