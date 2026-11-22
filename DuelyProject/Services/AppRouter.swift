@@ -33,20 +33,35 @@ final class AppRouter {
 nonisolated final class NotificationCoordinator: NSObject, UNUserNotificationCenterDelegate, Sendable {
     static let shared = NotificationCoordinator()
 
+    // Completion-handler variants on purpose: the `async` ones, in a nonisolated class, run off the
+    // main thread and call UIKit's completion handler from there, which crashes on notification tap.
+
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification
-    ) async -> UNNotificationPresentationOptions {
-        [.banner, .list, .sound]
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .list, .sound])
     }
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        didReceive response: UNNotificationResponse
-    ) async {
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
         let identifier = response.notification.request.identifier
-        await MainActor.run {
-            AppRouter.shared.handleNotification(identifier: identifier)
+        // UIKit delivers taps on the main thread and expects the handler to be called there too.
+        if Thread.isMainThread {
+            MainActor.assumeIsolated {
+                AppRouter.shared.handleNotification(identifier: identifier)
+            }
+            completionHandler()
+        } else {
+            nonisolated(unsafe) let completion = completionHandler
+            DispatchQueue.main.async {
+                AppRouter.shared.handleNotification(identifier: identifier)
+                completion()
+            }
         }
     }
 }
