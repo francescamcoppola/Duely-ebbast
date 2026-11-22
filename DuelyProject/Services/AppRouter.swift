@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import UIKit
 import UserNotifications
 import Observation
@@ -25,6 +26,44 @@ final class AppRouter {
         } else if identifier.hasPrefix(NotificationIDs.paymentPrefix) {
             selectedTab = .calendar
         }
+    }
+}
+
+/// Erases everything the user created and sends them back to the first-launch setup.
+@MainActor
+enum AppReset {
+    /// Every preference the app stores. Removing them brings back the defaults of a fresh install.
+    static let storedKeys = [
+        OnboardingKeys.userName,
+        OnboardingKeys.monthlyBudget,
+        OnboardingKeys.currencyCode,
+        CheckInKeys.enabled,
+        CheckInKeys.weekday,
+        CheckInKeys.minutes,
+        CheckInKeys.skippedWeek,
+        CheckInKeys.paymentRemindersEnabled,
+        "subscriptionsSort",
+    ]
+
+    static func eraseAll(context: ModelContext, defaults: UserDefaults = .standard) async {
+        // Delete one by one (not a batch delete) so open @Query views update right away.
+        for entry in (try? context.fetch(FetchDescriptor<UsageEntry>())) ?? [] {
+            context.delete(entry)
+        }
+        for subscription in (try? context.fetch(FetchDescriptor<Subscription>())) ?? [] {
+            context.delete(subscription)
+        }
+        try? context.save()
+
+        await NotificationService.reschedule(checkIn: nil, payments: [])
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+
+        storedKeys.forEach(defaults.removeObject(forKey:))
+        AppRouter.shared.isCheckInPresented = false
+        AppRouter.shared.selectedTab = .home
+
+        // Last: flipping this swaps the tabs for onboarding.
+        defaults.set(false, forKey: OnboardingKeys.hasCompleted)
     }
 }
 

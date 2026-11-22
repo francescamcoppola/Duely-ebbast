@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import UIKit
 import UserNotifications
 
@@ -14,6 +15,7 @@ struct SettingsView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.calendar) private var calendar
+    @Environment(\.modelContext) private var modelContext
 
     @AppStorage(OnboardingKeys.userName) private var userName = ""
     @AppStorage(OnboardingKeys.monthlyBudget) private var budgetString = ""
@@ -26,6 +28,7 @@ struct SettingsView: View {
     @State private var notificationStatus: UNAuthorizationStatus?
     @State private var isEditingBudget = false
     @State private var isPickingCurrency = false
+    @State private var isConfirmingReset = false
 
     var body: some View {
         NavigationStack {
@@ -37,6 +40,7 @@ struct SettingsView: View {
                 if notificationStatus == .denied {
                     notificationsDeniedSection
                 }
+                resetSection
                 #if DEBUG
                 debugSection
                 #endif
@@ -151,6 +155,26 @@ struct SettingsView: View {
         }
     }
 
+    private var resetSection: some View {
+        Section {
+            Button("Reset App", role: .destructive) {
+                isConfirmingReset = true
+            }
+            .confirmationDialog(
+                "Reset \(AppInfo.name)?",
+                isPresented: $isConfirmingReset,
+                titleVisibility: .visible
+            ) {
+                Button("Erase All Data and Reset", role: .destructive, action: resetApp)
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("All your subscriptions, check-in history and settings will be deleted. This can't be undone.")
+            }
+        } footer: {
+            Text("Deletes everything and shows the first-launch setup again, so you can start over.")
+        }
+    }
+
     #if DEBUG
     private var debugSection: some View {
         Section("Debug") {
@@ -188,6 +212,14 @@ struct SettingsView: View {
         } set: { date in
             let parts = calendar.dateComponents([.hour, .minute], from: date)
             checkInMinutes = (parts.hour ?? 18) * 60 + (parts.minute ?? 0)
+        }
+    }
+
+    private func resetApp() {
+        let context = modelContext
+        dismiss()
+        Task {
+            await AppReset.eraseAll(context: context)
         }
     }
 
