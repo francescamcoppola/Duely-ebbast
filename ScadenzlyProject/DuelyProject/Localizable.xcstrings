@@ -1,0 +1,2300 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ can only read email. It can't send, delete or change anything in your mailbox." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ solo puede leer el correo. No puede enviar, eliminar ni cambiar nada en tu buzón."
+          }
+        }
+      }
+    },
+    "%@ doesn't track you, show ads or share data with data brokers." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ no te rastrea, no muestra anuncios ni comparte datos con intermediarios de datos."
+          }
+        }
+      }
+    },
+    "%@ has no account, no servers and no analytics. Everything you enter stays on your device." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ no tiene cuentas, servidores ni analíticas. Todo lo que introduces se queda en tu dispositivo."
+          }
+        }
+      }
+    },
+    "%@'s use of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El uso que hace %@ de la información recibida de las API de Google cumple la Política de datos de usuario de los servicios de API de Google, incluidos los requisitos de uso limitado."
+          }
+        }
+      }
+    },
+    "^[%lld subscription](inflect: true) added." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "^[%lld suscripción agregada](inflect: true)."
+          }
+        }
+      }
+    },
+    "Access to Gmail wasn't allowed." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se permitió el acceso a Gmail."
+          }
+        }
+      }
+    },
+    "Account" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cuenta"
+          }
+        }
+      }
+    },
+    "Allow “View your email messages and settings” on Google's screen so emails can be scanned." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Permite “Ver tus mensajes y ajustes de correo electrónico” en la pantalla de Google para poder analizar los correos."
+          }
+        }
+      }
+    },
+    "Analyzed on this device" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Analizado en este dispositivo"
+          }
+        }
+      }
+    },
+    "Apple Intelligence is still getting ready. Try again in a few minutes." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence aún se está preparando. Vuelve a intentarlo en unos minutos."
+          }
+        }
+      }
+    },
+    "Apple Intelligence isn't available right now." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence no está disponible en este momento."
+          }
+        }
+      }
+    },
+    "Apple Intelligence reads your recent receipts and renewal emails on this device and suggests the subscriptions it finds. You choose which ones to add." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence lee en este dispositivo tus recibos y correos de renovación recientes y te sugiere las suscripciones que encuentra. Tú eliges cuáles agregar."
+          }
+        }
+      }
+    },
+    "Billed in %@, saved without conversion" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Facturado en %@, se guarda sin conversión"
+          }
+        }
+      }
+    },
+    "Check-in and payment reminders are scheduled on your device. No push service is used." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los recordatorios de revisión y de pago se programan en tu dispositivo. No se usa ningún servicio push."
+          }
+        }
+      }
+    },
+    "Connect Gmail" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Conectar Gmail"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Conectado"
+          }
+        }
+      }
+    },
+    "Couldn't reach Google. Check your connection and try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se pudo conectar con Google. Revisa tu conexión y vuelve a intentarlo."
+          }
+        }
+      }
+    },
+    "Delete subscriptions in the app, disconnect Gmail in Settings, or delete the app to remove everything it stored." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Elimina suscripciones en la app, desconecta Gmail en Configuración o elimina la app para borrar todo lo que guardó."
+          }
+        }
+      }
+    },
+    "Delete your data" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Eliminar tus datos"
+          }
+        }
+      }
+    },
+    "Disconnect" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Desconectar"
+          }
+        }
+      }
+    },
+    "Disconnect Gmail" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Desconectar Gmail"
+          }
+        }
+      }
+    },
+    "Disconnect Gmail?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "¿Desconectar Gmail?"
+          }
+        }
+      }
+    },
+    "Emails are held in memory only during a scan. Only the subscriptions you choose to add are saved." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los correos solo se mantienen en memoria durante el análisis. Solo se guardan las suscripciones que decides agregar."
+          }
+        }
+      }
+    },
+    "Emails are read by Apple Intelligence on your device. Their content is never sent to %@, to Apple or to anyone else." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence lee los correos en tu dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más."
+          }
+        }
+      }
+    },
+    "Find Subscriptions in Your Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encuentra suscripciones en tu correo"
+          }
+        }
+      }
+    },
+    "Find subscriptions in your Gmail receipts with Apple Intelligence, on this device." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encuentra suscripciones en tus recibos de Gmail con Apple Intelligence, en este dispositivo."
+          }
+        }
+      }
+    },
+    "Found in Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encontradas en el correo"
+          }
+        }
+      }
+    },
+    "Found on this device by Apple Intelligence, which can make mistakes. Check the details: you can edit any subscription after adding it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encontradas en este dispositivo por Apple Intelligence, que puede cometer errores. Revisa los detalles: puedes editar cualquier suscripción después de agregarla."
+          }
+        }
+      }
+    },
+    "Gmail" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Gmail"
+          }
+        }
+      }
+    },
+    "Gmail import isn't available in this version of the app." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "La importación desde Gmail no está disponible en esta versión de la app."
+          }
+        }
+      }
+    },
+    "Gmail import isn't set up in this version of the app." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "La importación desde Gmail no está configurada en esta versión de la app."
+          }
+        }
+      }
+    },
+    "Google didn't complete the sign-in. Try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Google no completó el inicio de sesión. Vuelve a intentarlo."
+          }
+        }
+      }
+    },
+    "If you connect Gmail, %@ asks Google for read-only access. It can't send, delete or change email." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Si conectas Gmail, %@ pide a Google acceso de solo lectura. No puede enviar, eliminar ni cambiar correos."
+          }
+        }
+      }
+    },
+    "Import from Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Importar desde el correo"
+          }
+        }
+      }
+    },
+    "Last scanned %@. Reads up to %lld recent billing emails." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Último análisis: %1$@. Lee hasta %2$lld correos de facturación recientes."
+          }
+        }
+      }
+    },
+    "Local notifications" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Notificaciones locales"
+          }
+        }
+      }
+    },
+    "Next payment %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Próximo pago: %@"
+          }
+        }
+      }
+    },
+    "No New Subscriptions" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No hay suscripciones nuevas"
+          }
+        }
+      }
+    },
+    "No price found · Needs setup" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Sin precio · Requiere configuración"
+          }
+        }
+      }
+    },
+    "No receipts or renewals were found for subscriptions that aren't in %@ yet." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se encontraron recibos ni renovaciones de suscripciones que aún no estén en %@."
+          }
+        }
+      }
+    },
+    "No tracking" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Sin rastreo"
+          }
+        }
+      }
+    },
+    "Nothing is kept" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se guarda nada"
+          }
+        }
+      }
+    },
+    "Off" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No"
+          }
+        }
+      }
+    },
+    "On this device only" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Solo en este dispositivo"
+          }
+        }
+      }
+    },
+    "Optional and read-only" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opcional y de solo lectura"
+          }
+        }
+      }
+    },
+    "Privacy" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Privacidad"
+          }
+        }
+      }
+    },
+    "Processed on this device" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Procesado en este dispositivo"
+          }
+        }
+      }
+    },
+    "Read-only" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Solo lectura"
+          }
+        }
+      }
+    },
+    "Reading emails…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Leyendo correos…"
+          }
+        }
+      }
+    },
+    "Reads up to %lld recent billing emails. Keep the app open while it runs." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Lee hasta %lld correos de facturación recientes. Mantén la app abierta mientras se ejecuta."
+          }
+        }
+      }
+    },
+    "Recent billing emails are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to %@, to Apple or to anyone else, isn't used to train models, and isn't saved after the scan." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los correos de facturación recientes se descargan directamente de Google a tu dispositivo y Apple Intelligence los lee en el propio dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más, no se usa para entrenar modelos y no se guarda tras el análisis."
+          }
+        }
+      }
+    },
+    "Removes %@'s access in your Google Account and deletes the sign-in from this device. Subscriptions you've added stay." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Retira el acceso de %@ en tu cuenta de Google y elimina el inicio de sesión de este dispositivo. Las suscripciones que agregaste se mantienen."
+          }
+        }
+      }
+    },
+    "Scan" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Análisis"
+          }
+        }
+      }
+    },
+    "Scan Emails" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Analizar correos"
+          }
+        }
+      }
+    },
+    "Scanning emails needs a device that supports Apple Intelligence." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Para analizar correos se necesita un dispositivo compatible con Apple Intelligence."
+          }
+        }
+      }
+    },
+    "Searching your inbox…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Buscando en tu bandeja de entrada…"
+          }
+        }
+      }
+    },
+    "Something went wrong. Try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Algo salió mal. Vuelve a intentarlo."
+          }
+        }
+      }
+    },
+    "Stop Scanning" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Detener análisis"
+          }
+        }
+      }
+    },
+    "Stored securely" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Guardado de forma segura"
+          }
+        }
+      }
+    },
+    "The Gmail sign-in is kept in this device's Keychain and isn't synced. Disconnecting revokes it in your Google Account and deletes it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El inicio de sesión de Gmail se guarda en el llavero de este dispositivo y no se sincroniza. Al desconectarlo, se revoca en tu cuenta de Google y se elimina."
+          }
+        }
+      }
+    },
+    "The sign-in is stored in this device's Keychain. Disconnect at any time here or in your Google Account." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El inicio de sesión se guarda en el llavero de este dispositivo. Desconéctalo cuando quieras aquí o en tu cuenta de Google."
+          }
+        }
+      }
+    },
+    "Turn on Apple Intelligence in Settings › Apple Intelligence & Siri to scan emails." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Activa Apple Intelligence en Configuración › Apple Intelligence y Siri para analizar correos."
+          }
+        }
+      }
+    },
+    "What's Stored" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Qué se guarda"
+          }
+        }
+      }
+    },
+    "You'll sign in on Google's page. %@ never sees your password." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Iniciarás sesión en la página de Google. %@ nunca ve tu contraseña."
+          }
+        }
+      }
+    },
+    "Your choice" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tú decides"
+          }
+        }
+      }
+    },
+    "Your Gmail connection expired. Connect again to continue." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu conexión con Gmail caducó. Vuelve a conectarla para continuar."
+          }
+        }
+      }
+    },
+    "Your name, budget, currency, subscriptions and check-in answers are saved in the app's storage on this device. They're included in your device backup like other app data." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu nombre, presupuesto, moneda, suscripciones y respuestas de revisión se guardan en el almacenamiento de la app en este dispositivo. Se incluyen en la copia de seguridad del dispositivo como otros datos de apps."
+          }
+        }
+      }
+    },
+    "Your Privacy" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu privacidad"
+          }
+        }
+      }
+    },
+    "·" : {
+
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ left of %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ left of %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Quedan %1$@ de %2$@"
+          }
+        }
+      }
+    },
+    "%@ of category" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ de la categoría"
+          }
+        }
+      }
+    },
+    "%@ over budget" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ sobre el presupuesto"
+          }
+        }
+      }
+    },
+    "%@ renews in %lld days" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ renews in %#@days@"
+          },
+          "substitutions" : {
+            "days" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg day"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg days"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg days"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ se renueva en %#@days@"
+          },
+          "substitutions" : {
+            "days" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg día"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg días"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "machine_translated",
+                      "value" : "%arg días"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%@ renews in a week" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ se renueva en una semana"
+          }
+        }
+      }
+    },
+    "%@ renews tomorrow" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@ se renueva mañana"
+          }
+        }
+      }
+    },
+    "%@ will be charged on %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ will be charged on %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Se cobrará %1$@ el %2$@."
+          }
+        }
+      }
+    },
+    "%@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@. ^[%lld payment](inflect: true): %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@. ^[%2$lld payment](inflect: true): %3$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@. ^[%2$lld pago](inflect: true): %3$@"
+          }
+        }
+      }
+    },
+    "%@/mo" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%@/mes"
+          }
+        }
+      }
+    },
+    "%lld days before" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld day before"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld days before"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld days before"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld día antes"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld días antes"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "machine_translated",
+                  "value" : "%lld días antes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld de %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld characters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld characters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld de %2$lld caracteres"
+          }
+        }
+      }
+    },
+    "%lld of %lld selected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld selected"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld de %2$lld seleccionadas"
+          }
+        }
+      }
+    },
+    "%lld of %lld weekly check-ins done" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld weekly check-ins done"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld de %2$lld revisiones semanales completadas"
+          }
+        }
+      }
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "^[%lld active subscription](inflect: true)" : {
+
+    },
+    "^[%lld more subscription](inflect: true) in this category isn't counted until it has a price and payment date." : {
+
+    },
+    "0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "0"
+          }
+        }
+      }
+    },
+    "1 day before" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "1 día antes"
+          }
+        }
+      }
+    },
+    "1 week before" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "1 semana antes"
+          }
+        }
+      }
+    },
+    "About %@ per month." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aproximadamente %@ al mes."
+          }
+        }
+      }
+    },
+    "Active" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Activas"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agregar"
+          }
+        }
+      }
+    },
+    "Add a price and payment date so ^[%lld subscription](inflect: true) can count toward your budget." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega un precio y una fecha de pago para incluir ^[%lld suscripción](inflect: true) en tu presupuesto."
+          }
+        }
+      }
+    },
+    "Add a price and payment date to include these in your totals." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega un precio y una fecha de pago para incluirlas en tus totales."
+          }
+        }
+      }
+    },
+    "Add a subscription and its billing dates will appear here." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega una suscripción y aquí aparecerán sus fechas de cobro."
+          }
+        }
+      }
+    },
+    "Add Details" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agregar detalles"
+          }
+        }
+      }
+    },
+    "Add price and payment date" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega el precio y la fecha de pago"
+          }
+        }
+      }
+    },
+    "Add Price and Payment Date" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agregar precio y fecha de pago"
+          }
+        }
+      }
+    },
+    "Add Subscription" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agregar suscripción"
+          }
+        }
+      }
+    },
+    "Add the services you pay for to keep track of their cost and renewal dates." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega los servicios que pagas para llevar el control de su costo y sus fechas de renovación."
+          }
+        }
+      }
+    },
+    "Add the subscriptions you pay for to see your monthly cost and upcoming payments." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Agrega las suscripciones que pagas para ver tu costo mensual y tus próximos pagos."
+          }
+        }
+      }
+    },
+    "All Currencies" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Todas las monedas"
+          }
+        }
+      }
+    },
+    "Allow notifications for %@ in the Settings app to receive check-in and payment reminders." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Permite las notificaciones de %@ en la app Configuración para recibir recordatorios de revisiones y pagos."
+          }
+        }
+      }
+    },
+    "Amount" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Monto"
+          }
+        }
+      }
+    },
+    "Automatic" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Automático"
+          }
+        }
+      }
+    },
+    "Average per month" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Promedio mensual"
+          }
+        }
+      }
+    },
+    "Balanced" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Equilibrio"
+          }
+        }
+      }
+    },
+    "Based on your budget and ^[%lld week](inflect: true) of check-ins." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Según tu presupuesto y ^[%lld semana](inflect: true) de revisiones."
+          }
+        }
+      }
+    },
+    "Based on your budget. Weekly check-ins will make it more accurate." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Según tu presupuesto. Las revisiones semanales lo harán más preciso."
+          }
+        }
+      }
+    },
+    "Based on your recent check-ins. Only you know what's worth keeping." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Según tus revisiones recientes. Solo tú sabes qué vale la pena conservar."
+          }
+        }
+      }
+    },
+    "Billing" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Facturación"
+          }
+        }
+      }
+    },
+    "Billing Cycle" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Ciclo de facturación"
+          }
+        }
+      }
+    },
+    "Blue" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Azul"
+          }
+        }
+      }
+    },
+    "Brown" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Marrón"
+          }
+        }
+      }
+    },
+    "Budget" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Presupuesto"
+          }
+        }
+      }
+    },
+    "By Category" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Por categoría"
+          }
+        }
+      }
+    },
+    "Calendar" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Calendario"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "Canceling %@ would save %@ a month and make you %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Canceling %1$@ would save %2$@ a month and make you %3$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cancelar %1$@ te ahorraría %2$@ al mes y te llevaría al perfil %3$@."
+          }
+        }
+      }
+    },
+    "Category" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Categoría"
+          }
+        }
+      }
+    },
+    "Charged" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cobrado"
+          }
+        }
+      }
+    },
+    "Charges in %@ · ^[%lld payment](inflect: true)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Charges in %1$@ · ^[%2$lld payment](inflect: true)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cobros en %1$@ · ^[%2$lld pago](inflect: true)"
+          }
+        }
+      }
+    },
+    "Check-In" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Revisión semanal"
+          }
+        }
+      }
+    },
+    "Check-In Complete" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Revisión completada"
+          }
+        }
+      }
+    },
+    "Clear name" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Borrar nombre"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cerrar"
+          }
+        }
+      }
+    },
+    "Close to your %@ monthly average." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cerca de tu promedio mensual de %@."
+          }
+        }
+      }
+    },
+    "Collector" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Coleccionista"
+          }
+        }
+      }
+    },
+    "Collector under %@ · Optimizer at %@ or more" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Collector under %1$@ · Optimizer at %2$@ or more"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Coleccionista: menos de %1$@ · Optimización: %2$@ o más"
+          }
+        }
+      }
+    },
+    "Color" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Color"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Continuar"
+          }
+        }
+      }
+    },
+    "Cost per Week Used" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Costo por semana de uso"
+          }
+        }
+      }
+    },
+    "Cost per week used is what each week you actually used it really cost." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El costo por semana de uso es lo que realmente te costó cada semana que usaste la suscripción."
+          }
+        }
+      }
+    },
+    "Currency" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Moneda"
+          }
+        }
+      }
+    },
+    "Cyan" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cian"
+          }
+        }
+      }
+    },
+    "Day" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Día"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Eliminar"
+          }
+        }
+      }
+    },
+    "Delete %@?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "¿Eliminar %@?"
+          }
+        }
+      }
+    },
+    "Delete Subscription" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Eliminar suscripción"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Listo"
+          }
+        }
+      }
+    },
+    "Due" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Por cobrar"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Editar"
+          }
+        }
+      }
+    },
+    "Edit Budget" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Editar presupuesto"
+          }
+        }
+      }
+    },
+    "Edit Subscription" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Editar suscripción"
+          }
+        }
+      }
+    },
+    "Every 3 Months" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cada 3 meses"
+          }
+        }
+      }
+    },
+    "Everything in one place" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Todo en un solo lugar"
+          }
+        }
+      }
+    },
+    "Film & TV" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cine y TV"
+          }
+        }
+      }
+    },
+    "Finish Setting Up" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Termina de configurar"
+          }
+        }
+      }
+    },
+    "Get a reminder each week" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Recibe un recordatorio cada semana"
+          }
+        }
+      }
+    },
+    "Get reminded before each payment is due, so nothing renews by surprise." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Recibe un recordatorio antes de cada pago para que nada se renueve por sorpresa."
+          }
+        }
+      }
+    },
+    "Get Started" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Comenzar"
+          }
+        }
+      }
+    },
+    "Getting close" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cerca del límite"
+          }
+        }
+      }
+    },
+    "Getting Started" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Primeros pasos"
+          }
+        }
+      }
+    },
+    "Green" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Verde"
+          }
+        }
+      }
+    },
+    "Hi, %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Hola, %@"
+          }
+        }
+      }
+    },
+    "Higher than your %@ average because more payments fall in this month." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Más alto que tu promedio mensual de %@ porque este mes caen más pagos."
+          }
+        }
+      }
+    },
+    "Higher than your %@ average because of plans that renew this month: %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Higher than your %1$@ average because of plans that renew this month: %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Más alto que tu promedio mensual de %1$@ por los planes que se renuevan este mes: %2$@."
+          }
+        }
+      }
+    },
+    "History" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Historial"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Inicio"
+          }
+        }
+      }
+    },
+    "I Didn't Use Any" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No usé ninguna"
+          }
+        }
+      }
+    },
+    "In %lld days" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "En %lld días"
+          }
+        }
+      }
+    },
+    "Indigo" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Índigo"
+          }
+        }
+      }
+    },
+    "Insights" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Análisis"
+          }
+        }
+      }
+    },
+    "Insights show which subscriptions you actually use for what you pay." : {
+
+    },
+    "Its check-in history will be deleted too." : {
+
+    },
+    "Know what's worth it" : {
+
+    },
+    "Last %lld weeks" : {
+
+    },
+    "Last ^[%lld check-in](inflect: true): used %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Last ^[%1$lld check-in](inflect: true): used %2$lld"
+          }
+        }
+      }
+    },
+    "Least Worth It" : {
+
+    },
+    "Leisure" : {
+
+    },
+    "Lower than your %@ average: your longer plans renew in other months." : {
+
+    },
+    "Manage your subscriptions and deadlines in just one place." : {
+
+    },
+    "Mint" : {
+
+    },
+    "Monthly" : {
+
+    },
+    "Monthly budget" : {
+
+    },
+    "Monthly Budget" : {
+
+    },
+    "Monthly Cost" : {
+
+    },
+    "Music" : {
+
+    },
+    "Name" : {
+
+    },
+    "Needs Setup" : {
+
+    },
+    "Never miss a deadline" : {
+
+    },
+    "New Subscription" : {
+
+    },
+    "Next" : {
+
+    },
+    "Next Month" : {
+
+    },
+    "Next Payment" : {
+
+    },
+    "Nice to meet you, %@. Set a monthly limit and we'll let you know when you're getting close." : {
+
+    },
+    "No budget set, so your profile can only use how often you use your subscriptions." : {
+
+    },
+    "No check-ins yet." : {
+
+    },
+    "No payments on this day." : {
+
+    },
+    "No Payments Yet" : {
+
+    },
+    "No Subscriptions" : {
+
+    },
+    "No Subscriptions Yet" : {
+
+    },
+    "None" : {
+
+    },
+    "Not Set" : {
+
+    },
+    "Not used" : {
+
+    },
+    "Not Used This Week" : {
+
+    },
+    "Nothing due in the next two weeks." : {
+
+    },
+    "Nothing in this category counts toward your total right now." : {
+
+    },
+    "Notifications Are Off" : {
+
+    },
+    "On track" : {
+
+    },
+    "One quick question a week about which subscriptions you used. It makes your spending profile and usage insights more accurate." : {
+
+    },
+    "Open Notification Settings" : {
+
+    },
+    "Optimizer" : {
+
+    },
+    "Orange" : {
+
+    },
+    "Other" : {
+
+    },
+    "Over budget" : {
+
+    },
+    "Over Budget" : {
+
+    },
+    "Payment Reminders" : {
+
+    },
+    "Payments" : {
+
+    },
+    "Per Month" : {
+
+    },
+    "per month · %@ of your subscriptions" : {
+
+    },
+    "per week used" : {
+
+    },
+    "Per year" : {
+
+    },
+    "Per Year" : {
+
+    },
+    "Pick up to %lld to get started. You can add more later." : {
+
+    },
+    "Pink" : {
+
+    },
+    "Previous Month" : {
+
+    },
+    "Price" : {
+
+    },
+    "Profile" : {
+
+    },
+    "Purple" : {
+
+    },
+    "Red" : {
+
+    },
+    "Reminder" : {
+
+    },
+    "Remove Budget" : {
+
+    },
+    "Save" : {
+
+    },
+    "Saver" : {
+
+    },
+    "Saver under %@ · Balanced under %@ · Over budget above 100%%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Saver under %1$@ · Balanced under %2$@ · Over budget above 100%%"
+          }
+        }
+      }
+    },
+    "Search" : {
+
+    },
+    "Search currencies" : {
+
+    },
+    "See every subscription you pay for, and what it costs you each month." : {
+
+    },
+    "Sent at %@ before each payment, using the reminder chosen for each subscription." : {
+
+    },
+    "Set a budget and complete a weekly check-in to discover your profile." : {
+
+    },
+    "Set a monthly limit for your subscriptions. We'll let you know when you're getting close." : {
+
+    },
+    "Set Budget" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Shows a list of currencies" : {
+
+    },
+    "Shows subscription details" : {
+
+    },
+    "Shows the subscriptions in this category" : {
+
+    },
+    "Shows why you have this profile" : {
+
+    },
+    "Since %@, based on billing dates." : {
+
+    },
+    "Skip" : {
+
+    },
+    "Skip This Week" : {
+
+    },
+    "Social" : {
+
+    },
+    "Sort" : {
+
+    },
+    "Sort By" : {
+
+    },
+    "Spender" : {
+
+    },
+    "Spending profile" : {
+
+    },
+    "Spending Profile" : {
+
+    },
+    "Spent So Far" : {
+
+    },
+    "Start Check-In" : {
+
+    },
+    "Step %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Step %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "Still to come" : {
+
+    },
+    "Subscription Deleted" : {
+
+    },
+    "Subscriptions" : {
+
+    },
+    "Subscriptions use %@ of your monthly budget." : {
+
+    },
+    "Subscriptions use less than 1% of your monthly budget." : {
+
+    },
+    "Suggested" : {
+
+    },
+    "Teal" : {
+
+    },
+    "That's %@ a month. If this keeps happening, it may be worth canceling." : {
+
+    },
+    "this subscription" : {
+
+    },
+    "This subscription isn't counted in your totals yet." : {
+
+    },
+    "Time" : {
+
+    },
+    "Today" : {
+
+    },
+    "Today, %@" : {
+
+    },
+    "Tomorrow" : {
+
+    },
+    "Total" : {
+
+    },
+    "Turn On Reminders" : {
+
+    },
+    "Up Next" : {
+
+    },
+    "Usage" : {
+
+    },
+    "Usage starts counting toward your profile after %lld weekly check-ins." : {
+
+    },
+    "Used" : {
+
+    },
+    "Used %lld of ^[%lld week](inflect: true)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Used %1$lld of ^[%2$lld week](inflect: true)"
+          }
+        }
+      }
+    },
+    "Used for every price in the app. Changing it doesn't convert prices you've already entered." : {
+
+    },
+    "Utilities" : {
+
+    },
+    "We'll send one notification on %@ so you don't forget." : {
+
+    },
+    "We'll use your name to personalize your experience." : {
+
+    },
+    "Weekly" : {
+
+    },
+    "Weekly Check-In" : {
+
+    },
+    "Weekly check-ins will show how often you use this subscription and what each use really costs." : {
+
+    },
+    "Welcome to %@" : {
+
+    },
+    "What should we call you?" : {
+
+    },
+    "What Would Change It" : {
+
+    },
+    "What's your monthly budget?" : {
+
+    },
+    "Which subscriptions did you use from %@? It takes 10 seconds." : {
+
+    },
+    "Which subscriptions did you use this week?" : {
+
+    },
+    "Which subscriptions did you use this week? It takes 10 seconds." : {
+
+    },
+    "Which subscriptions do you have?" : {
+
+    },
+    "Why" : {
+
+    },
+    "Work" : {
+
+    },
+    "Yearly" : {
+
+    },
+    "Yearly plans are shown as their monthly average." : {
+
+    },
+    "Yellow" : {
+
+    },
+    "You can change this anytime in Settings." : {
+
+    },
+    "You pay for more than you use. Some subscriptions may be worth canceling." : {
+
+    },
+    "You use what you pay for and stay within budget." : {
+
+    },
+    "You used %lld of ^[%lld subscription](inflect: true) this week." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You used %1$lld of ^[%2$lld subscription](inflect: true) this week."
+          }
+        }
+      }
+    },
+    "You used your subscriptions in %@ of check-in answers." : {
+
+    },
+    "You'll see a warning on Home when your subscriptions get close to this amount." : {
+
+    },
+    "You're close to your budget. A check-in can show what to cut." : {
+
+    },
+    "Your name" : {
+
+    },
+    "Your profile combines how much of your budget subscriptions take with how often you use them, over the last %lld weeks." : {
+
+    },
+    "Your subscriptions cost more than your monthly budget." : {
+
+    },
+    "Your subscriptions fit comfortably within your budget." : {
+
+    },
+    "Your subscriptions use less than half of your budget." : {
+
+    }
+  },
+  "version" : "1.3"
+}
