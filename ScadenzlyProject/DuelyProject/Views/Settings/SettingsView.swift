@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import SwiftData
 import UserNotifications
 
 struct SettingsView: View {
@@ -14,6 +15,7 @@ struct SettingsView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.calendar) private var calendar
+    @Environment(\.modelContext) private var modelContext
 
     @AppStorage(OnboardingKeys.userName) private var userName = ""
     @AppStorage(OnboardingKeys.monthlyBudget) private var budgetString = ""
@@ -27,6 +29,8 @@ struct SettingsView: View {
     @State private var isEditingBudget = false
     @State private var isPickingCurrency = false
     @State private var emailImport = EmailImportModel.shared
+    @State private var isConfirmingReset = false
+    @State private var isResetting = false
 
     var body: some View {
         NavigationStack {
@@ -40,6 +44,7 @@ struct SettingsView: View {
                 }
                 emailImportSection
                 privacySection
+                resetSection
                 #if DEBUG
                 debugSection
                 #endif
@@ -180,6 +185,39 @@ struct SettingsView: View {
         }
     }
 
+    private var resetSection: some View {
+        Section {
+            Button(role: .destructive) {
+                isConfirmingReset = true
+            } label: {
+                if isResetting {
+                    HStack {
+                        Text("Resetting…")
+                        Spacer()
+                        ProgressView()
+                    }
+                } else {
+                    Text("Reset \(AppInfo.name)")
+                }
+            }
+            .disabled(isResetting)
+            .confirmationDialog(
+                "Reset \(AppInfo.name)?",
+                isPresented: $isConfirmingReset,
+                titleVisibility: .visible
+            ) {
+                Button("Erase All and Start Over", role: .destructive) {
+                    resetApp()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("All your subscriptions, check-ins and settings will be deleted from this device and Gmail will be disconnected. This can't be undone.")
+            }
+        } footer: {
+            Text("Deletes everything and takes you back to the welcome screen to set up \(AppInfo.name) again.")
+        }
+    }
+
     #if DEBUG
     private var debugSection: some View {
         Section("Debug") {
@@ -217,6 +255,15 @@ struct SettingsView: View {
         } set: { date in
             let parts = calendar.dateComponents([.hour, .minute], from: date)
             checkInMinutes = (parts.hour ?? 18) * 60 + (parts.minute ?? 0)
+        }
+    }
+
+    private func resetApp() {
+        isResetting = true
+        Task {
+            await AppReset.eraseAll(context: modelContext)
+            // ContentView switches to onboarding; close the sheet in case it's still on screen.
+            dismiss()
         }
     }
 
