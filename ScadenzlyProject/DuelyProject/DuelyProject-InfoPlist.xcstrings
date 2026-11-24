@@ -3,18 +3,36 @@
   "strings" : {
     "CFBundleName" : {
       "comment" : "Bundle name",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DuelyProject"
+            "state" : "translated",
+            "value" : "MyDues"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Duely"
+            "state" : "translated",
+            "value" : "MyDues"
+          }
+        }
+      }
+    },
+    "CFBundleDisplayName" : {
+      "comment" : "Name shown under the app icon",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MyDues"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MyDues"
           }
         }
       }

@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  DuelyProject
 //
-//  Profile, budget, weekly check-in, notifications, email import and privacy.
+//  Profile, budget, weekly check-in, notifications, iCloud, email import and privacy.
 //
 
 import SwiftUI
@@ -31,6 +31,7 @@ struct SettingsView: View {
     @State private var emailImport = EmailImportModel.shared
     @State private var isConfirmingReset = false
     @State private var isResetting = false
+    @State private var cloudStatus: CloudSyncStatus = .checking
 
     var body: some View {
         NavigationStack {
@@ -42,6 +43,7 @@ struct SettingsView: View {
                 if notificationStatus == .denied {
                     notificationsDeniedSection
                 }
+                iCloudSection
                 emailImportSection
                 privacySection
                 resetSection
@@ -65,6 +67,7 @@ struct SettingsView: View {
             .task(id: scenePhase) {
                 // Refresh when coming back from the Settings app.
                 notificationStatus = await NotificationService.authorizationStatus()
+                cloudStatus = await CloudSyncStatus.current()
             }
             .onChange(of: userName) { _, newValue in
                 let limited = OnboardingViewModel.limitedName(newValue)
@@ -165,13 +168,33 @@ struct SettingsView: View {
                 EmailImportView()
             } label: {
                 LabeledContent {
-                    Text(emailImport.isConnected ? "Connected" : "Off")
+                    switch emailImport.connectedEmails.count {
+                    case 0: Text("Off")
+                    case 1: Text("Connected")
+                    case let count: Text("^[\(count) account](inflect: true)")
+                    }
                 } label: {
                     Label("Import from Email", systemImage: "envelope.badge")
                 }
             }
         } footer: {
-            Text("Find subscriptions in your Gmail receipts with Apple Intelligence, on this device.")
+            Text("Find subscriptions, bills, taxes and tuition in one or more Gmail accounts with Apple Intelligence, on this device.")
+        }
+    }
+
+    private var iCloudSection: some View {
+        Section {
+            LabeledContent {
+                if cloudStatus == .checking {
+                    ProgressView()
+                } else {
+                    Text(cloudStatus.title)
+                }
+            } label: {
+                Label("iCloud Sync", systemImage: cloudStatus == .on ? "checkmark.icloud" : "icloud.slash")
+            }
+        } footer: {
+            Text(cloudStatus.message)
         }
     }
 
@@ -211,7 +234,7 @@ struct SettingsView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("All your subscriptions, check-ins and settings will be deleted from this device and Gmail will be disconnected. This can't be undone.")
+                Text("All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices, and every Gmail account will be disconnected. This can't be undone.")
             }
         } footer: {
             Text("Deletes everything and takes you back to the welcome screen to set up \(AppInfo.name) again.")

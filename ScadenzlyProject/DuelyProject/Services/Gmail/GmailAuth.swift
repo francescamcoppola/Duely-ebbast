@@ -57,21 +57,59 @@ nonisolated struct GmailAuthorizationRequest: Sendable {
 }
 
 nonisolated enum GmailAuth {
-    private static let keychainAccount = "tokens"
+    /// One Keychain item holding every connected account, in the order they were added.
+    private static let keychainAccount = "accounts"
+    /// Before several accounts were supported: a single `GmailTokens`. Migrated on first read.
+    private static let legacyKeychainAccount = "tokens"
 
     // MARK: Stored tokens
 
-    static func storedTokens() -> GmailTokens? {
-        guard let data = KeychainStore.data(for: keychainAccount) else { return nil }
-        return try? JSONDecoder().decode(GmailTokens.self, from: data)
+    /// Every connected account.
+    static func storedAccounts() -> [GmailTokens] {
+        if let data = KeychainStore.data(for: keychainAccount),
+           let accounts = try? JSONDecoder().decode([GmailTokens].self, from: data) {
+            return accounts
+        }
+        // Migrate the single account saved by earlier versions.
+        if let data = KeychainStore.data(for: legacyKeychainAccount),
+           let tokens = try? JSONDecoder().decode(GmailTokens.self, from: data) {
+            if (try? save([tokens])) != nil { KeychainStore.delete(legacyKeychainAccount) }
+            return [tokens]
+        }
+        return []
     }
 
+    static func storedTokens(for email: String) -> GmailTokens? {
+        storedAccounts().first { $0.email?.caseInsensitiveCompare(email) == .orderedSame }
+    }
+
+    /// Adds the account, or replaces it if the same address is already connected.
     static func store(_ tokens: GmailTokens) throws {
-        try KeychainStore.set(JSONEncoder().encode(tokens), for: keychainAccount)
+        var accounts = storedAccounts()
+        if let index = accounts.firstIndex(where: { $0.email?.caseInsensitiveCompare(tokens.email ?? "") == .orderedSame }) {
+            accounts[index] = tokens
+        } else {
+            accounts.append(tokens)
+        }
+        try save(accounts)
     }
 
-    static func deleteStoredTokens() {
+    static func deleteStoredTokens(for email: String) {
+        let remaining = storedAccounts().filter { $0.email?.caseInsensitiveCompare(email) != .orderedSame }
+        if remaining.isEmpty {
+            KeychainStore.delete(keychainAccount)
+        } else {
+            try? save(remaining)
+        }
+    }
+
+    static func deleteAllStoredTokens() {
         KeychainStore.delete(keychainAccount)
+        KeychainStore.delete(legacyKeychainAccount)
+    }
+
+    private static func save(_ accounts: [GmailTokens]) throws {
+        try KeychainStore.set(JSONEncoder().encode(accounts), for: keychainAccount)
     }
 
     // MARK: Authorization
@@ -91,6 +129,8 @@ nonisolated enum GmailAuth {
             URLQueryItem(name: "code_challenge", value: challenge),
             URLQueryItem(name: "code_challenge_method", value: "S256"),
             URLQueryItem(name: "state", value: state),
+            // Always show Google's account chooser, so another account can be added.
+            URLQueryItem(name: "prompt", value: "select_account"),
         ]
         return GmailAuthorizationRequest(url: components.url!, state: state, codeVerifier: verifier)
     }

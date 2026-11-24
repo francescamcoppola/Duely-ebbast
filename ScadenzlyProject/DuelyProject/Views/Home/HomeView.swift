@@ -33,6 +33,7 @@ struct HomeView: View {
     @State private var isAddingSubscription = false
     @State private var isEditingBudget = false
     @State private var isShowingSettings = false
+    @State private var catalog = PlanCatalogStore.shared
 
     private var checkInSchedule: CheckInSchedule {
         CheckInSchedule(weekday: checkInWeekday, minutes: checkInMinutes)
@@ -137,6 +138,10 @@ struct HomeView: View {
                             }
                             .buttonStyle(.plain)
                         }
+                        let savings = savingsItems
+                        if !savings.isEmpty {
+                            SavingsCard(items: savings, currencyCode: currencyCode) { detailSubscription = $0 }
+                        }
                         if !summary.categories.isEmpty {
                             CategoryBreakdownCard(shares: summary.categories,
                                                   total: summary.monthlyTotal,
@@ -153,6 +158,24 @@ struct HomeView: View {
         }
         .animation(.smooth, value: subscriptions.count)
         .animation(.smooth, value: dueCheckInWeek)
+    }
+
+    /// The best cheaper option for each configured subscription, biggest saving first.
+    private var savingsItems: [SavingsCard.Item] {
+        let names = subscriptions.map(\.name)
+        return subscriptions
+            .filter { !$0.needsSetup }
+            .compactMap { subscription in
+                let others = names.filter { $0 != subscription.name }
+                return catalog.alternatives(forName: subscription.name,
+                                            monthlyCost: subscription.monthlyCost,
+                                            currencyCode: currencyCode,
+                                            excludingNames: others,
+                                            limit: 1)
+                    .first
+                    .map { SavingsCard.Item(subscription: subscription, best: $0) }
+            }
+            .sorted { $0.best.monthlySaving > $1.best.monthlySaving }
     }
 
     private var emptyState: some View {

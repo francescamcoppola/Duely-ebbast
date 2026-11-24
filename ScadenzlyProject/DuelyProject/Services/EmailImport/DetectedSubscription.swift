@@ -26,6 +26,8 @@ struct DetectedSubscription: Identifiable, Equatable {
     var paymentDate: Date
     var emailSubject: String
     var emailDate: Date
+    /// The connected account the email was found in.
+    var sourceAccount: String? = nil
 
     func differsFromCurrency(_ code: String) -> Bool {
         guard let currencyCode else { return false }
@@ -36,7 +38,7 @@ struct DetectedSubscription: Identifiable, Equatable {
 // MARK: - Building candidates
 
 extension DetectedSubscription {
-    init?(analysis: EmailSubscriptionAnalysis, email: EmailMessage, calendar: Calendar = .current) {
+    init?(analysis: EmailSubscriptionAnalysis, email: EmailMessage, account: String? = nil, calendar: Calendar = .current) {
         let name = analysis.serviceName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard analysis.isRecurringSubscription, !name.isEmpty, name.count <= 60 else { return nil }
 
@@ -51,6 +53,7 @@ extension DetectedSubscription {
             ?? calendar.startOfDay(for: email.date)
         self.emailSubject = email.subject
         self.emailDate = email.date
+        self.sourceAccount = account
     }
 
     /// Positive, plausible amounts only, rounded to cents.
@@ -117,7 +120,9 @@ extension BillingCycle {
         switch detected {
         case .weekly: self = .weekly
         case .monthly, .unknown: self = .monthly
+        case .bimonthly: self = .bimonthly
         case .quarterly: self = .quarterly
+        case .semiannual: self = .semiannual
         case .yearly: self = .yearly
         }
     }
@@ -132,6 +137,10 @@ extension SubscriptionCategory {
         case .social: self = .social
         case .work: self = .work
         case .utilities: self = .utilities
+        case .home: self = .home
+        case .taxes: self = .taxes
+        case .education: self = .education
+        case .insurance: self = .insurance
         case .other: self = .other
         }
     }

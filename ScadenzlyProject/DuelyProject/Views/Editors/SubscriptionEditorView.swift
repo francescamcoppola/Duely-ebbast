@@ -30,6 +30,10 @@ struct SubscriptionEditorView: View {
     @State private var nextPayment = Date.now
     @State private var reminderDays = 1
     @State private var tint: SubscriptionTint?
+    /// Plan picked from the catalog. Kept if the price is edited (a promo, an old price), dropped
+    /// if the billing cycle no longer matches it (see `resolvedPlanName`).
+    @State private var planName: String?
+    @State private var catalog = PlanCatalogStore.shared
     @State private var didLoad = false
     @State private var isConfirmingDelete = false
     @FocusState private var focusedField: Field?
@@ -53,9 +57,19 @@ struct SubscriptionEditorView: View {
                             .animation(.smooth(duration: 0.2), value: tint)
                         TextField("Name", text: $name)
                             .textInputAutocapitalization(.words)
+                            .autocorrectionDisabled()
                             .submitLabel(.next)
                             .focused($focusedField, equals: .name)
                             .onSubmit { focusedField = .price }
+                    }
+
+                    ForEach(nameSuggestions) { service in
+                        Button {
+                            choose(service)
+                        } label: {
+                            ServiceSuggestionRow(service: service, currencyCode: currencyCode)
+                        }
+                        .foregroundStyle(.primary)
                     }
 
                     Picker("Category", selection: $category) {
@@ -63,6 +77,10 @@ struct SubscriptionEditorView: View {
                             Label(category.title, systemImage: category.symbol).tag(category)
                         }
                     }
+                }
+
+                if let matchedService {
+                    plansSection(for: matchedService)
                 }
 
                 Section("Color") {
@@ -147,6 +165,99 @@ struct SubscriptionEditorView: View {
         .interactiveDismissDisabled(hasChanges)
     }
 
+    // MARK: Plans
+
+    /// The catalog service for the name typed so far, if it's a known one.
+    private var matchedService: CatalogService? {
+        catalog.service(matching: trimmedName)
+    }
+
+    /// Known services matching what's being typed, while the name field is focused.
+    private var nameSuggestions: [CatalogService] {
+        guard focusedField == .name, !trimmedName.isEmpty else { return [] }
+        let results = catalog.suggestions(for: trimmedName)
+        // Once the name is exactly a known service, the plans section takes over.
+        if results.contains(where: { $0.name.caseInsensitiveCompare(trimmedName) == .orderedSame }) { return [] }
+        return results
+    }
+
+    /// The selected plan's name, only if it belongs to the service the name refers to and its
+    /// billing cycle is still the one chosen.
+    private var resolvedPlanName: String? {
+        guard let planName,
+              let plan = matchedService?.plans.first(where: { $0.name == planName }),
+              BillingCycle(rawValue: plan.cycle) == cycle else { return nil }
+        return planName
+    }
+
+    @ViewBuilder
+    private func plansSection(for service: CatalogService) -> some View {
+        let priced = service.plans(in: currencyCode)
+        Section {
+            if priced.isEmpty {
+                ForEach(service.plans) { plan in
+                    Button {
+                        planName = plan.name
+                        cycle = BillingCycle(rawValue: plan.cycle) ?? cycle
+                    } label: {
+                        PlanRow(name: plan.name, details: plan.details, price: nil,
+                                cycle: BillingCycle(rawValue: plan.cycle) ?? .monthly,
+                                currencyCode: currencyCode, isSelected: resolvedPlanName == plan.name)
+                    }
+                    .foregroundStyle(.primary)
+                }
+            } else {
+                ForEach(priced) { option in
+                    Button {
+                        apply(option)
+                    } label: {
+                        PlanRow(name: option.plan.name, details: option.plan.details, price: option.price,
+                                cycle: option.cycle, currencyCode: currencyCode,
+                                isSelected: resolvedPlanName == option.plan.name)
+                    }
+                    .foregroundStyle(.primary)
+                }
+            }
+        } header: {
+            Text("\(service.name) Plans")
+        } footer: {
+            if priced.isEmpty {
+                Text("Plan prices aren't available in \(currency.name). Pick a plan to set its billing cycle, then enter the price.")
+            } else {
+                Text("Choose a plan to fill in the price and billing cycle. Typical prices as of \(catalogDate); check the current price with the provider.")
+            }
+        }
+    }
+
+    private var catalogDate: String {
+        let parts = catalog.catalog.updated.split(separator: "-").compactMap { Int($0) }
+        guard parts.count == 3,
+              let date = Calendar.current.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2])) else {
+            return catalog.catalog.updated
+        }
+        return date.formatted(.dateTime.month(.wide).year())
+    }
+
+    private func choose(_ service: CatalogService) {
+        name = service.name
+        if isNew || category == .other { category = service.subscriptionCategory }
+        planName = nil
+        focusedField = nil
+        // A service with a single plan needs no choice.
+        let priced = service.plans(in: currencyCode)
+        if priced.count == 1, let only = priced.first { apply(only) }
+    }
+
+    private func apply(_ option: PricedPlan) {
+        planName = option.plan.name
+        cycle = option.cycle
+        priceText = OnboardingViewModel.sanitizedAmount(
+            BillingMath.storedString(option.price),
+            maxFractionDigits: currency.fractionDigits
+        )
+        focusedField = nil
+    }
+
     // MARK: Helpers
 
     private var isLastStep: Bool { progress.map { $0.current >= $0.total } ?? true }
@@ -174,6 +285,7 @@ struct SubscriptionEditorView: View {
             || category != subscription.category
             || reminderDays != subscription.reminderDaysBefore
             || tint != subscription.tint
+            || resolvedPlanName != subscription.planName
     }
 
     private func load() {
@@ -185,6 +297,7 @@ struct SubscriptionEditorView: View {
         category = subscription.category
         reminderDays = ReminderOption.all.contains(subscription.reminderDaysBefore) ? subscription.reminderDaysBefore : 1
         tint = subscription.tint
+        planName = subscription.planName
         nextPayment = subscription.nextPayment() ?? .now
         if subscription.price > 0 {
             priceText = OnboardingViewModel.sanitizedAmount(
@@ -211,6 +324,7 @@ struct SubscriptionEditorView: View {
         target.anchorDate = Calendar.current.startOfDay(for: nextPayment)
         target.reminderDaysBefore = reminderDays
         target.tint = tint
+        target.planName = resolvedPlanName
 
         do {
             try context.save()
@@ -231,6 +345,73 @@ struct SubscriptionEditorView: View {
         try? context.save()
         finish()
         onDeleted?()
+    }
+}
+
+// MARK: - Rows
+
+private struct ServiceSuggestionRow: View {
+    let service: CatalogService
+    let currencyCode: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            MonogramTile(name: service.name, color: service.subscriptionCategory.color, size: 28)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(service.name)
+                if let cheapest = service.plans(in: currencyCode).first {
+                    Text("From \(Text(cheapest.monthlyCost, format: .currency(code: currencyCode))) a month · ^[\(service.plans.count) plan](inflect: true)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Spacer(minLength: 0)
+            Image(systemName: "arrow.up.left")
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Fills in the name and shows its plans")
+    }
+}
+
+private struct PlanRow: View {
+    let name: String
+    let details: String?
+    let price: Decimal?
+    let cycle: BillingCycle
+    let currencyCode: String
+    let isSelected: Bool
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                .font(.title3)
+                .foregroundStyle(isSelected ? AnyShapeStyle(.tint) : AnyShapeStyle(.tertiary))
+                .contentTransition(.symbolEffect(.replace))
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(name)
+                if let details {
+                    Text(details)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Spacer(minLength: 8)
+            VStack(alignment: .trailing, spacing: 2) {
+                if let price {
+                    Text(price, format: .currency(code: currencyCode))
+                        .monospacedDigit()
+                }
+                Text(cycle.title)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
 

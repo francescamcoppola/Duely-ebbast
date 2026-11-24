@@ -12,20 +12,30 @@ struct PrivacyView: View {
     var body: some View {
         Form {
             Section {
-                Text("\(AppInfo.name) has no account, no servers and no analytics. Everything you enter stays on your device.")
+                Text("\(AppInfo.name) has no account, no servers and no analytics. Everything you enter stays on your devices and in your own private iCloud.")
                     .padding(.vertical, 4)
             }
 
             Section("What's Stored") {
                 PrivacyPoint(
-                    title: "On this device only",
-                    detail: "Your name, budget, currency, subscriptions and check-in answers are saved in the app's storage on this device. They're included in your device backup like other app data.",
+                    title: "On your devices",
+                    detail: "Your name, budget, currency, subscriptions, payments and check-in answers are saved in the app's storage on this device.",
                     systemImage: "iphone"
                 )
                 PrivacyPoint(
+                    title: "In your private iCloud",
+                    detail: "If you're signed in to iCloud, the same data is saved in your private iCloud database so it's never lost and stays in sync on your devices. Only you can access it; \(AppInfo.name)'s developers can't.",
+                    systemImage: "icloud"
+                )
+                PrivacyPoint(
                     title: "Local notifications",
-                    detail: "Check-in and payment reminders are scheduled on your device. No push service is used.",
+                    detail: "Check-in and payment reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device.",
                     systemImage: "bell"
+                )
+                PrivacyPoint(
+                    title: "Plan suggestions",
+                    detail: "Plans, prices and cheaper alternatives come from a list in the app, which may be updated by downloading a new copy. Nothing about you is sent, and comparisons happen on your device.",
+                    systemImage: "tag"
                 )
                 PrivacyPoint(
                     title: "No tracking",
@@ -37,7 +47,7 @@ struct PrivacyView: View {
             Section {
                 PrivacyPoint(
                     title: "Optional and read-only",
-                    detail: "If you connect Gmail, \(AppInfo.name) asks Google for read-only access. It can't send, delete or change email.",
+                    detail: "For each Gmail account you connect, \(AppInfo.name) asks Google for read-only access. It can't send, delete or change email.",
                     systemImage: "envelope"
                 )
                 PrivacyPoint(
@@ -47,7 +57,7 @@ struct PrivacyView: View {
                 )
                 PrivacyPoint(
                     title: "Stored securely",
-                    detail: "The Gmail sign-in is kept in this device's Keychain and isn't synced. Disconnecting revokes it in your Google Account and deletes it.",
+                    detail: "Each Gmail sign-in is kept in this device's Keychain and is never synced to iCloud. Disconnecting an account revokes it in your Google Account and deletes it.",
                     systemImage: "key"
                 )
             } header: {
@@ -59,7 +69,7 @@ struct PrivacyView: View {
             Section {
                 PrivacyPoint(
                     title: "Delete your data",
-                    detail: "Delete subscriptions in the app, disconnect Gmail in Settings, or delete the app to remove everything it stored.",
+                    detail: "Delete subscriptions in the app, disconnect Gmail accounts in Settings, or reset \(AppInfo.name) in Settings to erase everything from this device, iCloud and your other devices.",
                     systemImage: "trash"
                 )
             }

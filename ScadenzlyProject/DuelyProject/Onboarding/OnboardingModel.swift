@@ -14,7 +14,7 @@ import Observation
 
 enum AppInfo {
     /// Display name used in onboarding copy. Change it in one place when the final name is decided.
-    static let name = "Duely"
+    static let name = "MyDues"
 }
 
 // MARK: - Persistence keys

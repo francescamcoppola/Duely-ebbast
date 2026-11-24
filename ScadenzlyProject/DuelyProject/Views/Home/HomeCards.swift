@@ -8,6 +8,7 @@
 //  • Up Next  — "What's charged in the next two weeks?" (the Calendar tab owns the full schedule)
 //  • Profile  — "What kind of spender am I?"
 //  • Category — "Where does the money go?"
+//  • Savings  — "Could I pay less for the same thing?" (SavingsCard.swift, only when I could)
 //
 
 import SwiftUI

@@ -21,13 +21,18 @@ nonisolated struct EmailMessage: Identifiable, Equatable, Sendable {
 nonisolated struct GmailAPI: Sendable {
     let accessToken: String
 
-    /// Recent emails that look like receipts, renewals or plan confirmations, in English,
-    /// Spanish and Italian. A broad net: the model decides what is really a subscription.
+    /// Recent emails that look like receipts, renewals, plan confirmations, household bills,
+    /// taxes and tuition notices, in English, Spanish and Italian. A broad net: the model decides
+    /// what is really a recurring payment.
     static let searchQuery = """
     newer_than:13m -in:chats -in:spam -in:trash (category:purchases OR subject:(subscription OR \
     subscribed OR renewal OR renews OR renewed OR receipt OR invoice OR membership OR "your plan" OR \
-    billing OR payment OR suscripción OR renovación OR recibo OR factura OR membresía OR pago OR \
-    abbonamento OR rinnovo OR ricevuta OR fattura OR pagamento))
+    billing OR payment OR bill OR statement OR "amount due" OR tax OR tuition OR rent OR insurance OR \
+    suscripción OR renovación OR recibo OR factura OR membresía OR pago OR impuesto OR matrícula OR \
+    abbonamento OR rinnovo OR ricevuta OR fattura OR pagamento OR bolletta OR bollette OR \
+    "avviso di pagamento" OR pagopa OR tari OR imu OR tassa OR tasse OR tributo OR tributi OR \
+    "bollo auto" OR rata OR scadenza OR condominio OR affitto OR canone OR polizza OR assicurazione OR \
+    "contribuzione studentesca" OR iscrizione))
     """
 
     // MARK: Calls

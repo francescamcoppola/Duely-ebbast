@@ -19,10 +19,17 @@ struct DuelyProjectApp: App {
     /// Registers the notification delegate at launch so taps on notifications are handled.
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
+    init() {
+        // Before the first view reads @AppStorage, so iCloud settings are already in place.
+        CloudSettingsSync.shared.start()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task { await PlanCatalogStore.shared.refreshIfNeeded() }
         }
-        .modelContainer(for: [Subscription.self, UsageEntry.self])
+        // Synced with the user's private iCloud database (see Persistence.swift).
+        .modelContainer(Persistence.container)
     }
 }

@@ -17,7 +17,8 @@ struct EmailImportView: View {
     @Query private var subscriptions: [Subscription]
 
     @State private var model = EmailImportModel.shared
-    @State private var isConfirmingDisconnect = false
+    /// The account waiting for the user to confirm it should be disconnected.
+    @State private var accountToDisconnect: String?
     @State private var addedCount: Int?
 
     var body: some View {
@@ -28,22 +29,20 @@ struct EmailImportView: View {
                 scanSection
             }
             privacySection
-            if model.isConnected {
-                Section {
-                    Button("Disconnect Gmail", role: .destructive) {
-                        isConfirmingDisconnect = true
-                    }
-                } footer: {
-                    Text("Removes \(AppInfo.name)'s access in your Google Account and deletes the sign-in from this device. Subscriptions you've added stay.")
-                }
-            }
         }
         .navigationTitle("Import from Email")
         .navigationBarTitleDisplayMode(.inline)
-        .confirmationDialog("Disconnect Gmail?", isPresented: $isConfirmingDisconnect, titleVisibility: .visible) {
+        .confirmationDialog(
+            Text("Disconnect \(accountToDisconnect ?? "")?"),
+            isPresented: isConfirmingDisconnect,
+            titleVisibility: .visible,
+            presenting: accountToDisconnect
+        ) { account in
             Button("Disconnect", role: .destructive) {
-                Task { await model.disconnect() }
+                Task { await model.disconnect(email: account) }
             }
+        } message: { _ in
+            Text("Removes \(AppInfo.name)'s access in this Google Account and deletes the sign-in from this device. Subscriptions you've added stay.")
         }
         .sheet(isPresented: isReviewing) {
             if case .review(let candidates) = model.phase {
@@ -71,9 +70,9 @@ struct EmailImportView: View {
     private var introSection: some View {
         Section {
             VStack(alignment: .leading, spacing: 8) {
-                Label("Find Subscriptions in Your Email", systemImage: "envelope.badge")
+                Label("Find Recurring Payments in Your Email", systemImage: "envelope.badge")
                     .font(.headline)
-                Text("Apple Intelligence reads your recent receipts and renewal emails on this device and suggests the subscriptions it finds. You choose which ones to add.")
+                Text("Apple Intelligence reads your recent receipts, renewals, bills, tax notices and tuition emails on this device and suggests what it finds. Connect several accounts to find them all. You choose what to add.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -87,35 +86,74 @@ struct EmailImportView: View {
             if !GmailConfiguration.isConfigured {
                 Label("Gmail import isn't available in this version of the app.", systemImage: "exclamationmark.circle")
                     .foregroundStyle(.secondary)
-            } else if let email = model.connectedEmail {
-                LabeledContent("Gmail") {
-                    Text(email)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                }
             } else {
-                Button {
-                    Task {
-                        if await model.connect(using: webAuthenticationSession) {
-                            model.startScan(existing: subscriptions)
+                ForEach(model.connectedEmails, id: \.self) { email in
+                    accountRow(email)
+                }
+
+                if model.canAddAccount {
+                    Button {
+                        Task {
+                            if let email = await model.connect(using: webAuthenticationSession) {
+                                addedCount = nil
+                                model.startScan(existing: subscriptions, accounts: [email])
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Label(model.isConnected ? "Add Another Gmail Account" : "Connect Gmail",
+                                  systemImage: model.isConnected ? "plus.circle" : "envelope")
+                            Spacer()
+                            if model.isConnecting { ProgressView() }
                         }
                     }
-                } label: {
-                    HStack {
-                        Label("Connect Gmail", systemImage: "envelope")
-                        Spacer()
-                        if model.isConnecting { ProgressView() }
-                    }
+                    .disabled(model.isConnecting || model.isScanning)
                 }
-                .disabled(model.isConnecting)
             }
         } header: {
-            Text("Account")
+            Text(model.connectedEmails.count > 1 ? "Accounts" : "Account")
         } footer: {
             if let error = model.connectionError {
                 Text(error).foregroundStyle(.red)
-            } else if !model.isConnected && GmailConfiguration.isConfigured {
-                Text("You'll sign in on Google's page. \(AppInfo.name) never sees your password.")
+            } else if GmailConfiguration.isConfigured {
+                if model.isConnected {
+                    Text("Swipe an account to disconnect it. You can connect up to \(EmailImportModel.maxAccounts) accounts.")
+                } else {
+                    Text("You'll sign in on Google's page. \(AppInfo.name) never sees your password.")
+                }
+            }
+        }
+    }
+
+    private func accountRow(_ email: String) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "envelope.fill")
+                .foregroundStyle(.tint)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(email)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                if let error = model.accountErrors[email] {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                } else if case .scanning(_, _, let account) = model.phase, account == email {
+                    Text("Scanning…")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .swipeActions {
+            Button("Disconnect", role: .destructive) {
+                accountToDisconnect = email
+            }
+        }
+        .contextMenu {
+            Button("Disconnect", systemImage: "xmark.circle", role: .destructive) {
+                accountToDisconnect = email
             }
         }
     }
@@ -124,13 +162,17 @@ struct EmailImportView: View {
     private var scanSection: some View {
         Section {
             switch model.phase {
-            case .scanning(let done, let total):
+            case .scanning(let done, let total, let account):
                 VStack(alignment: .leading, spacing: 8) {
                     if total > 0 {
                         ProgressView(value: Double(done), total: Double(total)) {
                             Text("Reading emails…")
                         } currentValueLabel: {
-                            Text("\(done) of \(total)")
+                            if let account, model.connectedEmails.count > 1 {
+                                Text("\(done) of \(total) · \(account)")
+                            } else {
+                                Text("\(done) of \(total)")
+                            }
                         }
                     } else {
                         ProgressView { Text("Searching your inbox…") }
@@ -144,7 +186,8 @@ struct EmailImportView: View {
                     addedCount = nil
                     model.startScan(existing: subscriptions)
                 } label: {
-                    Label("Scan Emails", systemImage: "sparkle.magnifyingglass")
+                    Label(model.connectedEmails.count > 1 ? "Scan All Accounts" : "Scan Emails",
+                          systemImage: "sparkle.magnifyingglass")
                 }
                 .disabled(model.aiStatus != .available)
             }
@@ -162,11 +205,11 @@ struct EmailImportView: View {
         } else if case .failed(let message) = model.phase {
             Text(message).foregroundStyle(.red)
         } else if let addedCount, addedCount > 0 {
-            Text("^[\(addedCount) subscription](inflect: true) added.")
+            Text("^[\(addedCount) payment](inflect: true) added.")
         } else if let lastScan = model.lastScan {
-            Text("Last scanned \(Text(lastScan, format: .relative(presentation: .named))). Reads up to \(EmailImportModel.scanLimit) recent billing emails.")
+            Text("Last scanned \(Text(lastScan, format: .relative(presentation: .named))). Reads up to \(EmailImportModel.scanLimit) recent billing emails per account.")
         } else {
-            Text("Reads up to \(EmailImportModel.scanLimit) recent billing emails. Keep the app open while it runs.")
+            Text("Reads up to \(EmailImportModel.scanLimit) recent billing emails per account. Keep the app open while it runs.")
         }
     }
 
@@ -184,14 +227,22 @@ struct EmailImportView: View {
             )
             PrivacyPoint(
                 title: "Nothing is kept",
-                detail: "Emails are held in memory only during a scan. Only the subscriptions you choose to add are saved.",
+                detail: "Emails are held in memory only during a scan. Only the payments you choose to add are saved.",
                 systemImage: "tray"
             )
             PrivacyPoint(
                 title: "Your choice",
-                detail: "The sign-in is stored in this device's Keychain. Disconnect at any time here or in your Google Account.",
+                detail: "Each account's sign-in is stored in this device's Keychain and is never synced to iCloud. Disconnect at any time here or in your Google Account.",
                 systemImage: "hand.raised"
             )
+        }
+    }
+
+    private var isConfirmingDisconnect: Binding<Bool> {
+        Binding {
+            accountToDisconnect != nil
+        } set: { isPresented in
+            if !isPresented { accountToDisconnect = nil }
         }
     }
 

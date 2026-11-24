@@ -3,7 +3,7 @@
 //  DuelyProject
 //
 //  SwiftData models. Every stored property has a default and relationships are optional,
-//  so the store can sync with CloudKit later without a migration.
+//  as CloudKit requires: the store syncs to the user's private iCloud database (see Persistence.swift).
 //
 
 import Foundation
@@ -13,7 +13,7 @@ import SwiftUI
 // MARK: - Billing cycle
 
 enum BillingCycle: String, CaseIterable, Identifiable, Codable, Sendable {
-    case weekly, monthly, quarterly, yearly
+    case weekly, monthly, bimonthly, quarterly, semiannual, yearly
 
     var id: String { rawValue }
 
@@ -21,7 +21,9 @@ enum BillingCycle: String, CaseIterable, Identifiable, Codable, Sendable {
         switch self {
         case .weekly: "Weekly"
         case .monthly: "Monthly"
+        case .bimonthly: "Every 2 Months"
         case .quarterly: "Every 3 Months"
+        case .semiannual: "Every 6 Months"
         case .yearly: "Yearly"
         }
     }
@@ -31,7 +33,9 @@ enum BillingCycle: String, CaseIterable, Identifiable, Codable, Sendable {
         switch self {
         case .weekly: (.weekOfYear, 1)
         case .monthly: (.month, 1)
+        case .bimonthly: (.month, 2)
         case .quarterly: (.month, 3)
+        case .semiannual: (.month, 6)
         case .yearly: (.year, 1)
         }
     }
@@ -40,7 +44,9 @@ enum BillingCycle: String, CaseIterable, Identifiable, Codable, Sendable {
         switch self {
         case .weekly: 52
         case .monthly: 12
+        case .bimonthly: 6
         case .quarterly: 4
+        case .semiannual: 2
         case .yearly: 1
         }
     }
@@ -49,7 +55,7 @@ enum BillingCycle: String, CaseIterable, Identifiable, Codable, Sendable {
 // MARK: - Category
 
 enum SubscriptionCategory: String, CaseIterable, Identifiable, Codable, Sendable {
-    case filmTV, music, leisure, social, work, utilities, other
+    case filmTV, music, leisure, social, work, utilities, home, taxes, education, insurance, other
 
     var id: String { rawValue }
 
@@ -61,6 +67,10 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable, Codable, Sendable
         case .social: "Social"
         case .work: "Work"
         case .utilities: "Utilities"
+        case .home: "Home & Bills"
+        case .taxes: "Taxes & Fees"
+        case .education: "Education"
+        case .insurance: "Insurance"
         case .other: "Other"
         }
     }
@@ -73,6 +83,10 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable, Codable, Sendable
         case .social: "bubble.left.and.bubble.right"
         case .work: "briefcase"
         case .utilities: "wrench.and.screwdriver"
+        case .home: "house"
+        case .taxes: "building.columns"
+        case .education: "graduationcap"
+        case .insurance: "checkmark.shield"
         case .other: "square.grid.2x2"
         }
     }
@@ -85,6 +99,10 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable, Codable, Sendable
         case .social: .indigo
         case .work: .teal
         case .utilities: .orange
+        case .home: .brown
+        case .taxes: .blue
+        case .education: .yellow
+        case .insurance: .pink
         case .other: .gray
         }
     }
@@ -175,6 +193,10 @@ final class Subscription {
     var createdAt: Date = Date.now
     /// User-chosen color. `nil` = use the category's color.
     var tintRaw: String?
+    /// Plan picked from the catalog, e.g. "Premium". `nil` when entered by hand.
+    var planName: String?
+    /// The email account this was found in, when it came from an email import.
+    var sourceAccount: String?
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []
@@ -186,7 +208,9 @@ final class Subscription {
         category: SubscriptionCategory = .other,
         anchorDate: Date? = nil,
         reminderDaysBefore: Int = 1,
-        tint: SubscriptionTint? = nil
+        tint: SubscriptionTint? = nil,
+        planName: String? = nil,
+        sourceAccount: String? = nil
     ) {
         self.name = name
         self.price = price
@@ -196,6 +220,8 @@ final class Subscription {
         self.reminderDaysBefore = reminderDaysBefore
         self.createdAt = .now
         self.tintRaw = tint?.rawValue
+        self.planName = planName
+        self.sourceAccount = sourceAccount
     }
 
     var cycle: BillingCycle {

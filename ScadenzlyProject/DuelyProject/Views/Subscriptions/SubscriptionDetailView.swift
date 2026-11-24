@@ -15,6 +15,8 @@ struct SubscriptionDetailView: View {
 
     @AppStorage(OnboardingKeys.currencyCode) private var currencyCode = AppDefaults.currencyCode
     @Environment(\.dismiss) private var dismiss
+    @Query private var allSubscriptions: [Subscription]
+    @State private var catalog = PlanCatalogStore.shared
     @State private var isEditing = false
 
     /// After a delete the model is detached; reading its properties then is unsafe.
@@ -55,6 +57,10 @@ struct SubscriptionDetailView: View {
                 }
             } else {
                 billingSection
+                let alternatives = alternatives
+                if !alternatives.isEmpty {
+                    savingsSection(alternatives)
+                }
                 historySection(stats)
             }
 
@@ -73,6 +79,13 @@ struct SubscriptionDetailView: View {
                 LabeledContent("Reminder") {
                     Text(ReminderOption.title(subscription.reminderDaysBefore))
                 }
+                if let account = subscription.sourceAccount {
+                    LabeledContent("Found In") {
+                        Text(account)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                    }
+                }
             }
         }
         .listStyle(.insetGrouped)
@@ -87,7 +100,13 @@ struct SubscriptionDetailView: View {
                 .font(.title2.bold())
                 .multilineTextAlignment(.center)
             if !subscription.needsSetup {
-                Text("\(Text(subscription.price, format: .currency(code: currencyCode))) · \(Text(subscription.cycle.title))")
+                Group {
+                    if let plan = subscription.planName {
+                        Text("\(plan) · \(Text(subscription.price, format: .currency(code: currencyCode))) · \(Text(subscription.cycle.title))")
+                    } else {
+                        Text("\(Text(subscription.price, format: .currency(code: currencyCode))) · \(Text(subscription.cycle.title))")
+                    }
+                }
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -116,6 +135,29 @@ struct SubscriptionDetailView: View {
                 Text(BillingMath.yearlyEquivalent(price: subscription.price, cycle: subscription.cycle),
                      format: .currency(code: currencyCode))
             }
+        }
+    }
+
+    /// Cheaper plans of this service and similar services the user doesn't already pay for.
+    private var alternatives: [PlanAlternative] {
+        let others = allSubscriptions
+            .filter { $0.persistentModelID != subscription.persistentModelID }
+            .map(\.name)
+        return catalog.alternatives(forName: subscription.name,
+                                    monthlyCost: subscription.monthlyCost,
+                                    currencyCode: currencyCode,
+                                    excludingNames: others)
+    }
+
+    private func savingsSection(_ alternatives: [PlanAlternative]) -> some View {
+        Section {
+            ForEach(alternatives) { alternative in
+                AlternativeRow(alternative: alternative, currencyCode: currencyCode)
+            }
+        } header: {
+            Text("Ways to Save")
+        } footer: {
+            Text("Cheaper plans and similar services, based on typical prices. Features and content differ: check before switching.")
         }
     }
 
@@ -159,6 +201,44 @@ struct SubscriptionDetailView: View {
                 Text("Weekly check-ins will show how often you use this subscription and what each use really costs.")
             }
         }
+    }
+}
+
+// MARK: - Alternative row
+
+struct AlternativeRow: View {
+    let alternative: PlanAlternative
+    let currencyCode: String
+
+    private var option: PricedPlan { alternative.option }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            MonogramTile(name: option.service.name, color: option.service.subscriptionCategory.color, size: 32)
+            VStack(alignment: .leading, spacing: 2) {
+                if alternative.isSameService {
+                    Text("Switch to \(option.plan.name)")
+                } else {
+                    Text("\(option.service.name) · \(option.plan.name)")
+                }
+                Text("\(Text(option.price, format: .currency(code: currencyCode))) · \(Text(option.cycle.title))\(option.plan.details.map { " · " + $0 } ?? "")")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+            Spacer(minLength: 8)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("−\(Text(alternative.monthlySaving, format: .currency(code: currencyCode)))")
+                    .font(.subheadline.weight(.semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(.green)
+                Text("a month")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 2)
+        .accessibilityElement(children: .combine)
     }
 }
 

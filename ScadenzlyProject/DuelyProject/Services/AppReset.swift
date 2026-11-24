@@ -2,7 +2,7 @@
 //  AppReset.swift
 //  DuelyProject
 //
-//  Erases everything the app stored on this device and sends the user back to onboarding.
+//  Erases everything the app stored, on this device and in iCloud, and sends the user back to onboarding.
 //
 
 import Foundation
@@ -14,10 +14,11 @@ enum AppReset {
     /// Deletes subscriptions and usage history, removes notifications, disconnects Gmail and
     /// clears every preference. Setting `hasCompleted` to false last makes `ContentView` swap to onboarding.
     static func eraseAll(context: ModelContext, defaults: UserDefaults = .standard) async {
-        // Data
+        // Data. Deleted one by one rather than in a batch, so CloudKit mirrors the deletions
+        // and the data is erased from iCloud and the user's other devices too.
         do {
-            try context.delete(model: UsageEntry.self)
-            try context.delete(model: Subscription.self)
+            for entry in try context.fetch(FetchDescriptor<UsageEntry>()) { context.delete(entry) }
+            for subscription in try context.fetch(FetchDescriptor<Subscription>()) { context.delete(subscription) }
             try context.save()
         } catch {
             assertionFailure("Reset failed: \(error)")
@@ -28,14 +29,15 @@ enum AppReset {
         center.removeAllPendingNotificationRequests()
         center.removeAllDeliveredNotifications()
 
-        // Gmail tokens (Keychain) and the app's access on Google's side
-        await EmailImportModel.shared.disconnect()
+        // Gmail tokens (Keychain) and the app's access on Google's side, for every account
+        await EmailImportModel.shared.disconnectAll()
 
         // Navigation state
         AppRouter.shared.selectedTab = .home
         AppRouter.shared.isCheckInPresented = false
 
-        // Preferences: name, budget, currency, check-in, sort…
+        // Preferences: name, budget, currency, check-in, sort… (in iCloud too)
+        CloudSettingsSync.shared.eraseCloud()
         if let domain = Bundle.main.bundleIdentifier {
             defaults.removePersistentDomain(forName: domain)
         }
