@@ -30,8 +30,9 @@ You can choose to connect one or more Gmail accounts (up to five) so MyDues can 
 **What MyDues accesses.** When you connect, you sign in on Google's own page (MyDues never sees your password) and Google asks you to allow one permission: `gmail.readonly`, read-only access to your messages. MyDues uses it to:
 
 - read your Gmail address, to show which accounts are connected;
-- search for recent emails that look like receipts, renewals, plan confirmations, bills, tax or payment notices and tuition emails;
-- download those emails, up to 60 per account and scan.
+- search the last 13 months for emails that look like receipts, renewals, plan confirmations, bills, tax or payment notices and tuition emails (up to 500 per account and scan);
+- read only the sender and subject of those emails, to skip ads, newsletters, shipping and security notices and older copies of the same receipt;
+- download the full content of the remaining emails, up to 150 per account and scan.
 
 MyDues can't send, delete, label or change any email.
 

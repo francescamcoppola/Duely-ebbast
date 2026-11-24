@@ -17,6 +17,64 @@ import Observation
 enum EmailImportKeys {
     /// Date of the last finished scan, shown in Settings.
     static let lastScan = "emailImportLastScan"
+    /// `ScanSummary` of the last finished scan.
+    static let lastSummary = "emailImportLastSummary"
+}
+
+/// Where a scan is, for the progress UI.
+struct ScanProgress: Equatable {
+    enum Stage: Equatable {
+        /// Asking Gmail for billing-like emails.
+        case searching
+        /// Checking senders and subjects to skip ads, newsletters and repeats.
+        case filtering
+        /// Apple Intelligence is reading the emails that matter.
+        case reading
+    }
+
+    /// The mailbox being scanned.
+    var account: String?
+    var stage: Stage
+    var done = 0
+    var total = 0
+}
+
+/// What a scan looked at, shown after it finishes so it's clear it went beyond a few emails.
+struct ScanSummary: Equatable {
+    /// Billing-like emails found by the search in the last 13 months.
+    var checked = 0
+    /// Ads, newsletters, shipping and security notices, recognized from sender and subject.
+    var skippedNotBilling = 0
+    /// Older copies of the same receipt or bill (only the newest are read).
+    var skippedRepeats = 0
+    /// Emails Apple Intelligence actually read.
+    var read = 0
+
+    static func + (lhs: ScanSummary, rhs: ScanSummary) -> ScanSummary {
+        ScanSummary(checked: lhs.checked + rhs.checked,
+                    skippedNotBilling: lhs.skippedNotBilling + rhs.skippedNotBilling,
+                    skippedRepeats: lhs.skippedRepeats + rhs.skippedRepeats,
+                    read: lhs.read + rhs.read)
+    }
+
+    var dictionary: [String: Int] {
+        ["checked": checked, "notBilling": skippedNotBilling, "repeats": skippedRepeats, "read": read]
+    }
+
+    init(checked: Int = 0, skippedNotBilling: Int = 0, skippedRepeats: Int = 0, read: Int = 0) {
+        self.checked = checked
+        self.skippedNotBilling = skippedNotBilling
+        self.skippedRepeats = skippedRepeats
+        self.read = read
+    }
+
+    init?(dictionary: [String: Int]?) {
+        guard let dictionary, let checked = dictionary["checked"] else { return nil }
+        self.init(checked: checked,
+                  skippedNotBilling: dictionary["notBilling"] ?? 0,
+                  skippedRepeats: dictionary["repeats"] ?? 0,
+                  read: dictionary["read"] ?? 0)
+    }
 }
 
 @MainActor
@@ -27,14 +85,17 @@ final class EmailImportModel {
 
     enum Phase: Equatable {
         case idle
-        /// `account` is the mailbox being read right now.
-        case scanning(done: Int, total: Int, account: String?)
+        case scanning(ScanProgress)
         case review([DetectedSubscription])
         case failed(String)
     }
 
-    /// Max full emails analyzed by Apple Intelligence per account and scan, newest first.
-    static let scanLimit = 60
+    /// Billing-like emails checked per account (by sender and subject only), newest first.
+    /// Covers the 13-month search window for almost any inbox.
+    static let searchLimit = 500
+    /// Most emails Apple Intelligence reads per account, after ads, newsletters and repeats are
+    /// skipped. Keeps a scan to a few minutes.
+    static let readLimit = 150
     /// Keeps a scan to a reasonable length.
     static let maxAccounts = 5
 
@@ -62,6 +123,15 @@ final class EmailImportModel {
 
     var lastScan: Date? {
         UserDefaults.standard.object(forKey: EmailImportKeys.lastScan) as? Date
+    }
+
+    /// What the last finished scan looked at.
+    private(set) var lastSummary: ScanSummary? =
+        ScanSummary(dictionary: UserDefaults.standard.dictionary(forKey: EmailImportKeys.lastSummary) as? [String: Int])
+
+    /// The account being scanned right now, if any.
+    var scanningAccount: String? {
+        if case .scanning(let progress) = phase { progress.account } else { nil }
     }
 
     func refreshAvailability() {
@@ -123,6 +193,8 @@ final class EmailImportModel {
         reloadAccounts()
         if !isConnected {
             UserDefaults.standard.removeObject(forKey: EmailImportKeys.lastScan)
+            UserDefaults.standard.removeObject(forKey: EmailImportKeys.lastSummary)
+            lastSummary = nil
             phase = .idle
         }
         if let token = tokens?.refreshToken ?? tokens?.accessToken {
@@ -136,6 +208,8 @@ final class EmailImportModel {
         let accounts = GmailAuth.storedAccounts()
         GmailAuth.deleteAllStoredTokens()
         UserDefaults.standard.removeObject(forKey: EmailImportKeys.lastScan)
+        UserDefaults.standard.removeObject(forKey: EmailImportKeys.lastSummary)
+        lastSummary = nil
         accountErrors = [:]
         connectedEmails = []
         phase = .idle
@@ -172,20 +246,24 @@ final class EmailImportModel {
     }
 
     private func scan(accounts: [String], skipping existingKeys: Set<String>) async {
-        phase = .scanning(done: 0, total: 0, account: accounts.first)
+        phase = .scanning(ScanProgress(account: accounts.first, stage: .searching))
         accountErrors = [:]
         let extractor = SubscriptionExtractor()
+        // Loads the on-device model while the first network requests run.
+        extractor.prewarm()
         var found: [DetectedSubscription] = []
+        var summary = ScanSummary()
         var scannedAny = false
 
         for account in accounts {
             var didRefresh = false
             do {
-                phase = .scanning(done: 0, total: 0, account: account)
+                phase = .scanning(ScanProgress(account: account, stage: .searching))
                 let auth = try await validAccessToken(for: account)
                 didRefresh = auth.refreshed
-                let accountFound = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                found.append(contentsOf: accountFound)
+                let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
+                found += result.found
+                summary = summary + result.summary
                 scannedAny = true
             } catch is CancellationError {
                 phase = .idle
@@ -195,8 +273,9 @@ final class EmailImportModel {
                 // Access token may have been invalidated early (HTTP 401); try refreshing once before signing out.
                 do {
                     let auth = try await validAccessToken(for: account, forceRefresh: true)
-                    let accountFound = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                    found.append(contentsOf: accountFound)
+                    let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
+                    found += result.found
+                    summary = summary + result.summary
                     scannedAny = true
                 } catch is CancellationError {
                     phase = .idle
@@ -222,6 +301,8 @@ final class EmailImportModel {
         if scannedAny {
             let candidates = DetectedSubscription.merged(found).filter { !existingKeys.contains($0.id) }
             UserDefaults.standard.set(Date.now, forKey: EmailImportKeys.lastScan)
+            UserDefaults.standard.set(summary.dictionary, forKey: EmailImportKeys.lastSummary)
+            lastSummary = summary
             phase = .review(candidates)
         } else {
             phase = .failed(accountErrors.values.first ?? String(localized: "Something went wrong. Try again."))
@@ -229,32 +310,55 @@ final class EmailImportModel {
         scanTask = nil
     }
 
+    /// 1. Search: every billing-like email of the last 13 months (IDs only).
+    /// 2. Filter: fetch just sender and subject, skip ads, newsletters, shipping, security notices
+    ///    and older repeats of the same receipt.
+    /// 3. Read: only what's left is downloaded in full and read by Apple Intelligence.
     private func scanAccount(
         _ account: String,
         accessToken: String,
         extractor: SubscriptionExtractor
-    ) async throws -> [DetectedSubscription] {
+    ) async throws -> (found: [DetectedSubscription], summary: ScanSummary) {
         let api = GmailAPI(accessToken: accessToken)
 
-        // Search deeper across the 13-month window, then filter via cheap metadata headers
-        // so Apple Intelligence only runs on the most likely `scanLimit` candidates.
-        let rawIDs = try await api.searchMessageIDs(limit: Self.scanLimit * 3)
+        let ids = try await api.searchMessageIDs(limit: Self.searchLimit)
         try Task.checkCancellation()
-        let ids = Array(try await api.filterCandidateIDs(rawIDs).prefix(Self.scanLimit))
-        phase = .scanning(done: 0, total: ids.count, account: account)
 
+        phase = .scanning(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
+        let headers = try await api.metadata(for: ids) { [weak self] done in
+            await self?.updateFiltering(account: account, done: done, total: ids.count)
+        }
+        try Task.checkCancellation()
+
+        let billing = headers.filter { BillingEmailFilter.verdict(for: $0) == .billing }
+        let selection = BillingEmailFilter.selectForReading(billing, limit: Self.readLimit)
+        var summary = ScanSummary(
+            checked: ids.count,
+            skippedNotBilling: headers.count - billing.count,
+            skippedRepeats: selection.repeats,
+            read: 0
+        )
+
+        let toRead = selection.selected
+        phase = .scanning(ScanProgress(account: account, stage: .reading, done: 0, total: toRead.count))
         var accountFound: [DetectedSubscription] = []
-        for (index, id) in ids.enumerated() {
+        for (index, item) in toRead.enumerated() {
             try Task.checkCancellation()
             // Each email is fetched, read and dropped before the next one.
-            let email = try await api.message(id: id)
+            let email = try await api.message(id: item.id)
             if let analysis = await extractor.analyze(email),
                let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
                 accountFound.append(candidate)
             }
-            phase = .scanning(done: index + 1, total: ids.count, account: account)
+            summary.read = index + 1
+            phase = .scanning(ScanProgress(account: account, stage: .reading, done: index + 1, total: toRead.count))
         }
-        return accountFound
+        return (accountFound, summary)
+    }
+
+    private func updateFiltering(account: String, done: Int, total: Int) {
+        guard isScanning else { return }
+        phase = .scanning(ScanProgress(account: account, stage: .filtering, done: done, total: total))
     }
 
     private func validAccessToken(for account: String, forceRefresh: Bool = false) async throws -> (token: String, refreshed: Bool) {

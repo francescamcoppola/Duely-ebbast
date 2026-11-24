@@ -72,7 +72,7 @@ struct EmailImportView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Label("Find Recurring Payments in Your Email", systemImage: "envelope.badge")
                     .font(.headline)
-                Text("Apple Intelligence reads your recent receipts, renewals, bills, tax notices and tuition emails on this device and suggests what it finds. Connect several accounts to find them all. You choose what to add.")
+                Text("\(AppInfo.name) checks every receipt, renewal, bill, tax notice and tuition email of the last 13 months, skips ads, newsletters and repeats, and Apple Intelligence reads the rest on this device. Connect several accounts to find everything. You choose what to add.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -138,7 +138,7 @@ struct EmailImportView: View {
                     Text(error)
                         .font(.caption)
                         .foregroundStyle(.red)
-                } else if case .scanning(_, _, let account) = model.phase, account == email {
+                } else if model.scanningAccount == email {
                     Text("Scanning…")
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -162,23 +162,9 @@ struct EmailImportView: View {
     private var scanSection: some View {
         Section {
             switch model.phase {
-            case .scanning(let done, let total, let account):
-                VStack(alignment: .leading, spacing: 8) {
-                    if total > 0 {
-                        ProgressView(value: Double(done), total: Double(total)) {
-                            Text("Reading emails…")
-                        } currentValueLabel: {
-                            if let account, model.connectedEmails.count > 1 {
-                                Text("\(done) of \(total) · \(account)")
-                            } else {
-                                Text("\(done) of \(total)")
-                            }
-                        }
-                    } else {
-                        ProgressView { Text("Searching your inbox…") }
-                    }
-                }
-                .padding(.vertical, 4)
+            case .scanning(let progress):
+                ScanProgressView(progress: progress, showsAccount: model.connectedEmails.count > 1)
+                    .padding(.vertical, 4)
                 Button("Stop Scanning", role: .cancel) { model.cancelScan() }
 
             default:
@@ -204,12 +190,19 @@ struct EmailImportView: View {
             Text(message)
         } else if case .failed(let message) = model.phase {
             Text(message).foregroundStyle(.red)
+        } else if model.isScanning {
+            Text("Keep \(AppInfo.name) open while it scans. It can take a few minutes.")
+        } else if let lastScan = model.lastScan, let summary = model.lastSummary {
+            VStack(alignment: .leading, spacing: 4) {
+                if let addedCount, addedCount > 0 {
+                    Text("^[\(addedCount) payment](inflect: true) added.")
+                }
+                Text("Last scanned \(Text(lastScan, format: .relative(presentation: .named))): checked ^[\(summary.checked) email](inflect: true), skipped \(summary.skippedNotBilling) ads and other non-billing emails and \(summary.skippedRepeats) repeats, read \(summary.read) with Apple Intelligence.")
+            }
         } else if let addedCount, addedCount > 0 {
             Text("^[\(addedCount) payment](inflect: true) added.")
-        } else if let lastScan = model.lastScan {
-            Text("Last scanned \(Text(lastScan, format: .relative(presentation: .named))). Reads up to \(EmailImportModel.scanLimit) recent billing emails per account.")
         } else {
-            Text("Reads up to \(EmailImportModel.scanLimit) recent billing emails per account. Keep the app open while it runs.")
+            Text("Checks up to \(EmailImportModel.searchLimit) billing-related emails per account from the last 13 months. Ads, newsletters and repeat receipts are recognized by sender and subject and skipped; Apple Intelligence reads the rest (up to \(EmailImportModel.readLimit) per account). Keep the app open while it runs.")
         }
     }
 
@@ -227,7 +220,7 @@ struct EmailImportView: View {
             )
             PrivacyPoint(
                 title: "Nothing is kept",
-                detail: "Emails are held in memory only during a scan. Only the payments you choose to add are saved.",
+                detail: "Emails are held in memory only during a scan. Ads and newsletters are skipped from their sender and subject, without being opened. Only the payments you choose to add are saved.",
                 systemImage: "tray"
             )
             PrivacyPoint(
@@ -251,6 +244,41 @@ struct EmailImportView: View {
             if case .review = model.phase { true } else { false }
         } set: { isPresented in
             if !isPresented, case .review = model.phase { model.dismissReview() }
+        }
+    }
+}
+
+// MARK: - Scan progress
+
+private struct ScanProgressView: View {
+    let progress: ScanProgress
+    let showsAccount: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            switch progress.stage {
+            case .searching:
+                ProgressView { Text("Searching the last 13 months…") }
+            case .filtering:
+                ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
+                    Text("Skipping ads and newsletters…")
+                } currentValueLabel: {
+                    Text("Checked \(progress.done) of ^[\(progress.total) email](inflect: true)")
+                }
+            case .reading:
+                ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
+                    Text("Reading billing emails…")
+                } currentValueLabel: {
+                    Text("\(progress.done) of \(progress.total)")
+                }
+            }
+            if showsAccount, let account = progress.account {
+                Label(account, systemImage: "envelope")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+            }
         }
     }
 }

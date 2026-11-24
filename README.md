@@ -13,6 +13,12 @@ billing emails in each (receipts, renewals, household bills, tax and pagoPA noti
 insurance), reads them with Apple Intelligence **on the device** (`SystemLanguageModel`, Foundation
 Models), and suggests payments that the user confirms before anything is added.
 
+A scan has three steps per account (`EmailImportModel.scanAccount`): Gmail search of the last 13
+months (up to 500 IDs), a header-only pass (`format=metadata`: sender, subject, List-Unsubscribe)
+where `BillingEmailFilter` skips ads, newsletters, shipping and security notices and keeps only the
+newest two emails per sender+subject, then full download and on-device reading of what's left
+(up to 150).
+
 - No backend and no third-party SDK: OAuth 2.0 with PKCE via `WebAuthenticationSession`,
   Gmail REST API via `URLSession`.
 - Scope: `https://www.googleapis.com/auth/gmail.readonly` only.
