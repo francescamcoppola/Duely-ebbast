@@ -106,7 +106,7 @@ struct WelcomeStepView: View {
     }
 }
 
-/// The app's logo, square. Keep `AppLogo` in the asset catalog in sync with the AppIcon artwork.
+/// The app's logo, as a rounded square like its icon. Keep `AppLogo` in the asset catalog in sync with the AppIcon artwork.
 struct AppMark: View {
     @ScaledMetric(relativeTo: .largeTitle) private var size: CGFloat = 100
 
@@ -119,7 +119,8 @@ struct AppMark: View {
             .interpolation(.high)
             .scaledToFill()
             .frame(width: markSize, height: markSize)
-            // Square, like the logo artwork itself.
+            // Rounded square, like the app's icon on the Home Screen.
+            .clipShape(RoundedRectangle(cornerRadius: markSize * 0.2237, style: .continuous))
             .shadow(color: Color.accentColor.opacity(0.35), radius: 16, y: 8)
             .accessibilityHidden(true)
     }

@@ -19,10 +19,9 @@ struct EmailStepView: View {
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @State private var emailImport = EmailImportModel.shared
 
-    /// Gmail is configured and the device can read emails: otherwise this step is skipped.
-    static var isAvailable: Bool {
-        GmailConfiguration.isConfigured && AppleIntelligenceStatus.current == .available
-    }
+    /// Always offered when Gmail import is set up in this build. Without Apple Intelligence the
+    /// account is connected anyway and Home explains how to start the scan.
+    static var isAvailable: Bool { GmailConfiguration.isConfigured }
 
     var body: some View {
         OnboardingStepLayout(
@@ -43,6 +42,15 @@ struct EmailStepView: View {
                     detail: "\(AppInfo.name) can only read email. It can't send, delete or change anything in your mailbox.",
                     systemImage: "eye"
                 )
+                if let message = AppleIntelligenceStatus.current.message {
+                    Label {
+                        Text(message)
+                    } icon: {
+                        Image(systemName: "apple.intelligence")
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(.orange)
+                }
                 if let error = emailImport.connectionError {
                     Text(error)
                         .font(.footnote)
