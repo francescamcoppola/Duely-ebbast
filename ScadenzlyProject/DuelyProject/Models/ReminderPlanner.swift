@@ -43,11 +43,10 @@ enum ReminderPlanner {
         let horizon = calendar.date(byAdding: .day, value: horizonDays, to: now) ?? now
 
         for subscription in subscriptions where !subscription.needsSetup && subscription.reminderDaysBefore > 0 {
-            guard let anchor = subscription.anchorDate else { continue }
             let days = subscription.reminderDaysBefore
-            let payments = BillingMath.occurrences(anchor: anchor, cycle: subscription.cycle,
-                                                   from: calendar.startOfDay(for: now), to: horizon,
-                                                   calendar: calendar)
+            // Stops after the last installment; payments already marked as paid need no reminder.
+            let payments = subscription.paymentDates(from: calendar.startOfDay(for: now), to: horizon, calendar: calendar)
+                .filter { !subscription.isMarkedPaid(on: $0, calendar: calendar) }
             var added = 0
             for payment in payments {
                 guard added < perSubscription,
@@ -77,15 +76,15 @@ enum ReminderPlanner {
 
     static func title(name: String, daysBefore: Int) -> String {
         switch daysBefore {
-        case 1: String(localized: "\(name) renews tomorrow")
-        case 7: String(localized: "\(name) renews in a week")
-        default: String(localized: "\(name) renews in \(daysBefore) days")
+        case 1: String(appLocalized: "\(name) renews tomorrow")
+        case 7: String(appLocalized: "\(name) renews in a week")
+        default: String(appLocalized: "\(name) renews in \(daysBefore) days")
         }
     }
 
     static func body(price: Decimal, currencyCode: String, payment: Date) -> String {
-        let amount = price.formatted(.currency(code: currencyCode))
-        let date = payment.formatted(.dateTime.weekday(.wide).day().month(.wide))
-        return String(localized: "\(amount) will be charged on \(date).")
+        let amount = price.formatted(.currency(code: currencyCode).locale(LocalizedBundle.locale))
+        let date = payment.formatted(.dateTime.weekday(.wide).day().month(.wide).locale(LocalizedBundle.locale))
+        return String(appLocalized: "\(amount) will be charged on \(date).")
     }
 }

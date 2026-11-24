@@ -188,12 +188,17 @@ struct UpNextList: View {
         } else {
             VStack(spacing: 0) {
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    Button {
-                        onSelect(item.subscription)
-                    } label: {
-                        UpcomingRow(item: item, currencyCode: currencyCode)
+                    HStack(spacing: 0) {
+                        Button {
+                            onSelect(item.subscription)
+                        } label: {
+                            UpcomingRow(item: item, currencyCode: currencyCode)
+                        }
+                        .buttonStyle(.plain)
+
+                        PaidCheckButton(subscription: item.subscription, date: item.date)
+                            .padding(.trailing, 6)
                     }
-                    .buttonStyle(.plain)
 
                     if index < items.count - 1 {
                         Divider().padding(.leading, 74)
@@ -212,7 +217,7 @@ private struct UpcomingRow: View {
     let item: HomeSummary.Upcoming
     let currencyCode: String
 
-    private var isSoon: Bool { item.daysAway <= 1 }
+    private var isSoon: Bool { item.daysAway <= 1 && !item.isPaid }
 
     var body: some View {
         AdaptiveStack(spacing: 14) {
@@ -222,9 +227,15 @@ private struct UpcomingRow: View {
                 Text(item.subscription.name)
                     .font(.body.weight(.semibold))
                     .lineLimit(1)
-                Text(HomeSummary.relativeDay(item.daysAway))
-                    .font(.subheadline)
-                    .foregroundStyle(isSoon ? Color.red : Color.secondary)
+                Group {
+                    if item.isPaid {
+                        Text("Paid")
+                    } else {
+                        Text(HomeSummary.relativeDay(item.daysAway))
+                    }
+                }
+                .font(.subheadline)
+                .foregroundStyle(isSoon ? Color.red : Color.secondary)
             }
 
             Spacer(minLength: 8)
@@ -232,8 +243,10 @@ private struct UpcomingRow: View {
             Text(item.subscription.price, format: .currency(code: currencyCode))
                 .font(.body.weight(.semibold))
                 .monospacedDigit()
+                .foregroundStyle(item.isPaid ? Color.secondary : Color.primary)
         }
-        .padding(.horizontal, 16)
+        .padding(.leading, 16)
+        .padding(.trailing, 4)
         .padding(.vertical, 10)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)

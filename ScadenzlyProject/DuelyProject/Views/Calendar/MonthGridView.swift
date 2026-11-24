@@ -195,7 +195,7 @@ private struct DayCell: View {
 
     private var accessibilityLabel: Text {
         let date = day.formatted(.dateTime.weekday(.wide).day().month(.wide))
-        let prefix = isToday ? String(localized: "Today, \(date)") : date
+        let prefix = isToday ? String(appLocalized: "Today, \(date)") : date
         guard !payments.isEmpty else { return Text(prefix) }
         let names = payments.map(\.subscription.name).formatted(.list(type: .and))
         return Text("\(prefix). ^[\(payments.count) payment](inflect: true): \(names)")

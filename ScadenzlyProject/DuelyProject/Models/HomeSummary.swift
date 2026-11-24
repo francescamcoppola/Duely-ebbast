@@ -16,6 +16,7 @@ struct HomeSummary {
         let date: Date
         let daysAway: Int
         var id: Subscription.ID { subscription.id }
+        var isPaid: Bool { subscription.isMarkedPaid(on: date) }
     }
 
     struct CategoryShare: Identifiable {
@@ -48,9 +49,7 @@ struct HomeSummary {
         self.needsSetup = subscriptions.filter(\.needsSetup)
 
         self.monthlyTotal = configured.reduce(Decimal.zero) { $0 + $1.monthlyCost }
-        self.yearlyTotal = configured.reduce(Decimal.zero) {
-            $0 + BillingMath.yearlyEquivalent(price: $1.price, cycle: $1.cycle)
-        }
+        self.yearlyTotal = configured.reduce(Decimal.zero) { $0 + $1.yearlyCost }
 
         // Up next: payments in the coming two weeks, soonest first.
         self.upcoming = Array(
@@ -102,9 +101,9 @@ struct HomeSummary {
     /// "Today", "Tomorrow", "In 5 days". Day-based, so 23:00 → tomorrow 00:00 is still "Tomorrow".
     static func relativeDay(_ daysAway: Int) -> String {
         switch daysAway {
-        case ...0: String(localized: "Today")
-        case 1: String(localized: "Tomorrow")
-        default: String(localized: "In \(daysAway) days")
+        case ...0: String(appLocalized: "Today")
+        case 1: String(appLocalized: "Tomorrow")
+        default: String(appLocalized: "In \(daysAway) days")
         }
     }
 }

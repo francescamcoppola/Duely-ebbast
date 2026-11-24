@@ -17,7 +17,7 @@ struct SubscriptionStats {
 
     static let usageWeeksShown = 8
 
-    /// Charges strictly before today, since tracking began.
+    /// Charges strictly before today since tracking began, plus upcoming ones marked as paid.
     let chargedCount: Int
     let chargedTotal: Decimal
     let trackingStart: Date
@@ -35,11 +35,16 @@ struct SubscriptionStats {
         let today = calendar.startOfDay(for: now)
         trackingStart = subscription.trackingStart(calendar: calendar)
 
-        if let anchor = subscription.anchorDate, !subscription.needsSetup {
-            let dates = BillingMath.occurrences(anchor: anchor, cycle: subscription.cycle,
-                                                from: trackingStart, to: today, calendar: calendar)
-            chargedCount = dates.count
-            chargedTotal = subscription.price * Decimal(dates.count)
+        if !subscription.needsSetup {
+            let past = subscription.paymentDates(from: trackingStart, to: today, limit: 10_000, calendar: calendar)
+            // Upcoming payments already marked as paid count too.
+            let paidAhead = subscription.paidDates.filter { day in
+                day >= today && !subscription.paymentDates(
+                    from: day, to: calendar.date(byAdding: .day, value: 1, to: day) ?? day, calendar: calendar
+                ).isEmpty
+            }
+            chargedCount = past.count + paidAhead.count
+            chargedTotal = subscription.price * Decimal(chargedCount)
         } else {
             chargedCount = 0
             chargedTotal = 0

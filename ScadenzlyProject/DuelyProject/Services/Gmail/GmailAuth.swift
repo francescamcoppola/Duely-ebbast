@@ -34,17 +34,17 @@ nonisolated enum GmailAuthError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .notConfigured:
-            String(localized: "Gmail import isn't set up in this version of the app.")
+            String(appLocalized: "Gmail import isn't set up in this version of the app.")
         case .invalidCallback:
-            String(localized: "Google didn't complete the sign-in. Try again.")
+            String(appLocalized: "Google didn't complete the sign-in. Try again.")
         case .accessDenied:
-            String(localized: "Access to Gmail wasn't allowed.")
+            String(appLocalized: "Access to Gmail wasn't allowed.")
         case .scopeNotGranted:
-            String(localized: "Allow “View your email messages and settings” on Google's screen so emails can be scanned.")
+            String(appLocalized: "Allow “View your email messages and settings” on Google's screen so emails can be scanned.")
         case .signedOut:
-            String(localized: "Your Gmail connection expired. Connect again to continue.")
+            String(appLocalized: "Your Gmail connection expired. Connect again to continue.")
         case .server:
-            String(localized: "Couldn't reach Google. Check your connection and try again.")
+            String(appLocalized: "Couldn't reach Google. Check your connection and try again.")
         }
     }
 }

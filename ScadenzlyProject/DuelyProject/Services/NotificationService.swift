@@ -51,8 +51,8 @@ nonisolated enum NotificationService {
 
         if let checkIn {
             let content = UNMutableNotificationContent()
-            content.title = String(localized: "Weekly Check-In")
-            content.body = String(localized: "Which subscriptions did you use this week? It takes 10 seconds.")
+            content.title = String(appLocalized: "Weekly Check-In")
+            content.body = String(appLocalized: "Which subscriptions did you use this week? It takes 10 seconds.")
             content.sound = .default
             content.threadIdentifier = "check-in"
             let trigger = UNCalendarNotificationTrigger(dateMatching: checkIn.components, repeats: true)

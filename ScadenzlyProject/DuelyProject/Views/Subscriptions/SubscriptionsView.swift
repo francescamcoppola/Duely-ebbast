@@ -245,9 +245,17 @@ struct SubscriptionRow: View {
                     Text(subscription.price, format: .currency(code: currencyCode))
                         .font(.body.weight(.semibold))
                         .monospacedDigit()
-                    Text(subscription.cycle.title)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    Group {
+                        if subscription.hasEnded() {
+                            Text("Ended")
+                        } else if let left = subscription.remainingPayments() {
+                            Text("^[\(left) payment](inflect: true) left")
+                        } else {
+                            Text(subscription.cycle.title)
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
             }
         }

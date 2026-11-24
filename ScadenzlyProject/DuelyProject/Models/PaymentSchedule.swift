@@ -18,6 +18,7 @@ extension BillingMath {
         cycle: BillingCycle,
         from start: Date,
         to end: Date,
+        limit: Int = 64,
         calendar: Calendar = .current
     ) -> [Date] {
         guard start < end else { return [] }
@@ -31,7 +32,7 @@ extension BillingMath {
         var period = Int((Double(elapsed) / Double(step)).rounded(.down)) - 1
 
         var dates: [Date] = []
-        for _ in 0..<64 {   // A month holds at most 6 weekly payments; 64 is a hard safety stop.
+        for _ in 0..<max(limit, 1) {   // A month holds at most 6 weekly payments; the limit is a hard safety stop.
             guard let date = calendar.date(byAdding: component, value: period * step, to: anchorDay) else { break }
             if date >= end { break }
             if date >= start { dates.append(date) }
@@ -101,6 +102,10 @@ struct ScheduledPayment: Identifiable {
     let isPast: Bool
 
     var amount: Decimal { subscription.price }
+    /// Today or later, and marked as paid by hand.
+    var isMarkedPaid: Bool { !isPast && subscription.isMarkedPaid(on: date) }
+    /// Counted as charged: past, or marked as paid.
+    var isPaid: Bool { isPast || isMarkedPaid }
     var id: ID { ID(subscription: subscription.persistentModelID, date: date) }
 }
 
@@ -118,12 +123,10 @@ struct MonthSchedule {
         var byDay: [Date: [ScheduledPayment]] = [:]
 
         for subscription in subscriptions where !subscription.needsSetup {
-            guard let anchor = subscription.anchorDate else { continue }
             // Don't invent history: show past charges only from when tracking began.
             let from = max(month.start, subscription.trackingStart(calendar: calendar))
 
-            for date in BillingMath.occurrences(anchor: anchor, cycle: subscription.cycle,
-                                                from: from, to: month.end, calendar: calendar) {
+            for date in subscription.paymentDates(from: from, to: month.end, calendar: calendar) {
                 byDay[date, default: []].append(
                     ScheduledPayment(subscription: subscription, date: date, isPast: date < todayStart)
                 )
@@ -138,7 +141,7 @@ struct MonthSchedule {
         let all = byDay.values.joined()
         paymentCount = all.count
         total = all.reduce(Decimal.zero) { $0 + $1.amount }
-        chargedTotal = all.filter(\.isPast).reduce(Decimal.zero) { $0 + $1.amount }
+        chargedTotal = all.filter(\.isPaid).reduce(Decimal.zero) { $0 + $1.amount }
         upcomingTotal = total - chargedTotal
     }
 

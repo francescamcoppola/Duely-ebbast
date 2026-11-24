@@ -88,7 +88,10 @@ struct RootTabView: View {
     private var notificationSignature: String {
         let settings = "\(checkInEnabled)|\(checkInWeekday)|\(checkInMinutes)|\(paymentRemindersEnabled)|\(currencyCode)|\(budgetString)|\(LanguageController.shared.generation)"
         let data = subscriptions
-            .map { "\($0.name)|\($0.price)|\($0.cycleRaw)|\($0.anchorDate?.timeIntervalSince1970 ?? 0)|\($0.reminderDaysBefore)" }
+            .map {
+                "\($0.name)|\($0.price)|\($0.cycleRaw)|\($0.anchorDate?.timeIntervalSince1970 ?? 0)|\($0.reminderDaysBefore)"
+                    + "|\($0.lastPaymentDate?.timeIntervalSince1970 ?? 0)|\($0.paidDates.map(\.timeIntervalSince1970).sorted())"
+            }
             .sorted()
             .joined(separator: ";")
         return settings + "#" + data

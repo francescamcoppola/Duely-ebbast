@@ -35,12 +35,20 @@ struct DayAgendaView: View {
             } else {
                 VStack(spacing: 0) {
                     ForEach(Array(payments.enumerated()), id: \.element.id) { index, payment in
-                        Button {
-                            onSelect(payment.subscription)
-                        } label: {
-                            PaymentRow(payment: payment, currencyCode: currencyCode)
+                        HStack(spacing: 0) {
+                            Button {
+                                onSelect(payment.subscription)
+                            } label: {
+                                PaymentRow(payment: payment, currencyCode: currencyCode)
+                            }
+                            .buttonStyle(.plain)
+
+                            // Past payments are already charged; today's and later can be ticked off.
+                            if !payment.isPast {
+                                PaidCheckButton(subscription: payment.subscription, date: payment.date)
+                                    .padding(.trailing, 6)
+                            }
                         }
-                        .buttonStyle(.plain)
 
                         if index < payments.count - 1 {
                             Divider().padding(.leading, 66)
@@ -88,6 +96,8 @@ private struct PaymentRow: View {
                             .foregroundStyle(.green)
                             .accessibilityHidden(true)
                         Text("Charged")
+                    } else if payment.isMarkedPaid {
+                        Text("Paid")
                     } else {
                         Text("Due")
                     }
@@ -103,9 +113,10 @@ private struct PaymentRow: View {
             Text(payment.amount, format: .currency(code: currencyCode))
                 .font(.body.weight(.semibold))
                 .monospacedDigit()
-                .foregroundStyle(payment.isPast ? Color.secondary : Color.primary)
+                .foregroundStyle(payment.isPaid ? Color.secondary : Color.primary)
         }
-        .padding(.horizontal, 16)
+        .padding(.leading, 16)
+        .padding(.trailing, payment.isPast ? 16 : 4)
         .padding(.vertical, 10)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
@@ -145,7 +156,8 @@ struct MonthSummaryCard: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
 
-            // Only the current month is split: past months are all charged, future ones all to come.
+            // Only the current month is split: past months are all charged, future ones all to come
+            // (unless some are already marked as paid).
             if isCurrentMonth {
                 VStack(alignment: .leading, spacing: 8) {
                     BudgetBar(ratio: chargedFraction, tint: .accentColor)

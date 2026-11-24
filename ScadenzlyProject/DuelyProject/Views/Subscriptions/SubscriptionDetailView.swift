@@ -124,23 +124,44 @@ struct SubscriptionDetailView: View {
     }
 
     private var billingSection: some View {
-        Section("Billing") {
+        Section {
             if let next = subscription.nextPayment() {
-                LabeledContent("Next Payment") {
-                    Text(next, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated).year())
+                HStack {
+                    LabeledContent("Next Payment") {
+                        Text(next, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated).year())
+                    }
+                    PaidCheckButton(subscription: subscription, date: next)
+                        .padding(.trailing, -8)
                 }
             }
             LabeledContent("Billing Cycle") {
                 Text(subscription.cycle.title)
             }
-            if subscription.cycle != .monthly {
-                LabeledContent("Per Month") {
-                    Text(subscription.monthlyCost, format: .currency(code: currencyCode))
+            if let last = subscription.lastPaymentDate {
+                LabeledContent("Last Payment") {
+                    Text(last, format: .dateTime.day().month(.abbreviated).year())
+                }
+                if let left = subscription.remainingPayments(), left > 0 {
+                    LabeledContent("Payments Left") {
+                        Text(left, format: .number)
+                    }
                 }
             }
-            LabeledContent("Per Year") {
-                Text(BillingMath.yearlyEquivalent(price: subscription.price, cycle: subscription.cycle),
-                     format: .currency(code: currencyCode))
+            if !subscription.hasEnded() {
+                if subscription.cycle != .monthly {
+                    LabeledContent("Per Month") {
+                        Text(subscription.monthlyCost, format: .currency(code: currencyCode))
+                    }
+                }
+                LabeledContent("Per Year") {
+                    Text(subscription.yearlyCost, format: .currency(code: currencyCode))
+                }
+            }
+        } header: {
+            Text("Billing")
+        } footer: {
+            if subscription.hasEnded() {
+                Text("All payments are done. It no longer counts toward your totals.")
             }
         }
     }

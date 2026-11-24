@@ -77,10 +77,10 @@ struct ScreenTimeSection: View {
 
     private var lastUseText: String {
         guard let key = subscription.usageKey, let last = UsageLinks.lastUse(key: key) else {
-            return String(localized: "Not used yet")
+            return String(appLocalized: "Not used yet")
         }
-        if Calendar.current.isDateInToday(last) { return String(localized: "Used today") }
-        return String(localized: "Last used \(last.formatted(.dateTime.day().month(.abbreviated).locale(LanguageController.shared.locale)))")
+        if Calendar.current.isDateInToday(last) { return String(appLocalized: "Used today") }
+        return String(appLocalized: "Last used \(last.formatted(.dateTime.day().month(.abbreviated).locale(LanguageController.shared.locale)))")
     }
 
     private func openPicker() {

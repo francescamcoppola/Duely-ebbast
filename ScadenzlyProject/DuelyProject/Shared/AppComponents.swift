@@ -156,6 +156,41 @@ struct MonogramTile: View {
     }
 }
 
+// MARK: - Paid check
+
+/// Round check, like a Reminders item: marks one payment as paid, or back to due. A paid payment
+/// counts as charged and gets no reminder.
+struct PaidCheckButton: View {
+    let subscription: Subscription
+    let date: Date
+
+    @Environment(\.modelContext) private var context
+    @Environment(\.calendar) private var calendar
+
+    private var isPaid: Bool { subscription.isMarkedPaid(on: date, calendar: calendar) }
+
+    var body: some View {
+        Button {
+            withAnimation(.snappy) {
+                subscription.setPaid(!isPaid, on: date, calendar: calendar)
+            }
+            try? context.save()
+        } label: {
+            Image(systemName: isPaid ? "checkmark.circle.fill" : "circle")
+                .font(.title2)
+                .foregroundStyle(isPaid ? Color.green : Color.secondary)
+                .contentTransition(.symbolEffect(.replace))
+                .frame(minWidth: AppMetrics.minimumHitTarget, minHeight: AppMetrics.minimumHitTarget)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.borderless)
+        .sensoryFeedback(.success, trigger: isPaid) { _, paid in paid }
+        .accessibilityLabel(Text("Paid"))
+        .accessibilityValue(isPaid ? Text("Yes") : Text("No"))
+        .accessibilityHint(isPaid ? Text("Marks this payment as still due") : Text("Marks this payment as paid"))
+    }
+}
+
 // MARK: - Sheet toolbar buttons
 
 /// System ✕ button for dismissing a sheet without saving.

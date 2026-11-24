@@ -105,8 +105,8 @@ final class ScreenTimeService {
         links[key] = UsageLink(
             selection: (try? JSONEncoder().encode(selection)) ?? Data(),
             name: subscription.name,
-            unusedTitle: String(localized: "You haven't opened \(subscription.name) this week"),
-            unusedBody: String(localized: "It costs you \(monthly) a month. Is it still worth it?"),
+            unusedTitle: String(appLocalized: "You haven't opened \(subscription.name) this week"),
+            unusedBody: String(appLocalized: "It costs you \(monthly) a month. Is it still worth it?"),
             linkedOn: links[key]?.linkedOn ?? .now
         )
         UsageLinks.all = links

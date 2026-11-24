@@ -184,7 +184,7 @@ final class EmailImportModel {
             let isNew = !connectedEmails.contains { $0.caseInsensitiveCompare(email) == .orderedSame }
             guard !isNew || canAddAccount else {
                 await GmailAuth.revoke(token: tokens.refreshToken ?? tokens.accessToken)
-                connectionError = String(localized: "You can connect up to \(Self.maxAccounts) accounts. Disconnect one to add another.")
+                connectionError = String(appLocalized: "You can connect up to \(Self.maxAccounts) accounts. Disconnect one to add another.")
                 return nil
             }
             try GmailAuth.store(tokens)
@@ -241,7 +241,7 @@ final class EmailImportModel {
         presentsResultsOnHome = presentResultsOnHome
         refreshAvailability()
         guard aiStatus == .available else {
-            phase = .failed(aiStatus.message.map { String(localized: $0) } ?? "")
+            phase = .failed(aiStatus.message.map { String(appLocalizedResource: $0) } ?? "")
             return
         }
         let targets = accounts ?? connectedEmails
@@ -325,7 +325,7 @@ final class EmailImportModel {
             lastSummary = summary
             phase = .review(candidates)
         } else {
-            phase = .failed(accountErrors.values.first ?? String(localized: "Something went wrong. Try again."))
+            phase = .failed(accountErrors.values.first ?? String(appLocalized: "Something went wrong. Try again."))
         }
         scanTask = nil
     }
@@ -412,9 +412,9 @@ final class EmailImportModel {
             reloadAccounts()
             accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
         } else if connectionLost {
-            accountErrors[account] = String(localized: "The connection dropped after \(processed) of \(toRead.count) emails. What was found so far is shown; scan again to finish.")
+            accountErrors[account] = String(appLocalized: "The connection dropped after \(processed) of \(toRead.count) emails. What was found so far is shown; scan again to finish.")
         } else if unreadable > 0 {
-            accountErrors[account] = String(localized: "^[\(unreadable) email](inflect: true) couldn't be read and was skipped.")
+            accountErrors[account] = String(appLocalized: "^[\(unreadable) email](inflect: true) couldn't be read and was skipped.")
         }
         return (accountFound, summary)
     }
@@ -503,6 +503,6 @@ final class EmailImportModel {
     private static func message(for error: Error) -> String {
         if let error = error as? GmailAuthError { return error.errorDescription ?? "" }
         if error is URLError { return GmailAuthError.server("").errorDescription ?? "" }
-        return String(localized: "Something went wrong. Try again.")
+        return String(appLocalized: "Something went wrong. Try again.")
     }
 }

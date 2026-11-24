@@ -30,6 +30,10 @@ struct SubscriptionEditorView: View {
     @State private var cycle: BillingCycle = .monthly
     @State private var category: SubscriptionCategory = .other
     @State private var nextPayment = Date.now
+    @State private var endRule: EndRule = .never
+    /// Installments still to pay, the next payment included.
+    @State private var paymentsLeft = 12
+    @State private var lastPayment = Date.now
     @State private var reminderDays = 1
     @State private var tint: SubscriptionTint?
     /// Plan picked from the catalog. Kept if the price is edited (a promo, an old price), dropped
@@ -42,10 +46,13 @@ struct SubscriptionEditorView: View {
 
     private enum Field { case name, price }
 
+    /// When a plan paid in installments stops.
+    private enum EndRule: Hashable { case never, afterPayments, onDate }
+
     private var currency: CurrencyOption { CurrencyOption(code: currencyCode) }
     private var trimmedName: String { name.trimmingCharacters(in: .whitespacesAndNewlines) }
     private var price: Decimal? { priceText.isEmpty ? nil : Decimal(string: priceText, locale: .current) }
-    private var canSave: Bool { !trimmedName.isEmpty && (price ?? 0) > 0 }
+    private var canSave: Bool { !trimmedName.isEmpty && (price ?? 0) > 0 && (endRule != .onDate || paymentsUntilLastDate > 0) }
     private var isNew: Bool { subscription == nil }
 
     var body: some View {
@@ -123,6 +130,8 @@ struct SubscriptionEditorView: View {
                     }
                 }
 
+                installmentsSection
+
                 Section {
                     Picker("Reminder", selection: $reminderDays) {
                         ForEach(ReminderOption.all, id: \.self) { days in
@@ -158,7 +167,7 @@ struct SubscriptionEditorView: View {
                 }
             }
             .confirmationDialog(
-                Text("Delete \(trimmedName.isEmpty ? String(localized: "this subscription") : trimmedName)?"),
+                Text("Delete \(trimmedName.isEmpty ? String(appLocalized: "this subscription") : trimmedName)?"),
                 isPresented: $isConfirmingDelete,
                 titleVisibility: .visible
             ) {
@@ -170,6 +179,7 @@ struct SubscriptionEditorView: View {
                 let clean = OnboardingViewModel.sanitizedAmount(newValue, maxFractionDigits: currency.fractionDigits)
                 if clean != newValue { priceText = clean }
             }
+            .onChange(of: endRule) { oldRule, newRule in syncEndRule(from: oldRule, to: newRule) }
             .onAppear(perform: load)
             .task {
                 guard isNew else { return }
@@ -180,6 +190,93 @@ struct SubscriptionEditorView: View {
         .safariSheet($webPage)
         // Unsaved edits shouldn't be lost by an accidental swipe-down.
         .interactiveDismissDisabled(hasChanges)
+    }
+
+    // MARK: Installments
+
+    private var installmentsSection: some View {
+        Section {
+            Picker("Ends", selection: $endRule.animation()) {
+                Text("Never").tag(EndRule.never)
+                Text("After a Number of Payments").tag(EndRule.afterPayments)
+                Text("On a Date").tag(EndRule.onDate)
+            }
+
+            switch endRule {
+            case .never:
+                EmptyView()
+            case .afterPayments:
+                Stepper(value: $paymentsLeft, in: 1...999) {
+                    LabeledContent("Payments Left") {
+                        Text(paymentsLeft, format: .number)
+                            .monospacedDigit()
+                    }
+                }
+            case .onDate:
+                DatePicker("Last Payment", selection: $lastPayment,
+                           in: Calendar.current.startOfDay(for: nextPayment)...,
+                           displayedComponents: .date)
+            }
+        } footer: {
+            switch endRule {
+            case .never:
+                Text("For payments in installments, like a phone or a loan: they stop after the last one.")
+            case .afterPayments:
+                if let last = resolvedLastPayment {
+                    Text("Next payment included. The last one is on \(Text(last, format: .dateTime.day().month(.wide).year())).")
+                }
+            case .onDate:
+                Text("^[\(paymentsUntilLastDate) payment](inflect: true) left, the next one included.")
+            }
+        }
+    }
+
+    /// The last installment for the chosen rule, `nil` when the plan never ends.
+    private var resolvedLastPayment: Date? {
+        let calendar = Calendar.current
+        let first = calendar.startOfDay(for: nextPayment)
+        switch endRule {
+        case .never:
+            return nil
+        case .afterPayments:
+            return lastPaymentDate(afterPayments: paymentsLeft)
+        case .onDate:
+            return max(first, calendar.startOfDay(for: lastPayment))
+        }
+    }
+
+    /// The date of the `count`-th payment, counting the next one as the first.
+    private func lastPaymentDate(afterPayments count: Int) -> Date? {
+        let calendar = Calendar.current
+        let (component, step) = cycle.step
+        return calendar.date(byAdding: component, value: (max(count, 1) - 1) * step,
+                             to: calendar.startOfDay(for: nextPayment))
+    }
+
+    /// Keeps the other rule's value in step, so switching between them shows the same end.
+    private func syncEndRule(from oldRule: EndRule, to newRule: EndRule) {
+        switch newRule {
+        case .onDate:
+            if oldRule == .afterPayments, let last = lastPaymentDate(afterPayments: paymentsLeft) {
+                lastPayment = last
+            } else if paymentsUntilLastDate == 0 {
+                lastPayment = lastPaymentDate(afterPayments: 12) ?? nextPayment
+            }
+        case .afterPayments:
+            if oldRule == .onDate, paymentsUntilLastDate > 0 { paymentsLeft = paymentsUntilLastDate }
+        case .never:
+            break
+        }
+    }
+
+    /// Payments from the next one through the chosen last date.
+    private var paymentsUntilLastDate: Int {
+        let calendar = Calendar.current
+        let first = calendar.startOfDay(for: nextPayment)
+        let last = calendar.startOfDay(for: lastPayment)
+        guard last >= first, let end = calendar.date(byAdding: .day, value: 1, to: last) else { return 0 }
+        return BillingMath.occurrences(anchor: first, cycle: cycle, from: first, to: end,
+                                       limit: 10_000, calendar: calendar).count
     }
 
     // MARK: Plans
@@ -310,6 +407,7 @@ struct SubscriptionEditorView: View {
             || reminderDays != subscription.reminderDaysBefore
             || tint != subscription.tint
             || resolvedPlanName != subscription.planName
+            || resolvedLastPayment != subscription.lastPaymentDate.map(Calendar.current.startOfDay(for:))
     }
 
     private func load() {
@@ -322,7 +420,13 @@ struct SubscriptionEditorView: View {
         reminderDays = ReminderOption.all.contains(subscription.reminderDaysBefore) ? subscription.reminderDaysBefore : 1
         tint = subscription.tint
         planName = subscription.planName
-        nextPayment = subscription.nextPayment() ?? .now
+        // A finished plan has no next payment: show its last one, so saving keeps its schedule.
+        nextPayment = subscription.nextPayment() ?? subscription.lastPaymentDate ?? .now
+        if let last = subscription.lastPaymentDate {
+            endRule = .onDate
+            lastPayment = last
+            paymentsLeft = max(subscription.remainingPayments() ?? 1, 1)
+        }
         if subscription.price > 0 {
             priceText = OnboardingViewModel.sanitizedAmount(
                 BillingMath.storedString(subscription.price),
@@ -351,6 +455,7 @@ struct SubscriptionEditorView: View {
         target.cycle = cycle
         target.category = category
         target.anchorDate = Calendar.current.startOfDay(for: nextPayment)
+        target.lastPaymentDate = resolvedLastPayment
         target.reminderDaysBefore = reminderDays
         target.tint = tint
         target.planName = resolvedPlanName

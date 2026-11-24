@@ -221,6 +221,10 @@ final class Subscription {
     var cancelURL: String?
     /// Identifies this subscription's Screen Time link (`UsageLinks`) once it's linked to an app.
     var usageKey: String?
+    /// Last payment of a plan paid in installments (a phone, a loan). `nil` = renews until deleted.
+    var lastPaymentDate: Date?
+    /// Payments marked as paid by hand, at the start of their day. Past payments count as paid anyway.
+    var paidDates: [Date] = []
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []
@@ -272,11 +276,70 @@ final class Subscription {
     /// Added from onboarding but still missing a price or a payment date.
     var needsSetup: Bool { price <= 0 || anchorDate == nil }
 
-    var monthlyCost: Decimal { BillingMath.monthlyEquivalent(price: price, cycle: cycle) }
+    /// What it costs a month now: 0 once its last installment is behind us, so a finished plan
+    /// drops out of every total, average and budget.
+    var monthlyCost: Decimal {
+        hasEnded() ? 0 : BillingMath.monthlyEquivalent(price: price, cycle: cycle)
+    }
+
+    /// Same rule as `monthlyCost`.
+    var yearlyCost: Decimal {
+        hasEnded() ? 0 : BillingMath.yearlyEquivalent(price: price, cycle: cycle)
+    }
 
     func nextPayment(after reference: Date = .now, calendar: Calendar = .current) -> Date? {
-        guard let anchorDate else { return nil }
-        return BillingMath.nextPayment(anchor: anchorDate, cycle: cycle, onOrAfter: reference, calendar: calendar)
+        guard let anchorDate,
+              let next = BillingMath.nextPayment(anchor: anchorDate, cycle: cycle, onOrAfter: reference, calendar: calendar),
+              isWithinPlan(next, calendar: calendar) else { return nil }
+        return next
+    }
+
+    // MARK: Installments
+
+    /// True once every installment has been charged.
+    func hasEnded(now: Date = .now, calendar: Calendar = .current) -> Bool {
+        guard let lastPaymentDate else { return false }
+        return calendar.startOfDay(for: lastPaymentDate) < calendar.startOfDay(for: now)
+    }
+
+    /// Payment dates in `[start, end)`, none after the last installment.
+    func paymentDates(from start: Date, to end: Date, limit: Int = 64, calendar: Calendar = .current) -> [Date] {
+        guard let anchorDate else { return [] }
+        var end = end
+        if let lastPaymentDate,
+           let dayAfter = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: lastPaymentDate)) {
+            end = min(end, dayAfter)
+        }
+        return BillingMath.occurrences(anchor: anchorDate, cycle: cycle, from: start, to: end,
+                                       limit: limit, calendar: calendar)
+    }
+
+    /// Installments still to pay from today, today's included. `nil` when the plan never ends.
+    func remainingPayments(now: Date = .now, calendar: Calendar = .current) -> Int? {
+        guard let lastPaymentDate else { return nil }
+        let end = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: lastPaymentDate)) ?? lastPaymentDate
+        return paymentDates(from: calendar.startOfDay(for: now), to: end, limit: 10_000, calendar: calendar).count
+    }
+
+    private func isWithinPlan(_ date: Date, calendar: Calendar) -> Bool {
+        guard let lastPaymentDate else { return true }
+        return calendar.startOfDay(for: date) <= calendar.startOfDay(for: lastPaymentDate)
+    }
+
+    // MARK: Paid
+
+    func isMarkedPaid(on date: Date, calendar: Calendar = .current) -> Bool {
+        let day = calendar.startOfDay(for: date)
+        return paidDates.contains { calendar.isDate($0, inSameDayAs: day) }
+    }
+
+    func setPaid(_ paid: Bool, on date: Date, calendar: Calendar = .current) {
+        let day = calendar.startOfDay(for: date)
+        paidDates.removeAll { calendar.isDate($0, inSameDayAs: day) }
+        if paid { paidDates.append(day) }
+        // Marks for payments long gone only take space: past payments count as paid anyway.
+        let cutoff = calendar.date(byAdding: .month, value: -2, to: calendar.startOfDay(for: .now)) ?? day
+        paidDates.removeAll { $0 < cutoff }
     }
 
     /// Earliest date we show charges from: the month tracking began, or an earlier known payment.

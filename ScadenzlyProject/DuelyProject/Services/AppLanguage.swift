@@ -8,8 +8,9 @@
 //  applied in three ways at once, which together look like a restart:
 //  1. `AppleLanguages` is written, as the system's own per-app language setting does: every
 //     later launch starts in the new language.
-//  2. `Bundle.main` looks up strings in the chosen language from now on (`String(localized:)`,
-//     errors, notifications).
+//  2. Text built outside SwiftUI views (notifications, widgets, errors) is looked up in the
+//     chosen language's .lproj: `String(appLocalized:)`. Plain `String(localized:)` doesn't follow
+//     the change: Foundation resolves it at launch and ignores the `Bundle.main` override below.
 //  3. The whole interface is rebuilt with the new locale (`LanguageController.generation` is the
 //     root view's identity), so every screen, date and price switches immediately.
 //
@@ -104,7 +105,7 @@ final class LanguageController {
 
     /// Call once at launch.
     func start() {
-        LocalizedBundle.use(language.localization)
+        LocalizedBundle.use(language.localization, locale: language.locale)
     }
 
     /// Applies a new language right away, as if the app had restarted.
@@ -112,23 +113,45 @@ final class LanguageController {
         guard newLanguage != language else { return }
         newLanguage.persist()
         language = newLanguage
-        LocalizedBundle.use(newLanguage.localization)
+        LocalizedBundle.use(newLanguage.localization, locale: newLanguage.locale)
         generation += 1
     }
 }
 
 // MARK: - Bundle lookup
 
-/// Makes `Bundle.main` answer string lookups from the chosen language's .lproj, so text built
-/// outside SwiftUI views (`String(localized:)`) follows the choice without a relaunch.
+/// The chosen language's .lproj, for text built outside SwiftUI views (views follow the
+/// environment locale on their own). Also makes `Bundle.main.localizedString(forKey:…)` answer
+/// from it, for the few APIs that still call it.
 enum LocalizedBundle {
     nonisolated(unsafe) fileprivate static var current: Bundle?
+    nonisolated(unsafe) private(set) static var locale: Locale = .current
 
-    static func use(_ localization: String) {
+    /// Where strings in the app's language live: the chosen .lproj, or the main bundle before `use`.
+    nonisolated static var bundle: Bundle { current ?? .main }
+
+    static func use(_ localization: String, locale: Locale) {
         if object_getClass(Bundle.main) != OverridingBundle.self {
             object_setClass(Bundle.main, OverridingBundle.self)
         }
         current = Bundle.main.path(forResource: localization, ofType: "lproj").flatMap(Bundle.init(path:))
+        self.locale = locale
+    }
+}
+
+extension String {
+    /// `String(localized:)` in the language chosen in the app, with numbers and dates in the
+    /// interpolation formatted for it. Use it for text that isn't shown by a SwiftUI `Text`.
+    nonisolated init(appLocalized value: String.LocalizationValue) {
+        self.init(localized: value, bundle: LocalizedBundle.bundle, locale: LocalizedBundle.locale)
+    }
+
+    /// The same for a `LocalizedStringResource` (resolved later, e.g. an error message): its
+    /// locale picks the language it's looked up in.
+    nonisolated init(appLocalizedResource resource: LocalizedStringResource) {
+        var resource = resource
+        resource.locale = LocalizedBundle.locale
+        self.init(localized: resource)
     }
 }
 
