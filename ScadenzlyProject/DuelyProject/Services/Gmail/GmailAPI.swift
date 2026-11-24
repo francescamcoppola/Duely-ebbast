@@ -2,9 +2,9 @@
 //  GmailAPI.swift
 //  DuelyProject
 //
-//  The three read-only Gmail REST calls the import needs: the account address, a search for
-//  likely billing emails, and one message at a time. Messages are kept in memory only for the
-//  duration of a scan; nothing is written to disk.
+//  The read-only Gmail REST calls the import needs: the account address, a search for
+//  likely billing emails, a lightweight metadata pre-filter, and full message fetching.
+//  Messages are kept in memory only for the duration of a scan; nothing is written to disk.
 //
 
 import Foundation
@@ -22,17 +22,18 @@ nonisolated struct GmailAPI: Sendable {
     let accessToken: String
 
     /// Recent emails that look like receipts, renewals, plan confirmations, household bills,
-    /// taxes and tuition notices, in English, Spanish and Italian. A broad net: the model decides
-    /// what is really a recurring payment.
+    /// taxes and tuition notices, in English, Spanish and Italian. Excludes promotions and social
+    /// tabs so marketing blasts with words like "payment" or "scadenza" never enter the pipeline.
     static let searchQuery = """
-    newer_than:13m -in:chats -in:spam -in:trash (category:purchases OR subject:(subscription OR \
-    subscribed OR renewal OR renews OR renewed OR receipt OR invoice OR membership OR "your plan" OR \
-    billing OR payment OR bill OR statement OR "amount due" OR tax OR tuition OR rent OR insurance OR \
+    newer_than:13m -in:chats -in:spam -in:trash -category:promotions -category:social (category:purchases OR subject:(\
+    subscription OR subscribed OR renewal OR renews OR renewed OR "auto-renew" OR "free trial" OR trial OR \
+    receipt OR invoice OR membership OR "your plan" OR billing OR payment OR "direct debit" OR sepa OR \
+    bill OR statement OR "amount due" OR tax OR tuition OR rent OR insurance OR \
     suscripción OR renovación OR recibo OR factura OR membresía OR pago OR impuesto OR matrícula OR \
-    abbonamento OR rinnovo OR ricevuta OR fattura OR pagamento OR bolletta OR bollette OR \
-    "avviso di pagamento" OR pagopa OR tari OR imu OR tassa OR tasse OR tributo OR tributi OR \
-    "bollo auto" OR rata OR scadenza OR condominio OR affitto OR canone OR polizza OR assicurazione OR \
-    "contribuzione studentesca" OR iscrizione))
+    abbonamento OR rinnovo OR ricevuta OR fattura OR pagamento OR addebito OR domiciliazione OR \
+    "prova gratuita" OR bolletta OR bollette OR utenza OR utenze OR "avviso di pagamento" OR pagopa OR \
+    tari OR imu OR tassa OR tasse OR tributo OR tributi OR "bollo auto" OR rata OR scadenza OR \
+    condominio OR affitto OR canone OR polizza OR assicurazione OR "contribuzione studentesca" OR iscrizione))
     """
 
     // MARK: Calls
@@ -45,6 +46,8 @@ nonisolated struct GmailAPI: Sendable {
 
     /// Newest first, as Gmail returns them.
     func searchMessageIDs(query: String = Self.searchQuery, limit: Int) async throws -> [String] {
+        guard limit > 0 else { return [] }
+
         struct ListResponse: Decodable {
             struct Ref: Decodable { let id: String }
             let messages: [Ref]?
@@ -54,16 +57,76 @@ nonisolated struct GmailAPI: Sendable {
         var ids: [String] = []
         var pageToken: String?
         repeat {
-            var query = [
+            var params = [
                 URLQueryItem(name: "q", value: query),
                 URLQueryItem(name: "maxResults", value: String(min(100, limit - ids.count))),
             ]
-            if let pageToken { query.append(URLQueryItem(name: "pageToken", value: pageToken)) }
-            let page: ListResponse = try await get("messages", query: query)
+            if let pageToken { params.append(URLQueryItem(name: "pageToken", value: pageToken)) }
+            let page: ListResponse = try await get("messages", query: params)
             ids += page.messages?.map(\.id) ?? []
             pageToken = page.nextPageToken
         } while pageToken != nil && ids.count < limit
         return Array(ids.prefix(limit))
+    }
+
+    /// Fetches only `From`, `Subject`, and `List-Unsubscribe` (`format=metadata`) in parallel
+    /// to drop promotional newsletters before downloading full bodies or running the on-device model.
+    func filterCandidateIDs(_ ids: [String], maxConcurrent: Int = 10) async throws -> [String] {
+        guard !ids.isEmpty else { return [] }
+        let concurrency = max(1, maxConcurrent)
+        var kept = Set<String>()
+
+        try await withThrowingTaskGroup(of: (String, Bool).self) { group in
+            var iterator = ids.makeIterator()
+            for _ in 0..<min(concurrency, ids.count) {
+                if let nextID = iterator.next() {
+                    group.addTask { (nextID, try await self.isLikelyBillingMetadata(id: nextID)) }
+                }
+            }
+
+            while let (id, keep) = try await group.next() {
+                if keep { kept.insert(id) }
+                if let nextID = iterator.next() {
+                    group.addTask { (nextID, try await self.isLikelyBillingMetadata(id: nextID)) }
+                }
+            }
+        }
+
+        // Preserve Gmail's newest-first ordering.
+        return ids.filter { kept.contains($0) }
+    }
+
+    /// End-to-end convenience pipeline: searches IDs, filters via lightweight metadata headers,
+    /// and fetches full message bodies only for surviving candidates.
+    func candidateMessages(
+        query: String = Self.searchQuery,
+        limit: Int,
+        maxConcurrent: Int = 8
+    ) async throws -> [EmailMessage] {
+        let rawIDs = try await searchMessageIDs(query: query, limit: limit)
+        let candidateIDs = try await filterCandidateIDs(rawIDs, maxConcurrent: maxConcurrent)
+        guard !candidateIDs.isEmpty else { return [] }
+
+        let concurrency = max(1, maxConcurrent)
+        var fetched: [String: EmailMessage] = [:]
+
+        try await withThrowingTaskGroup(of: EmailMessage.self) { group in
+            var iterator = candidateIDs.makeIterator()
+            for _ in 0..<min(concurrency, candidateIDs.count) {
+                if let nextID = iterator.next() {
+                    group.addTask { try await self.message(id: nextID) }
+                }
+            }
+
+            while let msg = try await group.next() {
+                fetched[msg.id] = msg
+                if let nextID = iterator.next() {
+                    group.addTask { try await self.message(id: nextID) }
+                }
+            }
+        }
+
+        return candidateIDs.compactMap { fetched[$0] }
     }
 
     func message(id: String) async throws -> EmailMessage {
@@ -72,6 +135,20 @@ nonisolated struct GmailAPI: Sendable {
             query: [URLQueryItem(name: "format", value: "full")]
         )
         return GmailMessagePayload.emailMessage(from: raw)
+    }
+
+    private func isLikelyBillingMetadata(id: String) async throws -> Bool {
+        let raw: GmailMessagePayload.Message = try await get(
+            "messages/\(id)",
+            query: [
+                URLQueryItem(name: "format", value: "metadata"),
+                URLQueryItem(name: "metadataHeaders", value: "From"),
+                URLQueryItem(name: "metadataHeaders", value: "Subject"),
+                URLQueryItem(name: "metadataHeaders", value: "List-Unsubscribe"),
+            ]
+        )
+        let headers = raw.payload?.headers ?? []
+        return GmailHeaderFilter.isLikelyBilling(headers: headers)
     }
 
     // MARK: Transport
@@ -95,6 +172,52 @@ nonisolated struct GmailAPI: Sendable {
         case let status:
             throw GmailAuthError.server("HTTP \(status)")
         }
+    }
+}
+
+// MARK: - Header pre-filter
+
+/// Pure header heuristic used on `format=metadata` responses before fetching full bodies.
+nonisolated enum GmailHeaderFilter {
+    private static let highConfidenceSubjectTokens = [
+        // Italian
+        "ricevuta", "fattura", "abbonamento", "rinnovo", "addebito", "domiciliazione",
+        "bolletta", "bollette", "pagopa", "scadenza", "polizza", "rata", "canone",
+        "prova gratuita", "quietanza", "estratto conto",
+        // English
+        "receipt", "invoice", "subscription", "renewal", "renews", "renewed", "billing",
+        "statement", "amount due", "payment", "direct debit", "auto-renew", "free trial",
+        // Spanish
+        "recibo", "factura", "suscripción", "suscripcion", "renovación", "renovacion", "pago"
+    ]
+
+    private static let shippingOnlyTokens = [
+        "in consegna", "è stato spedito", "pacco spedito", "traccia il tuo pacco",
+        "has shipped", "out for delivery", "track your package", "tracking number"
+    ]
+
+    static func isLikelyBilling(headers: [GmailMessagePayload.Header]) -> Bool {
+        func value(_ name: String) -> String {
+            headers.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }?.value ?? ""
+        }
+
+        let subject = value("Subject").lowercased()
+        let hasListUnsubscribe = !value("List-Unsubscribe").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+        let hasStrongSubject = highConfidenceSubjectTokens.contains { subject.contains($0) }
+
+        // Marketing emails almost always include List-Unsubscribe; keep them only if the
+        // subject explicitly looks like a receipt/invoice/renewal (e.g. Spotify, Apple, Netflix).
+        if hasListUnsubscribe && !hasStrongSubject {
+            return false
+        }
+
+        // Pure parcel tracking notifications without billing terms are one-off e-commerce noise.
+        if shippingOnlyTokens.contains(where: { subject.contains($0) }) && !hasStrongSubject {
+            return false
+        }
+
+        return true
     }
 }
 
@@ -141,16 +264,28 @@ nonisolated enum GmailMessagePayload {
         return EmailMessage(id: message.id, from: header("From"), subject: header("Subject"), date: date, body: body)
     }
 
-    /// Prefers the plain-text alternative; falls back to the HTML one, stripped. Attachments are skipped.
-    static func bestText(in part: Part) -> String {
-        if let plain = firstBody(in: part, mimeType: "text/plain"), !plain.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return EmailText.normalized(plain)
+    /// Prefers the plain-text alternative unless it's a tiny stub; falls back to HTML stripped.
+    /// Prefers the plain-text alternative unless it's a tiny stub; falls back to HTML stripped.
+        static func bestText(in part: Part) -> String {
+            var plain = ""
+            if let rawPlain = firstBody(in: part, mimeType: "text/plain") {
+                plain = EmailText.normalized(rawPlain).trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+
+            if plain.count >= 80 {
+                return plain
+            }
+
+            if let rawHTML = firstBody(in: part, mimeType: "text/html") {
+                let stripped = EmailText.normalized(EmailText.plainText(fromHTML: rawHTML))
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                if !stripped.isEmpty {
+                    return stripped
+                }
+            }
+
+            return plain
         }
-        if let html = firstBody(in: part, mimeType: "text/html") {
-            return EmailText.normalized(EmailText.plainText(fromHTML: html))
-        }
-        return ""
-    }
 
     private static func firstBody(in part: Part, mimeType: String) -> String? {
         if let name = part.filename, !name.isEmpty { return nil }

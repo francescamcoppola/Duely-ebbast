@@ -3,9 +3,9 @@
 //  DuelyProject
 //
 //  Connects one or more Gmail accounts, scans their recent billing emails (subscriptions, bills,
-//  taxes, tuition) with Apple Intelligence on the device, and adds the ones the user confirms. Email content only ever lives in memory during a scan:
-//  it isn't saved, logged or sent anywhere. What gets saved is just the subscriptions the user
-//  chooses to add, like any other subscription in the app.
+//  taxes, tuition) with Apple Intelligence on the device, and adds the ones the user confirms.
+//  Email content only ever lives in memory during a scan: it isn't saved, logged or sent anywhere.
+//  What gets saved is just the subscriptions the user chooses to add, like any other subscription in the app.
 //
 
 import Foundation
@@ -33,7 +33,7 @@ final class EmailImportModel {
         case failed(String)
     }
 
-    /// Emails read per account and scan, newest first. Enough for a year of receipts without a long wait.
+    /// Max full emails analyzed by Apple Intelligence per account and scan, newest first.
     static let scanLimit = 60
     /// Keeps a scan to a reasonable length.
     static let maxAccounts = 5
@@ -179,29 +179,38 @@ final class EmailImportModel {
         var scannedAny = false
 
         for account in accounts {
+            var didRefresh = false
             do {
                 phase = .scanning(done: 0, total: 0, account: account)
-                let api = GmailAPI(accessToken: try await validAccessToken(for: account))
-                let ids = try await api.searchMessageIDs(limit: Self.scanLimit)
-                phase = .scanning(done: 0, total: ids.count, account: account)
-
-                for (index, id) in ids.enumerated() {
-                    try Task.checkCancellation()
-                    // Each email is fetched, read and dropped before the next one.
-                    let email = try await api.message(id: id)
-                    if let analysis = await extractor.analyze(email),
-                       let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
-                        found.append(candidate)
-                    }
-                    phase = .scanning(done: index + 1, total: ids.count, account: account)
-                }
+                let auth = try await validAccessToken(for: account)
+                didRefresh = auth.refreshed
+                let accountFound = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
+                found.append(contentsOf: accountFound)
                 scannedAny = true
             } catch is CancellationError {
                 phase = .idle
                 scanTask = nil
                 return
+            } catch GmailAuthError.signedOut where !didRefresh {
+                // Access token may have been invalidated early (HTTP 401); try refreshing once before signing out.
+                do {
+                    let auth = try await validAccessToken(for: account, forceRefresh: true)
+                    let accountFound = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
+                    found.append(contentsOf: accountFound)
+                    scannedAny = true
+                } catch is CancellationError {
+                    phase = .idle
+                    scanTask = nil
+                    return
+                } catch GmailAuthError.signedOut {
+                    GmailAuth.deleteStoredTokens(for: account)
+                    reloadAccounts()
+                    accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
+                } catch {
+                    accountErrors[account] = Self.message(for: error)
+                }
             } catch GmailAuthError.signedOut {
-                // This account's sign-in expired or was revoked: drop it, keep scanning the others.
+                // Refresh token expired or was revoked: drop this account, keep scanning the others.
                 GmailAuth.deleteStoredTokens(for: account)
                 reloadAccounts()
                 accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
@@ -220,13 +229,42 @@ final class EmailImportModel {
         scanTask = nil
     }
 
-    private func validAccessToken(for account: String) async throws -> String {
+    private func scanAccount(
+        _ account: String,
+        accessToken: String,
+        extractor: SubscriptionExtractor
+    ) async throws -> [DetectedSubscription] {
+        let api = GmailAPI(accessToken: accessToken)
+
+        // Search deeper across the 13-month window, then filter via cheap metadata headers
+        // so Apple Intelligence only runs on the most likely `scanLimit` candidates.
+        let rawIDs = try await api.searchMessageIDs(limit: Self.scanLimit * 3)
+        try Task.checkCancellation()
+        let ids = Array(try await api.filterCandidateIDs(rawIDs).prefix(Self.scanLimit))
+        phase = .scanning(done: 0, total: ids.count, account: account)
+
+        var accountFound: [DetectedSubscription] = []
+        for (index, id) in ids.enumerated() {
+            try Task.checkCancellation()
+            // Each email is fetched, read and dropped before the next one.
+            let email = try await api.message(id: id)
+            if let analysis = await extractor.analyze(email),
+               let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
+                accountFound.append(candidate)
+            }
+            phase = .scanning(done: index + 1, total: ids.count, account: account)
+        }
+        return accountFound
+    }
+
+    private func validAccessToken(for account: String, forceRefresh: Bool = false) async throws -> (token: String, refreshed: Bool) {
         guard var tokens = GmailAuth.storedTokens(for: account) else { throw GmailAuthError.signedOut }
-        if tokens.isExpired {
+        if forceRefresh || tokens.isExpired {
             tokens = try await GmailAuth.refreshed(tokens)
             try GmailAuth.store(tokens)
+            return (tokens.accessToken, true)
         }
-        return tokens.accessToken
+        return (tokens.accessToken, false)
     }
 
     // MARK: Add

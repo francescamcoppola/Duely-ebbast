@@ -24,6 +24,8 @@ struct DetectedSubscription: Identifiable, Equatable {
     var category: SubscriptionCategory
     /// A known payment date: the next renewal if stated, else the charge date, else the email's date.
     var paymentDate: Date
+    /// False when `paymentDate` fell back to `emailDate` because the email stated no date.
+    var paymentDateIsKnown: Bool = true
     var emailSubject: String
     var emailDate: Date
     /// The connected account the email was found in.
@@ -32,6 +34,13 @@ struct DetectedSubscription: Identifiable, Equatable {
     func differsFromCurrency(_ code: String) -> Bool {
         guard let currencyCode else { return false }
         return currencyCode.caseInsensitiveCompare(code) != .orderedSame
+    }
+
+    /// True when this candidate refers to the same service as an existing subscription name in the app.
+    func matches(serviceName existingName: String) -> Bool {
+        let candidateKey = id
+        let existingKey = Self.matchKey(existingName)
+        return !candidateKey.isEmpty && candidateKey == existingKey
     }
 }
 
@@ -49,8 +58,11 @@ extension DetectedSubscription {
         self.cycle = BillingCycle(analysis.billingCycle)
         self.cycleIsKnown = analysis.billingCycle != .unknown
         self.category = SubscriptionCategory(analysis.category)
-        self.paymentDate = Self.date(from: analysis.paymentDate, near: email.date, calendar: calendar)
-            ?? calendar.startOfDay(for: email.date)
+
+        let parsedDate = Self.date(from: analysis.paymentDate, near: email.date, calendar: calendar)
+        self.paymentDate = parsedDate ?? calendar.startOfDay(for: email.date)
+        self.paymentDateIsKnown = parsedDate != nil
+
         self.emailSubject = email.subject
         self.emailDate = email.date
         self.sourceAccount = account
@@ -78,15 +90,31 @@ extension DetectedSubscription {
     /// Lowercased, without accents, spaces, punctuation or trailing plan words, so
     /// "Spotify Premium", "spotify" and "SPOTIFY AB" all match, and so do "Disney+" and "Disney Plus".
     static func matchKey(_ name: String) -> String {
-        var key = name.folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: nil)
-        for suffix in [" premium", " plus", " subscription", " membership", " ab", " inc", " llc", " ltd", " gmbh", " s.r.l.", " srl", " s.l."] {
-            if key.hasSuffix(suffix) { key = String(key.dropLast(suffix.count)) }
+        var key = name
+            .folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: nil)
+            .lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let suffixes = [
+            " premium", " plus", " subscription", " membership",
+            " abbonamento", " mensile", " annuale", " italia",
+            " ab", " inc", " llc", " ltd", " gmbh", " s.r.l.", " srl", " s.l.", " s.p.a.", " spa"
+        ]
+
+        var removedSuffix = true
+        while removedSuffix {
+            removedSuffix = false
+            for suffix in suffixes where key.hasSuffix(suffix) {
+                key = String(key.dropLast(suffix.count)).trimmingCharacters(in: .whitespacesAndNewlines)
+                removedSuffix = true
+            }
         }
+
         return key.filter { $0.isLetter || $0.isNumber }
     }
 
-    /// One candidate per service. The most recent email wins, but a missing price or cycle is
-    /// filled in from an older email about the same service.
+    /// One candidate per service. The most recent email wins, but missing price, cycle,
+    /// payment date or category are filled in from an older email about the same service.
     static func merged(_ candidates: [DetectedSubscription]) -> [DetectedSubscription] {
         var byKey: [String: DetectedSubscription] = [:]
         var order: [String] = []
@@ -101,12 +129,19 @@ extension DetectedSubscription {
             if existing.price == nil {
                 existing.price = candidate.price
                 existing.currencyCode = candidate.currencyCode
+            } else if existing.currencyCode == nil {
+                existing.currencyCode = candidate.currencyCode
             }
             if !existing.cycleIsKnown, candidate.cycleIsKnown {
                 existing.cycle = candidate.cycle
                 existing.cycleIsKnown = true
             }
+            if !existing.paymentDateIsKnown, candidate.paymentDateIsKnown {
+                existing.paymentDate = candidate.paymentDate
+                existing.paymentDateIsKnown = true
+            }
             if existing.category == .other { existing.category = candidate.category }
+            if existing.sourceAccount == nil { existing.sourceAccount = candidate.sourceAccount }
             byKey[key] = existing
         }
         return order.compactMap { byKey[$0] }
