@@ -57,8 +57,10 @@ Setup in Xcode (needed once per developer team):
 1. Target › Signing & Capabilities: the project already points to `MyDues.entitlements` with
    **iCloud** (CloudKit + key-value storage) and **Push Notifications**, and `Info.plist` enables
    **Background Modes › Remote notifications**. Select your team so Xcode registers them.
-2. In the iCloud capability, create/tick the container `iCloud.com.francescamariacoppola.MyDues`.
-   If you change it, update `CloudConfiguration.containerID` too.
+2. In the iCloud capability, add the container. Do this **only from a Mac signed in with the
+   team that owns the bundle ID**: container identifiers are global and can never be deleted, so
+   one registered by another team is lost for good. The app uses the first container listed in
+   the entitlements (`cloudKitDatabase: .automatic`), so no code change is needed.
 3. Before shipping, open the CloudKit Console and **deploy the schema to Production**
    (development builds create it automatically on first sync). Every new model property must
    have a default value or be optional.

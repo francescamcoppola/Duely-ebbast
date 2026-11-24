@@ -10,13 +10,6 @@
 
 import Foundation
 import SwiftData
-import CloudKit
-
-enum CloudConfiguration {
-    /// Must match the container in MyDues.entitlements and in the developer account
-    /// (Signing & Capabilities › iCloud › Containers).
-    static let containerID = "iCloud.com.francescamariacoppola.MyDues"
-}
 
 enum Persistence {
     static let schema = Schema([Subscription.self, UsageEntry.self])
@@ -28,7 +21,9 @@ enum Persistence {
     private(set) static var isCloudBacked = false
 
     private static func makeContainer() -> ModelContainer {
-        let cloud = ModelConfiguration(schema: schema, cloudKitDatabase: .private(CloudConfiguration.containerID))
+        // `.automatic` uses the first iCloud container in MyDues.entitlements, so the container
+        // can be changed in Signing & Capabilities without touching the code.
+        let cloud = ModelConfiguration(schema: schema, cloudKitDatabase: .automatic)
         do {
             let container = try ModelContainer(for: schema, configurations: cloud)
             isCloudBacked = true
@@ -56,16 +51,9 @@ enum CloudSyncStatus: Equatable {
 
     static func current() async -> CloudSyncStatus {
         guard Persistence.isCloudBacked else { return .unavailable }
-        do {
-            switch try await CKContainer(identifier: CloudConfiguration.containerID).accountStatus() {
-            case .available: return .on
-            case .noAccount: return .noAccount
-            case .restricted: return .restricted
-            default: return .unavailable
-            }
-        } catch {
-            return .unavailable
-        }
+        // Signed in to iCloud with iCloud Drive/data allowed for this app. Doesn't need the
+        // container's name, so it can't fall out of sync with the entitlements.
+        return FileManager.default.ubiquityIdentityToken == nil ? .noAccount : .on
     }
 
     var title: LocalizedStringResource {
