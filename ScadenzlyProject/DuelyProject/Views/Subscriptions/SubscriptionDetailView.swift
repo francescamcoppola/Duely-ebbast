@@ -15,7 +15,9 @@ struct SubscriptionDetailView: View {
 
     @AppStorage(OnboardingKeys.currencyCode) private var currencyCode = AppDefaults.currencyCode
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     @Query private var allSubscriptions: [Subscription]
+    @State private var webPage: WebPage?
     @State private var catalog = PlanCatalogStore.shared
     @State private var isEditing = false
 
@@ -41,6 +43,7 @@ struct SubscriptionDetailView: View {
         .sheet(isPresented: $isEditing) {
             SubscriptionEditorView(subscription: subscription, onDeleted: { dismiss() })
         }
+        .safariSheet($webPage)
     }
 
     private func content(stats: SubscriptionStats) -> some View {
@@ -87,6 +90,8 @@ struct SubscriptionDetailView: View {
                     }
                 }
             }
+
+            manageSection
         }
         .listStyle(.insetGrouped)
     }
@@ -134,6 +139,42 @@ struct SubscriptionDetailView: View {
             LabeledContent("Per Year") {
                 Text(BillingMath.yearlyEquivalent(price: subscription.price, cycle: subscription.cycle),
                      format: .currency(code: currencyCode))
+            }
+        }
+    }
+
+    /// Plans page and cancellation: official pages for known services, a web search otherwise.
+    @ViewBuilder
+    private var manageSection: some View {
+        let service = catalog.service(matching: subscription.name)
+        let billedByApple = ServiceLinks.isBilledByApple(service)
+        Section {
+            if let website = service?.website.flatMap(URL.init(string:)) {
+                Button {
+                    webPage = WebPage(url: website)
+                } label: {
+                    Label("See Plans and Prices", systemImage: "safari")
+                }
+            } else {
+                FindPlansButton(name: subscription.name, knownDomain: subscription.websiteDomain) { url in
+                    webPage = WebPage(url: url)
+                }
+            }
+            CancelSubscriptionButton(subscription: subscription)
+            if !billedByApple {
+                Button {
+                    openURL(ServiceLinks.appleSubscriptions)
+                } label: {
+                    Label("Manage App Store Subscriptions", systemImage: "apple.logo")
+                }
+            }
+        } header: {
+            Text("Manage")
+        } footer: {
+            if billedByApple {
+                Text("\(subscription.name) is managed in your Apple Account: Cancel Subscription opens your App Store subscriptions. \(AppInfo.name) can't cancel for you; once it's cancelled, delete it here.")
+            } else {
+                Text("Cancel Subscription opens \(subscription.name)'s own cancellation page; you may need to sign in first. If you subscribed through the App Store, use App Store Subscriptions instead. \(AppInfo.name) can't cancel for you; once it's cancelled, delete it here.")
             }
         }
     }

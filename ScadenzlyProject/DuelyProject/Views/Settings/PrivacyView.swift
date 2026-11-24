@@ -34,7 +34,7 @@ struct PrivacyView: View {
                 )
                 PrivacyPoint(
                     title: "Plan suggestions",
-                    detail: "Plans, prices and cheaper alternatives come from a list in the app, which may be updated by downloading a new copy. Nothing about you is sent, and comparisons happen on your device.",
+                    detail: "Plans, prices and cheaper alternatives come from a list in the app, which may be updated by downloading a new copy. When you look for a service's plans or cancellation page, your device reads that service's public web pages, without cookies or anything about you. Comparisons and choices happen on your device.",
                     systemImage: "tag"
                 )
                 PrivacyPoint(

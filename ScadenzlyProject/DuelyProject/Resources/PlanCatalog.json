@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "region": "IT",
   "note": "Indicative list prices for Italy. Edit this file (or the hosted copy) to update plans without an app release.",
   "services": [
@@ -11,6 +11,8 @@
       "groups": [
         "video"
       ],
+      "website": "https://help.netflix.com/node/24926",
+      "cancelURL": "https://www.netflix.com/cancelplan",
       "plans": [
         {
           "id": "ads",
@@ -48,6 +50,11 @@
       "groups": [
         "video"
       ],
+      "aliases": [
+        "Disney Plus"
+      ],
+      "website": "https://www.disneyplus.com/",
+      "cancelURL": "https://www.disneyplus.com/account/subscription",
       "plans": [
         {
           "id": "ads",
@@ -94,9 +101,6 @@
           },
           "details": "4K HDR · 4 screens"
         }
-      ],
-      "aliases": [
-        "Disney Plus"
       ]
     },
     {
@@ -106,6 +110,13 @@
       "groups": [
         "video"
       ],
+      "aliases": [
+        "Prime Video",
+        "Amazon Prime Video",
+        "Amazon"
+      ],
+      "website": "https://www.amazon.it/prime",
+      "cancelURL": "https://www.amazon.it/gp/primecentral",
       "plans": [
         {
           "id": "monthly",
@@ -134,11 +145,6 @@
           },
           "details": "Prime Video without ads"
         }
-      ],
-      "aliases": [
-        "Prime Video",
-        "Amazon Prime Video",
-        "Amazon"
       ]
     },
     {
@@ -148,6 +154,11 @@
       "groups": [
         "video"
       ],
+      "aliases": [
+        "Apple TV+"
+      ],
+      "website": "https://www.apple.com/it/apple-tv-plus/",
+      "billedByApple": true,
       "plans": [
         {
           "id": "monthly",
@@ -158,9 +169,6 @@
           },
           "details": "Apple Originals · 6 people"
         }
-      ],
-      "aliases": [
-        "Apple TV+"
       ]
     },
     {
@@ -170,6 +178,11 @@
       "groups": [
         "video"
       ],
+      "aliases": [
+        "Paramount Plus"
+      ],
+      "website": "https://www.paramountplus.com/it/",
+      "cancelURL": "https://www.paramountplus.com/account/",
       "plans": [
         {
           "id": "standard",
@@ -189,9 +202,6 @@
           },
           "details": "4K · 4 screens"
         }
-      ],
-      "aliases": [
-        "Paramount Plus"
       ]
     },
     {
@@ -201,6 +211,8 @@
       "groups": [
         "video"
       ],
+      "website": "https://www.crunchyroll.com/premium",
+      "cancelURL": "https://www.crunchyroll.com/account/membership",
       "plans": [
         {
           "id": "fan",
@@ -238,6 +250,8 @@
       "groups": [
         "sport"
       ],
+      "website": "https://www.dazn.com/",
+      "cancelURL": "https://www.dazn.com/myaccount",
       "plans": [
         {
           "id": "full-monthly",
@@ -276,6 +290,11 @@
         "video",
         "music"
       ],
+      "aliases": [
+        "YouTube"
+      ],
+      "website": "https://www.youtube.com/premium",
+      "cancelURL": "https://www.youtube.com/paid_memberships",
       "plans": [
         {
           "id": "individual",
@@ -305,9 +324,6 @@
           },
           "details": "Up to 6 people"
         }
-      ],
-      "aliases": [
-        "YouTube"
       ]
     },
     {
@@ -317,6 +333,8 @@
       "groups": [
         "music"
       ],
+      "website": "https://www.spotify.com/it/premium/",
+      "cancelURL": "https://www.spotify.com/account/subscription/",
       "plans": [
         {
           "id": "individual",
@@ -364,6 +382,8 @@
       "groups": [
         "music"
       ],
+      "website": "https://www.apple.com/it/apple-music/",
+      "billedByApple": true,
       "plans": [
         {
           "id": "individual",
@@ -402,6 +422,11 @@
       "groups": [
         "music"
       ],
+      "aliases": [
+        "Amazon Music"
+      ],
+      "website": "https://www.amazon.it/music/unlimited",
+      "cancelURL": "https://www.amazon.it/music/settings",
       "plans": [
         {
           "id": "individual",
@@ -421,9 +446,6 @@
           },
           "details": "Up to 6 people"
         }
-      ],
-      "aliases": [
-        "Amazon Music"
       ]
     },
     {
@@ -433,6 +455,8 @@
       "groups": [
         "music"
       ],
+      "website": "https://www.youtube.com/musicpremium",
+      "cancelURL": "https://www.youtube.com/paid_memberships",
       "plans": [
         {
           "id": "individual",
@@ -471,6 +495,8 @@
       "groups": [
         "music"
       ],
+      "website": "https://tidal.com/pricing",
+      "cancelURL": "https://account.tidal.com/subscription",
       "plans": [
         {
           "id": "individual",
@@ -509,6 +535,8 @@
       "groups": [
         "music"
       ],
+      "website": "https://www.deezer.com/it/offers",
+      "cancelURL": "https://www.deezer.com/account/subscription",
       "plans": [
         {
           "id": "premium",
@@ -556,6 +584,11 @@
       "groups": [
         "cloud-storage"
       ],
+      "aliases": [
+        "iCloud"
+      ],
+      "website": "https://www.apple.com/it/icloud/",
+      "billedByApple": true,
       "plans": [
         {
           "id": "50gb",
@@ -601,9 +634,6 @@
           },
           "details": "Share with family"
         }
-      ],
-      "aliases": [
-        "iCloud"
       ]
     },
     {
@@ -614,6 +644,13 @@
         "cloud-storage",
         "ai"
       ],
+      "aliases": [
+        "Google Drive",
+        "Gemini",
+        "Google AI Pro"
+      ],
+      "website": "https://one.google.com/about/plans",
+      "cancelURL": "https://one.google.com/settings",
       "plans": [
         {
           "id": "100gb",
@@ -648,11 +685,6 @@
           },
           "details": "Gemini Pro · 2 TB"
         }
-      ],
-      "aliases": [
-        "Google Drive",
-        "Gemini",
-        "Google AI Pro"
       ]
     },
     {
@@ -662,6 +694,8 @@
       "groups": [
         "cloud-storage"
       ],
+      "website": "https://www.dropbox.com/plans",
+      "cancelURL": "https://www.dropbox.com/account/plan",
       "plans": [
         {
           "id": "plus-monthly",
@@ -691,6 +725,12 @@
         "cloud-storage",
         "productivity"
       ],
+      "aliases": [
+        "Office 365",
+        "OneDrive"
+      ],
+      "website": "https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products",
+      "cancelURL": "https://account.microsoft.com/services",
       "plans": [
         {
           "id": "basic",
@@ -719,10 +759,6 @@
           },
           "details": "1 TB each · up to 6 people"
         }
-      ],
-      "aliases": [
-        "Office 365",
-        "OneDrive"
       ]
     },
     {
@@ -732,6 +768,8 @@
       "groups": [
         "bundle"
       ],
+      "website": "https://www.apple.com/it/apple-one/",
+      "billedByApple": true,
       "plans": [
         {
           "id": "individual",
@@ -769,6 +807,11 @@
       "groups": [
         "ai"
       ],
+      "aliases": [
+        "OpenAI"
+      ],
+      "website": "https://chatgpt.com/pricing",
+      "cancelURL": "https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription",
       "plans": [
         {
           "id": "plus",
@@ -778,9 +821,6 @@
             "EUR": "23.00"
           }
         }
-      ],
-      "aliases": [
-        "OpenAI"
       ]
     },
     {
@@ -790,6 +830,12 @@
       "groups": [
         "gaming"
       ],
+      "aliases": [
+        "Game Pass",
+        "Xbox"
+      ],
+      "website": "https://www.xbox.com/it-IT/xbox-game-pass",
+      "cancelURL": "https://account.microsoft.com/services",
       "plans": [
         {
           "id": "essential",
@@ -827,10 +873,6 @@
           },
           "details": "PC only"
         }
-      ],
-      "aliases": [
-        "Game Pass",
-        "Xbox"
       ]
     },
     {
@@ -840,6 +882,12 @@
       "groups": [
         "gaming"
       ],
+      "aliases": [
+        "PS Plus",
+        "PlayStation"
+      ],
+      "website": "https://www.playstation.com/it-it/ps-plus/",
+      "cancelURL": "https://www.playstation.com/it-it/support/subscriptions/cancel-playstation-plus/",
       "plans": [
         {
           "id": "essential",
@@ -886,10 +934,6 @@
           },
           "details": "Classics · cloud streaming"
         }
-      ],
-      "aliases": [
-        "PS Plus",
-        "PlayStation"
       ]
     },
     {
@@ -899,6 +943,11 @@
       "groups": [
         "gaming"
       ],
+      "aliases": [
+        "Nintendo"
+      ],
+      "website": "https://www.nintendo.com/it-it/Nintendo-Switch-Online/",
+      "cancelURL": "https://ec.nintendo.com/my/membership",
       "plans": [
         {
           "id": "individual",
@@ -934,9 +983,6 @@
           },
           "details": "Up to 8 accounts"
         }
-      ],
-      "aliases": [
-        "Nintendo"
       ]
     },
     {
@@ -946,6 +992,8 @@
       "groups": [
         "gaming"
       ],
+      "website": "https://www.apple.com/it/apple-arcade/",
+      "billedByApple": true,
       "plans": [
         {
           "id": "monthly",
@@ -965,6 +1013,10 @@
       "groups": [
         "social"
       ],
+      "aliases": [
+        "Discord"
+      ],
+      "website": "https://discord.com/nitro",
       "plans": [
         {
           "id": "basic",
@@ -982,9 +1034,6 @@
             "EUR": "9.99"
           }
         }
-      ],
-      "aliases": [
-        "Discord"
       ]
     },
     {
@@ -994,6 +1043,8 @@
       "groups": [
         "learning"
       ],
+      "website": "https://www.duolingo.com/super",
+      "cancelURL": "https://www.duolingo.com/settings/subscription",
       "plans": [
         {
           "id": "super-monthly",

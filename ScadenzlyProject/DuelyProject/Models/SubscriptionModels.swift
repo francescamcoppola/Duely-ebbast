@@ -197,6 +197,12 @@ final class Subscription {
     var planName: String?
     /// The email account this was found in, when it came from an email import.
     var sourceAccount: String?
+    /// The service's website, e.g. "dazn.com": from the sender of the imported email, or found
+    /// when looking for its pages. Helps find the cancellation page of services not in the catalog.
+    var websiteDomain: String?
+    /// The cancellation page found for a service not in the catalog, remembered so the next tap
+    /// opens it straight away. Cleared when the name changes.
+    var cancelURL: String?
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []

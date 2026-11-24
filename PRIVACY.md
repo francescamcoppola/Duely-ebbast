@@ -69,6 +69,8 @@ MyDues doesn't track you across apps or websites, doesn't include third-party an
 
 When you add a subscription by hand, MyDues can suggest the plans of well-known services and their typical prices, and it points out cheaper plans or similar services. This uses a list of plans included in the app. The app may also download an updated copy of that list from a web address chosen by MyDues's developers, at most once a day. That request is a plain download: it contains nothing about you or your subscriptions, and the comparison happens on your device.
 
+**Plans and cancellation pages.** "See Plans and Prices" and "Cancel Subscription" open the service's own pages, and only when you tap them. For well-known services the links are part of the app's list; for Apple's services, your Apple Account subscriptions open. For any other service, your device finds the service's website (from the domain of the email it was imported from, or with a suggestion from Apple Intelligence on the device, always checked by loading the site) and reads its public home and help pages to find the right link; Apple Intelligence picks among the links actually found there. These pages are loaded without cookies or any information about you, and no search engine is used. The page found is remembered with that subscription (and synced through your iCloud). Plans open in an in-app Safari view; cancellation opens in Safari or in your Apple Account, where you're signed in. MyDues doesn't see what you do on those pages.
+
 ## Children
 
 MyDues isn't directed at children under 13 and doesn't knowingly collect information from them.

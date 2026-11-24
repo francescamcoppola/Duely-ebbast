@@ -38,6 +38,13 @@ nonisolated struct CatalogService: Codable, Identifiable, Hashable, Sendable {
     /// Services that share a group offer the same kind of thing ("video", "music", "cloud-storage"…)
     /// and are suggested as alternatives to each other.
     var groups: [String]
+    /// The service's page listing its plans and prices.
+    var website: String?
+    /// The page where the subscription is cancelled or managed, checked by hand. Usually behind
+    /// the service's sign-in, which then continues to it.
+    var cancelURL: String?
+    /// Apple's own services: cancelled in the user's Apple Account, not on a website.
+    var billedByApple: Bool?
     var plans: [CatalogPlan]
 }
 

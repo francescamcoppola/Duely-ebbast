@@ -30,6 +30,9 @@ struct DetectedSubscription: Identifiable, Equatable {
     var emailDate: Date
     /// The connected account the email was found in.
     var sourceAccount: String? = nil
+    /// The sender's website, e.g. "dazn.com" for "noreply@mail.dazn.com". `nil` for stores and
+    /// mail providers, which aren't the service itself.
+    var senderDomain: String? = nil
 
     func differsFromCurrency(_ code: String) -> Bool {
         guard let currencyCode else { return false }
@@ -66,6 +69,21 @@ extension DetectedSubscription {
         self.emailSubject = email.subject
         self.emailDate = email.date
         self.sourceAccount = account
+        self.senderDomain = Self.serviceDomain(fromSender: email.from)
+    }
+
+    /// Stores (Apple, Google, PayPal) and personal mail providers send emails about other
+    /// services, so their domain says nothing about the service's website.
+    static func serviceDomain(fromSender from: String) -> String? {
+        let address = BillingEmailFilter.senderAddress(from)
+        guard let at = address.lastIndex(of: "@") else { return nil }
+        let root = PageLinks.rootDomain(String(address[address.index(after: at)...]))
+        let notTheService = ["apple.com", "icloud.com", "me.com", "google.com", "gmail.com", "googlemail.com",
+                             "paypal.com", "paypal.it", "outlook.com", "hotmail.com", "hotmail.it", "live.com",
+                             "live.it", "yahoo.com", "yahoo.it", "libero.it", "virgilio.it", "tiscali.it",
+                             "stripe.com", "pec.it"]
+        guard root.contains("."), !notTheService.contains(root) else { return nil }
+        return root
     }
 
     /// Positive, plausible amounts only, rounded to cents.
@@ -142,6 +160,7 @@ extension DetectedSubscription {
             }
             if existing.category == .other { existing.category = candidate.category }
             if existing.sourceAccount == nil { existing.sourceAccount = candidate.sourceAccount }
+            if existing.senderDomain == nil { existing.senderDomain = candidate.senderDomain }
             byKey[key] = existing
         }
         return order.compactMap { byKey[$0] }

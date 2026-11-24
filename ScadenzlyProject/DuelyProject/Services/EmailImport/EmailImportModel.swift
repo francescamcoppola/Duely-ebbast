@@ -389,15 +389,18 @@ final class EmailImportModel {
                 pending.anchorDate = candidate.paymentDate
                 if pending.category == .other { pending.category = candidate.category }
                 if pending.sourceAccount == nil { pending.sourceAccount = candidate.sourceAccount }
+                if pending.websiteDomain == nil { pending.websiteDomain = candidate.senderDomain }
             } else {
-                context.insert(Subscription(
+                let subscription = Subscription(
                     name: candidate.name,
                     price: candidate.price ?? 0,
                     cycle: candidate.cycle,
                     category: candidate.category,
                     anchorDate: candidate.paymentDate,
                     sourceAccount: candidate.sourceAccount
-                ))
+                )
+                subscription.websiteDomain = candidate.senderDomain
+                context.insert(subscription)
             }
         }
 

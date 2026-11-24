@@ -21,6 +21,8 @@ struct SubscriptionEditorView: View {
 
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    /// A plans page shown in an in-app Safari sheet.
+    @State private var webPage: WebPage?
     @AppStorage(OnboardingKeys.currencyCode) private var currencyCode = AppDefaults.currencyCode
 
     @State private var name = ""
@@ -81,6 +83,15 @@ struct SubscriptionEditorView: View {
 
                 if let matchedService {
                     plansSection(for: matchedService)
+                } else if trimmedName.count >= 2, nameSuggestions.isEmpty {
+                    // Not in the catalog: find its own website and plans page.
+                    Section {
+                        FindPlansButton(name: trimmedName, knownDomain: subscription?.websiteDomain) { url in
+                            webPage = WebPage(url: url)
+                        }
+                    } footer: {
+                        Text("Opens \(trimmedName)'s own plans page to compare prices, then enter the one you pay for below.")
+                    }
                 }
 
                 Section("Color") {
@@ -122,9 +133,14 @@ struct SubscriptionEditorView: View {
 
                 if !isNew {
                     Section {
+                        if let subscription {
+                            CancelSubscriptionButton(subscription: subscription)
+                        }
                         Button("Delete Subscription", role: .destructive) {
                             isConfirmingDelete = true
                         }
+                    } footer: {
+                        Text("Cancel Subscription opens the service's own cancellation page. Delete only removes it from \(AppInfo.name).")
                     }
                 }
             }
@@ -161,6 +177,7 @@ struct SubscriptionEditorView: View {
                 focusedField = .name
             }
         }
+        .safariSheet($webPage)
         // Unsaved edits shouldn't be lost by an accidental swipe-down.
         .interactiveDismissDisabled(hasChanges)
     }
@@ -216,6 +233,13 @@ struct SubscriptionEditorView: View {
                                 isSelected: resolvedPlanName == option.plan.name)
                     }
                     .foregroundStyle(.primary)
+                }
+            }
+            if let website = service.website.flatMap(URL.init(string:)) {
+                Button {
+                    webPage = WebPage(url: website)
+                } label: {
+                    Label("See All Plans on \(service.name)'s Website", systemImage: "safari")
                 }
             }
         } header: {
@@ -316,6 +340,11 @@ struct SubscriptionEditorView: View {
         } else {
             target = Subscription(name: trimmedName)
             context.insert(target)
+        }
+        if DetectedSubscription.matchKey(target.name) != DetectedSubscription.matchKey(trimmedName) {
+            // Another service: its website and cancellation page must be found again.
+            target.cancelURL = nil
+            target.websiteDomain = nil
         }
         target.name = trimmedName
         target.price = price

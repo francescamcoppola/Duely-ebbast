@@ -1676,33 +1676,6 @@
         }
       }
     },
-    "Last scanned %@. Reads up to %lld recent billing emails per account." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails per account."
-          }
-        }
-      }
-    },
-    "Last scanned %@. Reads up to %lld recent billing emails." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Último análisis: %1$@. Lee hasta %2$lld correos de facturación recientes."
-          }
-        }
-      }
-    },
     "Least Worth It" : {
 
     },
@@ -2011,20 +1984,6 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Leyendo correos…"
-          }
-        }
-      }
-    },
-    "Reads up to %lld recent billing emails per account. Keep the app open while it runs." : {
-
-    },
-    "Reads up to %lld recent billing emails. Keep the app open while it runs." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Lee hasta %lld correos de facturación recientes. Mantén la app abierta mientras se ejecuta."
           }
         }
       }
