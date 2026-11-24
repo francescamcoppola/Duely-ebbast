@@ -1,6 +1,61 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "·" : {
+
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ · %@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@ · %3$@"
+          }
+        }
+      }
+    },
+    "%@ · %@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@%3$@"
+          }
+        }
+      }
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
     "%@ can only read email. It can't send, delete or change anything in your mailbox." : {
       "localizations" : {
         "es" : {
@@ -22,6 +77,7 @@
       }
     },
     "%@ has no account, no servers and no analytics. Everything you enter stays on your device." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -31,696 +87,8 @@
         }
       }
     },
-    "%@'s use of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "El uso que hace %@ de la información recibida de las API de Google cumple la Política de datos de usuario de los servicios de API de Google, incluidos los requisitos de uso limitado."
-          }
-        }
-      }
-    },
-    "^[%lld subscription](inflect: true) added." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "^[%lld suscripción agregada](inflect: true)."
-          }
-        }
-      }
-    },
-    "Access to Gmail wasn't allowed." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No se permitió el acceso a Gmail."
-          }
-        }
-      }
-    },
-    "Account" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Cuenta"
-          }
-        }
-      }
-    },
-    "Allow “View your email messages and settings” on Google's screen so emails can be scanned." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Permite “Ver tus mensajes y ajustes de correo electrónico” en la pantalla de Google para poder analizar los correos."
-          }
-        }
-      }
-    },
-    "Analyzed on this device" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Analizado en este dispositivo"
-          }
-        }
-      }
-    },
-    "Apple Intelligence is still getting ready. Try again in a few minutes." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Apple Intelligence aún se está preparando. Vuelve a intentarlo en unos minutos."
-          }
-        }
-      }
-    },
-    "Apple Intelligence isn't available right now." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Apple Intelligence no está disponible en este momento."
-          }
-        }
-      }
-    },
-    "Apple Intelligence reads your recent receipts and renewal emails on this device and suggests the subscriptions it finds. You choose which ones to add." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Apple Intelligence lee en este dispositivo tus recibos y correos de renovación recientes y te sugiere las suscripciones que encuentra. Tú eliges cuáles agregar."
-          }
-        }
-      }
-    },
-    "Billed in %@, saved without conversion" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Facturado en %@, se guarda sin conversión"
-          }
-        }
-      }
-    },
-    "Check-in and payment reminders are scheduled on your device. No push service is used." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Los recordatorios de revisión y de pago se programan en tu dispositivo. No se usa ningún servicio push."
-          }
-        }
-      }
-    },
-    "Connect Gmail" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Conectar Gmail"
-          }
-        }
-      }
-    },
-    "Connected" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Conectado"
-          }
-        }
-      }
-    },
-    "Couldn't reach Google. Check your connection and try again." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No se pudo conectar con Google. Revisa tu conexión y vuelve a intentarlo."
-          }
-        }
-      }
-    },
-    "Delete subscriptions in the app, disconnect Gmail in Settings, or delete the app to remove everything it stored." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Elimina suscripciones en la app, desconecta Gmail en Configuración o elimina la app para borrar todo lo que guardó."
-          }
-        }
-      }
-    },
-    "Delete your data" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Eliminar tus datos"
-          }
-        }
-      }
-    },
-    "Disconnect" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Desconectar"
-          }
-        }
-      }
-    },
-    "Disconnect Gmail" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Desconectar Gmail"
-          }
-        }
-      }
-    },
-    "Disconnect Gmail?" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "¿Desconectar Gmail?"
-          }
-        }
-      }
-    },
-    "Emails are held in memory only during a scan. Only the subscriptions you choose to add are saved." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Los correos solo se mantienen en memoria durante el análisis. Solo se guardan las suscripciones que decides agregar."
-          }
-        }
-      }
-    },
-    "Emails are read by Apple Intelligence on your device. Their content is never sent to %@, to Apple or to anyone else." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Apple Intelligence lee los correos en tu dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más."
-          }
-        }
-      }
-    },
-    "Find Subscriptions in Your Email" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Encuentra suscripciones en tu correo"
-          }
-        }
-      }
-    },
-    "Find subscriptions in your Gmail receipts with Apple Intelligence, on this device." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Encuentra suscripciones en tus recibos de Gmail con Apple Intelligence, en este dispositivo."
-          }
-        }
-      }
-    },
-    "Found in Email" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Encontradas en el correo"
-          }
-        }
-      }
-    },
-    "Found on this device by Apple Intelligence, which can make mistakes. Check the details: you can edit any subscription after adding it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Encontradas en este dispositivo por Apple Intelligence, que puede cometer errores. Revisa los detalles: puedes editar cualquier suscripción después de agregarla."
-          }
-        }
-      }
-    },
-    "Gmail" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Gmail"
-          }
-        }
-      }
-    },
-    "Gmail import isn't available in this version of the app." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "La importación desde Gmail no está disponible en esta versión de la app."
-          }
-        }
-      }
-    },
-    "Gmail import isn't set up in this version of the app." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "La importación desde Gmail no está configurada en esta versión de la app."
-          }
-        }
-      }
-    },
-    "Google didn't complete the sign-in. Try again." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Google no completó el inicio de sesión. Vuelve a intentarlo."
-          }
-        }
-      }
-    },
-    "If you connect Gmail, %@ asks Google for read-only access. It can't send, delete or change email." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Si conectas Gmail, %@ pide a Google acceso de solo lectura. No puede enviar, eliminar ni cambiar correos."
-          }
-        }
-      }
-    },
-    "Import from Email" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Importar desde el correo"
-          }
-        }
-      }
-    },
-    "Last scanned %@. Reads up to %lld recent billing emails." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Último análisis: %1$@. Lee hasta %2$lld correos de facturación recientes."
-          }
-        }
-      }
-    },
-    "Local notifications" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Notificaciones locales"
-          }
-        }
-      }
-    },
-    "Next payment %@" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Próximo pago: %@"
-          }
-        }
-      }
-    },
-    "No New Subscriptions" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No hay suscripciones nuevas"
-          }
-        }
-      }
-    },
-    "No price found · Needs setup" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Sin precio · Requiere configuración"
-          }
-        }
-      }
-    },
-    "No receipts or renewals were found for subscriptions that aren't in %@ yet." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No se encontraron recibos ni renovaciones de suscripciones que aún no estén en %@."
-          }
-        }
-      }
-    },
-    "No tracking" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Sin rastreo"
-          }
-        }
-      }
-    },
-    "Nothing is kept" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No se guarda nada"
-          }
-        }
-      }
-    },
-    "Off" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "No"
-          }
-        }
-      }
-    },
-    "On this device only" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Solo en este dispositivo"
-          }
-        }
-      }
-    },
-    "Optional and read-only" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Opcional y de solo lectura"
-          }
-        }
-      }
-    },
-    "Privacy" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Privacidad"
-          }
-        }
-      }
-    },
-    "Processed on this device" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Procesado en este dispositivo"
-          }
-        }
-      }
-    },
-    "Read-only" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Solo lectura"
-          }
-        }
-      }
-    },
-    "Reading emails…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Leyendo correos…"
-          }
-        }
-      }
-    },
-    "Reads up to %lld recent billing emails. Keep the app open while it runs." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Lee hasta %lld correos de facturación recientes. Mantén la app abierta mientras se ejecuta."
-          }
-        }
-      }
-    },
-    "Recent billing emails are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to %@, to Apple or to anyone else, isn't used to train models, and isn't saved after the scan." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Los correos de facturación recientes se descargan directamente de Google a tu dispositivo y Apple Intelligence los lee en el propio dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más, no se usa para entrenar modelos y no se guarda tras el análisis."
-          }
-        }
-      }
-    },
-    "Removes %@'s access in your Google Account and deletes the sign-in from this device. Subscriptions you've added stay." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Retira el acceso de %@ en tu cuenta de Google y elimina el inicio de sesión de este dispositivo. Las suscripciones que agregaste se mantienen."
-          }
-        }
-      }
-    },
-    "Scan" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Análisis"
-          }
-        }
-      }
-    },
-    "Scan Emails" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Analizar correos"
-          }
-        }
-      }
-    },
-    "Scanning emails needs a device that supports Apple Intelligence." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Para analizar correos se necesita un dispositivo compatible con Apple Intelligence."
-          }
-        }
-      }
-    },
-    "Searching your inbox…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Buscando en tu bandeja de entrada…"
-          }
-        }
-      }
-    },
-    "Something went wrong. Try again." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Algo salió mal. Vuelve a intentarlo."
-          }
-        }
-      }
-    },
-    "Stop Scanning" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Detener análisis"
-          }
-        }
-      }
-    },
-    "Stored securely" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Guardado de forma segura"
-          }
-        }
-      }
-    },
-    "The Gmail sign-in is kept in this device's Keychain and isn't synced. Disconnecting revokes it in your Google Account and deletes it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "El inicio de sesión de Gmail se guarda en el llavero de este dispositivo y no se sincroniza. Al desconectarlo, se revoca en tu cuenta de Google y se elimina."
-          }
-        }
-      }
-    },
-    "The sign-in is stored in this device's Keychain. Disconnect at any time here or in your Google Account." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "El inicio de sesión se guarda en el llavero de este dispositivo. Desconéctalo cuando quieras aquí o en tu cuenta de Google."
-          }
-        }
-      }
-    },
-    "Turn on Apple Intelligence in Settings › Apple Intelligence & Siri to scan emails." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Activa Apple Intelligence en Configuración › Apple Intelligence y Siri para analizar correos."
-          }
-        }
-      }
-    },
-    "What's Stored" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Qué se guarda"
-          }
-        }
-      }
-    },
-    "You'll sign in on Google's page. %@ never sees your password." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Iniciarás sesión en la página de Google. %@ nunca ve tu contraseña."
-          }
-        }
-      }
-    },
-    "Your choice" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Tú decides"
-          }
-        }
-      }
-    },
-    "Your Gmail connection expired. Connect again to continue." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Tu conexión con Gmail caducó. Vuelve a conectarla para continuar."
-          }
-        }
-      }
-    },
-    "Your name, budget, currency, subscriptions and check-in answers are saved in the app's storage on this device. They're included in your device backup like other app data." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Tu nombre, presupuesto, moneda, suscripciones y respuestas de revisión se guardan en el almacenamiento de la app en este dispositivo. Se incluyen en la copia de seguridad del dispositivo como otros datos de apps."
-          }
-        }
-      }
-    },
-    "Your Privacy" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Tu privacidad"
-          }
-        }
-      }
-    },
-    "·" : {
+    "%@ has no account, no servers and no analytics. Everything you enter stays on your devices and in your own private iCloud." : {
 
-    },
-    "%@ · %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ · %2$@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%1$@ · %2$@"
-          }
-        }
-      }
-    },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
     },
     "%@ left of %@" : {
       "localizations" : {
@@ -757,6 +125,9 @@
           }
         }
       }
+    },
+    "%@ Plans" : {
+
     },
     "%@ renews in %lld days" : {
       "localizations" : {
@@ -898,6 +269,16 @@
         }
       }
     },
+    "%@'s use of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El uso que hace %@ de la información recibida de las API de Google cumple la Política de datos de usuario de los servicios de API de Google, incluidos los requisitos de uso limitado."
+          }
+        }
+      }
+    },
     "%@/mo" : {
       "localizations" : {
         "es" : {
@@ -976,6 +357,16 @@
         }
       }
     },
+    "%lld of %lld · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld · %3$@"
+          }
+        }
+      }
+    },
     "%lld of %lld characters" : {
       "localizations" : {
         "en" : {
@@ -1040,10 +431,30 @@
         }
       }
     },
+    "^[%lld account](inflect: true)" : {
+
+    },
     "^[%lld active subscription](inflect: true)" : {
 
     },
     "^[%lld more subscription](inflect: true) in this category isn't counted until it has a price and payment date." : {
+
+    },
+    "^[%lld payment](inflect: true) added." : {
+
+    },
+    "^[%lld subscription](inflect: true) added." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "^[%lld suscripción agregada](inflect: true)."
+          }
+        }
+      }
+    },
+    "−%@" : {
 
     },
     "0" : {
@@ -1076,6 +487,9 @@
         }
       }
     },
+    "a month" : {
+
+    },
     "About %@ per month." : {
       "localizations" : {
         "es" : {
@@ -1085,6 +499,29 @@
           }
         }
       }
+    },
+    "Access to Gmail wasn't allowed." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se permitió el acceso a Gmail."
+          }
+        }
+      }
+    },
+    "Account" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Cuenta"
+          }
+        }
+      }
+    },
+    "Accounts" : {
+
     },
     "Active" : {
       "localizations" : {
@@ -1135,6 +572,9 @@
           }
         }
       }
+    },
+    "Add Another Gmail Account" : {
+
     },
     "Add Details" : {
       "localizations" : {
@@ -1206,6 +646,19 @@
         }
       }
     },
+    "All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices, and every Gmail account will be disconnected. This can't be undone." : {
+
+    },
+    "Allow “View your email messages and settings” on Google's screen so emails can be scanned." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Permite “Ver tus mensajes y ajustes de correo electrónico” en la pantalla de Google para poder analizar los correos."
+          }
+        }
+      }
+    },
     "Allow notifications for %@ in the Settings app to receive check-in and payment reminders." : {
       "localizations" : {
         "es" : {
@@ -1225,6 +678,50 @@
           }
         }
       }
+    },
+    "Analyzed on this device" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Analizado en este dispositivo"
+          }
+        }
+      }
+    },
+    "Apple Intelligence is still getting ready. Try again in a few minutes." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence aún se está preparando. Vuelve a intentarlo en unos minutos."
+          }
+        }
+      }
+    },
+    "Apple Intelligence isn't available right now." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence no está disponible en este momento."
+          }
+        }
+      }
+    },
+    "Apple Intelligence reads your recent receipts and renewal emails on this device and suggests the subscriptions it finds. You choose which ones to add." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence lee en este dispositivo tus recibos y correos de renovación recientes y te sugiere las suscripciones que encuentra. Tú eliges cuáles agregar."
+          }
+        }
+      }
+    },
+    "Apple Intelligence reads your recent receipts, renewals, bills, tax notices and tuition emails on this device and suggests what it finds. Connect several accounts to find them all. You choose what to add." : {
+
     },
     "Automatic" : {
       "localizations" : {
@@ -1282,6 +779,16 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Según tus revisiones recientes. Solo tú sabes qué vale la pena conservar."
+          }
+        }
+      }
+    },
+    "Billed in %@, saved without conversion" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Facturado en %@, se guarda sin conversión"
           }
         }
       }
@@ -1418,12 +925,29 @@
         }
       }
     },
+    "Cheaper plans and similar services, based on typical prices. Features and content differ: check before switching." : {
+
+    },
     "Check-In" : {
       "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Revisión semanal"
+          }
+        }
+      }
+    },
+    "Check-in and payment reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device." : {
+
+    },
+    "Check-in and payment reminders are scheduled on your device. No push service is used." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los recordatorios de revisión y de pago se programan en tu dispositivo. No se usa ningún servicio push."
           }
         }
       }
@@ -1437,6 +961,12 @@
           }
         }
       }
+    },
+    "Checking…" : {
+
+    },
+    "Choose a plan to fill in the price and billing cycle. Typical prices as of %@; check the current price with the provider." : {
+
     },
     "Clear name" : {
       "localizations" : {
@@ -1504,6 +1034,26 @@
         }
       }
     },
+    "Connect Gmail" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Conectar Gmail"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Conectado"
+          }
+        }
+      }
+    },
     "Continue" : {
       "localizations" : {
         "es" : {
@@ -1530,6 +1080,16 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "El costo por semana de uso es lo que realmente te costó cada semana que usaste la suscripción."
+          }
+        }
+      }
+    },
+    "Couldn't reach Google. Check your connection and try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se pudo conectar con Google. Revisa tu conexión y vuelve a intentarlo."
           }
         }
       }
@@ -1594,6 +1154,68 @@
         }
       }
     },
+    "Delete subscriptions in the app, disconnect Gmail accounts in Settings, or reset %@ in Settings to erase everything from this device, iCloud and your other devices." : {
+
+    },
+    "Delete subscriptions in the app, disconnect Gmail in Settings, or delete the app to remove everything it stored." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Elimina suscripciones en la app, desconecta Gmail en Configuración o elimina la app para borrar todo lo que guardó."
+          }
+        }
+      }
+    },
+    "Delete your data" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Eliminar tus datos"
+          }
+        }
+      }
+    },
+    "Deletes everything and takes you back to the welcome screen to set up %@ again." : {
+
+    },
+    "Disconnect" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Desconectar"
+          }
+        }
+      }
+    },
+    "Disconnect %@?" : {
+
+    },
+    "Disconnect Gmail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Desconectar Gmail"
+          }
+        }
+      }
+    },
+    "Disconnect Gmail?" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "¿Desconectar Gmail?"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "es" : {
@@ -1613,6 +1235,12 @@
           }
         }
       }
+    },
+    "Each account's sign-in is stored in this device's Keychain and is never synced to iCloud. Disconnect at any time here or in your Google Account." : {
+
+    },
+    "Each Gmail sign-in is kept in this device's Keychain and is never synced to iCloud. Disconnecting an account revokes it in your Google Account and deletes it." : {
+
     },
     "Edit" : {
       "localizations" : {
@@ -1644,6 +1272,39 @@
         }
       }
     },
+    "Education" : {
+
+    },
+    "Emails are held in memory only during a scan. Only the payments you choose to add are saved." : {
+
+    },
+    "Emails are held in memory only during a scan. Only the subscriptions you choose to add are saved." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los correos solo se mantienen en memoria durante el análisis. Solo se guardan las suscripciones que decides agregar."
+          }
+        }
+      }
+    },
+    "Emails are read by Apple Intelligence on your device. Their content is never sent to %@, to Apple or to anyone else." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Apple Intelligence lee los correos en tu dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más."
+          }
+        }
+      }
+    },
+    "Erase All and Start Over" : {
+
+    },
+    "Every 2 Months" : {
+
+    },
     "Every 3 Months" : {
       "localizations" : {
         "es" : {
@@ -1653,6 +1314,9 @@
           }
         }
       }
+    },
+    "Every 6 Months" : {
+
     },
     "Everything in one place" : {
       "localizations" : {
@@ -1664,6 +1328,9 @@
         }
       }
     },
+    "Fills in the name and shows its plans" : {
+
+    },
     "Film & TV" : {
       "localizations" : {
         "es" : {
@@ -1674,12 +1341,76 @@
         }
       }
     },
+    "Find Recurring Payments in Your Email" : {
+
+    },
+    "Find Subscriptions in Your Email" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encuentra suscripciones en tu correo"
+          }
+        }
+      }
+    },
+    "Find subscriptions in your Gmail receipts with Apple Intelligence, on this device." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encuentra suscripciones en tus recibos de Gmail con Apple Intelligence, en este dispositivo."
+          }
+        }
+      }
+    },
+    "Find subscriptions, bills, taxes and tuition in one or more Gmail accounts with Apple Intelligence, on this device." : {
+
+    },
     "Finish Setting Up" : {
       "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Termina de configurar"
+          }
+        }
+      }
+    },
+    "For each Gmail account you connect, %@ asks Google for read-only access. It can't send, delete or change email." : {
+
+    },
+    "Found In" : {
+
+    },
+    "Found in Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encontradas en el correo"
+          }
+        }
+      }
+    },
+    "Found on this device by Apple Intelligence, which can make mistakes. Check the details: you can edit any subscription after adding it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Encontradas en este dispositivo por Apple Intelligence, que puede cometer errores. Revisa los detalles: puedes editar cualquier suscripción después de agregarla."
+          }
+        }
+      }
+    },
+    "From %@ a month · ^[%lld plan](inflect: true)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "From %1$@ a month · ^[%2$lld plan](inflect: true)"
           }
         }
       }
@@ -1730,6 +1461,47 @@
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "Primeros pasos"
+          }
+        }
+      }
+    },
+    "Gmail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Gmail"
+          }
+        }
+      }
+    },
+    "Gmail import isn't available in this version of the app." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "La importación desde Gmail no está disponible en esta versión de la app."
+          }
+        }
+      }
+    },
+    "Gmail import isn't set up in this version of the app." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "La importación desde Gmail no está configurada en esta versión de la app."
+          }
+        }
+      }
+    },
+    "Google didn't complete the sign-in. Try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Google no completó el inicio de sesión. Vuelve a intentarlo."
           }
         }
       }
@@ -1800,12 +1572,48 @@
         }
       }
     },
+    "Home & Bills" : {
+
+    },
     "I Didn't Use Any" : {
       "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "machine_translated",
             "value" : "No usé ninguna"
+          }
+        }
+      }
+    },
+    "iCloud is restricted on this device, so your data is saved only here." : {
+
+    },
+    "iCloud isn't available right now, so your data is saved only on this device." : {
+
+    },
+    "iCloud Sync" : {
+
+    },
+    "If you connect Gmail, %@ asks Google for read-only access. It can't send, delete or change email." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Si conectas Gmail, %@ pide a Google acceso de solo lectura. No puede enviar, eliminar ni cambiar correos."
+          }
+        }
+      }
+    },
+    "If you're signed in to iCloud, the same data is saved in your private iCloud database so it's never lost and stays in sync on your devices. Only you can access it; %@'s developers can't." : {
+
+    },
+    "Import from Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Importar desde el correo"
           }
         }
       }
@@ -1819,6 +1627,9 @@
           }
         }
       }
+    },
+    "In your private iCloud" : {
+
     },
     "Indigo" : {
       "localizations" : {
@@ -1843,6 +1654,9 @@
     "Insights show which subscriptions you actually use for what you pay." : {
 
     },
+    "Insurance" : {
+
+    },
     "Its check-in history will be deleted too." : {
 
     },
@@ -1862,11 +1676,48 @@
         }
       }
     },
+    "Last scanned %@. Reads up to %lld recent billing emails per account." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails per account."
+          }
+        }
+      }
+    },
+    "Last scanned %@. Reads up to %lld recent billing emails." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Last scanned %1$@. Reads up to %2$lld recent billing emails."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Último análisis: %1$@. Lee hasta %2$lld correos de facturación recientes."
+          }
+        }
+      }
+    },
     "Least Worth It" : {
 
     },
     "Leisure" : {
 
+    },
+    "Local notifications" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Notificaciones locales"
+          }
+        }
+      }
     },
     "Lower than your %@ average: your longer plans renew in other months." : {
 
@@ -1913,6 +1764,16 @@
     "Next Payment" : {
 
     },
+    "Next payment %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Próximo pago: %@"
+          }
+        }
+      }
+    },
     "Nice to meet you, %@. Set a monthly limit and we'll let you know when you're getting close." : {
 
     },
@@ -1922,17 +1783,57 @@
     "No check-ins yet." : {
 
     },
+    "No New Subscriptions" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No hay suscripciones nuevas"
+          }
+        }
+      }
+    },
     "No payments on this day." : {
 
     },
     "No Payments Yet" : {
 
     },
+    "No price found · Needs setup" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Sin precio · Requiere configuración"
+          }
+        }
+      }
+    },
+    "No receipts or renewals were found for subscriptions that aren't in %@ yet." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se encontraron recibos ni renovaciones de suscripciones que aún no estén en %@."
+          }
+        }
+      }
+    },
     "No Subscriptions" : {
 
     },
     "No Subscriptions Yet" : {
 
+    },
+    "No tracking" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Sin rastreo"
+          }
+        }
+      }
     },
     "None" : {
 
@@ -1952,10 +1853,47 @@
     "Nothing in this category counts toward your total right now." : {
 
     },
+    "Nothing is kept" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No se guarda nada"
+          }
+        }
+      }
+    },
     "Notifications Are Off" : {
 
     },
+    "Off" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "No"
+          }
+        }
+      }
+    },
+    "On" : {
+
+    },
+    "On this device only" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Solo en este dispositivo"
+          }
+        }
+      }
+    },
     "On track" : {
+
+    },
+    "On your devices" : {
 
     },
     "One quick question a week about which subscriptions you used. It makes your spending profile and usage insights more accurate." : {
@@ -1966,6 +1904,16 @@
     },
     "Optimizer" : {
 
+    },
+    "Optional and read-only" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Opcional y de solo lectura"
+          }
+        }
+      }
     },
     "Orange" : {
 
@@ -2006,17 +1954,90 @@
     "Pink" : {
 
     },
+    "Plan prices aren't available in %@. Pick a plan to set its billing cycle, then enter the price." : {
+
+    },
+    "Plan suggestions" : {
+
+    },
+    "Plans, prices and cheaper alternatives come from a list in the app, which may be updated by downloading a new copy. Nothing about you is sent, and comparisons happen on your device." : {
+
+    },
     "Previous Month" : {
 
     },
     "Price" : {
 
     },
+    "Privacy" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Privacidad"
+          }
+        }
+      }
+    },
+    "Processed on this device" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Procesado en este dispositivo"
+          }
+        }
+      }
+    },
     "Profile" : {
 
     },
     "Purple" : {
 
+    },
+    "Read-only" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Solo lectura"
+          }
+        }
+      }
+    },
+    "Reading emails…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Leyendo correos…"
+          }
+        }
+      }
+    },
+    "Reads up to %lld recent billing emails per account. Keep the app open while it runs." : {
+
+    },
+    "Reads up to %lld recent billing emails. Keep the app open while it runs." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Lee hasta %lld correos de facturación recientes. Mantén la app abierta mientras se ejecuta."
+          }
+        }
+      }
+    },
+    "Recent billing emails are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to %@, to Apple or to anyone else, isn't used to train models, and isn't saved after the scan." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Los correos de facturación recientes se descargan directamente de Google a tu dispositivo y Apple Intelligence los lee en el propio dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más, no se usa para entrenar modelos y no se guarda tras el análisis."
+          }
+        }
+      }
     },
     "Red" : {
 
@@ -2025,6 +2046,29 @@
 
     },
     "Remove Budget" : {
+
+    },
+    "Removes %@'s access in this Google Account and deletes the sign-in from this device. Subscriptions you've added stay." : {
+
+    },
+    "Removes %@'s access in your Google Account and deletes the sign-in from this device. Subscriptions you've added stay." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Retira el acceso de %@ en tu cuenta de Google y elimina el inicio de sesión de este dispositivo. Las suscripciones que agregaste se mantienen."
+          }
+        }
+      }
+    },
+    "Reset %@" : {
+
+    },
+    "Reset %@?" : {
+
+    },
+    "Resetting…" : {
 
     },
     "Save" : {
@@ -2043,11 +2087,57 @@
         }
       }
     },
+    "Scan" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Análisis"
+          }
+        }
+      }
+    },
+    "Scan All Accounts" : {
+
+    },
+    "Scan Emails" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Analizar correos"
+          }
+        }
+      }
+    },
+    "Scanning emails needs a device that supports Apple Intelligence." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Para analizar correos se necesita un dispositivo compatible con Apple Intelligence."
+          }
+        }
+      }
+    },
+    "Scanning…" : {
+
+    },
     "Search" : {
 
     },
     "Search currencies" : {
 
+    },
+    "Searching your inbox…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Buscando en tu bandeja de entrada…"
+          }
+        }
+      }
     },
     "See every subscription you pay for, and what it costs you each month." : {
 
@@ -2079,6 +2169,9 @@
     "Shows why you have this profile" : {
 
     },
+    "Sign in to iCloud in the Settings app to back up your data and sync it across your devices. Until then, it's saved only on this device." : {
+
+    },
     "Since %@, based on billing dates." : {
 
     },
@@ -2090,6 +2183,16 @@
     },
     "Social" : {
 
+    },
+    "Something went wrong. Try again." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Algo salió mal. Vuelve a intentarlo."
+          }
+        }
+      }
     },
     "Sort" : {
 
@@ -2125,6 +2228,26 @@
     "Still to come" : {
 
     },
+    "Stop Scanning" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Detener análisis"
+          }
+        }
+      }
+    },
+    "Stored securely" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Guardado de forma segura"
+          }
+        }
+      }
+    },
     "Subscription Deleted" : {
 
     },
@@ -2137,7 +2260,19 @@
     "Subscriptions use less than 1% of your monthly budget." : {
 
     },
+    "Subscriptions, check-ins and settings are saved in your private iCloud and stay in sync on all your devices signed in with the same Apple Account." : {
+
+    },
     "Suggested" : {
+
+    },
+    "Swipe an account to disconnect it. You can connect up to %lld accounts." : {
+
+    },
+    "Switch to %@" : {
+
+    },
+    "Taxes & Fees" : {
 
     },
     "Teal" : {
@@ -2145,6 +2280,28 @@
     },
     "That's %@ a month. If this keeps happening, it may be worth canceling." : {
 
+    },
+    "The Gmail sign-in is kept in this device's Keychain and isn't synced. Disconnecting revokes it in your Google Account and deletes it." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El inicio de sesión de Gmail se guarda en el llavero de este dispositivo y no se sincroniza. Al desconectarlo, se revoca en tu cuenta de Google y se elimina."
+          }
+        }
+      }
+    },
+    "The sign-in is stored in this device's Keychain. Disconnect at any time here or in your Google Account." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "El inicio de sesión se guarda en el llavero de este dispositivo. Desconéctalo cuando quieras aquí o en tu cuenta de Google."
+          }
+        }
+      }
     },
     "this subscription" : {
 
@@ -2166,6 +2323,26 @@
     },
     "Total" : {
 
+    },
+    "Try %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Try %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "Turn on Apple Intelligence in Settings › Apple Intelligence & Siri to scan emails." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Activa Apple Intelligence en Configuración › Apple Intelligence y Siri para analizar correos."
+          }
+        }
+      }
     },
     "Turn On Reminders" : {
 
@@ -2198,6 +2375,9 @@
     "Utilities" : {
 
     },
+    "Ways to Save" : {
+
+    },
     "We'll send one notification on %@ so you don't forget." : {
 
     },
@@ -2221,6 +2401,16 @@
     },
     "What Would Change It" : {
 
+    },
+    "What's Stored" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Qué se guarda"
+          }
+        }
+      }
     },
     "What's your monthly budget?" : {
 
@@ -2255,6 +2445,12 @@
     "You can change this anytime in Settings." : {
 
     },
+    "You can connect up to %lld accounts. Disconnect one to add another." : {
+
+    },
+    "You could pay up to %@ less a month with cheaper plans or similar services." : {
+
+    },
     "You pay for more than you use. Some subscriptions may be worth canceling." : {
 
     },
@@ -2277,11 +2473,65 @@
     "You'll see a warning on Home when your subscriptions get close to this amount." : {
 
     },
+    "You'll sign in on Google's page. %@ never sees your password." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Iniciarás sesión en la página de Google. %@ nunca ve tu contraseña."
+          }
+        }
+      }
+    },
     "You're close to your budget. A check-in can show what to cut." : {
 
     },
+    "Your choice" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tú decides"
+          }
+        }
+      }
+    },
+    "Your Gmail connection expired. Connect again to continue." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu conexión con Gmail caducó. Vuelve a conectarla para continuar."
+          }
+        }
+      }
+    },
     "Your name" : {
 
+    },
+    "Your name, budget, currency, subscriptions and check-in answers are saved in the app's storage on this device. They're included in your device backup like other app data." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu nombre, presupuesto, moneda, suscripciones y respuestas de revisión se guardan en el almacenamiento de la app en este dispositivo. Se incluyen en la copia de seguridad del dispositivo como otros datos de apps."
+          }
+        }
+      }
+    },
+    "Your name, budget, currency, subscriptions, payments and check-in answers are saved in the app's storage on this device." : {
+
+    },
+    "Your Privacy" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Tu privacidad"
+          }
+        }
+      }
     },
     "Your profile combines how much of your budget subscriptions take with how often you use them, over the last %lld weeks." : {
 

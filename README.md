@@ -57,7 +57,7 @@ Setup in Xcode (needed once per developer team):
 1. Target › Signing & Capabilities: the project already points to `MyDues.entitlements` with
    **iCloud** (CloudKit + key-value storage) and **Push Notifications**, and `Info.plist` enables
    **Background Modes › Remote notifications**. Select your team so Xcode registers them.
-2. In the iCloud capability, create/tick the container `iCloud.com.francescamariacoppola.Duely`.
+2. In the iCloud capability, create/tick the container `iCloud.com.francescamariacoppola.MyDues`.
    If you change it, update `CloudConfiguration.containerID` too.
 3. Before shipping, open the CloudKit Console and **deploy the schema to Production**
    (development builds create it automatically on first sync). Every new model property must

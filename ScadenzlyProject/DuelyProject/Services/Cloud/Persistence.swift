@@ -15,7 +15,7 @@ import CloudKit
 enum CloudConfiguration {
     /// Must match the container in MyDues.entitlements and in the developer account
     /// (Signing & Capabilities › iCloud › Containers).
-    static let containerID = "iCloud.com.francescamariacoppola.Duely"
+    static let containerID = "iCloud.com.francescamariacoppola.MyDues"
 }
 
 enum Persistence {
