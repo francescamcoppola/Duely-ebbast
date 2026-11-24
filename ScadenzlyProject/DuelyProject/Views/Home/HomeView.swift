@@ -54,9 +54,11 @@ struct HomeView: View {
         )
     }
 
-    private var title: String {
+    /// A `Text` (not `String(localized:)`), so SwiftUI resolves it with the environment locale
+    /// and it follows an in-app language change like every other label.
+    private var title: Text {
         let firstName = userName.split(separator: " ").first.map(String.init) ?? ""
-        return firstName.isEmpty ? String(localized: "Home") : String(localized: "Hi, \(firstName)")
+        return firstName.isEmpty ? Text("Home") : Text("Hi, \(firstName)")
     }
 
     var body: some View {
