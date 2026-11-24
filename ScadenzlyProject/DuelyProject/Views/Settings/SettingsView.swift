@@ -32,11 +32,15 @@ struct SettingsView: View {
     @State private var isConfirmingReset = false
     @State private var isResetting = false
     @State private var cloudStatus: CloudSyncStatus = .checking
+    @State private var language = AppLanguage.stored()
+    /// Set after a change, to explain that it applies at the next launch.
+    @State private var languageToApply: AppLanguage?
 
     var body: some View {
         NavigationStack {
             Form {
                 profileSection
+                languageSection
                 budgetSection
                 checkInSection
                 remindersSection
@@ -84,6 +88,41 @@ struct SettingsView: View {
                 .textContentType(.givenName)
                 .textInputAutocapitalization(.words)
                 .autocorrectionDisabled()
+        }
+    }
+
+    private var languageSection: some View {
+        Section {
+            Picker(selection: Binding {
+                language
+            } set: { newValue in
+                guard newValue != language else { return }
+                newValue.apply()
+                language = newValue
+                languageToApply = newValue
+            }) {
+                ForEach(AppLanguage.allCases) { option in
+                    if let name = option.nativeName {
+                        Text(verbatim: name).tag(option)
+                    } else {
+                        Text("Device Language").tag(option)
+                    }
+                }
+            } label: {
+                Label("Language", systemImage: "globe")
+            }
+            .pickerStyle(.navigationLink)
+        } footer: {
+            Text("The new language is used the next time you open \(AppInfo.name).")
+        }
+        .alert(
+            Text("Restart to Change Language"),
+            isPresented: Binding(get: { languageToApply != nil }, set: { if !$0 { languageToApply = nil } }),
+            presenting: languageToApply
+        ) { _ in
+            Button("OK") {}
+        } message: { choice in
+            Text("Close \(AppInfo.name) from the App Switcher and open it again to use \(choice.nativeName ?? String(localized: "Device Language")).")
         }
     }
 
