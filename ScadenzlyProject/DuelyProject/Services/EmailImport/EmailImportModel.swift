@@ -12,6 +12,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 import AuthenticationServices
+import UIKit
 import Observation
 
 enum EmailImportKeys {
@@ -109,6 +110,8 @@ final class EmailImportModel {
     var aiStatus: AppleIntelligenceStatus = .current
 
     private var scanTask: Task<Void, Never>?
+    /// Extra time iOS grants if the user leaves the app mid-scan.
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
 
     init() {
         reloadAccounts()
@@ -248,6 +251,8 @@ final class EmailImportModel {
     private func scan(accounts: [String], skipping existingKeys: Set<String>) async {
         phase = .scanning(ScanProgress(account: accounts.first, stage: .searching))
         accountErrors = [:]
+        beginKeepingAlive()
+        defer { endKeepingAlive() }
         let extractor = SubscriptionExtractor()
         // Loads the on-device model while the first network requests run.
         extractor.prewarm()
@@ -319,7 +324,7 @@ final class EmailImportModel {
         accessToken: String,
         extractor: SubscriptionExtractor
     ) async throws -> (found: [DetectedSubscription], summary: ScanSummary) {
-        let api = GmailAPI(accessToken: accessToken)
+        var api = GmailAPI(accessToken: accessToken)
 
         let ids = try await api.searchMessageIDs(limit: Self.searchLimit)
         try Task.checkCancellation()
@@ -342,18 +347,82 @@ final class EmailImportModel {
         let toRead = selection.selected
         phase = .scanning(ScanProgress(account: account, stage: .reading, done: 0, total: toRead.count))
         var accountFound: [DetectedSubscription] = []
-        for (index, item) in toRead.enumerated() {
+        var unreadable = 0
+        var consecutiveFailures = 0
+        var processed = 0
+        var connectionLost = false
+        var signedOut = false
+
+        for item in toRead {
             try Task.checkCancellation()
-            // Each email is fetched, read and dropped before the next one.
-            let email = try await api.message(id: item.id)
-            if let analysis = await extractor.analyze(email),
-               let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
-                accountFound.append(candidate)
+            do {
+                // A long scan can outlast Google's one-hour access token: refresh it when needed.
+                api = GmailAPI(accessToken: try await validAccessToken(for: account).token)
+                let email: EmailMessage
+                do {
+                    email = try await api.message(id: item.id)
+                } catch GmailAuthError.signedOut {
+                    api = GmailAPI(accessToken: try await validAccessToken(for: account, forceRefresh: true).token)
+                    email = try await api.message(id: item.id)
+                }
+                consecutiveFailures = 0
+                // Each email is fetched, read and dropped before the next one.
+                if let analysis = await extractor.analyze(email),
+                   let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
+                    accountFound.append(candidate)
+                }
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch GmailAuthError.signedOut {
+                signedOut = true
+                break
+            } catch {
+                // One email that can't be fetched is skipped. Several in a row: the connection is gone.
+                unreadable += 1
+                consecutiveFailures += 1
+                if consecutiveFailures >= 5 {
+                    connectionLost = true
+                    processed += 1
+                    break
+                }
             }
-            summary.read = index + 1
-            phase = .scanning(ScanProgress(account: account, stage: .reading, done: index + 1, total: toRead.count))
+            processed += 1
+            phase = .scanning(ScanProgress(account: account, stage: .reading, done: processed, total: toRead.count))
+        }
+
+        // What was found is always kept; the account row explains what's missing.
+        summary.read = processed - unreadable
+        if signedOut {
+            GmailAuth.deleteStoredTokens(for: account)
+            reloadAccounts()
+            accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
+        } else if connectionLost {
+            accountErrors[account] = String(localized: "The connection dropped after \(processed) of \(toRead.count) emails. What was found so far is shown; scan again to finish.")
+        } else if unreadable > 0 {
+            accountErrors[account] = String(localized: "^[\(unreadable) email](inflect: true) couldn't be read and was skipped.")
         }
         return (accountFound, summary)
+    }
+
+    /// Keeps the screen on during a scan (a locked phone drops network connections) and asks
+    /// iOS for extra time if the user switches apps.
+    private func beginKeepingAlive() {
+        UIApplication.shared.isIdleTimerDisabled = true
+        guard backgroundTask == .invalid else { return }
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "Email scan") { [weak self] in
+            MainActor.assumeIsolated { self?.endBackgroundTask() }
+        }
+    }
+
+    private func endKeepingAlive() {
+        UIApplication.shared.isIdleTimerDisabled = false
+        endBackgroundTask()
+    }
+
+    private func endBackgroundTask() {
+        guard backgroundTask != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
     }
 
     private func updateFiltering(account: String, done: Int, total: Int) {

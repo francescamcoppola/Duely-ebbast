@@ -75,21 +75,37 @@ nonisolated struct GmailAPI: Sendable {
     /// Newest first, like `ids`. `onProgress` gets how many have been fetched so far.
     func metadata(
         for ids: [String],
-        maxConcurrent: Int = 8,
+        maxConcurrent: Int = 4,
         onProgress: @escaping @Sendable (Int) async -> Void = { _ in }
     ) async throws -> [EmailMetadata] {
         guard !ids.isEmpty else { return [] }
         var fetched: [String: EmailMetadata] = [:]
+        var done = 0
 
-        try await withThrowingTaskGroup(of: EmailMetadata.self) { group in
+        // One email that can't be fetched (deleted meanwhile, a hiccup) is skipped, never the
+        // whole scan. Only a sign-out or a cancel stop it.
+        try await withThrowingTaskGroup(of: EmailMetadata?.self) { group in
             var iterator = ids.makeIterator()
-            for _ in 0..<min(max(1, maxConcurrent), ids.count) {
-                if let id = iterator.next() { group.addTask { try await self.metadata(id: id) } }
+            func addNext() {
+                guard let id = iterator.next() else { return }
+                group.addTask {
+                    do {
+                        return try await self.metadata(id: id)
+                    } catch let error as GmailAuthError where error == .signedOut {
+                        throw error
+                    } catch is CancellationError {
+                        throw CancellationError()
+                    } catch {
+                        return nil
+                    }
+                }
             }
+            for _ in 0..<min(max(1, maxConcurrent), ids.count) { addNext() }
             while let item = try await group.next() {
-                fetched[item.id] = item
-                await onProgress(fetched.count)
-                if let id = iterator.next() { group.addTask { try await self.metadata(id: id) } }
+                if let item { fetched[item.id] = item }
+                done += 1
+                await onProgress(done)
+                addNext()
             }
         }
         return ids.compactMap { fetched[$0] }
@@ -126,11 +142,21 @@ nonisolated struct GmailAPI: Sendable {
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
 
-        // Gmail limits requests per user per second: back off and retry on 429 and server errors.
+        // Gmail limits requests per user per second, and mobile connections drop now and then:
+        // back off and retry on rate limits, server errors and transient network errors.
         var attempt = 0
         while true {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            switch (response as? HTTPURLResponse)?.statusCode ?? 0 {
+            let data: Data
+            let response: URLResponse
+            do {
+                (data, response) = try await URLSession.shared.data(for: request)
+            } catch let error as URLError where Self.isTransient(error) && attempt < Self.maxRetries {
+                attempt += 1
+                try await Task.sleep(for: Self.backoff(attempt))
+                continue
+            }
+            let http = response as? HTTPURLResponse
+            switch http?.statusCode ?? 0 {
             case 200..<300:
                 return try JSONDecoder().decode(T.self, from: data)
             case 401:
@@ -138,15 +164,29 @@ nonisolated struct GmailAPI: Sendable {
             case 403 where Self.isRateLimit(data):
                 fallthrough
             case 429, 500, 502, 503, 504:
-                guard attempt < 3 else { throw GmailAuthError.server("rate limited") }
+                guard attempt < Self.maxRetries else { throw GmailAuthError.server("rate limited") }
                 attempt += 1
-                try await Task.sleep(for: .milliseconds(500 * (1 << attempt)))
+                // Gmail may say how long to wait.
+                let retryAfter = http?.value(forHTTPHeaderField: "Retry-After").flatMap(Double.init)
+                try await Task.sleep(for: retryAfter.map { .seconds(min($0, 30)) } ?? Self.backoff(attempt))
             case 403:
                 throw GmailAuthError.scopeNotGranted
             case let status:
                 throw GmailAuthError.server("HTTP \(status)")
             }
         }
+    }
+
+    private static let maxRetries = 5
+
+    /// 1, 2, 4, 8, 16 seconds, plus a little jitter so parallel requests don't retry together.
+    private static func backoff(_ attempt: Int) -> Duration {
+        .milliseconds(1000 * (1 << (attempt - 1)) + Int.random(in: 0...400))
+    }
+
+    private static func isTransient(_ error: URLError) -> Bool {
+        [.timedOut, .networkConnectionLost, .cannotConnectToHost, .notConnectedToInternet,
+         .dnsLookupFailed, .secureConnectionFailed].contains(error.code)
     }
 
     /// Gmail reports some rate limits as 403 with a `rateLimitExceeded` reason.

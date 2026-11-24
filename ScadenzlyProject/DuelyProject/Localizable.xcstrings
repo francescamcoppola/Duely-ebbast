@@ -15337,6 +15337,86 @@
           }
         }
       }
+    },
+    "The connection dropped after %lld of %lld emails. What was found so far is shown; scan again to finish." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connessione si è interrotta dopo %lld email su %lld. Vedi quello che è stato trovato finora; analizza di nuovo per completare."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La conexión se cortó tras %lld de %lld correos. Se muestra lo encontrado hasta ahora; analiza de nuevo para terminar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion a été interrompue après %lld e-mails sur %lld. Ce qui a été trouvé jusqu'ici est affiché ; relancez l'analyse pour terminer."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Verbindung ist nach %lld von %lld E-Mails abgebrochen. Bisher Gefundenes wird angezeigt; analysiere erneut, um fertig zu werden."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De verbinding viel weg na %lld van %lld e-mails. Wat tot nu toe is gevonden wordt getoond; scan opnieuw om af te ronden."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connessions si è interrotts dops %lld email su %lld. Veds quells che è stats trovats finors; analizzs di nuovs per completars."
+          }
+        }
+      }
+    },
+    "^[%lld email](inflect: true) couldn't be read and was skipped." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld email non è stata letta ed è stata saltata](inflect: true)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo leer ^[%lld correo](inflect: true) y se omitió."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld e-mail n'a pas pu être lu et a été ignoré](inflect: true)."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld E-Mail konnte](inflect: true) nicht gelesen werden und wurde übersprungen."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld e-mail(s) kon(den) niet worden gelezen en is/zijn overgeslagen."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld email non sons stats letts e sons stats saltats."
+          }
+        }
+      }
     }
   },
   "version" : "1.3"
