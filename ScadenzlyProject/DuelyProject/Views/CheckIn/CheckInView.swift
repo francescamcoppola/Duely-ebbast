@@ -212,8 +212,12 @@ struct CheckInView: View {
     private func load() {
         guard !didLoad else { return }
         didLoad = true
-        // Reopening an answered week shows the previous answers.
-        selected = Set(subscriptions.filter { entry(for: $0)?.used == true }.map(\.id))
+        // Reopening an answered week shows the previous answers; otherwise Screen Time's data,
+        // for subscriptions linked to an app, is already filled in.
+        selected = Set(subscriptions.filter { subscription in
+            if let answer = entry(for: subscription) { return answer.used }
+            return ScreenTimeService.shared.usage(of: subscription, inWeekStarting: week) == true
+        }.map(\.id))
     }
 
     private func toggle(_ subscription: Subscription) {

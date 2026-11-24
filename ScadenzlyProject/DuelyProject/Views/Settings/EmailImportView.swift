@@ -241,7 +241,8 @@ struct EmailImportView: View {
 
     private var isReviewing: Binding<Bool> {
         Binding {
-            if case .review = model.phase { true } else { false }
+            // The onboarding scan is reviewed on Home.
+            if case .review = model.phase, !model.presentsResultsOnHome { true } else { false }
         } set: { isPresented in
             if !isPresented, case .review = model.phase { model.dismissReview() }
         }

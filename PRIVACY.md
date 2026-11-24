@@ -10,7 +10,7 @@ This policy also appears inside the app under **Settings › Privacy**. If the t
 
 MyDues saves the following in the app's storage on your iPhone or iPad:
 
-- the name you enter during onboarding
+- the name you enter during onboarding, and the language you choose for the app
 - your monthly budget and currency, and your check-in and reminder preferences
 - the subscriptions and payments you add (name, plan, price, billing cycle, category, color, payment date, reminder choice and, for ones imported from email, which of your connected addresses it was found in)
 - your weekly check-in answers (whether you used each subscription in a given week)
@@ -56,6 +56,14 @@ MyDues's use and transfer of information received from Google APIs adheres to th
 - Gmail data is not transferred to anyone, except as necessary to provide that feature, to comply with applicable law, or as part of a merger, acquisition or sale of assets with notice to you. In practice, it never leaves your device;
 - Gmail data is not used for advertising, including retargeting, personalized or interest-based advertising;
 - no human reads your Gmail data. MyDues's developers have no way to access it.
+
+## Screen Time (optional)
+
+You can link a subscription to the app you use it in. MyDues then asks for Screen Time access (Apple's Family Controls, for your own device) and you choose the app in Apple's own picker. MyDues never learns which app you picked, how long you used it or what you did: Screen Time only tells it, on your device, on which days that app was used for at least a few minutes. Those days are stored on your device to fill in your weekly check-ins and to remind you when you haven't opened a paid app for a week. Nothing about your usage leaves your device. You can stop tracking a subscription at any time from its detail screen, or turn off access in Settings › Screen Time.
+
+## Widgets
+
+The Home Screen and Lock Screen widgets show your upcoming payments and monthly total. The app saves a small summary for them in a container on your device that only MyDues and its widgets can read. Anyone who can see your Home Screen or Lock Screen can see what the widgets show.
 
 ## Apple Intelligence
 

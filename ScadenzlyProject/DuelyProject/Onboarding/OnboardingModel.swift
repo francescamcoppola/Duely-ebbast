@@ -27,6 +27,8 @@ enum OnboardingKeys {
     static let monthlyBudget = "monthlyBudget"
     /// ISO 4217 code, e.g. "EUR".
     static let currencyCode = "currencyCode"
+    /// The first screen (language) was confirmed. Survives the rebuild a language change causes.
+    static let languageChosen = "onboardingLanguageChosen"
 }
 
 // MARK: - Steps
@@ -34,6 +36,8 @@ enum OnboardingKeys {
 enum OnboardingStep: Int, Hashable, CaseIterable {
     case name = 1
     case budget
+    /// Offered only when Gmail import can run on this device.
+    case email
     case subscriptions
 
     var number: Int { rawValue }

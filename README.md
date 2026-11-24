@@ -86,3 +86,38 @@ or a Gist) and set `PlanCatalogConfiguration.remoteURL`: the app downloads it at
 and keeps it when its `updated` date is newer than the bundled copy. Prices are per currency
 (`"prices": {"EUR": "13.99", "USD": "17.99"}`); plans without the user's currency are shown
 without a price. Plans with `eligibility` (e.g. students) are never suggested as alternatives.
+
+## Widgets and Screen Time (app extensions)
+
+The project has three targets: the app (`Scadenzsly`), `MyDuesWidgets` (Home Screen and Lock
+Screen widgets) and `UsageMonitor` (Screen Time / DeviceActivity monitor). Code shared by all three
+is in `MyDuesShared/` and talks through the App Group `group.com.francescamariacoppola.Duely`.
+
+- **Widgets** read `WidgetSnapshot`, written by the app (`Services/Extensions/WidgetSync.swift`)
+  whenever subscriptions, budget, currency or language change. Texts come translated from the
+  app, so widgets follow the in-app language.
+- **Screen Time**: in a subscription's detail, "Track Usage with Screen Time" asks for permission
+  and opens Apple's app picker. A daily DeviceActivity schedule records the days each linked app
+  is used for 5+ minutes (`UsageLinks`). Check-ins are pre-filled from it (and answered
+  automatically when every subscription is linked); the monitor sends a reminder when a paid app
+  hasn't been opened for a week. The app never learns which app was picked or what was done in it.
+
+Setup (once, on the Mac of the team that owns the bundle ID):
+
+1. Open the project, select each target › Signing & Capabilities and let Xcode register the App
+   IDs `….Duely.Widgets` and `….Duely.UsageMonitor` and the App Group
+   `group.com.francescamariacoppola.Duely` (tick it in the App Groups capability of all three).
+2. **Family Controls (Screen Time)**: Apple allows it in development builds only. It's in
+   `MyDues-Debug.entitlements` and `UsageMonitor-Debug.entitlements` (Debug configuration), so
+   TestFlight/App Store builds still sign and simply show Screen Time as unavailable. To ship it,
+   request the distribution entitlement at
+   https://developer.apple.com/contact/request/family-controls-distribution, then add
+   `com.apple.developer.family-controls` to `MyDues.entitlements` and `UsageMonitor.entitlements`.
+3. Screen Time doesn't work in the Simulator: test it on an iPhone.
+
+## Language
+
+The first onboarding screen picks the language (preset to the device's); Settings › Language
+changes it later. Switching rebuilds the whole interface in the new language right away
+(`Services/AppLanguage.swift`): iOS doesn't let apps relaunch themselves. Inglisc (`it-VA`) is
+generated from the Italian strings: every word's final vowels become "s".

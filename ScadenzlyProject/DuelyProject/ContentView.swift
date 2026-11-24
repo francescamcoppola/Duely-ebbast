@@ -10,6 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @AppStorage(OnboardingKeys.hasCompleted) private var hasCompletedOnboarding = false
+    @State private var language = LanguageController.shared
 
     var body: some View {
         ZStack {
@@ -24,6 +25,10 @@ struct ContentView: View {
             }
         }
         .animation(.smooth, value: hasCompletedOnboarding)
+        // A language change rebuilds the whole app in the new language: the "restart".
+        .environment(\.locale, language.locale)
+        .id(language.generation)
+        .transition(.opacity.animation(.smooth(duration: 0.35)))
     }
 }
 

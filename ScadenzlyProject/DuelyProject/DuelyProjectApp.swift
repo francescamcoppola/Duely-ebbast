@@ -22,6 +22,7 @@ struct DuelyProjectApp: App {
     init() {
         // Before the first view reads @AppStorage, so iCloud settings are already in place.
         CloudSettingsSync.shared.start()
+        LanguageController.shared.start()
     }
 
     var body: some Scene {

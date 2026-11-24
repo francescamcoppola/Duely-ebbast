@@ -15,16 +15,25 @@ struct OnboardingView: View {
 
     @State private var model = OnboardingViewModel()
     @Environment(\.modelContext) private var context
+    @AppStorage(OnboardingKeys.languageChosen) private var languageChosen = false
 
     var body: some View {
-        NavigationStack(path: $model.path) {
-            WelcomeStepView {
-                model.go(to: .name)
+        if !languageChosen {
+            LanguageStepView {
+                withAnimation(.smooth) { languageChosen = true }
             }
-            .toolbar(.hidden, for: .navigationBar)
-            .navigationDestination(for: OnboardingStep.self) { step in
-                destination(for: step)
+            .transition(.opacity)
+        } else {
+            NavigationStack(path: $model.path) {
+                WelcomeStepView {
+                    model.go(to: .name)
+                }
+                .toolbar(.hidden, for: .navigationBar)
+                .navigationDestination(for: OnboardingStep.self) { step in
+                    destination(for: step)
+                }
             }
+            .transition(.opacity)
         }
     }
 
@@ -34,15 +43,26 @@ struct OnboardingView: View {
         case .name:
             NameStepView(model: model) { model.go(to: .budget) }
         case .budget:
-            BudgetStepView(model: model) { model.go(to: .subscriptions) }
+            BudgetStepView(model: model) {
+                model.go(to: EmailStepView.isAvailable ? .email : .subscriptions)
+            }
+        case .email:
+            EmailStepView(onConnected: { finish(scanEmail: true) },
+                          onManual: { model.go(to: .subscriptions) })
         case .subscriptions:
-            SubscriptionPickerStepView(model: model) { finish() }
+            SubscriptionPickerStepView(model: model) { finish(scanEmail: false) }
         }
     }
 
-    private func finish() {
+    /// With Gmail connected, the manual pick is skipped: the scan starts now and its results
+    /// are shown on Home for review.
+    private func finish(scanEmail: Bool) {
         model.save()
-        StarterSeeder.insert(serviceIDs: model.selectedServiceIDs, into: context)
+        if scanEmail {
+            EmailImportModel.shared.startScan(existing: [], presentResultsOnHome: true)
+        } else {
+            StarterSeeder.insert(serviceIDs: model.selectedServiceIDs, into: context)
+        }
         onComplete()
     }
 }

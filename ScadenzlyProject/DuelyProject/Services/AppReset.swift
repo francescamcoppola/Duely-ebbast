@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import UserNotifications
+import WidgetKit
 
 @MainActor
 enum AppReset {
@@ -32,6 +33,14 @@ enum AppReset {
         // Gmail tokens (Keychain) and the app's access on Google's side, for every account
         await EmailImportModel.shared.disconnectAll()
 
+        // Screen Time links and the widgets' data, in the App Group
+        UsageLinks.all = [:]
+        UsageLinks.usedDays = [:]
+        UsageLinks.lastNotified = [:]
+        ScreenTimeService.shared.restartMonitoring()
+        SharedStore.defaults?.removeObject(forKey: WidgetSnapshot.key)
+        WidgetCenter.shared.reloadAllTimelines()
+
         // Navigation state
         AppRouter.shared.selectedTab = .home
         AppRouter.shared.isCheckInPresented = false
@@ -42,5 +51,7 @@ enum AppReset {
             defaults.removePersistentDomain(forName: domain)
         }
         defaults.set(false, forKey: OnboardingKeys.hasCompleted)
+        // Back to the device's language, chosen again on the first onboarding screen.
+        LanguageController.shared.change(to: .system)
     }
 }

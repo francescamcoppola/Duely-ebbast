@@ -32,9 +32,7 @@ struct SettingsView: View {
     @State private var isConfirmingReset = false
     @State private var isResetting = false
     @State private var cloudStatus: CloudSyncStatus = .checking
-    @State private var language = AppLanguage.stored()
-    /// Set after a change, to explain that it applies at the next launch.
-    @State private var languageToApply: AppLanguage?
+    @State private var languageController = LanguageController.shared
 
     var body: some View {
         NavigationStack {
@@ -94,12 +92,12 @@ struct SettingsView: View {
     private var languageSection: some View {
         Section {
             Picker(selection: Binding {
-                language
+                languageController.language
             } set: { newValue in
-                guard newValue != language else { return }
-                newValue.apply()
-                language = newValue
-                languageToApply = newValue
+                // Rebuilds the whole app in the new language, closing this screen.
+                withAnimation(.smooth(duration: 0.35)) {
+                    languageController.change(to: newValue)
+                }
             }) {
                 ForEach(AppLanguage.allCases) { option in
                     if let name = option.nativeName {
@@ -113,16 +111,7 @@ struct SettingsView: View {
             }
             .pickerStyle(.navigationLink)
         } footer: {
-            Text("The new language is used the next time you open \(AppInfo.name).")
-        }
-        .alert(
-            Text("Restart to Change Language"),
-            isPresented: Binding(get: { languageToApply != nil }, set: { if !$0 { languageToApply = nil } }),
-            presenting: languageToApply
-        ) { _ in
-            Button("OK") {}
-        } message: { choice in
-            Text("Close \(AppInfo.name) from the App Switcher and open it again to use \(choice.nativeName ?? String(localized: "Device Language")).")
+            Text("\(AppInfo.name) restarts in the new language.")
         }
     }
 

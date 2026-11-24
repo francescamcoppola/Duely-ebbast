@@ -91,6 +91,22 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable, Codable, Sendable
         }
     }
 
+    var colorName: String {
+        switch self {
+        case .filmTV: "red"
+        case .music: "green"
+        case .leisure: "purple"
+        case .social: "indigo"
+        case .work: "teal"
+        case .utilities: "orange"
+        case .home: "brown"
+        case .taxes: "blue"
+        case .education: "yellow"
+        case .insurance: "pink"
+        case .other: "gray"
+        }
+    }
+
     var color: Color {
         switch self {
         case .filmTV: .red
@@ -203,6 +219,8 @@ final class Subscription {
     /// The cancellation page found for a service not in the catalog, remembered so the next tap
     /// opens it straight away. Cleared when the name changes.
     var cancelURL: String?
+    /// Identifies this subscription's Screen Time link (`UsageLinks`) once it's linked to an app.
+    var usageKey: String?
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []
@@ -247,6 +265,9 @@ final class Subscription {
 
     /// The color shown everywhere for this subscription.
     var displayColor: Color { tint?.color ?? category.color }
+
+    /// `displayColor` by name, for the widgets (`SharedColor`).
+    var displayColorName: String { tint?.rawValue ?? category.colorName }
 
     /// Added from onboarding but still missing a price or a payment date.
     var needsSetup: Bool { price <= 0 || anchorDate == nil }

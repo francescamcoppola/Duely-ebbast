@@ -104,6 +104,9 @@ final class EmailImportModel {
     private(set) var connectedEmails: [String] = []
     private(set) var isConnecting = false
     private(set) var phase: Phase = .idle
+    /// Set for the scan started at the end of onboarding: Home shows its progress and results,
+    /// instead of Settings › Import from Email.
+    private(set) var presentsResultsOnHome = false
     private(set) var connectionError: String?
     /// Accounts that couldn't be read during the last scan, with the reason.
     private(set) var accountErrors: [String: String] = [:]
@@ -131,6 +134,15 @@ final class EmailImportModel {
     /// What the last finished scan looked at.
     private(set) var lastSummary: ScanSummary? =
         ScanSummary(dictionary: UserDefaults.standard.dictionary(forKey: EmailImportKeys.lastSummary) as? [String: Int])
+
+    /// Home shows the onboarding scan while it runs or after it failed.
+    var showsScanOnHome: Bool {
+        guard presentsResultsOnHome else { return false }
+        switch phase {
+        case .scanning, .failed: return true
+        default: return false
+        }
+    }
 
     /// The account being scanned right now, if any.
     var scanningAccount: String? {
@@ -224,8 +236,9 @@ final class EmailImportModel {
     // MARK: Scan
 
     /// Scans every connected account, or only `accounts` when given.
-    func startScan(existing: [Subscription], accounts: [String]? = nil) {
+    func startScan(existing: [Subscription], accounts: [String]? = nil, presentResultsOnHome: Bool = false) {
         guard !isScanning else { return }
+        presentsResultsOnHome = presentResultsOnHome
         refreshAvailability()
         guard aiStatus == .available else {
             phase = .failed(aiStatus.message.map { String(localized: $0) } ?? "")
@@ -242,9 +255,11 @@ final class EmailImportModel {
         scanTask?.cancel()
         scanTask = nil
         if isScanning { phase = .idle }
+        presentsResultsOnHome = false
     }
 
     func dismissReview() {
+        presentsResultsOnHome = false
         phase = .idle
     }
 
@@ -479,6 +494,7 @@ final class EmailImportModel {
             assertionFailure("Import failed: \(error)")
         }
         phase = .idle
+        presentsResultsOnHome = false
         return candidates.count
     }
 

@@ -106,8 +106,7 @@ struct WelcomeStepView: View {
     }
 }
 
-/// The app's logo, shaped like its Home Screen icon. Keep `AppLogo` in the asset catalog in sync
-/// with the AppIcon artwork.
+/// The app's logo, square. Keep `AppLogo` in the asset catalog in sync with the AppIcon artwork.
 struct AppMark: View {
     @ScaledMetric(relativeTo: .largeTitle) private var size: CGFloat = 100
 
@@ -120,9 +119,8 @@ struct AppMark: View {
             .interpolation(.high)
             .scaledToFill()
             .frame(width: markSize, height: markSize)
-            // Same proportions as the system's app icon mask.
-            .clipShape(RoundedRectangle(cornerRadius: markSize * 0.2237, style: .continuous))
-            .shadow(color: Color.indigo.opacity(0.35), radius: 16, y: 8)
+            // Square, like the logo artwork itself.
+            .shadow(color: Color.accentColor.opacity(0.35), radius: 16, y: 8)
             .accessibilityHidden(true)
     }
 }

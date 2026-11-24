@@ -69,6 +69,8 @@ struct SubscriptionDetailView: View {
 
             usageSection(stats)
 
+            ScreenTimeSection(subscription: subscription)
+
             Section {
                 // Plain HStack, not `Label`: inside a List row a Label takes the list's icon-column
                 // layout, which stretched this row and pushed its separator to the right.

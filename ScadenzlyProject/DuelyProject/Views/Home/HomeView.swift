@@ -34,6 +34,7 @@ struct HomeView: View {
     @State private var isEditingBudget = false
     @State private var isShowingSettings = false
     @State private var catalog = PlanCatalogStore.shared
+    @State private var emailImport = EmailImportModel.shared
 
     private var checkInSchedule: CheckInSchedule {
         CheckInSchedule(weekday: checkInWeekday, minutes: checkInMinutes)
@@ -61,7 +62,14 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if subscriptions.isEmpty {
+                if subscriptions.isEmpty && emailImport.showsScanOnHome {
+                    ScrollView {
+                        EmailScanCard()
+                            .padding(16)
+                            .frame(maxWidth: 700)
+                            .frame(maxWidth: .infinity)
+                    }
+                } else if subscriptions.isEmpty {
                     emptyState
                 } else {
                     content(HomeSummary(subscriptions: subscriptions,
@@ -107,6 +115,10 @@ struct HomeView: View {
     private func content(_ summary: HomeSummary) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
+                if emailImport.showsScanOnHome {
+                    EmailScanCard()
+                }
+
                 MonthlyOverviewCard(summary: summary, currencyCode: currencyCode) {
                     isEditingBudget = true
                 }
