@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 enum AppTab: Hashable {
-    case home, calendar, subscriptions
+    case home, calendar, deadlines, subscriptions
 }
 
 struct RootTabView: View {
@@ -19,6 +19,8 @@ struct RootTabView: View {
     @Environment(\.modelContext) private var context
 
     @Query private var subscriptions: [Subscription]
+    @Query private var purchases: [Purchase]
+    @Query private var notices: [PaymentNotice]
     @AppStorage(OnboardingKeys.currencyCode) private var currencyCode = AppDefaults.currencyCode
     @AppStorage(CheckInKeys.enabled) private var checkInEnabled = true
     @AppStorage(CheckInKeys.weekday) private var checkInWeekday = CheckInSchedule.defaultWeekday
@@ -37,14 +39,18 @@ struct RootTabView: View {
                 .tabItem { Label("Calendar", systemImage: "calendar") }
                 .tag(AppTab.calendar)
 
+            DeadlinesView()
+                .tabItem { Label("Deadlines", systemImage: "calendar.badge.clock") }
+                .tag(AppTab.deadlines)
+
             SubscriptionsView()
                 .tabItem { Label("Subscriptions", systemImage: "rectangle.stack") }
                 .tag(AppTab.subscriptions)
         }
         // Results of the Gmail scan started at the end of onboarding.
         .sheet(isPresented: isReviewingOnboardingScan) {
-            if case .review(let candidates) = emailImport.phase {
-                ImportReviewView(candidates: candidates) { chosen in
+            if case .review(let results) = emailImport.phase {
+                ImportReviewView(results: results) { chosen in
                     emailImport.add(chosen, existing: subscriptions, into: context)
                 }
             }
@@ -91,19 +97,35 @@ struct RootTabView: View {
             .map {
                 "\($0.name)|\($0.price)|\($0.cycleRaw)|\($0.anchorDate?.timeIntervalSince1970 ?? 0)|\($0.reminderDaysBefore)"
                     + "|\($0.lastPaymentDate?.timeIntervalSince1970 ?? 0)|\($0.paidDates.map(\.timeIntervalSince1970).sorted())"
+                    + "|\($0.trialEndDate?.timeIntervalSince1970 ?? 0)"
             }
             .sorted()
             .joined(separator: ";")
-        return settings + "#" + data
+        let orders = purchases
+            .map {
+                "\($0.title)|\($0.store)|\($0.price)|\($0.returnBy?.timeIntervalSince1970 ?? 0)|\($0.warrantyUntil?.timeIntervalSince1970 ?? 0)"
+                    + "|\($0.returnReminderEnabled)|\($0.warrantyReminderEnabled)|\($0.returnedAt != nil)"
+            }
+            .sorted()
+            .joined(separator: ";")
+        let pagoPA = notices
+            .map { "\($0.noticeNumber)|\($0.payee)|\($0.amount)|\($0.dueDate?.timeIntervalSince1970 ?? 0)|\($0.reminderDaysBefore)|\($0.paidAt != nil)" }
+            .sorted()
+            .joined(separator: ";")
+        return settings + "#" + data + "#" + orders + "#" + pagoPA
     }
 
     private func rescheduleNotifications() async {
         let checkIn = checkInEnabled && !subscriptions.isEmpty
             ? CheckInSchedule(weekday: checkInWeekday, minutes: checkInMinutes)
             : nil
-        let payments = paymentRemindersEnabled
-            ? ReminderPlanner.plan(subscriptions: subscriptions, currencyCode: currencyCode)
-            : []
+        // Deadline reminders (returns, warranties, trials, pagoPA) have their own switches per
+        // item, so they're planned even when payment reminders are off.
+        let payments = ReminderPlanner.plan(subscriptions: subscriptions,
+                                            currencyCode: currencyCode,
+                                            includePayments: paymentRemindersEnabled,
+                                            purchases: purchases,
+                                            notices: notices)
         await NotificationService.reschedule(checkIn: checkIn, payments: payments)
     }
 }

@@ -10,6 +10,9 @@ import SwiftData
 
 struct CalendarView: View {
     @Query(sort: \Subscription.createdAt) private var subscriptions: [Subscription]
+    @Query private var purchases: [Purchase]
+    @Query private var notices: [PaymentNotice]
+    @State private var router = AppRouter.shared
     @AppStorage(OnboardingKeys.currencyCode) private var currencyCode = AppDefaults.currencyCode
 
     @Environment(\.calendar) private var calendar
@@ -30,11 +33,16 @@ struct CalendarView: View {
 
     var body: some View {
         let schedule = MonthSchedule(subscriptions: subscriptions, month: month, calendar: calendar)
+        let deadlines = DeadlineList.items(purchases: purchases, notices: notices,
+                                           subscriptions: subscriptions, calendar: calendar)
+        let dayDeadlines = deadlines.filter { item in
+            item.date.map { calendar.isDate($0, inSameDayAs: selectedDay) } ?? false
+        }
 
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
-                    MonthGridView(month: month, schedule: schedule, selectedDay: $selectedDay) { offset in
+                    MonthGridView(month: month, schedule: schedule, deadlines: deadlines, selectedDay: $selectedDay) { offset in
                         showMonth(month.adding(months: offset, calendar: calendar))
                     }
 
@@ -43,6 +51,13 @@ struct CalendarView: View {
                         payments: schedule.payments(on: selectedDay, calendar: calendar),
                         currencyCode: currencyCode
                     ) { detailSubscription = $0 }
+
+                    if !dayDeadlines.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            SectionHeader(title: "Deadlines", actionTitle: "Show All") { router.selectedTab = .deadlines }
+                            DeadlinesCard(items: dayDeadlines, currencyCode: currencyCode) { router.selectedTab = .deadlines }
+                        }
+                    }
 
                     if schedule.paymentCount > 0 {
                         MonthSummaryCard(schedule: schedule, monthlyAverage: monthlyAverage,

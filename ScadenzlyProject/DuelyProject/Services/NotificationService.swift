@@ -4,7 +4,7 @@
 //
 //  Local notifications only (nothing leaves the device):
 //  • one repeating weekly check-in reminder
-//  • payment reminders, rebuilt from the data every time something changes or the app opens
+//  • payment and deadline reminders (returns, warranties, trials, pagoPA), rebuilt from the data every time something changes or the app opens
 //
 //  Permission is never requested at launch. It's requested when the user turns a reminder on
 //  or picks a reminder for a subscription (HIG: ask in context, when the benefit is clear).
@@ -43,6 +43,7 @@ nonisolated enum NotificationService {
         let pending = await center.pendingNotificationRequests()
         let ours = pending.map(\.identifier).filter {
             $0 == checkInIdentifier || $0.hasPrefix(NotificationIDs.paymentPrefix)
+                || $0.hasPrefix(NotificationIDs.deadlinePrefix)
         }
         center.removePendingNotificationRequests(withIdentifiers: ours)
 
@@ -65,7 +66,7 @@ nonisolated enum NotificationService {
             content.title = reminder.title
             content.body = reminder.body
             content.sound = .default
-            content.threadIdentifier = "payments"
+            content.threadIdentifier = reminder.id.hasPrefix(NotificationIDs.deadlinePrefix) ? "deadlines" : "payments"
             let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: reminder.fireDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             try? await center.add(UNNotificationRequest(identifier: reminder.id, content: content, trigger: trigger))

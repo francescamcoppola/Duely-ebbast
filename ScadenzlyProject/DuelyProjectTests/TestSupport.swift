@@ -38,7 +38,7 @@ final class TestStore {
 
     init() throws {
         container = try ModelContainer(
-            for: Subscription.self, UsageEntry.self,
+            for: Subscription.self, UsageEntry.self, Purchase.self, PaymentNotice.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
     }

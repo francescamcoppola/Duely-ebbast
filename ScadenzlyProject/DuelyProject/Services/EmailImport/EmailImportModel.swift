@@ -78,6 +78,16 @@ struct ScanSummary: Equatable {
     }
 }
 
+/// Everything a scan found that isn't in the app yet, for the review screen.
+struct ScanResults: Equatable {
+    var subscriptions: [DetectedSubscription] = []
+    var purchases: [DetectedPurchase] = []
+    var notices: [DetectedNotice] = []
+
+    var isEmpty: Bool { subscriptions.isEmpty && purchases.isEmpty && notices.isEmpty }
+    var count: Int { subscriptions.count + purchases.count + notices.count }
+}
+
 @MainActor
 @Observable
 final class EmailImportModel {
@@ -87,7 +97,7 @@ final class EmailImportModel {
     enum Phase: Equatable {
         case idle
         case scanning(ScanProgress)
-        case review([DetectedSubscription])
+        case review(ScanResults)
         case failed(String)
     }
 
@@ -97,6 +107,10 @@ final class EmailImportModel {
     /// Most emails Apple Intelligence reads per account, after ads, newsletters and repeats are
     /// skipped. Keeps a scan to a few minutes.
     static let readLimit = 150
+    /// Order and delivery emails read per account, for returns and warranties.
+    static let ordersReadLimit = 100
+    /// pagoPA emails read per account (each may mean downloading a PDF).
+    static let noticesReadLimit = 40
     /// Keeps a scan to a reasonable length.
     static let maxAccounts = 5
 
@@ -248,7 +262,8 @@ final class EmailImportModel {
         guard !targets.isEmpty else { return }
         // Services already set up are skipped; ones still in "Needs Setup" can be completed.
         let existingKeys = Set(existing.filter { !$0.needsSetup }.map { DetectedSubscription.matchKey($0.name) })
-        scanTask = Task { await scan(accounts: targets, skipping: existingKeys) }
+        let known = KnownItems(context: Persistence.container.mainContext)
+        scanTask = Task { await scan(accounts: targets, skipping: existingKeys, known: known) }
     }
 
     func cancelScan() {
@@ -263,7 +278,30 @@ final class EmailImportModel {
         phase = .idle
     }
 
-    private func scan(accounts: [String], skipping existingKeys: Set<String>) async {
+    /// Orders and notices already in the app, so a new scan doesn't suggest them again.
+    struct KnownItems {
+        var orderKeys: Set<String> = []
+        var noticeNumbers: Set<String> = []
+
+        init(context: ModelContext) {
+            for purchase in (try? context.fetch(FetchDescriptor<Purchase>())) ?? [] {
+                if let number = purchase.orderNumber, !number.isEmpty {
+                    orderKeys.insert("order:" + number.filter { $0.isLetter || $0.isNumber })
+                }
+                orderKeys.insert("item:" + DetectedSubscription.matchKey(purchase.store) + "|" + DetectedSubscription.matchKey(purchase.title))
+            }
+            noticeNumbers = Set(((try? context.fetch(FetchDescriptor<PaymentNotice>())) ?? []).map(\.noticeNumber))
+        }
+    }
+
+    private struct AccountResult {
+        var subscriptions: [DetectedSubscription] = []
+        var purchases: [DetectedPurchase] = []
+        var notices: [DetectedNotice] = []
+        var summary = ScanSummary()
+    }
+
+    private func scan(accounts: [String], skipping existingKeys: Set<String>, known: KnownItems) async {
         phase = .scanning(ScanProgress(account: accounts.first, stage: .searching))
         accountErrors = [:]
         beginKeepingAlive()
@@ -272,6 +310,8 @@ final class EmailImportModel {
         // Loads the on-device model while the first network requests run.
         extractor.prewarm()
         var found: [DetectedSubscription] = []
+        var foundPurchases: [DetectedPurchase] = []
+        var foundNotices: [DetectedNotice] = []
         var summary = ScanSummary()
         var scannedAny = false
 
@@ -282,7 +322,9 @@ final class EmailImportModel {
                 let auth = try await validAccessToken(for: account)
                 didRefresh = auth.refreshed
                 let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                found += result.found
+                found += result.subscriptions
+                foundPurchases += result.purchases
+                foundNotices += result.notices
                 summary = summary + result.summary
                 scannedAny = true
             } catch is CancellationError {
@@ -294,7 +336,9 @@ final class EmailImportModel {
                 do {
                     let auth = try await validAccessToken(for: account, forceRefresh: true)
                     let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                    found += result.found
+                    found += result.subscriptions
+                    foundPurchases += result.purchases
+                    foundNotices += result.notices
                     summary = summary + result.summary
                     scannedAny = true
                 } catch is CancellationError {
@@ -319,30 +363,55 @@ final class EmailImportModel {
         }
 
         if scannedAny {
-            let candidates = DetectedSubscription.merged(found).filter { !existingKeys.contains($0.id) }
+            let results = ScanResults(
+                subscriptions: DetectedSubscription.merged(found).filter { !existingKeys.contains($0.id) },
+                // Only orders that can still be returned or are still under warranty.
+                purchases: DetectedPurchase.merged(foundPurchases).filter {
+                    !known.orderKeys.contains($0.id)
+                        && WarrantyPolicy.until(orderDate: $0.orderDate, deliveryDate: $0.deliveryDate) >= Calendar.current.startOfDay(for: .now)
+                },
+                notices: DetectedNotice.merged(foundNotices).filter { !known.noticeNumbers.contains($0.id) }
+            )
             UserDefaults.standard.set(Date.now, forKey: EmailImportKeys.lastScan)
             UserDefaults.standard.set(summary.dictionary, forKey: EmailImportKeys.lastSummary)
             lastSummary = summary
-            phase = .review(candidates)
+            phase = .review(results)
         } else {
             phase = .failed(accountErrors.values.first ?? String(appLocalized: "Something went wrong. Try again."))
         }
         scanTask = nil
     }
 
-    /// 1. Search: every billing-like email of the last 13 months (IDs only).
-    /// 2. Filter: fetch just sender and subject, skip ads, newsletters, shipping, security notices
-    ///    and older repeats of the same receipt.
-    /// 3. Read: only what's left is downloaded in full and read by Apple Intelligence.
+    /// What an email is read as. pagoPA first (a notice beats a recurring tax), then orders,
+    /// then recurring payments; each falls back to the next if it finds nothing.
+    private enum Route {
+        case notice(alsoBilling: Bool)
+        case order(alsoBilling: Bool)
+        case billing
+    }
+
+    /// 1. Search: billing-like, order and pagoPA emails of the last 13 months (IDs only).
+    /// 2. Filter: fetch just sender and subject, skip ads, newsletters, security notices, review
+    ///    requests and older repeats of the same receipt or order.
+    /// 3. Read: only what's left is downloaded in full and read by Apple Intelligence on the device;
+    ///    the PDFs of pagoPA emails are scanned for their QR code.
     private func scanAccount(
         _ account: String,
         accessToken: String,
         extractor: SubscriptionExtractor
-    ) async throws -> (found: [DetectedSubscription], summary: ScanSummary) {
+    ) async throws -> AccountResult {
         var api = GmailAPI(accessToken: accessToken)
 
-        let ids = try await api.searchMessageIDs(limit: Self.searchLimit)
+        let billingIDs = try await api.searchMessageIDs(limit: Self.searchLimit)
         try Task.checkCancellation()
+        let orderIDs = try await api.searchMessageIDs(query: GmailAPI.ordersQuery, limit: Self.searchLimit)
+        try Task.checkCancellation()
+        let noticeIDs = try await api.searchMessageIDs(query: GmailAPI.pagoPAQuery, limit: Self.noticesReadLimit * 2)
+        try Task.checkCancellation()
+
+        // Newest first, each email once.
+        var seen = Set<String>()
+        let ids = (billingIDs + orderIDs + noticeIDs).filter { seen.insert($0).inserted }
 
         phase = .scanning(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
         let headers = try await api.metadata(for: ids) { [weak self] done in
@@ -350,41 +419,81 @@ final class EmailImportModel {
         }
         try Task.checkCancellation()
 
+        let orderSet = Set(orderIDs)
+        let noticeSet = Set(noticeIDs)
         let billing = headers.filter { BillingEmailFilter.verdict(for: $0) == .billing }
         let selection = BillingEmailFilter.selectForReading(billing, limit: Self.readLimit)
-        var summary = ScanSummary(
+        let billingSelected = Set(selection.selected.map(\.id))
+        let orders = PurchaseEmailFilter.selectForReading(headers.filter { orderSet.contains($0.id) && !noticeSet.contains($0.id) },
+                                                          limit: Self.ordersReadLimit)
+        let notices = headers.filter { noticeSet.contains($0.id) }
+            .sorted { $0.date > $1.date }
+            .prefix(Self.noticesReadLimit)
+
+        var routes: [(id: String, route: Route)] = []
+        var routed = Set<String>()
+        for item in notices where routed.insert(item.id).inserted {
+            routes.append((item.id, .notice(alsoBilling: billingSelected.contains(item.id))))
+        }
+        for item in orders where routed.insert(item.id).inserted {
+            routes.append((item.id, .order(alsoBilling: billingSelected.contains(item.id))))
+        }
+        for item in selection.selected where routed.insert(item.id).inserted {
+            routes.append((item.id, .billing))
+        }
+
+        var result = AccountResult()
+        result.summary = ScanSummary(
             checked: ids.count,
-            skippedNotBilling: headers.count - billing.count,
+            skippedNotBilling: headers.count - billing.count - orders.count - notices.count,
             skippedRepeats: selection.repeats,
             read: 0
         )
+        result.summary.skippedNotBilling = max(0, result.summary.skippedNotBilling)
 
-        let toRead = selection.selected
-        phase = .scanning(ScanProgress(account: account, stage: .reading, done: 0, total: toRead.count))
-        var accountFound: [DetectedSubscription] = []
+        phase = .scanning(ScanProgress(account: account, stage: .reading, done: 0, total: routes.count))
+        let purchaseExtractor = PurchaseExtractor()
         var unreadable = 0
         var consecutiveFailures = 0
         var processed = 0
         var connectionLost = false
         var signedOut = false
 
-        for item in toRead {
+        for (id, route) in routes {
             try Task.checkCancellation()
             do {
                 // A long scan can outlast Google's one-hour access token: refresh it when needed.
                 api = GmailAPI(accessToken: try await validAccessToken(for: account).token)
                 let email: EmailMessage
                 do {
-                    email = try await api.message(id: item.id)
+                    email = try await api.message(id: id)
                 } catch GmailAuthError.signedOut {
                     api = GmailAPI(accessToken: try await validAccessToken(for: account, forceRefresh: true).token)
-                    email = try await api.message(id: item.id)
+                    email = try await api.message(id: id)
                 }
                 consecutiveFailures = 0
                 // Each email is fetched, read and dropped before the next one.
-                if let analysis = await extractor.analyze(email),
+                var readAsBilling = false
+                switch route {
+                case .notice(let alsoBilling):
+                    let pdfs = await api.pdfs(of: email, maxBytes: PaymentNoticeScanner.maxAttachmentBytes)
+                    let found = await PaymentNoticeScanner.notices(in: email, pdfs: pdfs, account: account)
+                    result.notices += found
+                    readAsBilling = found.isEmpty && alsoBilling
+                case .order(let alsoBilling):
+                    if let analysis = await purchaseExtractor.analyze(email),
+                       let candidate = DetectedPurchase(analysis: analysis, email: email, account: account) {
+                        result.purchases.append(candidate)
+                    } else {
+                        readAsBilling = alsoBilling
+                    }
+                case .billing:
+                    readAsBilling = true
+                }
+                if readAsBilling,
+                   let analysis = await extractor.analyze(email),
                    let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
-                    accountFound.append(candidate)
+                    result.subscriptions.append(candidate)
                 }
             } catch is CancellationError {
                 throw CancellationError()
@@ -402,21 +511,21 @@ final class EmailImportModel {
                 }
             }
             processed += 1
-            phase = .scanning(ScanProgress(account: account, stage: .reading, done: processed, total: toRead.count))
+            phase = .scanning(ScanProgress(account: account, stage: .reading, done: processed, total: routes.count))
         }
 
         // What was found is always kept; the account row explains what's missing.
-        summary.read = processed - unreadable
+        result.summary.read = processed - unreadable
         if signedOut {
             GmailAuth.deleteStoredTokens(for: account)
             reloadAccounts()
             accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
         } else if connectionLost {
-            accountErrors[account] = String(appLocalized: "The connection dropped after \(processed) of \(toRead.count) emails. What was found so far is shown; scan again to finish.")
+            accountErrors[account] = String(appLocalized: "The connection dropped after \(processed) of \(routes.count) emails. What was found so far is shown; scan again to finish.")
         } else if unreadable > 0 {
             accountErrors[account] = String(appLocalized: "^[\(unreadable) email](inflect: true) couldn't be read and was skipped.")
         }
-        return (accountFound, summary)
+        return result
     }
 
     /// Keeps the screen on during a scan (a locked phone drops network connections) and asks
@@ -457,6 +566,40 @@ final class EmailImportModel {
 
     // MARK: Add
 
+    /// Adds the chosen subscriptions, orders and notices. Returns how many were added or completed.
+    @discardableResult
+    func add(_ results: ScanResults, existing: [Subscription], into context: ModelContext) -> Int {
+        for candidate in results.purchases {
+            context.insert(Purchase(
+                title: candidate.title,
+                store: candidate.store,
+                orderNumber: candidate.orderNumber,
+                orderDate: candidate.orderDate,
+                deliveryDate: candidate.deliveryDate,
+                price: candidate.price ?? 0,
+                statedReturnBy: candidate.statedReturnBy,
+                sourceAccount: candidate.sourceAccount,
+                websiteDomain: candidate.websiteDomain
+            ))
+        }
+        for candidate in results.notices {
+            context.insert(PaymentNotice(
+                code: candidate.code,
+                payee: candidate.payee,
+                amount: candidate.amount ?? 0,
+                dueDate: candidate.dueDate,
+                reason: candidate.reason,
+                sourceAccount: candidate.sourceAccount
+            ))
+        }
+        let added = add(results.subscriptions, existing: existing, into: context)
+        if !results.purchases.isEmpty || !results.notices.isEmpty {
+            // Return, warranty and notice reminders are on by default.
+            Task { await NotificationService.requestAuthorizationIfNeeded() }
+        }
+        return added + results.purchases.count + results.notices.count
+    }
+
     /// Adds the chosen candidates. A matching subscription still in "Needs Setup" is completed
     /// instead of duplicated. Returns how many were added or completed.
     @discardableResult
@@ -471,6 +614,7 @@ final class EmailImportModel {
                 if let price = candidate.price { pending.price = price }
                 pending.cycle = candidate.cycle
                 pending.anchorDate = candidate.paymentDate
+                if let trialEnd = candidate.trialEndDate { pending.trialEndDate = trialEnd }
                 if pending.category == .other { pending.category = candidate.category }
                 if pending.sourceAccount == nil { pending.sourceAccount = candidate.sourceAccount }
                 if pending.websiteDomain == nil { pending.websiteDomain = candidate.senderDomain }
@@ -484,6 +628,7 @@ final class EmailImportModel {
                     sourceAccount: candidate.sourceAccount
                 )
                 subscription.websiteDomain = candidate.senderDomain
+                subscription.trialEndDate = candidate.trialEndDate
                 context.insert(subscription)
             }
         }

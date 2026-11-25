@@ -13,6 +13,8 @@ struct HomeView: View {
     var onShowCalendar: () -> Void = {}
 
     @Query(sort: \Subscription.createdAt) private var subscriptions: [Subscription]
+    @Query private var purchases: [Purchase]
+    @Query private var notices: [PaymentNotice]
 
     @AppStorage(OnboardingKeys.userName) private var userName = ""
     @AppStorage(OnboardingKeys.monthlyBudget) private var budgetString = ""
@@ -134,6 +136,15 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     SectionHeader(title: "Up Next", actionTitle: "Calendar", action: onShowCalendar)
                     UpNextList(items: summary.upcoming, currencyCode: currencyCode) { detailSubscription = $0 }
+                }
+
+                let deadlines = Array(DeadlineList.upcoming(within: 14, purchases: purchases, notices: notices,
+                                                            subscriptions: subscriptions, calendar: calendar).prefix(3))
+                if !deadlines.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        SectionHeader(title: "Due Soon", actionTitle: "Deadlines") { router.selectedTab = .deadlines }
+                        DeadlinesCard(items: deadlines, currencyCode: currencyCode) { router.selectedTab = .deadlines }
+                    }
                 }
 
                 let dueWeek = dueCheckInWeek

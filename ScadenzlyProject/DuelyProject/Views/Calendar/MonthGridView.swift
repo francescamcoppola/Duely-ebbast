@@ -12,6 +12,8 @@ import SwiftData
 struct MonthGridView: View {
     let month: CalendarMonth
     let schedule: MonthSchedule
+    /// Returns, trials, pagoPA notices and warranties: shown as extra dots.
+    var deadlines: [DeadlineItem] = []
     @Binding var selectedDay: Date
     let onChangeMonth: (Int) -> Void
 
@@ -104,6 +106,9 @@ struct MonthGridView: View {
                 DayCell(
                     day: day,
                     payments: schedule.payments(on: day, calendar: calendar),
+                    deadlineColors: deadlines
+                        .filter { item in item.date.map { calendar.isDate($0, inSameDayAs: day) } ?? false }
+                        .map(\.kind.color),
                     isToday: calendar.isDateInToday(day),
                     isSelected: calendar.isDate(day, inSameDayAs: selectedDay)
                 ) {
@@ -133,6 +138,7 @@ struct MonthGridView: View {
 private struct DayCell: View {
     let day: Date
     let payments: [ScheduledPayment]
+    let deadlineColors: [Color]
     let isToday: Bool
     let isSelected: Bool
     let action: () -> Void
@@ -141,14 +147,13 @@ private struct DayCell: View {
     /// Grows with Dynamic Type, capped so seven columns still fit on an iPhone.
     private var circleSize: CGFloat { min(scaledCircle, 48) }
 
-    /// One dot per distinct subscription color (max 3), so a busy day stays readable.
+    /// One dot per distinct subscription or deadline color (max 4), so a busy day stays readable.
     private var dotColors: [Color] {
         var seen = Set<Color>()
         return Array(
-            payments
-                .map(\.subscription.displayColor)
+            (payments.map(\.subscription.displayColor) + deadlineColors)
                 .filter { seen.insert($0).inserted }
-                .prefix(3)
+                .prefix(4)
         )
     }
 

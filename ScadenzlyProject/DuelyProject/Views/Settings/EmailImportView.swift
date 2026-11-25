@@ -45,8 +45,8 @@ struct EmailImportView: View {
             Text("Removes \(AppInfo.name)'s access in this Google Account and deletes the sign-in from this device. Subscriptions you've added stay.")
         }
         .sheet(isPresented: isReviewing) {
-            if case .review(let candidates) = model.phase {
-                ImportReviewView(candidates: candidates) { chosen in
+            if case .review(let results) = model.phase {
+                ImportReviewView(results: results) { chosen in
                     addedCount = model.add(chosen, existing: subscriptions, into: context)
                 }
             }

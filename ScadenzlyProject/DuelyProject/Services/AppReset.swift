@@ -12,7 +12,7 @@ import WidgetKit
 
 @MainActor
 enum AppReset {
-    /// Deletes subscriptions and usage history, removes notifications, disconnects Gmail and
+    /// Deletes subscriptions, usage history, purchases and pagoPA notices, removes notifications, disconnects Gmail and
     /// clears every preference. Setting `hasCompleted` to false last makes `ContentView` swap to onboarding.
     static func eraseAll(context: ModelContext, defaults: UserDefaults = .standard) async {
         // Data. Deleted one by one rather than in a batch, so CloudKit mirrors the deletions
@@ -20,6 +20,8 @@ enum AppReset {
         do {
             for entry in try context.fetch(FetchDescriptor<UsageEntry>()) { context.delete(entry) }
             for subscription in try context.fetch(FetchDescriptor<Subscription>()) { context.delete(subscription) }
+            for purchase in try context.fetch(FetchDescriptor<Purchase>()) { context.delete(purchase) }
+            for notice in try context.fetch(FetchDescriptor<PaymentNotice>()) { context.delete(notice) }
             try context.save()
         } catch {
             assertionFailure("Reset failed: \(error)")

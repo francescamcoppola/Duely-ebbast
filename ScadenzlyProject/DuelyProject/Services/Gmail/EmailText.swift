@@ -10,6 +10,16 @@
 import Foundation
 
 nonisolated enum EmailText {
+    /// Gmail's base64url as bytes (attachments).
+    static func base64URLData(_ string: String) -> Data? {
+        var base64 = string
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        let remainder = base64.count % 4
+        if remainder > 0 { base64 += String(repeating: "=", count: 4 - remainder) }
+        return Data(base64Encoded: base64)
+    }
+
     static func base64URLDecoded(_ string: String) -> String? {
         var base64 = string
             .replacingOccurrences(of: "-", with: "+")

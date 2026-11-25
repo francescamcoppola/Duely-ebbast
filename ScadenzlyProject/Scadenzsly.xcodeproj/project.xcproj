@@ -18,7 +18,7 @@
   },
   "files": [
     { "kind": "folder", "path": "DuelyProject", "target-membership": [ "Scadenzsly" ] },
-    { "kind": "folder", "path": "MyDuesShared", "target-membership": [ "Scadenzsly", "MyDuesWidgets", "UsageMonitor" ] },
+    { "kind": "folder", "path": "MyDuesShared", "target-membership": [ "MyDuesWidgets", "Scadenzsly", "UsageMonitor" ] },
     { "kind": "folder", "path": "MyDuesWidgets", "target-membership": [ "MyDuesWidgets" ] },
     { "kind": "folder", "path": "UsageMonitor", "target-membership": [ "UsageMonitor" ] },
     { "path": "PrivacyInfo.xcprivacy", "target-membership": [ "Scadenzsly/resources" ] },
@@ -38,18 +38,24 @@
       "id": "DC45040130ACA2C900F0B01C",
       "product": "Products/Scadenzsly.app",
       "product-type": "application",
-      "dependencies": [ "MyDuesWidgets", "UsageMonitor" ],
+      "dependencies": [
+        "MyDuesWidgets",
+        "UsageMonitor",
+      ],
       "build-phases": [
         "compile-sources",
         "frameworks",
         "resources",
-        { "kind": "copy", "name": "Embed Foundation Extensions", "bundle-base-path": "plugins-directory" },
+        {
+          "kind": "copy",
+          "name": "Embed Foundation Extensions",
+          "bundle-base-path": "plugins-directory",
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
         "CODE_SIGN_ENTITLEMENTS": "MyDues.entitlements",
-        "CODE_SIGN_ENTITLEMENTS[config=Debug]": "MyDues-Debug.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "2",
         "DEVELOPMENT_TEAM": "JHJ2Y32G4L",
@@ -78,8 +84,7 @@
         "SWIFT_VERSION": "5.0",
         "TARGETED_DEVICE_FAMILY": "1,2",
       },
-    },
-    {
+    }, {
       "name": "MyDuesWidgets",
       "id": "7D1E00000000000000000201",
       "product": "Products/MyDuesWidgets.appex",
@@ -91,7 +96,6 @@
       ],
       "build-settings": {
         "CODE_SIGN_ENTITLEMENTS": "MyDuesWidgets.entitlements",
-        "CODE_SIGN_ENTITLEMENTS[config=Debug]": "MyDuesWidgets.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "2",
         "DEVELOPMENT_TEAM": "JHJ2Y32G4L",
@@ -114,8 +118,7 @@
         "SWIFT_VERSION": "5.0",
         "TARGETED_DEVICE_FAMILY": "1,2",
       },
-    },
-    {
+    }, {
       "name": "UsageMonitor",
       "id": "7D1E00000000000000000301",
       "product": "Products/UsageMonitor.appex",
@@ -127,7 +130,6 @@
       ],
       "build-settings": {
         "CODE_SIGN_ENTITLEMENTS": "UsageMonitor.entitlements",
-        "CODE_SIGN_ENTITLEMENTS[config=Debug]": "UsageMonitor-Debug.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "2",
         "DEVELOPMENT_TEAM": "JHJ2Y32G4L",

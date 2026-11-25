@@ -246,7 +246,10 @@ struct SubscriptionRow: View {
                         .font(.body.weight(.semibold))
                         .monospacedDigit()
                     Group {
-                        if subscription.hasEnded() {
+                        if subscription.isInTrial() {
+                            Text("Free Trial")
+                                .foregroundStyle(DeadlineItem.Kind.trial.color)
+                        } else if subscription.hasEnded() {
                             Text("Ended")
                         } else if let left = subscription.remainingPayments() {
                             Text("^[\(left) payment](inflect: true) left")

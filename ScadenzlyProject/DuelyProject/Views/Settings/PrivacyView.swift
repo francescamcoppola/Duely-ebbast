@@ -19,7 +19,7 @@ struct PrivacyView: View {
             Section("What's Stored") {
                 PrivacyPoint(
                     title: "On your devices",
-                    detail: "Your name, budget, currency, subscriptions, payments and check-in answers are saved in the app's storage on this device.",
+                    detail: "Your name, budget, currency, subscriptions, payments, check-in answers, purchases and pagoPA notices are saved in the app's storage on this device.",
                     systemImage: "iphone"
                 )
                 PrivacyPoint(
@@ -29,13 +29,18 @@ struct PrivacyView: View {
                 )
                 PrivacyPoint(
                     title: "Local notifications",
-                    detail: "Check-in and payment reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device.",
+                    detail: "Check-in, payment, return, warranty, trial and pagoPA reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device.",
                     systemImage: "bell"
                 )
                 PrivacyPoint(
                     title: "Plan suggestions",
                     detail: "Plans, prices and cheaper alternatives come from a list in the app, which may be updated by downloading a new copy. When you look for a service's plans or cancellation page, your device reads that service's public web pages, without cookies or anything about you. Comparisons and choices happen on your device.",
                     systemImage: "tag"
+                )
+                PrivacyPoint(
+                    title: "Paying pagoPA notices",
+                    detail: "Pay with pagoPA opens pagoPA's official site with the notice's codes. You pay there: \(AppInfo.name) never sees your card or bank details.",
+                    systemImage: "creditcard"
                 )
                 PrivacyPoint(
                     title: "No tracking",
@@ -52,7 +57,7 @@ struct PrivacyView: View {
                 )
                 PrivacyPoint(
                     title: "Analyzed on this device",
-                    detail: "Recent billing emails are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to \(AppInfo.name), to Apple or to anyone else, isn't used to train models, and isn't saved after the scan.",
+                    detail: "Recent billing, order and pagoPA emails, with the PDFs of pagoPA notices, are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to \(AppInfo.name), to Apple or to anyone else, isn't used to train models, and isn't saved after the scan.",
                     systemImage: "apple.intelligence"
                 )
                 PrivacyPoint(

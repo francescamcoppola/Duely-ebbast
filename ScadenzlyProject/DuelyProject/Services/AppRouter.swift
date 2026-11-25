@@ -24,6 +24,8 @@ final class AppRouter {
             isCheckInPresented = true
         } else if identifier.hasPrefix(NotificationIDs.paymentPrefix) {
             selectedTab = .calendar
+        } else if identifier.hasPrefix(NotificationIDs.deadlinePrefix) {
+            selectedTab = .deadlines
         }
     }
 }

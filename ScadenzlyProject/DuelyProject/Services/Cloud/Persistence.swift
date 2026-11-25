@@ -12,7 +12,7 @@ import Foundation
 import SwiftData
 
 enum Persistence {
-    static let schema = Schema([Subscription.self, UsageEntry.self])
+    static let schema = Schema([Subscription.self, UsageEntry.self, Purchase.self, PaymentNotice.self])
 
     /// Created once at launch and shared by the whole app.
     static let container: ModelContainer = makeContainer()

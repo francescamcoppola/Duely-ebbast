@@ -30,6 +30,8 @@ struct SubscriptionEditorView: View {
     @State private var cycle: BillingCycle = .monthly
     @State private var category: SubscriptionCategory = .other
     @State private var nextPayment = Date.now
+    /// A free trial: `nextPayment` is then the day it ends and the first charge.
+    @State private var isTrial = false
     @State private var endRule: EndRule = .never
     /// Installments still to pay, the next payment included.
     @State private var paymentsLeft = 12
@@ -123,9 +125,13 @@ struct SubscriptionEditorView: View {
                         }
                     }
 
-                    DatePicker("Next Payment", selection: $nextPayment, displayedComponents: .date)
+                    Toggle("Free Trial", isOn: $isTrial.animation())
+
+                    DatePicker(isTrial ? "Trial Ends" : "Next Payment", selection: $nextPayment, displayedComponents: .date)
                 } footer: {
-                    if cycle != .monthly, let price, price > 0 {
+                    if isTrial {
+                        Text("The first charge is on the day the trial ends. You get a reminder 2 days before, in time to cancel.")
+                    } else if cycle != .monthly, let price, price > 0 {
                         Text("About \(Text(BillingMath.monthlyEquivalent(price: price, cycle: cycle), format: .currency(code: currencyCode))) per month.")
                     }
                 }
@@ -408,6 +414,7 @@ struct SubscriptionEditorView: View {
             || tint != subscription.tint
             || resolvedPlanName != subscription.planName
             || resolvedLastPayment != subscription.lastPaymentDate.map(Calendar.current.startOfDay(for:))
+            || isTrial != subscription.isInTrial()
     }
 
     private func load() {
@@ -422,6 +429,10 @@ struct SubscriptionEditorView: View {
         planName = subscription.planName
         // A finished plan has no next payment: show its last one, so saving keeps its schedule.
         nextPayment = subscription.nextPayment() ?? subscription.lastPaymentDate ?? .now
+        if subscription.isInTrial(), let end = subscription.trialEndDate {
+            isTrial = true
+            nextPayment = end
+        }
         if let last = subscription.lastPaymentDate {
             endRule = .onDate
             lastPayment = last
@@ -455,6 +466,7 @@ struct SubscriptionEditorView: View {
         target.cycle = cycle
         target.category = category
         target.anchorDate = Calendar.current.startOfDay(for: nextPayment)
+        target.trialEndDate = isTrial ? Calendar.current.startOfDay(for: nextPayment) : nil
         target.lastPaymentDate = resolvedLastPayment
         target.reminderDaysBefore = reminderDays
         target.tint = tint
@@ -468,7 +480,7 @@ struct SubscriptionEditorView: View {
         finish()
 
         // The user just asked to be reminded: the natural moment for the system prompt (first time only).
-        if reminderDays > 0 {
+        if reminderDays > 0 || isTrial {
             Task { await NotificationService.requestAuthorizationIfNeeded() }
         }
     }

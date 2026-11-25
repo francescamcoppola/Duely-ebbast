@@ -4576,46 +4576,6 @@
         }
       }
     },
-    "Check-in and payment reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check-in- und Zahlungserinnerungen werden auf deinem Gerät geplant. iCloud nutzt nur stille Mitteilungen, um der App zu melden, dass sich deine Daten auf einem anderen Gerät geändert haben."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los recordatorios de check-in y de pago se programan en tu dispositivo. iCloud solo usa notificaciones silenciosas para avisar a la app de que tus datos cambiaron en otro dispositivo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les rappels de check-in et de paiement sont programmés sur votre appareil. iCloud utilise seulement des notifications silencieuses pour signaler à l'app que vos données ont changé sur un autre appareil."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I promemoria di check-in e pagamento sono programmati sul tuo dispositivo. iCloud usa solo notifiche silenziose per avvisare l'app che i dati sono cambiati su un altro dispositivo."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I promemors di check-in e pagaments sons programmats sul tuo dispositivs. iCloud usa sols notifichs silenzioss per avvisars l'app che i dats sons cambiats su un altrs dispositivs."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Herinneringen voor check-ins en betalingen worden op je apparaat ingepland. iCloud gebruikt alleen stille meldingen om de app te laten weten dat je gegevens op een ander apparaat zijn gewijzigd."
-          }
-        }
-      }
-    },
     "Check-in and payment reminders are scheduled on your device. No push service is used." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -12026,46 +11986,6 @@
         }
       }
     },
-    "Recent billing emails are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to %@, to Apple or to anyone else, isn't used to train models, and isn't saved after the scan." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktuelle Rechnungs-E-Mails werden direkt von Google auf dein Gerät geladen und dort von Apple Intelligence gelesen. Ihr Inhalt wird nie an %@, Apple oder sonst jemanden gesendet, nicht zum Trainieren von Modellen genutzt und nach der Analyse nicht gespeichert."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "machine_translated",
-            "value" : "Los correos de facturación recientes se descargan directamente de Google a tu dispositivo y Apple Intelligence los lee en el propio dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más, no se usa para entrenar modelos y no se guarda tras el análisis."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les e-mails de facturation récents sont téléchargés directement de Google vers votre appareil et lus par Apple Intelligence sur l'appareil. Leur contenu n'est jamais envoyé à %@, à Apple ni à personne d'autre, n'est pas utilisé pour entraîner des modèles et n'est pas conservé après l'analyse."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le email di pagamento recenti vengono scaricate direttamente da Google sul tuo dispositivo e lette da Apple Intelligence sul dispositivo. Il loro contenuto non viene mai inviato a %@, ad Apple o a nessun altro, non viene usato per addestrare modelli e non viene salvato dopo l'analisi."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le email di pagaments recents vengons scaricats direttaments da Google sul tuo dispositivs e letts da Apple Intelligence sul dispositivs. Il lors contenuts non viens mai inviats a %@, ad Apple o a nessun altrs, non viens usats per addestrars modells e non viens salvats dops l'analiss."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recente factuur-e-mails worden rechtstreeks van Google naar je apparaat gedownload en daar door Apple Intelligence gelezen. De inhoud wordt nooit naar %@, Apple of iemand anders gestuurd, niet gebruikt om modellen te trainen en na de scan niet bewaard."
-          }
-        }
-      }
-    },
     "Red" : {
       "localizations" : {
         "de" : {
@@ -16953,46 +16873,6 @@
         }
       }
     },
-    "Your name, budget, currency, subscriptions, payments and check-in answers are saved in the app's storage on this device." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein Name, Budget, deine Währung, Abos, Zahlungen und Check-in-Antworten werden im Speicher der App auf diesem Gerät gesichert."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu nombre, presupuesto, divisa, suscripciones, pagos y respuestas de check-in se guardan en el almacenamiento de la app en este dispositivo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre nom, budget, devise, abonnements, paiements et réponses aux check-ins sont enregistrés dans le stockage de l'app sur cet appareil."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome, budget, valuta, abbonamenti, pagamenti e risposte ai check-in sono salvati nella memoria dell'app su questo dispositivo."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noms, budget, valuts, abbonaments, pagaments e risposts ai check-in sons salvats nells memors dell'app su quests dispositivs."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Je naam, budget, valuta, abonnementen, betalingen en check-in-antwoorden worden in de opslag van de app op dit apparaat bewaard."
-          }
-        }
-      }
-    },
     "Your Privacy" : {
       "localizations" : {
         "de" : {
@@ -17189,6 +17069,4776 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Je abonnementen gebruiken minder dan de helft van je budget."
+          }
+        }
+      }
+    },
+    "Show All" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout afficher"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra tutto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrs tutts"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles tonen"
+          }
+        }
+      }
+    },
+    "Last day to return" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzter Tag für die Rücksendung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Último día para devolverlo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernier jour pour le retourner"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimo giorno per il reso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultims giorns per il ress"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laatste dag om te retourneren"
+          }
+        }
+      }
+    },
+    "Return by %@ · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücksendung bis %@ · %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devolver antes del %@ · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour avant le %@ · %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reso entro il %@ · %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ress entrs il %@ · %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retourneren vóór %@ · %@"
+          }
+        }
+      }
+    },
+    "Warranty until %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie bis %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En garantía hasta el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous garantie jusqu'au %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzia fino al %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzis fins al %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie tot %@"
+          }
+        }
+      }
+    },
+    "Trial ends %@ · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testphase endet am %@ · %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La prueba termina el %@ · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'essai se termine le %@ · %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La prova finisce il %@ · %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La provs finiscs il %@ · %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proefperiode eindigt op %@ · %@"
+          }
+        }
+      }
+    },
+    "Overdue since %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überfällig seit %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vencido desde el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En retard depuis le %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaduto dal %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaduts dal %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verlopen sinds %@"
+          }
+        }
+      }
+    },
+    "Due %@ · %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fällig am %@ · %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vence el %@ · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échéance le %@ · %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scade il %@ · %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scads il %@ · %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te betalen op %@ · %@"
+          }
+        }
+      }
+    },
+    "No due date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Fälligkeitsdatum"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin fecha de vencimiento"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d'échéance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna scadenza"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuns scadenzs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen vervaldatum"
+          }
+        }
+      }
+    },
+    "pagoPA QR code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-QR-Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código QR de pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code QR pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice QR pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics QR pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-QR-code"
+          }
+        }
+      }
+    },
+    "Copied" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copié"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiato"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiats"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gekopieerd"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiëren"
+          }
+        }
+      }
+    },
+    "pagoPA" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA"
+          }
+        }
+      }
+    },
+    "Add Purchase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kauf hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir compra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un achat"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi acquisto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungs acquists"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aankoop toevoegen"
+          }
+        }
+      }
+    },
+    "Add pagoPA Notice" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungsaufforderung hinzufügen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir aviso pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un avis pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi avviso pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungs avviss pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalbericht toevoegen"
+          }
+        }
+      }
+    },
+    "To Return" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurückzusenden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para devolver"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À retourner"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da restituire"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da restituirs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te retourneren"
+          }
+        }
+      }
+    },
+    "Amazon: 30 days from delivery, until 31 January for orders placed in November and December. Other stores: at least 14 days, the EU right of withdrawal." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon: 30 Tage ab Lieferung, bis 31. Januar für Bestellungen im November und Dezember. Andere Shops: mindestens 14 Tage, das EU-Widerrufsrecht."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon: 30 días desde la entrega, hasta el 31 de enero para pedidos de noviembre y diciembre. Otras tiendas: al menos 14 días, el derecho de desistimiento de la UE."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon : 30 jours après la livraison, jusqu'au 31 janvier pour les commandes de novembre et décembre. Autres boutiques : au moins 14 jours, le droit de rétractation de l'UE."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon: 30 giorni dalla consegna, fino al 31 gennaio per gli ordini di novembre e dicembre. Altri negozi: almeno 14 giorni, il diritto di recesso UE."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon: 30 giorns dalls consegns, fins al 31 gennais per gli ordins di novembrs e dicembrs. Altrs negozs: almens 14 giorns, il diritts di recesss UE."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon: 30 dagen na levering, tot 31 januari voor bestellingen in november en december. Andere winkels: minstens 14 dagen, het EU-herroepingsrecht."
+          }
+        }
+      }
+    },
+    "Free Trials" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis-Testphasen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pruebas gratuitas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essais gratuits"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prove gratuite"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provs gratuits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis proefperiodes"
+          }
+        }
+      }
+    },
+    "You get a reminder 2 days before each trial turns into a charge." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du wirst 2 Tage bevor eine Testphase kostenpflichtig wird erinnert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibirás un aviso 2 días antes de que cada prueba pase a ser de pago."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous recevez un rappel 2 jours avant que chaque essai devienne payant."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricevi un promemoria 2 giorni prima che ogni prova diventi a pagamento."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricevs un promemoris 2 giorns prims che ogns provs divents a pagaments."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je krijgt 2 dagen voordat een proefperiode betaald wordt een herinnering."
+          }
+        }
+      }
+    },
+    "Pay on pagoPA's official site, with the notice's codes already filled in." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bezahle auf der offiziellen pagoPA-Seite, die Codes sind schon ausgefüllt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paga en el sitio oficial de pagoPA, con los códigos del aviso ya rellenados."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payez sur le site officiel de pagoPA, avec les codes de l'avis déjà remplis."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paga sul sito ufficiale pagoPA, con i codici dell'avviso già inseriti."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pags sul sits ufficials pagoPA, con i codics dell'avviss già inserits."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaal op de officiële site van pagoPA, met de codes al ingevuld."
+          }
+        }
+      }
+    },
+    "Under Warranty" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit Garantie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En garantía"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous garantie"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzia"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onder garantie"
+          }
+        }
+      }
+    },
+    "The legal warranty in the EU lasts 2 years from delivery." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In der EU gilt die gesetzliche Gewährleistung 2 Jahre ab Lieferung."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En la UE la garantía legal dura 2 años desde la entrega."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans l'UE, la garantie légale dure 2 ans après la livraison."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nell'UE la garanzia legale dura 2 anni dalla consegna."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nell'UE la garanzis legals durs 2 anns dalls consegns."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In de EU geldt de wettelijke garantie 2 jaar na levering."
+          }
+        }
+      }
+    },
+    "Returned" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurückgesendet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devuelto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retourné"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituito"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geretourneerd"
+          }
+        }
+      }
+    },
+    "Warranty ended" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie abgelaufen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantía vencida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie expirée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzia scaduta"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzis scaduts"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie verlopen"
+          }
+        }
+      }
+    },
+    "Archive" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiv"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archives"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archief"
+          }
+        }
+      }
+    },
+    "No Deadlines" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Fristen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin vencimientos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune échéance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna scadenza"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuns scadenzs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen deadlines"
+          }
+        }
+      }
+    },
+    "Orders you can still return, warranties, free trials and pagoPA notices appear here. Scan your email in Settings, or add them by hand." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier erscheinen Bestellungen, die du noch zurücksenden kannst, Garantien, Gratis-Testphasen und pagoPA-Zahlungsaufforderungen. Durchsuche deine E-Mails in den Einstellungen oder füge sie manuell hinzu."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquí aparecen los pedidos que aún puedes devolver, las garantías, las pruebas gratuitas y los avisos pagoPA. Busca en tu correo desde Ajustes o añádelos a mano."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les commandes encore retournables, les garanties, les essais gratuits et les avis pagoPA apparaissent ici. Analysez vos e-mails dans Réglages ou ajoutez-les à la main."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui trovi gli ordini che puoi ancora restituire, le garanzie, le prove gratuite e gli avvisi pagoPA. Cercali nella tua email dalle Impostazioni o aggiungili a mano."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui trovs gli ordins che puos ancors restituirs, le garanzis, le provs gratuits e gli avviss pagoPA. Cercals nells tua email dalls Impostazions o aggiungils a mans."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier verschijnen bestellingen die je nog kunt retourneren, garanties, gratis proefperiodes en pagoPA-betaalberichten. Scan je e-mail in Instellingen of voeg ze handmatig toe."
+          }
+        }
+      }
+    },
+    "Due Soon" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bald fällig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximos vencimientos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bientôt dû"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In scadenza"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In scadenzs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Binnenkort"
+          }
+        }
+      }
+    },
+    "Deadlines" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fristen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vencimientos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échéances"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scadenze"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scadenzs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deadlines"
+          }
+        }
+      }
+    },
+    "Nothing New Found" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nichts Neues gefunden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontró nada nuevo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien de nouveau"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna novità"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuns novità"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niets nieuws gevonden"
+          }
+        }
+      }
+    },
+    "No receipts, renewals, orders or pagoPA notices were found that aren't in %@ yet." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es wurden keine Belege, Verlängerungen, Bestellungen oder pagoPA-Zahlungsaufforderungen gefunden, die noch nicht in %@ sind."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontraron recibos, renovaciones, pedidos ni avisos pagoPA que aún no estén en %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun reçu, renouvellement, commande ou avis pagoPA absent de %@ n'a été trouvé."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non sono state trovate ricevute, rinnovi, ordini o avvisi pagoPA che non siano già in %@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non sons stats trovats ricevuts, rinnovs, ordins o avviss pagoPA che non sians già in %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er zijn geen bonnen, verlengingen, bestellingen of pagoPA-betaalberichten gevonden die nog niet in %@ staan."
+          }
+        }
+      }
+    },
+    "Orders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestellungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pedidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordini"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordins"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestellingen"
+          }
+        }
+      }
+    },
+    "You'll be reminded before the return window closes. Purchases from %@ also get a reminder before the 2-year warranty ends." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du wirst vor Ende der Rückgabefrist erinnert. Bei Käufen ab %@ auch vor Ende der 2-jährigen Garantie."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibirás un aviso antes de que termine el plazo de devolución. Las compras desde %@ también tendrán un aviso antes de que acabe la garantía de 2 años."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rappel arrive avant la fin du délai de retour. Les achats à partir de %@ ont aussi un rappel avant la fin de la garantie de 2 ans."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riceverai un promemoria prima che scada il reso. Per gli acquisti da %@ in su anche prima della fine della garanzia di 2 anni."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riceveras un promemoris prims che scads il ress. Per gli acquists da %@ in su anchs prims dells fins dells garanzis di 2 anns."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je krijgt een herinnering voordat de retourtermijn afloopt. Aankopen vanaf %@ krijgen ook een herinnering voordat de garantie van 2 jaar afloopt."
+          }
+        }
+      }
+    },
+    "pagoPA Notices" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungsaufforderungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avisos pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avis pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avviss pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalberichten"
+          }
+        }
+      }
+    },
+    "Pay them from the Deadlines tab, on pagoPA's official site." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bezahle sie im Tab „Fristen“ auf der offiziellen pagoPA-Seite."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Págalos desde la pestaña Vencimientos, en el sitio oficial de pagoPA."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payez-les depuis l'onglet Échéances, sur le site officiel de pagoPA."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagali dalla scheda Scadenze, sul sito ufficiale pagoPA."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagals dalls scheds Scadenzs, sul sits ufficials pagoPA."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaal ze via het tabblad Deadlines, op de officiële site van pagoPA."
+          }
+        }
+      }
+    },
+    "%lld of %lld selected. Found on this device by Apple Intelligence, which can make mistakes. Check the details: you can edit anything after adding it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld von %lld ausgewählt. Auf diesem Gerät von Apple Intelligence gefunden, die Fehler machen kann. Prüfe die Details: Du kannst alles nach dem Hinzufügen bearbeiten."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld de %lld seleccionados. Encontrados en este dispositivo por Apple Intelligence, que puede equivocarse. Revisa los detalles: puedes editarlo todo después de añadirlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sur %lld sélectionnés. Trouvés sur cet appareil par Apple Intelligence, qui peut se tromper. Vérifiez les détails : tout reste modifiable après l'ajout."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld di %lld selezionati. Trovati su questo dispositivo da Apple Intelligence, che può sbagliare. Controlla i dettagli: puoi modificare tutto dopo averlo aggiunto."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld di %lld selezionats. Trovats su quests dispositivs da Apple Intelligence, che può sbagliars. Controlls i dettagls: puos modificars tutts dops averls aggiunts."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld van %lld geselecteerd. Op dit apparaat gevonden door Apple Intelligence, dat fouten kan maken. Controleer de details: je kunt alles na het toevoegen aanpassen."
+          }
+        }
+      }
+    },
+    "Free trial until %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis testen bis %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba gratuita hasta el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai gratuit jusqu'au %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova gratuita fino al %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provs gratuits fins al %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis proef tot %@"
+          }
+        }
+      }
+    },
+    "Returnable until %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücksendung bis %@ möglich"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se puede devolver hasta el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retournable jusqu'au %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituibile fino al %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restituibils fins al %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te retourneren tot %@"
+          }
+        }
+      }
+    },
+    "Under warranty until %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie bis %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En garantía hasta el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sous garantie jusqu'au %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzia fino al %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In garanzis fins al %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onder garantie tot %@"
+          }
+        }
+      }
+    },
+    "Due %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fällig am %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vence el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échéance le %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scade il %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scads il %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te betalen op %@"
+          }
+        }
+      }
+    },
+    "Notice code %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código de aviso %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code de l'avis %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice avviso %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics avviss %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaalcode %@"
+          }
+        }
+      }
+    },
+    "Delete this notice?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Zahlungsaufforderung löschen?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar este aviso?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer cet avis ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminare questo avviso?"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminars quests avviss?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit betaalbericht verwijderen?"
+          }
+        }
+      }
+    },
+    "Pay with pagoPA" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit pagoPA bezahlen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagar con pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payer avec pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paga con pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pags con pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betalen met pagoPA"
+          }
+        }
+      }
+    },
+    "Opens checkout.pagopa.it, pagoPA's official site, with this notice already filled in. Pay by card, PayPal, Satispay or your bank. The amount is checked again there." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnet checkout.pagopa.it, die offizielle pagoPA-Seite, mit dieser Zahlungsaufforderung. Bezahle per Karte, PayPal, Satispay oder über deine Bank. Der Betrag wird dort erneut geprüft."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre checkout.pagopa.it, el sitio oficial de pagoPA, con este aviso ya rellenado. Paga con tarjeta, PayPal, Satispay o tu banco. Allí se vuelve a comprobar el importe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre checkout.pagopa.it, le site officiel de pagoPA, avec cet avis déjà rempli. Payez par carte, PayPal, Satispay ou votre banque. Le montant y est vérifié à nouveau."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apre checkout.pagopa.it, il sito ufficiale pagoPA, con questo avviso già compilato. Paga con carta, PayPal, Satispay o la tua banca. L'importo viene verificato di nuovo lì."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprs checkout.pagopa.it, il sits ufficials pagoPA, con quests avviss già compilats. Pags con carts, PayPal, Satispay o la tua bancs. L'imports viens verificats di nuovs lì."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opent checkout.pagopa.it, de officiële site van pagoPA, met dit betaalbericht al ingevuld. Betaal met kaart, PayPal, Satispay of je bank. Het bedrag wordt daar opnieuw gecontroleerd."
+          }
+        }
+      }
+    },
+    "Notice Code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zahlungscode"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código de aviso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code de l'avis"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice avviso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics avviss"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaalcode"
+          }
+        }
+      }
+    },
+    "Creditor Tax Code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steuernummer des Gläubigers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código fiscal del acreedor"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code fiscal du créancier"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice fiscale ente"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics fiscals ents"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fiscaal nummer schuldeiser"
+          }
+        }
+      }
+    },
+    "QR Code" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR-Code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código QR"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code QR"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice QR"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics QR"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR-code"
+          }
+        }
+      }
+    },
+    "Codes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Códigos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codici"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codes"
+          }
+        }
+      }
+    },
+    "To pay in the IO app, your bank's app or at a tobacconist: scan the QR code from another device, or enter the two codes." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Bezahlen in der IO-App, der App deiner Bank oder im Tabakladen: Scanne den QR-Code mit einem anderen Gerät oder gib die beiden Codes ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para pagar en la app IO, en la app de tu banco o en un estanco: escanea el código QR desde otro dispositivo o introduce los dos códigos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour payer dans l'app IO, l'app de votre banque ou dans un bureau de tabac : scannez le code QR depuis un autre appareil ou saisissez les deux codes."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per pagare nell'app IO, nell'app della tua banca o dal tabaccaio: inquadra il codice QR da un altro dispositivo oppure inserisci i due codici."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per pagars nell'app IO, nell'app dells tua bancs o dal tabaccais: inquadrs il codics QR da un altrs dispositivs oppurs inseriscs i due codics."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om te betalen in de IO-app, je bank-app of bij een tabakszaak: scan de QR-code met een ander apparaat of voer de twee codes in."
+          }
+        }
+      }
+    },
+    "Mark as Not Paid" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als nicht bezahlt markieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como no pagado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme non payé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segna come non pagato"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segns coms non pagats"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markeren als niet betaald"
+          }
+        }
+      }
+    },
+    "Mark as Paid" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als bezahlt markieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como pagado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme payé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segna come pagato"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segns coms pagats"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markeren als betaald"
+          }
+        }
+      }
+    },
+    "Marked as paid on %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am %@ als bezahlt markiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcado como pagado el %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marqué comme payé le %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnato come pagato il %@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnats coms pagats il %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Op %@ als betaald gemarkeerd."
+          }
+        }
+      }
+    },
+    "Delete Notice" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zahlungsaufforderung löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar aviso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer l'avis"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina avviso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimins avviss"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaalbericht verwijderen"
+          }
+        }
+      }
+    },
+    "It's only removed from %@: if it isn't paid, it still has to be." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sie wird nur aus %@ entfernt: Wenn sie nicht bezahlt ist, muss sie trotzdem bezahlt werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo se elimina de %@: si no está pagado, sigue habiendo que pagarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il est seulement retiré de %@ : s'il n'est pas payé, il reste à payer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viene solo rimosso da %@: se non è pagato, va comunque pagato."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viens sols rimosss da %@: se non è pagats, va comunqus pagats."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het wordt alleen uit %@ verwijderd: als het niet betaald is, moet dat nog steeds."
+          }
+        }
+      }
+    },
+    "Issued By" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausgestellt von"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emitido por"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Émis par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emesso da"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emesss da"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uitgegeven door"
+          }
+        }
+      }
+    },
+    "Reason" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zweck"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concepto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motif"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Causale"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Causals"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omschrijving"
+          }
+        }
+      }
+    },
+    "Due Date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fälligkeitsdatum"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha de vencimiento"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échéance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scadenza"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scadenzs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vervaldatum"
+          }
+        }
+      }
+    },
+    "On the Day" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am selben Tag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El mismo día"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le jour même"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il giorno stesso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il giorns stesss"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Op de dag zelf"
+          }
+        }
+      }
+    },
+    "Details" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détails"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagli"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagls"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        }
+      }
+    },
+    "New pagoPA Notice" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neue pagoPA-Zahlungsaufforderung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo aviso pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvel avis pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo avviso pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovs avviss pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuw pagoPA-betaalbericht"
+          }
+        }
+      }
+    },
+    "Import from PDF" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus PDF importieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar desde PDF"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer depuis un PDF"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importa da PDF"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imports da PDF"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importeren uit pdf"
+          }
+        }
+      }
+    },
+    "Reading the PDF…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF wird gelesen …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyendo el PDF…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture du PDF…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lettura del PDF…"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letturs del PDF…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pdf lezen…"
+          }
+        }
+      }
+    },
+    "Pick the notice's PDF: its QR code and details are read on this device." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wähle das PDF der Zahlungsaufforderung: QR-Code und Details werden auf diesem Gerät gelesen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el PDF del aviso: el código QR y los detalles se leen en este dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez le PDF de l'avis : son code QR et ses détails sont lus sur cet appareil."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli il PDF dell'avviso: il codice QR e i dettagli vengono letti su questo dispositivo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegls il PDF dell'avviss: il codics QR e i dettagls vengons letts su quests dispositivs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kies de pdf van het betaalbericht: de QR-code en details worden op dit apparaat gelezen."
+          }
+        }
+      }
+    },
+    "Notice Code (18 digits)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zahlungscode (18 Ziffern)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código de aviso (18 dígitos)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code de l'avis (18 chiffres)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice avviso (18 cifre)"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics avviss (18 cifrs)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betaalcode (18 cijfers)"
+          }
+        }
+      }
+    },
+    "Creditor Tax Code (11 digits)" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steuernummer des Gläubigers (11 Ziffern)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código fiscal del acreedor (11 dígitos)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code fiscal du créancier (11 chiffres)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice fiscale ente (11 cifre)"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codics fiscals ents (11 cifrs)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fiscaal nummer schuldeiser (11 cijfers)"
+          }
+        }
+      }
+    },
+    "Check the codes: the notice code has 18 digits, the creditor's tax code 11." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prüfe die Codes: Der Zahlungscode hat 18 Ziffern, die Steuernummer des Gläubigers 11."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisa los códigos: el código de aviso tiene 18 dígitos y el código fiscal del acreedor 11."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifiez les codes : le code de l'avis a 18 chiffres, le code fiscal du créancier 11."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla i codici: il codice avviso ha 18 cifre, il codice fiscale dell'ente 11."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlls i codics: il codics avviss ha 18 cifrs, il codics fiscals dell'ents 11."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controleer de codes: de betaalcode heeft 18 cijfers, het fiscale nummer van de schuldeiser 11."
+          }
+        }
+      }
+    },
+    "Printed on the notice, next to the QR code." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf der Zahlungsaufforderung neben dem QR-Code gedruckt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Están impresos en el aviso, junto al código QR."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imprimés sur l'avis, à côté du code QR."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sono stampati sull'avviso, accanto al codice QR."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sons stampats sull'avviss, accants al codics QR."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gedrukt op het betaalbericht, naast de QR-code."
+          }
+        }
+      }
+    },
+    "Found in the PDF. Check the details before adding." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im PDF gefunden. Prüfe die Details vor dem Hinzufügen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontrado en el PDF. Revisa los detalles antes de añadirlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouvé dans le PDF. Vérifiez les détails avant de l'ajouter."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trovato nel PDF. Controlla i dettagli prima di aggiungerlo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trovats nel PDF. Controlls i dettagls prims di aggiungerls."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gevonden in de pdf. Controleer de details voordat je het toevoegt."
+          }
+        }
+      }
+    },
+    "No pagoPA codes were found in this PDF. Enter them by hand." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In diesem PDF wurden keine pagoPA-Codes gefunden. Gib sie manuell ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontraron códigos pagoPA en este PDF. Introdúcelos a mano."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun code pagoPA trouvé dans ce PDF. Saisissez-les à la main."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In questo PDF non sono stati trovati codici pagoPA. Inseriscili a mano."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In quests PDF non sons stats trovats codics pagoPA. Inseriscils a mans."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er zijn geen pagoPA-codes in deze pdf gevonden. Voer ze handmatig in."
+          }
+        }
+      }
+    },
+    "The file couldn't be opened." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Datei konnte nicht geöffnet werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo abrir el archivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d'ouvrir le fichier."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stato possibile aprire il file."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stats possibils aprirs il fils."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het bestand kon niet worden geopend."
+          }
+        }
+      }
+    },
+    "pagoPA Notice" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungsaufforderung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviso pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avis pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avviso pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avviss pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalbericht"
+          }
+        }
+      }
+    },
+    "Item" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artikel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artículo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Article"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Articolo"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Articols"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artikel"
+          }
+        }
+      }
+    },
+    "Store" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shop"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tienda"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boutique"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negozio"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negozis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Winkel"
+          }
+        }
+      }
+    },
+    "Ordered" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestellt am"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pedido el"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandé le"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordinato il"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordinats il"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Besteld op"
+          }
+        }
+      }
+    },
+    "Delivered" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geliefert"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entregado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livré"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consegnato"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consegnats"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geleverd"
+          }
+        }
+      }
+    },
+    "Delivery Date" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lieferdatum"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha de entrega"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date de livraison"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data di consegna"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dats di consegns"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leverdatum"
+          }
+        }
+      }
+    },
+    "Until it's delivered, the deadlines assume it arrives %lld days after the order." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bis zur Lieferung gehen die Fristen von einer Ankunft %lld Tage nach der Bestellung aus."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasta la entrega, los plazos suponen que llega %lld días después del pedido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jusqu'à la livraison, les échéances supposent une arrivée %lld jours après la commande."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finché non viene consegnato, le scadenze considerano l'arrivo %lld giorni dopo l'ordine."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finché non viens consegnats, le scadenzs considerans l'arrivs %lld giorns dops l'ordins."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tot de levering gaan de deadlines uit van aankomst %lld dagen na de bestelling."
+          }
+        }
+      }
+    },
+    "Return By" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücksendung bis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devolver antes del"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour avant le"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reso entro"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ress entrs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retourneren vóór"
+          }
+        }
+      }
+    },
+    "Return Reminder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rückgabe-Erinnerung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviso de devolución"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappel de retour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoria reso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoris ress"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retourherinnering"
+          }
+        }
+      }
+    },
+    "Return" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücksendung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Devolución"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ress"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        }
+      }
+    },
+    "Marked as returned." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als zurückgesendet markiert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcado como devuelto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marqué comme retourné."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnato come restituito."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnats coms restituits."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemarkeerd als geretourneerd."
+          }
+        }
+      }
+    },
+    "Estimated from the order date. Set the delivery date for the exact deadline." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anhand des Bestelldatums geschätzt. Gib das Lieferdatum für die genaue Frist an."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimado a partir de la fecha del pedido. Indica la fecha de entrega para el plazo exacto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimé à partir de la date de commande. Indiquez la date de livraison pour l'échéance exacte."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stimato dalla data dell'ordine. Inserisci la data di consegna per la scadenza esatta."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stimats dalls dats dell'ordins. Inseriscs la dats di consegns per la scadenzs esatts."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschat op basis van de besteldatum. Vul de leverdatum in voor de exacte deadline."
+          }
+        }
+      }
+    },
+    "Reminders %lld days before and on the last day." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erinnerungen %lld Tage vorher und am letzten Tag."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avisos %lld días antes y el último día."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels %lld jours avant et le dernier jour."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoria %lld giorni prima e l'ultimo giorno."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoris %lld giorns prims e l'ultims giorns."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herinneringen %lld dagen vooraf en op de laatste dag."
+          }
+        }
+      }
+    },
+    "Warranty Until" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie bis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantía hasta el"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie jusqu'au"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzia fino al"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzis fins al"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie tot"
+          }
+        }
+      }
+    },
+    "Warranty Reminder" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie-Erinnerung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviso de garantía"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappel de garantie"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoria garanzia"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promemoris garanzis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantieherinnering"
+          }
+        }
+      }
+    },
+    "Warranty" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantía"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzia"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garanzis"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garantie"
+          }
+        }
+      }
+    },
+    "The legal warranty lasts 2 years from delivery. The reminder comes a month before it ends." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die gesetzliche Gewährleistung gilt 2 Jahre ab Lieferung. Die Erinnerung kommt einen Monat vor Ablauf."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La garantía legal dura 2 años desde la entrega. El aviso llega un mes antes de que termine."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La garantie légale dure 2 ans après la livraison. Le rappel arrive un mois avant la fin."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La garanzia legale dura 2 anni dalla consegna. Il promemoria arriva un mese prima della fine."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La garanzis legals durs 2 anns dalls consegns. Il promemoris arrivs un mess prims dells fins."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De wettelijke garantie geldt 2 jaar na levering. De herinnering komt een maand voor het einde."
+          }
+        }
+      }
+    },
+    "Purchase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kauf"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achat"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquisto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquists"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aankoop"
+          }
+        }
+      }
+    },
+    "Open Amazon Orders" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon-Bestellungen öffnen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir pedidos de Amazon"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir les commandes Amazon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri ordini Amazon"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprs ordins Amazon"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazon-bestellingen openen"
+          }
+        }
+      }
+    },
+    "Mark as Not Returned" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als nicht zurückgesendet markieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como no devuelto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme non retourné"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segna come non restituito"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segns coms non restituits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markeren als niet geretourneerd"
+          }
+        }
+      }
+    },
+    "Mark as Returned" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als zurückgesendet markieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como devuelto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme retourné"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segna come restituito"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segns coms restituits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markeren als geretourneerd"
+          }
+        }
+      }
+    },
+    "Order %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestellung %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pedido %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordine %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordins %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestelling %@"
+          }
+        }
+      }
+    },
+    "Delete Purchase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kauf löschen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar compra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer l'achat"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina acquisto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimins acquists"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aankoop verwijderen"
+          }
+        }
+      }
+    },
+    "New Purchase" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Kauf"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva compra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvel achat"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo acquisto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovs acquists"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuwe aankoop"
+          }
+        }
+      }
+    },
+    "%@: %lld days left to return it" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: noch %lld Tage für die Rücksendung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: quedan %lld días para devolverlo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ : plus que %lld jours pour le retourner"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: restano %lld giorni per il reso"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: restans %lld giorns per il ress"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: nog %lld dagen om te retourneren"
+          }
+        }
+      }
+    },
+    "You can return it to %@ until %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du kannst es bis %2$@ an %1$@ zurücksenden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes devolverlo a %@ hasta el %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez le retourner à %@ jusqu'au %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi restituirlo a %@ fino a %@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puos restituirls a %@ fins a %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je kunt het tot %2$@ terugsturen naar %1$@."
+          }
+        }
+      }
+    },
+    "Last day to return %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letzter Tag, um %@ zurückzusenden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Último día para devolver %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernier jour pour retourner %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimo giorno per restituire %@"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultims giorns per restituirs %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laatste dag om %@ te retourneren"
+          }
+        }
+      }
+    },
+    "The return window at %@ closes today." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Rückgabefrist bei %@ endet heute."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy termina el plazo de devolución en %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le délai de retour chez %@ se termine aujourd'hui."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oggi scade il reso su %@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oggs scads il ress su %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De retourtermijn bij %@ sluit vandaag."
+          }
+        }
+      }
+    },
+    "%@: warranty ends in a month" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: Garantie endet in einem Monat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: la garantía termina en un mes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ : la garantie expire dans un mois"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: la garanzia scade tra un mese"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: la garanzis scads tra un mess"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: garantie loopt over een maand af"
+          }
+        }
+      }
+    },
+    "It's covered until %@. If something isn't working, now is the time to ask for a repair." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist bis %@ abgedeckt. Wenn etwas nicht funktioniert, ist jetzt der Moment für eine Reparatur."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Está cubierto hasta el %@. Si algo no funciona, es el momento de pedir la reparación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il est couvert jusqu'au %@. Si quelque chose ne fonctionne pas, c'est le moment de demander une réparation."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È coperto fino a %@. Se qualcosa non funziona, è il momento di chiedere la riparazione."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È coperts fins a %@. Se qualcoss non funzions, è il moments di chieders la riparazions."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het is gedekt tot %@. Werkt er iets niet, vraag dan nu een reparatie aan."
+          }
+        }
+      }
+    },
+    "pagoPA notice from %@ due in %lld days" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungsaufforderung von %@ in %lld Tagen fällig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El aviso pagoPA de %@ vence en %lld días"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avis pagoPA de %@ arrive à échéance dans %lld jours"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avviso pagoPA di %@ scade tra %lld giorni"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avviss pagoPA di %@ scads tra %lld giorns"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalbericht van %@ vervalt over %lld dagen"
+          }
+        }
+      }
+    },
+    "%@ to pay by %@. Tap to pay it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ bis %@ zu bezahlen. Tippe zum Bezahlen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ a pagar antes del %@. Toca para pagar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ à payer avant le %@. Touchez pour payer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ da pagare entro %@. Tocca per pagare."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ da pagars entrs %@. Toccs per pagars."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ te betalen vóór %@. Tik om te betalen."
+          }
+        }
+      }
+    },
+    "pagoPA notice from %@ due today" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungsaufforderung von %@ heute fällig"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El aviso pagoPA de %@ vence hoy"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avis pagoPA de %@ arrive à échéance aujourd'hui"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avviso pagoPA di %@ scade oggi"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avviss pagoPA di %@ scads oggs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalbericht van %@ vervalt vandaag"
+          }
+        }
+      }
+    },
+    "%@ to pay today. Tap to pay it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ heute zu bezahlen. Tippe zum Bezahlen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ a pagar hoy. Toca para pagar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ à payer aujourd'hui. Touchez pour payer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ da pagare oggi. Tocca per pagare."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ da pagars oggs. Toccs per pagars."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ vandaag te betalen. Tik om te betalen."
+          }
+        }
+      }
+    },
+    "Then %@ will be charged on %@. Cancel before then if you don't want to keep it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dann werden am %2$@ %1$@ abgebucht. Kündige vorher, wenn du es nicht behalten willst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Después se cobrarán %@ el %@. Cancela antes si no quieres conservarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensuite, %@ seront prélevés le %@. Résiliez avant si vous ne voulez pas le garder."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poi %@ verranno addebitati %@. Disdici prima se non vuoi tenerlo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poi %@ verranns addebitats %@. Disdics prims se non vuos tenerls."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daarna wordt op %2$@ %1$@ in rekening gebracht. Zeg vóór die tijd op als je het niet wilt houden."
+          }
+        }
+      }
+    },
+    "It turns into a paid plan on %@. Cancel before then if you don't want to keep it." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ab %@ wird es kostenpflichtig. Kündige vorher, wenn du es nicht behalten willst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasa a ser de pago el %@. Cancela antes si no quieres conservarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il devient payant le %@. Résiliez avant si vous ne voulez pas le garder."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diventa a pagamento %@. Disdici prima se non vuoi tenerlo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Divents a pagaments %@. Disdics prims se non vuos tenerls."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Op %@ wordt het betaald. Zeg vóór die tijd op als je het niet wilt houden."
+          }
+        }
+      }
+    },
+    "%@ free trial ends in %lld days" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis-Testphase von %@ endet in %lld Tagen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La prueba gratuita de %@ termina en %lld días"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'essai gratuit de %@ se termine dans %lld jours"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La prova gratuita di %@ finisce tra %lld giorni"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La provs gratuits di %@ finiscs tra %lld giorns"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis proefperiode van %@ eindigt over %lld dagen"
+          }
+        }
+      }
+    },
+    "Trial Ends" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testphase endet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de la prueba"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de l'essai"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine della prova"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fins dells provs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einde proefperiode"
+          }
+        }
+      }
+    },
+    "The first charge is on the day the trial ends. You get a reminder 2 days before, in time to cancel." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die erste Abbuchung ist am letzten Tag der Testphase. Du wirst 2 Tage vorher erinnert, rechtzeitig zum Kündigen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El primer cargo es el día en que termina la prueba. Recibes un aviso 2 días antes, a tiempo para cancelar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le premier prélèvement a lieu le jour de la fin de l'essai. Un rappel arrive 2 jours avant, à temps pour résilier."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il primo addebito è il giorno in cui finisce la prova. Ricevi un promemoria 2 giorni prima, in tempo per disdire."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il prims addebits è il giorns in cui finiscs la provs. Ricevs un promemoris 2 giorns prims, in temps per disdirs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De eerste afschrijving is op de dag dat de proefperiode eindigt. Je krijgt 2 dagen vooraf een herinnering, op tijd om op te zeggen."
+          }
+        }
+      }
+    },
+    "Free Trial" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis testen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prueba gratuita"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai gratuit"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova gratuita"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provs gratuits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis proef"
+          }
+        }
+      }
+    },
+    "Debug" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depuración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Débogage"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
+    },
+    "Show Onboarding Again" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onboarding erneut zeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a mostrar la bienvenida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir l'accueil"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra di nuovo l'onboarding"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrs di nuovs l'onboarding"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introductie opnieuw tonen"
+          }
+        }
+      }
+    },
+    "^[%lld more installment](inflect: true) from the same PDF will be added too." : {
+      "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld weitere Rate aus demselben PDF wird auch hinzugefügt."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld weitere Raten aus demselben PDF werden auch hinzugefügt."
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld more installment from the same PDF will be added too."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld more installments from the same PDF will be added too."
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "También se añadirá %lld plazo más del mismo PDF."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "También se añadirán %lld plazos más del mismo PDF."
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld autre échéance du même PDF sera aussi ajoutée."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld autres échéances du même PDF seront aussi ajoutées."
+                }
+              }
+            }
+          }
+        },
+        "it" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Verrà aggiunta anche %lld altra rata dello stesso PDF."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Verranno aggiunte anche %lld altre rate dello stesso PDF."
+                }
+              }
+            }
+          }
+        },
+        "it-VA" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Verrà aggiunts anchs %lld altrs rats dells stesss PDF."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Verranns aggiunts anchs %lld altrs rats dells stesss PDF."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er wordt ook %lld andere termijn uit dezelfde pdf toegevoegd."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er worden ook %lld andere termijnen uit dezelfde pdf toegevoegd."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Your name, budget, currency, subscriptions, payments, check-in answers, purchases and pagoPA notices are saved in the app's storage on this device." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Name, Budget, deine Währung, Abos, Zahlungen, Check-in-Antworten, Käufe und pagoPA-Zahlungsaufforderungen werden im Speicher der App auf diesem Gerät gesichert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu nombre, presupuesto, divisa, suscripciones, pagos, respuestas de check-in, compras y avisos pagoPA se guardan en el almacenamiento de la app en este dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre nom, budget, devise, abonnements, paiements, réponses aux check-ins, achats et avis pagoPA sont enregistrés dans le stockage de l'app sur cet appareil."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome, budget, valuta, abbonamenti, pagamenti, risposte ai check-in, acquisti e avvisi pagoPA sono salvati nella memoria dell'app su questo dispositivo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noms, budget, valuts, abbonaments, pagaments, risposts ai check-in, acquists e avviss pagoPA sons salvats nells memoris dell'app su quests dispositivs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je naam, budget, valuta, abonnementen, betalingen, check-in-antwoorden, aankopen en pagoPA-betaalberichten worden in de opslag van de app op dit apparaat bewaard."
+          }
+        }
+      }
+    },
+    "Check-in, payment, return, warranty, trial and pagoPA reminders are scheduled on your device. iCloud only uses silent notifications to tell the app your data changed on another device." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erinnerungen für Check-ins, Zahlungen, Rücksendungen, Garantien, Testphasen und pagoPA werden auf deinem Gerät geplant. iCloud nutzt nur stille Mitteilungen, um der App zu melden, dass sich deine Daten auf einem anderen Gerät geändert haben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los recordatorios de check-in, pagos, devoluciones, garantías, pruebas y avisos pagoPA se programan en tu dispositivo. iCloud solo usa notificaciones silenciosas para avisar a la app de que tus datos cambiaron en otro dispositivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les rappels de check-in, de paiement, de retour, de garantie, d'essai et pagoPA sont programmés sur votre appareil. iCloud utilise seulement des notifications silencieuses pour signaler à l'app que vos données ont changé sur un autre appareil."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I promemoria di check-in, pagamenti, resi, garanzie, prove gratuite e avvisi pagoPA sono programmati sul tuo dispositivo. iCloud usa solo notifiche silenziose per avvisare l'app che i dati sono cambiati su un altro dispositivo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I promemoris di check-in, pagaments, ress, garanzis, provs gratuits e avviss pagoPA sons programmats sul tuo dispositivs. iCloud usa sols notifichs silenzioss per avvisars l'app che i dats sons cambiats su un altrs dispositivs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herinneringen voor check-ins, betalingen, retouren, garanties, proefperiodes en pagoPA worden op je apparaat ingepland. iCloud gebruikt alleen stille meldingen om de app te laten weten dat je gegevens op een ander apparaat zijn gewijzigd."
+          }
+        }
+      }
+    },
+    "Paying pagoPA notices" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-Zahlungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagar avisos pagoPA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payer les avis pagoPA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagare gli avvisi pagoPA"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagars gli avviss pagoPA"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pagoPA-betaalberichten betalen"
+          }
+        }
+      }
+    },
+    "Pay with pagoPA opens pagoPA's official site with the notice's codes. You pay there: %@ never sees your card or bank details." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„Mit pagoPA bezahlen“ öffnet die offizielle pagoPA-Seite mit den Codes. Du bezahlst dort: %@ sieht nie deine Karten- oder Bankdaten."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pagar con pagoPA abre el sitio oficial de pagoPA con los códigos del aviso. Pagas allí: %@ nunca ve los datos de tu tarjeta ni de tu banco."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Payer avec pagoPA ouvre le site officiel de pagoPA avec les codes de l'avis. Vous payez là-bas : %@ ne voit jamais votre carte ni vos coordonnées bancaires."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paga con pagoPA apre il sito ufficiale pagoPA con i codici dell'avviso. Paghi lì: %@ non vede mai i dati della tua carta o del tuo conto."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pags con pagoPA aprs il sits ufficials pagoPA con i codics dell'avviss. Paghs lì: %@ non veds mai i dats dells tua carts o del tuo conts."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betalen met pagoPA opent de officiële site van pagoPA met de codes van het bericht. Je betaalt daar: %@ ziet nooit je kaart- of bankgegevens."
+          }
+        }
+      }
+    },
+    "Recent billing, order and pagoPA emails, with the PDFs of pagoPA notices, are downloaded straight from Google to your device and read by Apple Intelligence on the device. Their content is never sent to %@, to Apple or to anyone else, isn't used to train models, and isn't saved after the scan." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktuelle Rechnungs-, Bestell- und pagoPA-E-Mails, mit den PDFs der pagoPA-Zahlungsaufforderungen, werden direkt von Google auf dein Gerät geladen und dort von Apple Intelligence gelesen. Ihr Inhalt wird nie an %@, Apple oder sonst jemanden gesendet, nicht zum Trainieren von Modellen genutzt und nach der Analyse nicht gespeichert."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los correos recientes de facturación, pedidos y pagoPA, con los PDF de los avisos pagoPA, se descargan directamente de Google a tu dispositivo y Apple Intelligence los lee en el propio dispositivo. Su contenido nunca se envía a %@, a Apple ni a nadie más, no se usa para entrenar modelos y no se guarda tras el análisis."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les e-mails récents de facturation, de commande et pagoPA, avec les PDF des avis pagoPA, sont téléchargés directement de Google vers votre appareil et lus par Apple Intelligence sur l'appareil. Leur contenu n'est jamais envoyé à %@, à Apple ni à personne d'autre, n'est pas utilisé pour entraîner des modèles et n'est pas conservé après l'analyse."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le email recenti di pagamenti, ordini e pagoPA, con i PDF degli avvisi pagoPA, vengono scaricate direttamente da Google sul tuo dispositivo e lette da Apple Intelligence sul dispositivo. Il loro contenuto non viene mai inviato a %@, ad Apple o a nessun altro, non viene usato per addestrare modelli e non viene salvato dopo l'analisi."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le email recents di pagaments, ordins e pagoPA, con i PDF degls avviss pagoPA, vengons scaricats direttaments da Google sul tuo dispositivs e letts da Apple Intelligence sul dispositivs. Il lors contenuts non viens mai inviats a %@, ad Apple o a nessun altrs, non viens usats per addestrars modells e non viens salvats dops l'analiss."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recente factuur-, bestel- en pagoPA-e-mails, met de pdf's van pagoPA-betaalberichten, worden rechtstreeks van Google naar je apparaat gedownload en daar door Apple Intelligence gelezen. De inhoud wordt nooit naar %@, Apple of iemand anders gestuurd, niet gebruikt om modellen te trainen en na de scan niet bewaard."
           }
         }
       }

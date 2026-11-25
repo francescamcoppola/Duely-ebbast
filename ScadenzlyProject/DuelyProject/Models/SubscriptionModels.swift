@@ -225,6 +225,9 @@ final class Subscription {
     var lastPaymentDate: Date?
     /// Payments marked as paid by hand, at the start of their day. Past payments count as paid anyway.
     var paidDates: [Date] = []
+    /// End of a free trial: the first charge is on this day (it's also `anchorDate`).
+    /// `nil` when it isn't a trial. See `isInTrial`.
+    var trialEndDate: Date?
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []

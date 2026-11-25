@@ -13,7 +13,7 @@ enum PreviewData {
     static let container: ModelContainer = {
         do {
             let container = try ModelContainer(
-                for: Subscription.self, UsageEntry.self,
+                for: Subscription.self, UsageEntry.self, Purchase.self, PaymentNotice.self,
                 configurations: ModelConfiguration(isStoredInMemoryOnly: true)
             )
             insertSamples(into: container.mainContext)
@@ -26,7 +26,7 @@ enum PreviewData {
     static let emptyContainer: ModelContainer = {
         do {
             return try ModelContainer(
-                for: Subscription.self, UsageEntry.self,
+                for: Subscription.self, UsageEntry.self, Purchase.self, PaymentNotice.self,
                 configurations: ModelConfiguration(isStoredInMemoryOnly: true)
             )
         } catch {
@@ -51,6 +51,21 @@ enum PreviewData {
             Subscription(name: "HBO Max", category: .filmTV),   // still needs setup
         ]
         for subscription in samples { context.insert(subscription) }
+
+        let trial = Subscription(name: "Apple TV+", price: money("9.99"), category: .filmTV, anchorDate: day(5))
+        trial.trialEndDate = day(5)
+        context.insert(trial)
+
+        // Deadlines tab.
+        context.insert(Purchase(title: "AirPods Pro", store: "Amazon", orderNumber: "405-1234567-1234567",
+                                orderDate: day(-26), deliveryDate: day(-24), price: money("249.00"),
+                                websiteDomain: "amazon.it"))
+        context.insert(Purchase(title: "Cavo USB-C", store: "Amazon", orderDate: day(-400), deliveryDate: day(-398),
+                                price: money("9.99"), websiteDomain: "amazon.it"))
+        if let code = PagoPACode(noticeNumber: "301000000000123456", fiscalCode: "80014890638") {
+            context.insert(PaymentNotice(code: code, payee: "Comune di Napoli", amount: money("128.50"),
+                                         dueDate: day(6), reason: "TARI 2026 – rata 1"))
+        }
 
         // Two weeks of check-ins.
         for weekOffset in [-1, -2] {

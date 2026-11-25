@@ -16,6 +16,18 @@ nonisolated struct EmailMessage: Identifiable, Equatable, Sendable {
     let subject: String
     let date: Date
     let body: String
+    /// PDF attachments (pagoPA notices come as PDFs). Only their references: the files are
+    /// downloaded one at a time, and only for notices.
+    var attachments: [EmailAttachment] = []
+}
+
+nonisolated struct EmailAttachment: Equatable, Sendable {
+    let filename: String
+    /// Gmail's id, to download it with `GmailAPI.attachment(messageID:id:)`.
+    let attachmentID: String?
+    /// Small attachments come inline, already base64url-encoded in the message.
+    let inlineData: String?
+    let size: Int
 }
 
 nonisolated struct GmailAPI: Sendable {
@@ -35,6 +47,22 @@ nonisolated struct GmailAPI: Sendable {
     "prova gratuita" OR bolletta OR bollette OR utenza OR utenze OR "avviso di pagamento" OR pagopa OR \
     tari OR imu OR tassa OR tasse OR tributo OR tributi OR "bollo auto" OR rata OR scadenza OR \
     condominio OR affitto OR canone OR polizza OR assicurazione OR "contribuzione studentesca" OR iscrizione))
+    """
+
+    /// Online orders, shipping and deliveries (Amazon and other stores), for return windows and
+    /// warranties. Same exclusions as `searchQuery`.
+    static let ordersQuery = """
+    newer_than:13m -in:chats -in:spam -in:trash -in:sent -in:drafts -category:promotions -category:social (\
+    from:amazon.it OR from:amazon.com OR from:amazon.de OR from:amazon.fr OR from:amazon.es OR from:amazon.co.uk OR \
+    subject:(ordinato OR spedito OR consegnato OR "il tuo ordine" OR "conferma d'ordine" OR "conferma ordine" OR \
+    "ordine confermato" OR "ordine n" OR "your order" OR "order confirmation" OR "has been delivered" OR \
+    shipped OR delivered OR "tu pedido" OR "pedido confirmado" OR entregado OR enviado))
+    """
+
+    /// pagoPA payment notices (avvisi di pagamento): often a PDF with the QR code.
+    static let pagoPAQuery = """
+    newer_than:13m -in:chats -in:spam -in:trash -in:sent -in:drafts (\
+    pagopa OR "avviso di pagamento" OR "avviso pagopa" OR "codice avviso" OR "avviso di scadenza")
     """
 
     // MARK: Calls
@@ -132,6 +160,28 @@ nonisolated struct GmailAPI: Sendable {
         return GmailMessagePayload.emailMessage(from: raw)
     }
 
+    /// One attachment's bytes, kept in memory only.
+    func attachment(messageID: String, id: String) async throws -> Data {
+        struct Attachment: Decodable { let data: String? }
+        let raw: Attachment = try await get("messages/\(messageID)/attachments/\(id)")
+        guard let data = raw.data.flatMap(EmailText.base64URLData) else { throw GmailAuthError.server("attachment") }
+        return data
+    }
+
+    /// The PDFs of an email that could be a notice, skipping oversized files.
+    func pdfs(of email: EmailMessage, maxBytes: Int, limit: Int = 3) async -> [Data] {
+        var files: [Data] = []
+        for attachment in email.attachments.prefix(limit) where attachment.size <= maxBytes {
+            if let inline = attachment.inlineData, let data = EmailText.base64URLData(inline) {
+                files.append(data)
+            } else if let id = attachment.attachmentID,
+                      let data = try? await self.attachment(messageID: email.id, id: id) {
+                files.append(data)
+            }
+        }
+        return files
+    }
+
     // MARK: Transport
 
     private func get<T: Decodable>(_ path: String, query: [URLQueryItem] = []) async throws -> T {
@@ -222,6 +272,8 @@ nonisolated enum GmailMessagePayload {
 
     struct Body: Decodable, Sendable {
         let data: String?
+        var attachmentId: String? = nil
+        var size: Int? = nil
     }
 
     static func emailMessage(from message: Message) -> EmailMessage {
@@ -236,7 +288,8 @@ nonisolated enum GmailMessagePayload {
         var body = message.payload.map(bestText) ?? ""
         if body.isEmpty { body = EmailText.decodeEntities(message.snippet ?? "") }
 
-        return EmailMessage(id: message.id, from: header("From"), subject: header("Subject"), date: date, body: body)
+        return EmailMessage(id: message.id, from: header("From"), subject: header("Subject"), date: date, body: body,
+                            attachments: message.payload.map(pdfAttachments) ?? [])
     }
 
     static func metadata(from message: Message) -> EmailMetadata {
@@ -274,6 +327,18 @@ nonisolated enum GmailMessagePayload {
         }
 
         return plain
+    }
+
+    /// Every PDF in the message, however deeply nested.
+    static func pdfAttachments(in part: Part) -> [EmailAttachment] {
+        var found: [EmailAttachment] = []
+        if let name = part.filename, !name.isEmpty,
+           part.mimeType?.lowercased() == "application/pdf" || name.lowercased().hasSuffix(".pdf") {
+            found.append(EmailAttachment(filename: name, attachmentID: part.body?.attachmentId,
+                                         inlineData: part.body?.data, size: part.body?.size ?? 0))
+        }
+        for child in part.parts ?? [] { found += pdfAttachments(in: child) }
+        return found
     }
 
     private static func firstBody(in part: Part, mimeType: String) -> String? {

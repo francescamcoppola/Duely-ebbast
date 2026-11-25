@@ -33,6 +33,8 @@ struct DetectedSubscription: Identifiable, Equatable {
     /// The sender's website, e.g. "dazn.com" for "noreply@mail.dazn.com". `nil` for stores and
     /// mail providers, which aren't the service itself.
     var senderDomain: String? = nil
+    /// Set for a free trial: the day it ends, which is also the first charge (`paymentDate`).
+    var trialEndDate: Date? = nil
 
     func differsFromCurrency(_ code: String) -> Bool {
         guard let currencyCode else { return false }
@@ -65,6 +67,14 @@ extension DetectedSubscription {
         let parsedDate = Self.date(from: analysis.paymentDate, near: email.date, calendar: calendar)
         self.paymentDate = parsedDate ?? calendar.startOfDay(for: email.date)
         self.paymentDateIsKnown = parsedDate != nil
+
+        // A trial's first charge is the day it ends.
+        if let trialEnd = Self.date(from: analysis.trialEndDate, near: email.date, calendar: calendar),
+           trialEnd >= calendar.startOfDay(for: .now) {
+            self.trialEndDate = trialEnd
+            self.paymentDate = trialEnd
+            self.paymentDateIsKnown = true
+        }
 
         self.emailSubject = email.subject
         self.emailDate = email.date
@@ -161,6 +171,11 @@ extension DetectedSubscription {
             if existing.category == .other { existing.category = candidate.category }
             if existing.sourceAccount == nil { existing.sourceAccount = candidate.sourceAccount }
             if existing.senderDomain == nil { existing.senderDomain = candidate.senderDomain }
+            if existing.trialEndDate == nil, let trialEnd = candidate.trialEndDate, !existing.paymentDateIsKnown {
+                existing.trialEndDate = trialEnd
+                existing.paymentDate = trialEnd
+                existing.paymentDateIsKnown = true
+            }
             byKey[key] = existing
         }
         return order.compactMap { byKey[$0] }
