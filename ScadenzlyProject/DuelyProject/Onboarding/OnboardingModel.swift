@@ -60,7 +60,10 @@ struct CurrencyOption: Identifiable, Hashable, Sendable {
 
     init(code: String, locale: Locale = .current) {
         self.code = code
-        self.name = locale.localizedString(forCurrencyCode: code) ?? code
+        // The name is in the app's language (it follows an in-app language change); the
+        // symbol and its position below still follow `locale`.
+        self.name = LocalizedBundle.locale.localizedString(forCurrencyCode: code)
+            ?? locale.localizedString(forCurrencyCode: code) ?? code
 
         // Let Foundation format a sample and read symbol, position and decimals from it.
         // This respects each locale's rules instead of hard-coding them.
@@ -97,10 +100,13 @@ struct CurrencyOption: Identifiable, Hashable, Sendable {
         CurrencyOption(code: AppDefaults.currencyCode)
     }
 
-    /// Every ISO currency in common use, sorted by localized name.
-    static let all: [CurrencyOption] = Locale.commonISOCurrencyCodes
-        .map { CurrencyOption(code: $0) }
-        .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+    /// Every ISO currency in common use, sorted by localized name. Computed each time (not
+    /// cached) so the names are in the current app language.
+    static var all: [CurrencyOption] {
+        Locale.commonISOCurrencyCodes
+            .map { CurrencyOption(code: $0) }
+            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+    }
 
     /// The user's own currency first, then widely used ones. No duplicates.
     static var suggested: [CurrencyOption] {

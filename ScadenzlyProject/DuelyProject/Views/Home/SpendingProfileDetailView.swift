@@ -149,7 +149,7 @@ struct SpendingProfileDetailView: View {
                     .font(.title3)
                     .foregroundStyle(suggestion.newProfile.tint)
                     .accessibilityHidden(true)
-                Text("Canceling \(suggestion.cancel.map(\.name).formatted(.list(type: .and))) would save \(Text(suggestion.monthlySavings, format: .currency(code: currencyCode))) a month and make you \(Text(suggestion.newProfile.title).bold()).")
+                Text("Canceling \(suggestion.cancel.map(\.name).formatted(.list(type: .and).locale(LocalizedBundle.locale))) would save \(Text(suggestion.monthlySavings, format: .currency(code: currencyCode))) a month and make you \(Text(suggestion.newProfile.title).bold()).")
                     .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.vertical, 4)
@@ -181,7 +181,7 @@ struct SpendingProfileDetailView: View {
     // MARK: Helpers
 
     private func percent(_ value: Double) -> String {
-        value.formatted(.percent.precision(.fractionLength(0)))
+        value.formatted(.percent.precision(.fractionLength(0)).locale(LocalizedBundle.locale))
     }
 }
 

@@ -27,6 +27,9 @@ struct ContentView: View {
         .animation(.smooth, value: hasCompletedOnboarding)
         // A language change rebuilds the whole app in the new language: the "restart".
         .environment(\.locale, language.locale)
+        // Weekday and month names (calendar grid, check-in, Settings) follow `\.calendar`, not
+        // `\.locale`.
+        .environment(\.calendar, language.calendar)
         .id(language.generation)
         .transition(.opacity.animation(.smooth(duration: 0.35)))
     }

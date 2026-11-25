@@ -78,6 +78,17 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         }
     }
 
+    /// Calendar whose weekday and month names are in the chosen language. `Calendar.current`
+    /// keeps the launch language's names; the week start stays the device's.
+    var calendar: Calendar {
+        let device = Calendar.current
+        var calendar = device
+        calendar.locale = locale
+        calendar.firstWeekday = device.firstWeekday
+        calendar.minimumDaysInFirstWeek = device.minimumDaysInFirstWeek
+        return calendar
+    }
+
     /// Saves the choice so every later launch uses it.
     fileprivate func persist(to defaults: UserDefaults = .standard) {
         if self == .system {
@@ -102,6 +113,7 @@ final class LanguageController {
     private(set) var generation = 0
 
     var locale: Locale { language.locale }
+    var calendar: Calendar { language.calendar }
 
     /// Call once at launch.
     func start() {

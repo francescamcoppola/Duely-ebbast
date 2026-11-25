@@ -193,7 +193,7 @@ struct MonthSummaryCard: View {
         let average = Text(monthlyAverage, format: .currency(code: currencyCode))
         switch schedule.comparison(toMonthlyAverage: monthlyAverage) {
         case .higher(let renewals) where !renewals.isEmpty:
-            let names = renewals.formatted(.list(type: .and))
+            let names = renewals.formatted(.list(type: .and).locale(LocalizedBundle.locale))
             return Text("Higher than your \(average) average because of plans that renew this month: \(names).")
         case .higher:
             return Text("Higher than your \(average) average because more payments fall in this month.")

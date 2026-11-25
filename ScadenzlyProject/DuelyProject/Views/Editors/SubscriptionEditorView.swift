@@ -356,7 +356,7 @@ struct SubscriptionEditorView: View {
               let date = Calendar.current.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2])) else {
             return catalog.catalog.updated
         }
-        return date.formatted(.dateTime.month(.wide).year())
+        return date.formatted(.dateTime.month(.wide).year().locale(LocalizedBundle.locale))
     }
 
     private func choose(_ service: CatalogService) {

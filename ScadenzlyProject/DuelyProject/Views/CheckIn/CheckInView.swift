@@ -75,7 +75,7 @@ struct CheckInView: View {
                         .font(.title2.bold())
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader)
-                    Text((week..<weekEnd).formatted(.interval.day().month(.abbreviated)))
+                    Text((week..<weekEnd).formatted(.interval.day().month(.abbreviated).locale(LocalizedBundle.locale)))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

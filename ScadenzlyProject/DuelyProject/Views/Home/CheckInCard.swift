@@ -25,7 +25,7 @@ struct CheckInCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Weekly Check-In")
                         .font(.headline)
-                    Text("Which subscriptions did you use from \((week..<weekEnd).formatted(.interval.day().month(.abbreviated)))? It takes 10 seconds.")
+                    Text("Which subscriptions did you use from \((week..<weekEnd).formatted(.interval.day().month(.abbreviated).locale(LocalizedBundle.locale)))? It takes 10 seconds.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
