@@ -15,7 +15,9 @@ nonisolated enum GmailConfiguration {
     /// While empty, the Gmail import is shown as unavailable.
     static let clientID = "376329629619-fje1ndspl86mod67kb4qupv2q7fvptb4.apps.googleusercontent.com"
 
-    static var isConfigured: Bool { clientID.hasSuffix(".apps.googleusercontent.com") }
+    static var isConfigured: Bool {
+        FeatureFlags.emailImport && clientID.hasSuffix(".apps.googleusercontent.com")
+    }
 
     /// Read-only access to messages. The app never sends, deletes, labels or modifies email.
     static let scope = "https://www.googleapis.com/auth/gmail.readonly"

@@ -22866,6 +22866,366 @@
           }
         }
       }
+    },
+    "All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices. This can't be undone." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle deine Abos, Check-ins und Einstellungen werden von diesem Gerät, aus iCloud und von deinen anderen Geräten gelöscht. Das kann nicht rückgängig gemacht werden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas tus suscripciones, check-ins y ajustes se eliminarán de este dispositivo, de iCloud y de tus otros dispositivos. Esta acción no se puede deshacer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tous vos abonnements, check-ins et réglages seront supprimés de cet appareil, d'iCloud et de vos autres appareils. Cette action est irréversible."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti i tuoi abbonamenti, check-in e impostazioni verranno eliminati da questo dispositivo, da iCloud e dagli altri tuoi dispositivi. L'operazione non si può annullare."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutts i tuoi abbonaments, check-in e impostazions verranns eliminats da quests dispositivs, da iCloud e dagls altrs tuoi dispositivs. L'operazions non si può annullars."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al je abonnementen, check-ins en instellingen worden verwijderd van dit apparaat, uit iCloud en van je andere apparaten. Dit kan niet ongedaan worden gemaakt."
+          }
+        }
+      }
+    },
+    "Contact Us" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontakt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contáctanos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nous contacter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contattaci"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contattacs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact opnemen"
+          }
+        }
+      }
+    },
+    "Delete subscriptions in the app, or reset %@ in Settings to erase everything from this device, iCloud and your other devices." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lösche Abos in der App oder setze %@ in den Einstellungen zurück, um alles von diesem Gerät, aus iCloud und von deinen anderen Geräten zu löschen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina suscripciones en la app o restablece %@ en Ajustes para borrar todo de este dispositivo, de iCloud y de tus otros dispositivos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimez des abonnements dans l'app, ou réinitialisez %@ dans Réglages pour tout effacer de cet appareil, d'iCloud et de vos autres appareils."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina gli abbonamenti nell'app, oppure ripristina %@ nelle Impostazioni per cancellare tutto da questo dispositivo, da iCloud e dagli altri tuoi dispositivi."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimins gli abbonaments nell'app, oppurs ripristins %@ nells Impostazions per cancellars tutts da quests dispositivs, da iCloud e dagls altrs tuoi dispositivs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwijder abonnementen in de app, of zet %@ terug in Instellingen om alles van dit apparaat, uit iCloud en van je andere apparaten te wissen."
+          }
+        }
+      }
+    },
+    "Full Privacy Policy" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vollständige Datenschutzerklärung"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad completa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité complète"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informativa sulla privacy completa"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informativs sulls privacy complets"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volledig privacybeleid"
+          }
+        }
+      }
+    },
+    "Help & Support" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilfe & Support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda y soporte"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide et assistance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuto e supporto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuts e supports"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hulp en ondersteuning"
+          }
+        }
+      }
+    },
+    "Orders you can still return, warranties, free trials and pagoPA notices appear here. Add them by hand." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier erscheinen Bestellungen, die du noch zurücksenden kannst, Garantien, Gratis-Testphasen und pagoPA-Zahlungsaufforderungen. Füge sie manuell hinzu."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquí aparecen los pedidos que aún puedes devolver, las garantías, las pruebas gratuitas y los avisos pagoPA. Añádelos a mano."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les commandes encore retournables, les garanties, les essais gratuits et les avis pagoPA apparaissent ici. Ajoutez-les à la main."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui trovi gli ordini che puoi ancora restituire, le garanzie, le prove gratuite e gli avvisi pagoPA. Aggiungili a mano."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qui trovs gli ordins che puos ancors restituirs, le garanzis, le provs gratuits e gli avviss pagoPA. Aggiungils a mans."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier verschijnen bestellingen die je nog kunt retourneren, garanties, gratis proefperiodes en pagoPA-betaalberichten. Voeg ze handmatig toe."
+          }
+        }
+      }
+    },
+    "Questions about privacy? Write to %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fragen zum Datenschutz? Schreib an %@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Dudas sobre la privacidad? Escribe a %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des questions sur la confidentialité ? Écrivez à %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domande sulla privacy? Scrivi a %@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domands sulls privacy? Scrivs a %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vragen over privacy? Schrijf naar %@."
+          }
+        }
+      }
+    },
+    "Questions or problems? Write to %@. Version %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fragen oder Probleme? Schreib an %1$@. Version %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Dudas o problemas? Escribe a %1$@. Versión %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des questions ou un problème ? Écrivez à %1$@. Version %2$@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domande o problemi? Scrivi a %1$@. Versione %2$@."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domands o problems? Scrivs a %1$@. Versions %2$@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vragen of problemen? Schrijf naar %1$@. Versie %2$@."
+          }
+        }
+      }
+    },
+    "Support" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soporte"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assistance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supporto"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supports"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ondersteuning"
+          }
+        }
+      }
     }
   },
   "version" : "1.3"

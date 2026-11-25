@@ -163,7 +163,11 @@ struct DeadlinesView: View {
         ContentUnavailableView {
             Label("No Deadlines", systemImage: "calendar.badge.clock")
         } description: {
-            Text("Orders you can still return, warranties, free trials and pagoPA notices appear here. Scan your email in Settings, or add them by hand.")
+            if FeatureFlags.emailImport {
+                Text("Orders you can still return, warranties, free trials and pagoPA notices appear here. Scan your email in Settings, or add them by hand.")
+            } else {
+                Text("Orders you can still return, warranties, free trials and pagoPA notices appear here. Add them by hand.")
+            }
         } actions: {
             Button("Add Purchase") { isAddingPurchase = true }
                 .buttonStyle(.borderedProminent)

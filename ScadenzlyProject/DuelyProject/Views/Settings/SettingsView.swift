@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  DuelyProject
 //
-//  Profile, budget, weekly check-in, notifications, iCloud, email import and privacy.
+//  Profile, budget, weekly check-in, notifications, iCloud, email import, support and privacy.
 //
 
 import SwiftUI
@@ -33,6 +33,7 @@ struct SettingsView: View {
     @State private var isResetting = false
     @State private var cloudStatus: CloudSyncStatus = .checking
     @State private var languageController = LanguageController.shared
+    @State private var webPage: WebPage?
 
     var body: some View {
         NavigationStack {
@@ -46,8 +47,10 @@ struct SettingsView: View {
                     notificationsDeniedSection
                 }
                 iCloudSection
-                emailImportSection
-                privacySection
+                if FeatureFlags.emailImport {
+                    emailImportSection
+                }
+                supportSection
                 resetSection
                 #if DEBUG
                 debugSection
@@ -66,6 +69,7 @@ struct SettingsView: View {
             .sheet(isPresented: $isPickingCurrency) {
                 CurrencyPickerView(selection: currency)
             }
+            .safariSheet($webPage)
             .task(id: scenePhase) {
                 // Refresh when coming back from the Settings app.
                 notificationStatus = await NotificationService.authorizationStatus()
@@ -226,13 +230,29 @@ struct SettingsView: View {
         }
     }
 
-    private var privacySection: some View {
+    private var supportSection: some View {
         Section {
+            Button {
+                webPage = WebPage(url: AppInfo.supportURL)
+            } label: {
+                Label("Help & Support", systemImage: "questionmark.circle")
+            }
+            if let url = AppInfo.supportEmailURL {
+                Button {
+                    openURL(url)
+                } label: {
+                    Label("Contact Us", systemImage: "envelope")
+                }
+            }
             NavigationLink {
                 PrivacyView()
             } label: {
                 Label("Privacy", systemImage: "hand.raised")
             }
+        } header: {
+            Text("Support")
+        } footer: {
+            Text("Questions or problems? Write to \(AppInfo.supportEmail). Version \(AppInfo.version).")
         }
     }
 
@@ -262,7 +282,11 @@ struct SettingsView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices, and every Gmail account will be disconnected. This can't be undone.")
+                if FeatureFlags.emailImport {
+                    Text("All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices, and every Gmail account will be disconnected. This can't be undone.")
+                } else {
+                    Text("All your subscriptions, check-ins and settings will be deleted from this device, from iCloud and from your other devices. This can't be undone.")
+                }
             }
         } footer: {
             Text("Deletes everything and takes you back to the welcome screen to set up \(AppInfo.name) again.")

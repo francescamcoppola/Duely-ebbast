@@ -9,12 +9,39 @@
 
 import SwiftUI
 import Observation
+import UIKit
 
 // MARK: - App info
 
 enum AppInfo {
     /// Display name used in onboarding copy. Change it in one place when the final name is decided.
     static let name = "MyDues"
+
+    /// Support site and privacy policy, published from docs/ in the repository (GitHub Pages).
+    /// The same addresses go in App Store Connect as Support URL and Privacy Policy URL.
+    static let supportURL = URL(string: "https://francescamcoppola.github.io/Duely-ebbast/")!
+    static let privacyPolicyURL = URL(string: "https://francescamcoppola.github.io/Duely-ebbast/privacy.html")!
+    static let supportEmail = "myduesapp@gmail.com"
+
+    /// "1.0 (2)", for support emails.
+    static var version: String {
+        let info = Bundle.main.infoDictionary
+        let short = info?["CFBundleShortVersionString"] as? String ?? "?"
+        let build = info?["CFBundleVersion"] as? String ?? "?"
+        return "\(short) (\(build))"
+    }
+
+    /// A new email to support, with the details that help answer it already filled in.
+    static var supportEmailURL: URL? {
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = supportEmail
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: "\(name) support"),
+            URLQueryItem(name: "body", value: "\n\n—\n\(name) \(version) · iOS \(UIDevice.current.systemVersion)"),
+        ]
+        return components.url
+    }
 }
 
 // MARK: - Persistence keys

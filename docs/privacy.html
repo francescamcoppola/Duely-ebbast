@@ -4,9 +4,9 @@
 <title>MyDues Privacy Policy</title><meta name="description" content="MyDues Privacy Policy">
 <link rel="stylesheet" href="style.css"></head><body><div class="wrap">
 <div style="height:24px"></div>
-<nav><a href="index.html">Support</a><a href="index.html#faq">FAQ</a><a href="index.html#gmail">Gmail import</a><a href="privacy.html" class="on">Privacy Policy</a></nav>
+<nav><a href="index.html">Support</a><a href="index.html#faq">FAQ</a><a href="privacy.html" class="on">Privacy Policy</a></nav>
 <main class="doc"><h1>MyDues Privacy Policy</h1>
-<p><em>Last updated: November 24, 2026</em></p>
+<p><em>Last updated: November 25, 2026</em></p>
 <p>MyDues helps you keep track of your subscriptions and other recurring payments (household bills, taxes and fees, tuition, insurance), their cost and their due dates. It's built so that your information stays with you: on your devices and in your own private iCloud. MyDues has no user accounts, no servers of its own, no analytics and no advertising.</p>
 <p>This policy also appears inside the app under <strong>Settings › Privacy</strong>. If the two ever differ, this document is the reference.</p>
 <h2>Information MyDues stores</h2>
@@ -14,63 +14,34 @@
 <ul>
 <li>the name you enter during onboarding, and the language you choose for the app</li>
 <li>your monthly budget and currency, and your check-in and reminder preferences</li>
-<li>the subscriptions and payments you add (name, plan, price, billing cycle, category, color, payment date, reminder choice and, for ones imported from email, which of your connected addresses it was found in)</li>
+<li>the subscriptions and payments you add (name, plan, price, billing cycle, category, color, payment date, reminder choice)</li>
 <li>your weekly check-in answers (whether you used each subscription in a given week)</li>
+<li>the purchases, warranties, free trials and pagoPA notices you add</li>
 </ul>
 <p><strong>iCloud sync.</strong> If you're signed in to iCloud, this information is also saved in <strong>your private iCloud database</strong> (CloudKit) and in iCloud key-value storage, so it isn't lost if you delete the app or change device, and it stays in sync on your devices signed in with the same Apple Account. Only you can access your private iCloud data; MyDues's developers can't see it. Apple stores it encrypted, and with Advanced Data Protection turned on it's end-to-end encrypted. You can see and delete it in the Settings app under your name › iCloud. If you're not signed in to iCloud, everything stays on the device.</p>
 <p>This information isn't sent to us or to anyone else. Like other app data, it's also included in your device's iCloud or computer backup if you have backups turned on.</p>
 <h2>Notifications</h2>
-<p>Check-in and payment reminders are scheduled with local notifications on your device, so no reminder content leaves your device. iCloud sync uses Apple's silent push notifications only to tell the app that your data changed on another device.</p>
-<h2>Import from Email (Gmail, optional)</h2>
-<p>You can choose to connect one or more Gmail accounts (up to five) so MyDues can find subscriptions and other recurring payments (household bills, taxes and public fees, tuition, insurance) in your receipts, renewals, bills and payment notices. This feature is off until you turn it on, and each account is connected separately.</p>
-<p><strong>What MyDues accesses.</strong> When you connect, you sign in on Google's own page (MyDues never sees your password) and Google asks you to allow one permission: <code>gmail.readonly</code>, read-only access to your messages. MyDues uses it to:</p>
-<ul>
-<li>read your Gmail address, to show which accounts are connected;</li>
-<li>search the last 13 months for emails that look like receipts, renewals, plan confirmations, bills, tax or payment notices and tuition emails (up to 500 per account and scan);</li>
-<li>read only the sender and subject of those emails, to skip ads, newsletters, shipping and security notices and older copies of the same receipt;</li>
-<li>download the full content of the remaining emails, up to 150 per account and scan.</li>
-</ul>
-<p>MyDues can't send, delete, label or change any email.</p>
-<p><strong>How it's processed.</strong> Emails are downloaded directly from Google to your device over an encrypted connection. They're read by Apple Intelligence using the language model that runs <strong>on your device</strong> (Apple's Foundation Models framework, on-device model only). Email content is:</p>
-<ul>
-<li>never sent to MyDues's developers, to Apple, or to any other third party;</li>
-<li>never used to train or improve any AI model;</li>
-<li>held in memory only while a scan runs, one email at a time, and never saved to storage or logs.</li>
-</ul>
-<p><strong>What's kept.</strong> The scan produces a list of suggested payments (name, price, currency, billing cycle, category, payment date, and the address it was found in). Nothing is added until you review the list and tap Add. Only the payments you choose are saved, in the same way as subscriptions you enter by hand (and synced to your iCloud as described above).</p>
-<p><strong>Your sign-in.</strong> The access and refresh tokens Google issues for each account are stored in your device's Keychain, available only on that device and not synced through iCloud or iCloud Keychain. On a new device you connect your accounts again.</p>
-<p><strong>Disconnecting.</strong> In <strong>Settings › Import from Email</strong>, swipe an account and tap Disconnect: MyDues revokes its access with Google and deletes that account's tokens from your device. You can also remove access at any time from your Google Account at <a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a>. Subscriptions you already added stay in the app until you delete them.</p>
-<h3>Google API Services User Data Policy</h3>
-<p>MyDues's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Specifically:</p>
-<ul>
-<li>Gmail data is used only to provide the user-facing feature of finding subscriptions and recurring payments in your email;</li>
-<li>Gmail data is not transferred to anyone, except as necessary to provide that feature, to comply with applicable law, or as part of a merger, acquisition or sale of assets with notice to you. In practice, it never leaves your device;</li>
-<li>Gmail data is not used for advertising, including retargeting, personalized or interest-based advertising;</li>
-<li>no human reads your Gmail data. MyDues's developers have no way to access it.</li>
-</ul>
-<h2>Screen Time (optional)</h2>
-<p>You can link a subscription to the app you use it in. MyDues then asks for Screen Time access (Apple's Family Controls, for your own device) and you choose the app in Apple's own picker. MyDues never learns which app you picked, how long you used it or what you did: Screen Time only tells it, on your device, on which days that app was used for at least a few minutes. Those days are stored on your device to fill in your weekly check-ins and to remind you when you haven't opened a paid app for a week. Nothing about your usage leaves your device. You can stop tracking a subscription at any time from its detail screen, or turn off access in Settings › Screen Time.</p>
+<p>Check-in, payment, return, warranty, trial and pagoPA reminders are scheduled with local notifications on your device, so no reminder content leaves your device. iCloud sync uses Apple's silent push notifications only to tell the app that your data changed on another device.</p>
 <h2>Widgets</h2>
 <p>The Home Screen and Lock Screen widgets show your upcoming payments and monthly total. The app saves a small summary for them in a container on your device that only MyDues and its widgets can read. Anyone who can see your Home Screen or Lock Screen can see what the widgets show.</p>
 <h2>Apple Intelligence</h2>
-<p>Email analysis uses only Apple's on-device model and requires a device that supports Apple Intelligence with Apple Intelligence turned on. MyDues doesn't use Private Cloud Compute or any server-based model for this feature.</p>
+<p>When MyDues looks for a service's website or picks its plans or cancellation link, it may use Apple Intelligence with the model that runs <strong>on your device</strong> (Apple's Foundation Models framework). MyDues doesn't use Private Cloud Compute or any server-based model, and nothing about you is sent for this. On devices without Apple Intelligence, these suggestions are simply not offered.</p>
 <h2>Tracking and third parties</h2>
-<p>MyDues doesn't track you across apps or websites, doesn't include third-party analytics or advertising SDKs, and doesn't sell or share data with data brokers. The external services MyDues contacts are Apple's iCloud (for sync, if you're signed in), Google (only if you connect Gmail) and, if the developers have configured one, the web address that hosts the updated list of service plans and prices.</p>
+<p>MyDues doesn't track you across apps or websites, doesn't include third-party analytics or advertising SDKs, and doesn't sell or share data with data brokers. The external services MyDues contacts are Apple's iCloud (for sync, if you're signed in), the public web pages of services you ask it to look up (see below), pagoPA's official site when you choose to pay a notice and, if the developers have configured one, the web address that hosts the updated list of service plans and prices.</p>
 <h2>Plan suggestions and cheaper alternatives</h2>
 <p>When you add a subscription by hand, MyDues can suggest the plans of well-known services and their typical prices, and it points out cheaper plans or similar services. This uses a list of plans included in the app. The app may also download an updated copy of that list from a web address chosen by MyDues's developers, at most once a day. That request is a plain download: it contains nothing about you or your subscriptions, and the comparison happens on your device.</p>
-<p><strong>Plans and cancellation pages.</strong> "See Plans and Prices" and "Cancel Subscription" open the service's own pages, and only when you tap them. For well-known services the links are part of the app's list; for Apple's services, your Apple Account subscriptions open. For any other service, your device finds the service's website (from the domain of the email it was imported from, or with a suggestion from Apple Intelligence on the device, always checked by loading the site) and reads its public home and help pages to find the right link; Apple Intelligence picks among the links actually found there. These pages are loaded without cookies or any information about you, and no search engine is used. The page found is remembered with that subscription (and synced through your iCloud). Plans open in an in-app Safari view; cancellation opens in Safari or in your Apple Account, where you're signed in. MyDues doesn't see what you do on those pages.</p>
+<p><strong>Plans and cancellation pages.</strong> "See Plans and Prices" and "Cancel Subscription" open the service's own pages, and only when you tap them. For well-known services the links are part of the app's list; for Apple's services, your Apple Account subscriptions open. For any other service, your device finds the service's website (from its name, with a suggestion from Apple Intelligence on the device, always checked by loading the site) and reads its public home and help pages to find the right link; Apple Intelligence picks among the links actually found there. These pages are loaded without cookies or any information about you, and no search engine is used. The page found is remembered with that subscription (and synced through your iCloud). Plans open in an in-app Safari view; cancellation opens in Safari or in your Apple Account, where you're signed in. MyDues doesn't see what you do on those pages.</p>
 <h2>Children</h2>
 <p>MyDues isn't directed at children under 13 and doesn't knowingly collect information from them.</p>
 <h2>Deleting your data</h2>
 <ul>
 <li>Delete individual subscriptions in the app: the deletion syncs to iCloud and your other devices.</li>
-<li>Disconnect Gmail accounts in Settings to revoke access and delete their sign-in.</li>
-<li><strong>Settings › Reset MyDues</strong> deletes everything from this device, from your iCloud and from your other devices, and disconnects every Gmail account.</li>
+<li><strong>Settings › Reset MyDues</strong> deletes everything from this device, from your iCloud and from your other devices.</li>
 <li>Deleting the app removes what's on that device; data in your iCloud stays until you reset the app or delete it in the Settings app under your name › iCloud.</li>
 </ul>
 <p>Because MyDues doesn't hold your data on any server of its own, there's nothing for us to delete on our side.</p>
 <h2>Changes</h2>
-<p>If this policy changes, the new version will be published here and in the app, with a new "Last updated" date. Material changes to how email is handled will be explained in the app before they take effect.</p>
+<p>If this policy changes, the new version will be published here and in the app, with a new "Last updated" date. Material changes, such as a new optional feature that accesses more of your information, will be explained in the app before they take effect.</p>
 <h2>Contact</h2>
 <p>Questions about this policy: <a href="mailto:myduesapp@gmail.com">myduesapp@gmail.com</a></p></main>
 <footer>© 2026 MyDues · <a href="privacy.html">Privacy Policy</a> · <a href="mailto:myduesapp@gmail.com">myduesapp@gmail.com</a></footer>

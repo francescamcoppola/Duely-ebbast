@@ -82,6 +82,7 @@ struct RootTabView: View {
     /// Screen Time: refreshes permission, forgets deleted subscriptions, answers the finished
     /// week when every subscription is tracked.
     private func syncScreenTime() {
+        guard FeatureFlags.screenTime else { return }
         screenTime.refreshStatus()
         screenTime.pruneLinks(keeping: subscriptions)
         guard checkInEnabled else { return }
