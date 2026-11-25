@@ -58,6 +58,12 @@ struct SubscriptionDetailView: View {
                 } footer: {
                     Text("This subscription isn't counted in your totals yet.")
                 }
+            } else if subscription.isFree {
+                Section {
+                    LabeledContent("Price") { Text("Free") }
+                } footer: {
+                    Text("A free plan: it isn't counted in your totals and has no payment reminders. Edit it to add a price if it starts costing something.")
+                }
             } else {
                 billingSection
                 let alternatives = alternatives
@@ -108,7 +114,13 @@ struct SubscriptionDetailView: View {
                 .multilineTextAlignment(.center)
             if !subscription.needsSetup {
                 Group {
-                    if let plan = subscription.planName {
+                    if subscription.isFree {
+                        if let plan = subscription.planName {
+                            Text("\(plan) · \(Text("Free"))")
+                        } else {
+                            Text("Free")
+                        }
+                    } else if let plan = subscription.planName {
                         Text("\(plan) · \(Text(subscription.price, format: .currency(code: currencyCode))) · \(Text(subscription.cycle.title))")
                     } else {
                         Text("\(Text(subscription.price, format: .currency(code: currencyCode))) · \(Text(subscription.cycle.title))")

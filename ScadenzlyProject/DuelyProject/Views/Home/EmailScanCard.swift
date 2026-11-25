@@ -41,7 +41,7 @@ struct EmailScanCard: View {
         case .failed(let message):
             Text(message)
         default:
-            Text("Apple Intelligence is looking for subscriptions and free trials, bills and taxes, orders you can still return, warranties and pagoPA notices, on this device. You can use other apps meanwhile: you'll get a notification when it's done.")
+            Text("Apple Intelligence is looking for subscriptions and free trials, bills and taxes, orders you can still return, warranties and pagoPA notices, on this device. If you switch app, emails keep downloading and are read when you come back.")
         }
     }
 
@@ -55,9 +55,15 @@ struct EmailScanCard: View {
                 ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
                     Text("Skipping ads and newsletters…").font(.caption)
                 }
+            case .downloading:
+                ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
+                    Text("Downloading emails…").font(.caption)
+                } currentValueLabel: {
+                    Text("\(progress.done) of \(progress.total)").font(.caption)
+                }
             case .reading:
                 ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
-                    Text("Reading emails…").font(.caption)
+                    Text("Apple Intelligence is reading…").font(.caption)
                 } currentValueLabel: {
                     Text("\(progress.done) of \(progress.total)").font(.caption)
                 }

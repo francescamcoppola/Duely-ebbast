@@ -49,7 +49,7 @@ enum ReminderPlanner {
         var drafts: [Draft] = []
         let horizon = calendar.date(byAdding: .day, value: horizonDays, to: now) ?? now
 
-        for subscription in subscriptions where includePayments && !subscription.needsSetup && subscription.reminderDaysBefore > 0 {
+        for subscription in subscriptions where includePayments && subscription.hasCharges && subscription.reminderDaysBefore > 0 {
             let days = subscription.reminderDaysBefore
             // The trial's own reminder covers its first charge.
             let trialEnd = subscription.isInTrial(now: now, calendar: calendar) ? subscription.trialEndDate : nil

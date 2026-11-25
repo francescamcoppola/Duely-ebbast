@@ -29,7 +29,9 @@ struct ScanProgress: Equatable {
         case searching
         /// Checking senders and subjects to skip ads, newsletters and repeats.
         case filtering
-        /// Apple Intelligence is reading the emails that matter.
+        /// Downloading the emails that matter (and reading pagoPA QR codes). Works in the background.
+        case downloading
+        /// Apple Intelligence is reading them. Only while the app is open.
         case reading
     }
 
@@ -83,6 +85,8 @@ struct ScanResults: Equatable {
     var subscriptions: [DetectedSubscription] = []
     var purchases: [DetectedPurchase] = []
     var notices: [DetectedNotice] = []
+    /// Why fewer emails than usual were read (iOS paused Apple Intelligence), if that happened.
+    var warning: String? = nil
 
     var isEmpty: Bool { subscriptions.isEmpty && purchases.isEmpty && notices.isEmpty }
     var count: Int { subscriptions.count + purchases.count + notices.count }
@@ -127,12 +131,11 @@ final class EmailImportModel {
     var aiStatus: AppleIntelligenceStatus = .current
 
     private var scanTask: Task<Void, Never>?
-    /// Set when the user stops the scan from its Live Activity (or iOS ends it): the scan stops
-    /// reading and shows what it found so far.
-    private(set) var isStopRequested = false
-    /// Apple Intelligence is limited while the app is in the background: the scan waits for the
-    /// user to open the app again.
+    /// The emails are downloaded and wait for the app to be opened, since Apple Intelligence
+    /// can't read them in the background.
     private(set) var isWaitingForForeground = false
+    /// The "ready to read" notification is sent once per scan.
+    private var didNotifyReadyToRead = false
     /// Settings › Import from Email is on screen (it shows the results itself).
     var isImportScreenVisible = false
     /// For the Live Activity: which account of how many, and how much was found so far.
@@ -275,12 +278,11 @@ final class EmailImportModel {
         // Services already set up are skipped; ones still in "Needs Setup" can be completed.
         let existingKeys = existing.filter { !$0.needsSetup }.map(\.name)
         let known = KnownItems(context: Persistence.container.mainContext)
-        isStopRequested = false
         isWaitingForForeground = false
+        didNotifyReadyToRead = false
+        ScanPacing.reset()
         // Keeps going if the user switches app, with a Live Activity showing the progress.
-        ScanBackgroundActivity.shared.begin(subtitle: String(appLocalized: "Searching the last 13 months…")) { [weak self] in
-            self?.isStopRequested = true
-        }
+        ScanBackgroundActivity.shared.begin(subtitle: String(appLocalized: "Searching the last 13 months…"))
         // The notification when it's done is the natural moment to ask (first time only).
         Task { await NotificationService.requestAuthorizationIfNeeded() }
         scanTask = Task { await scan(accounts: targets, skipping: existingKeys, known: known) }
@@ -304,7 +306,10 @@ final class EmailImportModel {
     func setWaitingForForeground(_ waiting: Bool) {
         guard waiting != isWaitingForForeground else { return }
         isWaitingForForeground = waiting
-        if waiting { ScanBackgroundActivity.shared.notifyPaused() }
+        if waiting, !didNotifyReadyToRead {
+            didNotifyReadyToRead = true
+            ScanBackgroundActivity.shared.notifyReadyToRead()
+        }
         if case .scanning(let progress) = phase { report(progress) }
     }
 
@@ -312,21 +317,24 @@ final class EmailImportModel {
     private func report(_ progress: ScanProgress) {
         phase = .scanning(progress)
         let ratio = progress.total > 0 ? Double(progress.done) / Double(progress.total) : 0
-        let stage: Double = switch progress.stage {
-        case .searching: 0.02
-        case .filtering: 0.05 + 0.2 * ratio
-        case .reading: 0.25 + 0.75 * ratio
+        // First half: every account's search and download. Second half: reading them all.
+        let fraction: Double = switch progress.stage {
+        case .searching: (Double(accountIndex) + 0.02) / Double(max(accountCount, 1)) * 0.5
+        case .filtering: (Double(accountIndex) + 0.05 + 0.15 * ratio) / Double(max(accountCount, 1)) * 0.5
+        case .downloading: (Double(accountIndex) + 0.2 + 0.8 * ratio) / Double(max(accountCount, 1)) * 0.5
+        case .reading: 0.5 + 0.5 * ratio
         }
-        let fraction = (Double(accountIndex) + stage) / Double(max(accountCount, 1))
         let subtitle: String
         if isWaitingForForeground {
-            subtitle = String(appLocalized: "Paused: open \(AppInfo.name) to continue")
+            subtitle = String(appLocalized: "Emails downloaded: open \(AppInfo.name) to read them")
         } else {
             switch progress.stage {
             case .searching:
                 subtitle = String(appLocalized: "Searching the last 13 months…")
             case .filtering:
                 subtitle = String(appLocalized: "Checking senders: \(progress.done) of \(progress.total)")
+            case .downloading:
+                subtitle = String(appLocalized: "Downloading \(progress.done) of \(progress.total)")
             case .reading:
                 subtitle = String(appLocalized: "Reading \(progress.done) of \(progress.total) · found: \(foundSoFar)")
             }
@@ -355,14 +363,20 @@ final class EmailImportModel {
         }
     }
 
-    private struct AccountResult {
-        var subscriptions: [DetectedSubscription] = []
-        var purchases: [DetectedPurchase] = []
-        var notices: [DetectedNotice] = []
+    /// An email downloaded during the first part of a scan, waiting to be read.
+    private struct PreparedEmail {
+        let account: String
+        let route: Route
+        let email: EmailMessage
+        /// For pagoPA emails: the codes and PDF text, found without Apple Intelligence.
+        var notice: PaymentNoticeScanner.Prepared?
+    }
+
+    private struct Download {
+        var emails: [PreparedEmail] = []
         var summary = ScanSummary()
     }
 
-    /// `existingKeys`: names of subscriptions already set up, which aren't suggested again.
     private func scan(accounts: [String], skipping existingKeys: [String], known: KnownItems) async {
         accountIndex = 0
         accountCount = accounts.count
@@ -371,56 +385,21 @@ final class EmailImportModel {
         accountErrors = [:]
         beginKeepingAlive()
         defer { endKeepingAlive() }
-        let extractor = SubscriptionExtractor()
-        // Loads the on-device model while the first network requests run.
-        extractor.prewarm()
-        var found: [DetectedSubscription] = []
-        var foundPurchases: [DetectedPurchase] = []
-        var foundNotices: [DetectedNotice] = []
+
+        // 1. Search and download every account. Network only, so it carries on in the background.
+        var prepared: [PreparedEmail] = []
         var summary = ScanSummary()
         var scannedAny = false
-
         for (index, account) in accounts.enumerated() {
-            guard !isStopRequested else { break }
             accountIndex = index
-            var didRefresh = false
             do {
-                report(ScanProgress(account: account, stage: .searching))
-                let auth = try await validAccessToken(for: account)
-                didRefresh = auth.refreshed
-                let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                found += result.subscriptions
-                foundPurchases += result.purchases
-                foundNotices += result.notices
-                summary = summary + result.summary
+                let download = try await downloadAccount(account)
+                prepared += download.emails
+                summary = summary + download.summary
                 scannedAny = true
             } catch is CancellationError {
-                phase = .idle
-                scanTask = nil
-                ScanBackgroundActivity.shared.end(success: false)
+                finishCancelled()
                 return
-            } catch GmailAuthError.signedOut where !didRefresh {
-                // Access token may have been invalidated early (HTTP 401); try refreshing once before signing out.
-                do {
-                    let auth = try await validAccessToken(for: account, forceRefresh: true)
-                    let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
-                    found += result.subscriptions
-                    foundPurchases += result.purchases
-                    foundNotices += result.notices
-                    summary = summary + result.summary
-                    scannedAny = true
-                } catch is CancellationError {
-                    phase = .idle
-                    scanTask = nil
-                    ScanBackgroundActivity.shared.end(success: false)
-                    return
-                } catch GmailAuthError.signedOut {
-                    GmailAuth.deleteStoredTokens(for: account)
-                    reloadAccounts()
-                    accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
-                } catch {
-                    accountErrors[account] = Self.message(for: error)
-                }
             } catch GmailAuthError.signedOut {
                 // Refresh token expired or was revoked: drop this account, keep scanning the others.
                 GmailAuth.deleteStoredTokens(for: account)
@@ -430,6 +409,55 @@ final class EmailImportModel {
                 accountErrors[account] = Self.message(for: error)
             }
         }
+
+        // 2. Apple Intelligence reads them, only while the app is open.
+        var found: [DetectedSubscription] = []
+        var foundPurchases: [DetectedPurchase] = []
+        var foundNotices: [DetectedNotice] = []
+        let subscriptionExtractor = SubscriptionExtractor()
+        let purchaseExtractor = PurchaseExtractor()
+        var read = 0
+        report(ScanProgress(account: nil, stage: .reading, done: 0, total: prepared.count))
+        await ScanPacing.waitUntilActive()
+        subscriptionExtractor.prewarm()
+
+        for item in prepared {
+            if Task.isCancelled {
+                finishCancelled()
+                return
+            }
+            if ScanPacing.isRateLimited { break }
+            var readAsBilling = false
+            switch item.route {
+            case .notice(let alsoBilling):
+                let notices = await PaymentNoticeScanner.notices(in: item.email, prepared: item.notice ?? .init(codes: [], text: ""),
+                                                                 account: item.account)
+                foundNotices += notices
+                readAsBilling = notices.isEmpty && alsoBilling
+            case .order(let alsoBilling):
+                if let analysis = await purchaseExtractor.analyze(item.email),
+                   let candidate = DetectedPurchase(analysis: analysis, email: item.email, account: item.account) {
+                    foundPurchases.append(candidate)
+                } else {
+                    readAsBilling = alsoBilling
+                }
+            case .billing:
+                readAsBilling = true
+            }
+            if readAsBilling, !ScanPacing.isRateLimited,
+               let analysis = await subscriptionExtractor.analyze(item.email),
+               let candidate = DetectedSubscription(analysis: analysis, email: item.email, account: item.account) {
+                found.append(candidate)
+            }
+            if !ScanPacing.isRateLimited { read += 1 }
+            foundSoFar = found.count + foundPurchases.count + foundNotices.count
+            report(ScanProgress(account: item.account, stage: .reading, done: read, total: prepared.count))
+        }
+        summary.read = read
+        // Shown with the results when iOS stopped Apple Intelligence before every email was read.
+        let warning = ScanPacing.isRateLimited
+            ? Self.rateLimitMessage(read: read, total: prepared.count, until: ScanPacing.rateLimitResetDate)
+            : nil
 
         if scannedAny {
             let results = ScanResults(
@@ -441,7 +469,8 @@ final class EmailImportModel {
                     !known.orderKeys.contains($0.id)
                         && WarrantyPolicy.until(orderDate: $0.orderDate, deliveryDate: $0.deliveryDate) >= Calendar.current.startOfDay(for: .now)
                 },
-                notices: DetectedNotice.merged(foundNotices).filter { !known.noticeNumbers.contains($0.id) }
+                notices: DetectedNotice.merged(foundNotices).filter { !known.noticeNumbers.contains($0.id) },
+                warning: warning
             )
             UserDefaults.standard.set(Date.now, forKey: EmailImportKeys.lastScan)
             UserDefaults.standard.set(summary.dictionary, forKey: EmailImportKeys.lastSummary)
@@ -459,6 +488,21 @@ final class EmailImportModel {
         scanTask = nil
     }
 
+    private func finishCancelled() {
+        phase = .idle
+        scanTask = nil
+        isWaitingForForeground = false
+        ScanBackgroundActivity.shared.end(success: false)
+    }
+
+    private static func rateLimitMessage(read: Int, total: Int, until: Date?) -> String {
+        if let until, until > .now {
+            let time = until.formatted(.dateTime.hour().minute().locale(LocalizedBundle.locale))
+            return String(appLocalized: "iOS has paused Apple Intelligence for \(AppInfo.name) until \(time). \(read) of \(total) emails were read: scan again later to read the rest.")
+        }
+        return String(appLocalized: "iOS has paused Apple Intelligence for \(AppInfo.name) for a while. \(read) of \(total) emails were read: scan again later to read the rest.")
+    }
+
     /// What an email is read as. pagoPA first (a notice beats a recurring tax), then orders,
     /// then recurring payments; each falls back to the next if it finds nothing.
     private enum Route {
@@ -470,20 +514,32 @@ final class EmailImportModel {
     /// 1. Search: billing-like, order and pagoPA emails of the last 13 months (IDs only).
     /// 2. Filter: fetch just sender and subject, skip ads, newsletters, security notices, review
     ///    requests and older repeats of the same receipt or order.
-    /// 3. Read: only what's left is downloaded in full and read by Apple Intelligence on the device;
-    ///    the PDFs of pagoPA emails are scanned for their QR code.
-    private func scanAccount(
-        _ account: String,
-        accessToken: String,
-        extractor: SubscriptionExtractor
-    ) async throws -> AccountResult {
-        var api = GmailAPI(accessToken: accessToken)
+    /// 3. Download: only what's left, in full; the PDFs of pagoPA emails are scanned for their
+    ///    QR code. Apple Intelligence reads them afterwards (`scan`).
+    /// Every step is network or Vision only, so it keeps going in the background.
+    private func downloadAccount(_ account: String) async throws -> Download {
+        func api(forceRefresh: Bool = false) async throws -> GmailAPI {
+            // A long scan can outlast Google's one-hour access token: refresh it when needed.
+            GmailAPI(accessToken: try await validAccessToken(for: account, forceRefresh: forceRefresh).token)
+        }
+        /// One Gmail call: a fresh token after a 401, another try after the app comes back to the
+        /// foreground if iOS suspended it mid-request.
+        func call<T>(_ request: (GmailAPI) async throws -> T) async throws -> T {
+            try await ScanPacing.retryingInForeground {
+                do {
+                    return try await request(try await api())
+                } catch GmailAuthError.signedOut {
+                    return try await request(try await api(forceRefresh: true))
+                }
+            }
+        }
 
-        let billingIDs = try await api.searchMessageIDs(limit: Self.searchLimit)
+        report(ScanProgress(account: account, stage: .searching))
+        let billingIDs = try await call { try await $0.searchMessageIDs(limit: Self.searchLimit) }
         try Task.checkCancellation()
-        let orderIDs = try await api.searchMessageIDs(query: GmailAPI.ordersQuery, limit: Self.searchLimit)
+        let orderIDs = try await call { try await $0.searchMessageIDs(query: GmailAPI.ordersQuery, limit: Self.searchLimit) }
         try Task.checkCancellation()
-        let noticeIDs = try await api.searchMessageIDs(query: GmailAPI.pagoPAQuery, limit: Self.noticesReadLimit * 2)
+        let noticeIDs = try await call { try await $0.searchMessageIDs(query: GmailAPI.pagoPAQuery, limit: Self.noticesReadLimit * 2) }
         try Task.checkCancellation()
 
         // Newest first, each email once.
@@ -491,8 +547,10 @@ final class EmailImportModel {
         let ids = (billingIDs + orderIDs + noticeIDs).filter { seen.insert($0).inserted }
 
         report(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
-        let headers = try await api.metadata(for: ids) { [weak self] done in
-            await self?.updateFiltering(account: account, done: done, total: ids.count)
+        let headers = try await call { api in
+            try await api.metadata(for: ids) { [weak self] done in
+                await self?.updateFiltering(account: account, done: done, total: ids.count)
+            }
         }
         try Task.checkCancellation()
 
@@ -519,67 +577,35 @@ final class EmailImportModel {
             routes.append((item.id, .billing))
         }
 
-        var result = AccountResult()
-        result.summary = ScanSummary(
+        var download = Download()
+        download.summary = ScanSummary(
             checked: ids.count,
-            skippedNotBilling: headers.count - billing.count - orders.count - notices.count,
+            skippedNotBilling: max(0, headers.count - billing.count - orders.count - notices.count),
             skippedRepeats: selection.repeats,
             read: 0
         )
-        result.summary.skippedNotBilling = max(0, result.summary.skippedNotBilling)
 
-        report(ScanProgress(account: account, stage: .reading, done: 0, total: routes.count))
-        let purchaseExtractor = PurchaseExtractor()
-        let foundBefore = foundSoFar
+        report(ScanProgress(account: account, stage: .downloading, done: 0, total: routes.count))
         var unreadable = 0
         var consecutiveFailures = 0
         var processed = 0
         var connectionLost = false
-        var signedOut = false
 
         for (id, route) in routes {
             try Task.checkCancellation()
-            // Stopped from the Live Activity: keep what was found so far.
-            if isStopRequested { break }
             do {
-                // A long scan can outlast Google's one-hour access token: refresh it when needed.
-                api = GmailAPI(accessToken: try await validAccessToken(for: account).token)
-                let email: EmailMessage
-                do {
-                    email = try await api.message(id: id)
-                } catch GmailAuthError.signedOut {
-                    api = GmailAPI(accessToken: try await validAccessToken(for: account, forceRefresh: true).token)
-                    email = try await api.message(id: id)
-                }
+                let email = try await call { try await $0.message(id: id) }
                 consecutiveFailures = 0
-                // Each email is fetched, read and dropped before the next one.
-                var readAsBilling = false
-                switch route {
-                case .notice(let alsoBilling):
-                    let pdfs = await api.pdfs(of: email, maxBytes: PaymentNoticeScanner.maxAttachmentBytes)
-                    let found = await PaymentNoticeScanner.notices(in: email, pdfs: pdfs, account: account)
-                    result.notices += found
-                    readAsBilling = found.isEmpty && alsoBilling
-                case .order(let alsoBilling):
-                    if let analysis = await purchaseExtractor.analyze(email),
-                       let candidate = DetectedPurchase(analysis: analysis, email: email, account: account) {
-                        result.purchases.append(candidate)
-                    } else {
-                        readAsBilling = alsoBilling
-                    }
-                case .billing:
-                    readAsBilling = true
+                var item = PreparedEmail(account: account, route: route, email: Self.compact(email))
+                if case .notice = route {
+                    let pdfs = await (try? api())?.pdfs(of: email, maxBytes: PaymentNoticeScanner.maxAttachmentBytes) ?? []
+                    item.notice = await PaymentNoticeScanner.prepare(email, pdfs: pdfs)
                 }
-                if readAsBilling,
-                   let analysis = await extractor.analyze(email),
-                   let candidate = DetectedSubscription(analysis: analysis, email: email, account: account) {
-                    result.subscriptions.append(candidate)
-                }
+                download.emails.append(item)
             } catch is CancellationError {
                 throw CancellationError()
             } catch GmailAuthError.signedOut {
-                signedOut = true
-                break
+                throw GmailAuthError.signedOut
             } catch {
                 // One email that can't be fetched is skipped. Several in a row: the connection is gone.
                 unreadable += 1
@@ -591,22 +617,25 @@ final class EmailImportModel {
                 }
             }
             processed += 1
-            foundSoFar = foundBefore + result.subscriptions.count + result.purchases.count + result.notices.count
-            report(ScanProgress(account: account, stage: .reading, done: processed, total: routes.count))
+            report(ScanProgress(account: account, stage: .downloading, done: processed, total: routes.count))
         }
 
-        // What was found is always kept; the account row explains what's missing.
-        result.summary.read = processed - unreadable
-        if signedOut {
-            GmailAuth.deleteStoredTokens(for: account)
-            reloadAccounts()
-            accountErrors[account] = GmailAuthError.signedOut.errorDescription ?? ""
-        } else if connectionLost {
+        // What was downloaded is always read; the account row explains what's missing.
+        if connectionLost {
             accountErrors[account] = String(appLocalized: "The connection dropped after \(processed) of \(routes.count) emails. What was found so far is shown; scan again to finish.")
         } else if unreadable > 0 {
             accountErrors[account] = String(appLocalized: "^[\(unreadable) email](inflect: true) couldn't be read and was skipped.")
         }
-        return result
+        return download
+    }
+
+    /// Keeps only what the model reads (the start and the end of long emails), so hundreds of
+    /// downloaded emails don't weigh on memory while they wait to be read.
+    private static func compact(_ email: EmailMessage) -> EmailMessage {
+        guard email.body.count > 8000 else { return email }
+        let body = "\(email.body.prefix(5600))\n...\n\(email.body.suffix(2400))"
+        return EmailMessage(id: email.id, from: email.from, subject: email.subject, date: email.date,
+                            body: body, attachments: email.attachments)
     }
 
     /// Keeps the screen on during a scan (a locked phone drops network connections) and asks

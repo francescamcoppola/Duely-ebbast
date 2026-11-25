@@ -46,7 +46,11 @@ struct ImportReviewView: View {
                     ContentUnavailableView {
                         Label("Nothing New Found", systemImage: "envelope.open")
                     } description: {
-                        Text("No receipts, renewals, orders or pagoPA notices were found that aren't in \(AppInfo.name) yet.")
+                        if let warning = results.warning {
+                            Text(warning)
+                        } else {
+                            Text("No receipts, renewals, orders or pagoPA notices were found that aren't in \(AppInfo.name) yet.")
+                        }
                     }
                 } else {
                     list
@@ -72,6 +76,13 @@ struct ImportReviewView: View {
 
     private var list: some View {
         List {
+            if let warning = results.warning {
+                Section {
+                    Label(warning, systemImage: "exclamationmark.triangle")
+                        .foregroundStyle(.orange)
+                }
+            }
+
             if !results.subscriptions.isEmpty {
                 Section {
                     ForEach(results.subscriptions) { candidate in

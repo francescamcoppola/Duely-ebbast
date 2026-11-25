@@ -193,7 +193,7 @@ struct EmailImportView: View {
         } else if case .failed(let message) = model.phase {
             Text(message).foregroundStyle(.red)
         } else if model.isScanning {
-            Text("It can take a few minutes. You can switch to other apps: the progress stays in the Dynamic Island and on the Lock Screen, and you'll get a notification when it's done.")
+            Text("It can take a few minutes. If you switch to other apps, it keeps downloading emails, with the progress in the Dynamic Island and on the Lock Screen; Apple Intelligence reads them when you come back, since iOS doesn't allow it in the background.")
         } else if let lastScan = model.lastScan, let summary = model.lastSummary {
             VStack(alignment: .leading, spacing: 4) {
                 if let addedCount, addedCount > 0 {
@@ -204,7 +204,7 @@ struct EmailImportView: View {
         } else if let addedCount, addedCount > 0 {
             Text("^[\(addedCount) payment](inflect: true) added.")
         } else {
-            Text("Checks up to \(EmailImportModel.searchLimit) emails about payments, orders and pagoPA per account from the last 13 months. Ads, newsletters and repeats are recognized by sender and subject and skipped; Apple Intelligence reads the rest: up to \(EmailImportModel.readLimit) billing emails, \(EmailImportModel.ordersReadLimit) orders and \(EmailImportModel.noticesReadLimit) pagoPA notices per account. It keeps going if you switch to another app.")
+            Text("Checks up to \(EmailImportModel.searchLimit) emails about payments, orders and pagoPA per account from the last 13 months. Ads, newsletters and repeats are recognized by sender and subject and skipped; Apple Intelligence reads the rest: up to \(EmailImportModel.readLimit) billing emails, \(EmailImportModel.ordersReadLimit) orders and \(EmailImportModel.noticesReadLimit) pagoPA notices per account.")
         }
     }
 
@@ -268,9 +268,15 @@ private struct ScanProgressView: View {
                 } currentValueLabel: {
                     Text("Checked \(progress.done) of ^[\(progress.total) email](inflect: true)")
                 }
+            case .downloading:
+                ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
+                    Text("Downloading emails…")
+                } currentValueLabel: {
+                    Text("\(progress.done) of \(progress.total)")
+                }
             case .reading:
                 ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
-                    Text("Reading emails…")
+                    Text("Apple Intelligence is reading…")
                 } currentValueLabel: {
                     Text("\(progress.done) of \(progress.total)")
                 }

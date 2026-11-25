@@ -18,7 +18,7 @@ enum WidgetSync {
         let horizon = calendar.date(byAdding: .day, value: 31, to: calendar.startOfDay(for: now)) ?? now
 
         var upcoming: [WidgetSnapshot.Payment] = []
-        for subscription in configured {
+        for subscription in configured where subscription.hasCharges {
             // Weekly plans can be charged several times in a month. Paid ones are done with.
             for date in subscription.paymentDates(from: calendar.startOfDay(for: now), to: horizon, calendar: calendar)
             where !subscription.isMarkedPaid(on: date, calendar: calendar) {

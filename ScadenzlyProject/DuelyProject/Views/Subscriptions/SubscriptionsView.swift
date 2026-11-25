@@ -242,7 +242,13 @@ struct SubscriptionRow: View {
                     .foregroundStyle(.tint)
             } else {
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text(subscription.price, format: .currency(code: currencyCode))
+                    Group {
+                        if subscription.isFree {
+                            Text("Free")
+                        } else {
+                            Text(subscription.price, format: .currency(code: currencyCode))
+                        }
+                    }
                         .font(.body.weight(.semibold))
                         .monospacedDigit()
                     Group {

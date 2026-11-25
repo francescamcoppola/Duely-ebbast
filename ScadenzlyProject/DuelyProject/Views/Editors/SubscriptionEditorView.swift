@@ -54,7 +54,9 @@ struct SubscriptionEditorView: View {
     private var currency: CurrencyOption { CurrencyOption(code: currencyCode) }
     private var trimmedName: String { name.trimmingCharacters(in: .whitespacesAndNewlines) }
     private var price: Decimal? { priceText.isEmpty ? nil : Decimal(string: priceText, locale: .current) }
-    private var canSave: Bool { !trimmedName.isEmpty && (price ?? 0) > 0 && (endRule != .onDate || paymentsUntilLastDate > 0) }
+    /// 0 is allowed: a free plan, confirmed as such. An empty price isn't.
+    private var canSave: Bool { !trimmedName.isEmpty && (price ?? -1) >= 0 && (endRule != .onDate || paymentsUntilLastDate > 0) }
+    private var isFree: Bool { price == 0 }
     private var isNew: Bool { subscription == nil }
 
     var body: some View {
@@ -129,7 +131,9 @@ struct SubscriptionEditorView: View {
 
                     DatePicker(isTrial ? "Trial Ends" : "Next Payment", selection: $nextPayment, displayedComponents: .date)
                 } footer: {
-                    if isTrial {
+                    if isFree {
+                        Text("Saved as free: it isn't counted in your totals and has no payment reminders.")
+                    } else if isTrial {
                         Text("The first charge is on the day the trial ends. You get a reminder 2 days before, in time to cancel.")
                     } else if cycle != .monthly, let price, price > 0 {
                         Text("About \(Text(BillingMath.monthlyEquivalent(price: price, cycle: cycle), format: .currency(code: currencyCode))) per month.")
@@ -407,7 +411,7 @@ struct SubscriptionEditorView: View {
     private var hasChanges: Bool {
         guard let subscription else { return !trimmedName.isEmpty || !priceText.isEmpty }
         return trimmedName != subscription.name
-            || price != (subscription.price > 0 ? subscription.price : nil)
+            || price != (subscription.price > 0 || subscription.isFree ? subscription.price : nil)
             || cycle != subscription.cycle
             || category != subscription.category
             || reminderDays != subscription.reminderDaysBefore
@@ -438,7 +442,9 @@ struct SubscriptionEditorView: View {
             lastPayment = last
             paymentsLeft = max(subscription.remainingPayments() ?? 1, 1)
         }
-        if subscription.price > 0 {
+        if subscription.isFree {
+            priceText = "0"
+        } else if subscription.price > 0 {
             priceText = OnboardingViewModel.sanitizedAmount(
                 BillingMath.storedString(subscription.price),
                 maxFractionDigits: currency.fractionDigits
@@ -463,6 +469,7 @@ struct SubscriptionEditorView: View {
         }
         target.name = trimmedName
         target.price = price
+        target.isFree = price == 0
         target.cycle = cycle
         target.category = category
         target.anchorDate = Calendar.current.startOfDay(for: nextPayment)

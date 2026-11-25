@@ -21637,46 +21637,6 @@
         }
       }
     },
-    "Paused: open %@ to continue" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pausiert: Öffne %@, um fortzufahren"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En pausa: abre %@ para continuar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En pause : ouvrez %@ pour continuer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In pausa: apri %@ per continuare"
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In pauss: aprs %@ per continuars"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gepauzeerd: open %@ om door te gaan"
-          }
-        }
-      }
-    },
     "Checking senders: %lld of %lld" : {
       "localizations" : {
         "de" : {
@@ -21797,46 +21757,6 @@
         }
       }
     },
-    "Apple Intelligence is looking for subscriptions and free trials, bills and taxes, orders you can still return, warranties and pagoPA notices, on this device. You can use other apps meanwhile: you'll get a notification when it's done." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence sucht auf diesem Gerät nach Abos und Gratis-Testphasen, Rechnungen und Steuern, noch zurücksendbaren Bestellungen, Garantien und pagoPA-Zahlungsaufforderungen. Du kannst solange andere Apps nutzen: Eine Mitteilung meldet, wenn es fertig ist."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence está buscando suscripciones y pruebas gratuitas, facturas e impuestos, pedidos que aún puedes devolver, garantías y avisos pagoPA, en este dispositivo. Mientras tanto puedes usar otras apps: recibirás una notificación al terminar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence recherche abonnements et essais gratuits, factures et impôts, commandes encore retournables, garanties et avis pagoPA, sur cet appareil. Vous pouvez utiliser d'autres apps en attendant : une notification vous préviendra à la fin."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence sta cercando abbonamenti e prove gratuite, bollette e tasse, ordini ancora restituibili, garanzie e avvisi pagoPA, su questo dispositivo. Intanto puoi usare altre app: riceverai una notifica quando ha finito."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence sta cercands abbonaments e provs gratuits, bolletts e tasss, ordins ancors restituibils, garanzis e avviss pagoPA, su quests dispositivs. Intants puos usars altrs app: riceveras una notifics quands ha finits."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Intelligence zoekt op dit apparaat naar abonnementen en proefperiodes, rekeningen en belastingen, bestellingen die je nog kunt retourneren, garanties en pagoPA-betaalberichten. Je kunt intussen andere apps gebruiken: je krijgt een melding als het klaar is."
-          }
-        }
-      }
-    },
     "%@ looks through the last 13 months of email for subscriptions and free trials, bills, taxes and tuition, online orders you can still return or that are under warranty, and pagoPA notices to pay. It skips ads, newsletters and repeats; Apple Intelligence reads the rest on this device. Connect several accounts to find everything. You choose what to add." : {
       "localizations" : {
         "de" : {
@@ -21873,86 +21793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ doorzoekt de e-mail van de afgelopen 13 maanden op abonnementen en proefperiodes, rekeningen, belastingen en collegegeld, online bestellingen die je nog kunt retourneren of onder garantie vallen, en pagoPA-betaalberichten. Advertenties, nieuwsbrieven en herhalingen worden overgeslagen; Apple Intelligence leest de rest op dit apparaat. Koppel meerdere accounts om alles te vinden. Jij kiest wat je toevoegt."
-          }
-        }
-      }
-    },
-    "It can take a few minutes. You can switch to other apps: the progress stays in the Dynamic Island and on the Lock Screen, and you'll get a notification when it's done." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Das kann ein paar Minuten dauern. Du kannst zu anderen Apps wechseln: Der Fortschritt bleibt in der Dynamic Island und auf dem Sperrbildschirm, und eine Mitteilung meldet, wenn es fertig ist."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puede tardar unos minutos. Puedes cambiar a otras apps: el progreso se queda en la Dynamic Island y en la pantalla bloqueada, y recibirás una notificación al terminar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cela peut prendre quelques minutes. Vous pouvez passer à d'autres apps : la progression reste dans la Dynamic Island et sur l'écran verrouillé, et une notification vous préviendra à la fin."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Può richiedere qualche minuto. Puoi passare ad altre app: l'avanzamento resta nella Dynamic Island e sulla schermata di blocco, e riceverai una notifica quando ha finito."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Può richieders qualchs minuts. Puos passars ad altrs app: l'avanzaments rests nells Dynamic Island e sulls schermats di bloccs, e riceveras una notifics quands ha finits."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dit kan een paar minuten duren. Je kunt naar andere apps gaan: de voortgang blijft zichtbaar in het Dynamic Island en op het toegangsscherm, en je krijgt een melding als het klaar is."
-          }
-        }
-      }
-    },
-    "Checks up to %lld emails about payments, orders and pagoPA per account from the last 13 months. Ads, newsletters and repeats are recognized by sender and subject and skipped; Apple Intelligence reads the rest: up to %lld billing emails, %lld orders and %lld pagoPA notices per account. It keeps going if you switch to another app." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prüft bis zu %lld E-Mails zu Zahlungen, Bestellungen und pagoPA pro Account aus den letzten 13 Monaten. Werbung, Newsletter und Wiederholungen werden an Absender und Betreff erkannt und übersprungen; Apple Intelligence liest den Rest: bis zu %lld Rechnungs-E-Mails, %lld Bestellungen und %lld pagoPA-Zahlungsaufforderungen pro Account. Läuft weiter, wenn du zu einer anderen App wechselst."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Revisa hasta %lld correos sobre pagos, pedidos y pagoPA por cuenta de los últimos 13 meses. Anuncios, boletines y repeticiones se reconocen por remitente y asunto y se omiten; Apple Intelligence lee el resto: hasta %lld correos de facturación, %lld pedidos y %lld avisos pagoPA por cuenta. Sigue aunque cambies a otra app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifie jusqu'à %lld e-mails de paiements, commandes et pagoPA par compte sur les 13 derniers mois. Publicités, newsletters et doublons sont reconnus par l'expéditeur et l'objet et ignorés ; Apple Intelligence lit le reste : jusqu'à %lld e-mails de facturation, %lld commandes et %lld avis pagoPA par compte. Continue même si vous passez à une autre app."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Controlla fino a %lld email su pagamenti, ordini e pagoPA per account degli ultimi 13 mesi. Pubblicità, newsletter e doppioni vengono riconosciuti da mittente e oggetto e saltati; Apple Intelligence legge il resto: fino a %lld email di pagamento, %lld ordini e %lld avvisi pagoPA per account. Continua anche se passi a un'altra app."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Controlls fins a %lld email su pagaments, ordins e pagoPA per account degls ultims 13 mess. Pubblicità, newsletter e doppions vengons riconosciuts da mittents e oggetts e saltats; Apple Intelligence leggs il rests: fins a %lld email di pagaments, %lld ordins e %lld avviss pagoPA per account. Continus anchs se passs a un'altrs app."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Controleert per account tot %lld e-mails over betalingen, bestellingen en pagoPA uit de afgelopen 13 maanden. Advertenties, nieuwsbrieven en herhalingen worden herkend aan afzender en onderwerp en overgeslagen; Apple Intelligence leest de rest: tot %lld factuurmails, %lld bestellingen en %lld pagoPA-betaalberichten per account. Gaat door als je naar een andere app gaat."
           }
         }
       }
@@ -22073,86 +21913,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "E-mailzoektocht klaar"
-          }
-        }
-      }
-    },
-    "Email Search Paused" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "E-Mail-Suche pausiert"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Búsqueda en el correo en pausa"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recherche dans les e-mails en pause"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ricerca nelle email in pausa"
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ricercs nells email in pauss"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "E-mailzoektocht gepauzeerd"
-          }
-        }
-      }
-    },
-    "iOS is limiting Apple Intelligence while %@ is in the background. Open the app to finish the search." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS schränkt Apple Intelligence ein, solange %@ im Hintergrund ist. Öffne die App, um die Suche abzuschließen."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS está limitando Apple Intelligence mientras %@ está en segundo plano. Abre la app para terminar la búsqueda."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS limite Apple Intelligence tant que %@ est en arrière-plan. Ouvrez l'app pour terminer la recherche."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS sta limitando Apple Intelligence mentre %@ è in background. Apri l'app per completare la ricerca."
-          }
-        },
-        "it-VA" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS sta limitands Apple Intelligence mentrs %@ è in background. Aprs l'app per completars la ricercs."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iOS beperkt Apple Intelligence zolang %@ op de achtergrond staat. Open de app om de zoektocht af te maken."
           }
         }
       }
@@ -22543,6 +22303,566 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "Emails downloaded: open %@ to read them" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mails geladen: Öffne %@, um sie zu lesen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correos descargados: abre %@ para leerlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mails téléchargés : ouvrez %@ pour les lire"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email scaricate: apri %@ per leggerle"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email scaricats: aprs %@ per leggerls"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mails gedownload: open %@ om ze te lezen"
+          }
+        }
+      }
+    },
+    "Downloading %lld of %lld" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lade %lld von %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargando %lld de %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement %lld sur %lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaricamento %lld di %lld"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaricaments %lld di %lld"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloaden %lld van %lld"
+          }
+        }
+      }
+    },
+    "iOS has paused Apple Intelligence for %@ until %@. %lld of %lld emails were read: scan again later to read the rest." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS hat Apple Intelligence für %@ bis %@ pausiert. %lld von %lld E-Mails wurden gelesen: Suche später erneut, um den Rest zu lesen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha pausado Apple Intelligence para %@ hasta las %@. Se leyeron %lld de %lld correos: vuelve a buscar más tarde para leer el resto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS a mis Apple Intelligence en pause pour %@ jusqu'à %@. %lld e-mails sur %lld ont été lus : relancez la recherche plus tard pour lire le reste."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha messo in pausa Apple Intelligence per %@ fino alle %@. Lette %lld email su %lld: ripeti la ricerca più tardi per leggere le altre."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha messs in pauss Apple Intelligence per %@ fins alls %@. Letts %lld email su %lld: ripets la ricercs più tards per leggers le altrs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS heeft Apple Intelligence voor %@ gepauzeerd tot %@. %lld van %lld e-mails zijn gelezen: zoek later opnieuw om de rest te lezen."
+          }
+        }
+      }
+    },
+    "iOS has paused Apple Intelligence for %@ for a while. %lld of %lld emails were read: scan again later to read the rest." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS hat Apple Intelligence für %@ eine Weile pausiert. %lld von %lld E-Mails wurden gelesen: Suche später erneut, um den Rest zu lesen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha pausado Apple Intelligence para %@ durante un tiempo. Se leyeron %lld de %lld correos: vuelve a buscar más tarde para leer el resto."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS a mis Apple Intelligence en pause pour %@ pendant un moment. %lld e-mails sur %lld ont été lus : relancez la recherche plus tard pour lire le reste."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha messo in pausa Apple Intelligence per %@ per un po'. Lette %lld email su %lld: ripeti la ricerca più tardi per leggere le altre."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS ha messs in pauss Apple Intelligence per %@ per un po'. Letts %lld email su %lld: ripets la ricercs più tards per leggers le altrs."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS heeft Apple Intelligence voor %@ een tijdje gepauzeerd. %lld van %lld e-mails zijn gelezen: zoek later opnieuw om de rest te lezen."
+          }
+        }
+      }
+    },
+    "Free" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kostenlos"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratuit"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratuito"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratuits"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis"
+          }
+        }
+      }
+    },
+    "A free plan: it isn't counted in your totals and has no payment reminders. Edit it to add a price if it starts costing something." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein kostenloser Tarif: Er zählt nicht zu deinen Summen und hat keine Zahlungserinnerungen. Bearbeite ihn, um einen Preis hinzuzufügen, falls er etwas kostet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un plan gratuito: no cuenta en tus totales ni tiene avisos de pago. Edítalo para añadir un precio si empieza a costar algo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une offre gratuite : elle n'est pas comptée dans vos totaux et n'a pas de rappels de paiement. Modifiez-la pour ajouter un prix si elle devient payante."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un piano gratuito: non conta nei totali e non ha promemoria di pagamento. Modificalo per aggiungere un prezzo se inizia a costare."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un pians gratuits: non conts nei totals e non ha promemoris di pagaments. Modificals per aggiungers un prezzs se inizis a costars."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Een gratis abonnement: het telt niet mee in je totalen en heeft geen betaalherinneringen. Bewerk het om een prijs toe te voegen als het iets gaat kosten."
+          }
+        }
+      }
+    },
+    "Saved as free: it isn't counted in your totals and has no payment reminders." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wird als kostenlos gespeichert: zählt nicht zu deinen Summen und hat keine Zahlungserinnerungen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se guarda como gratuito: no cuenta en tus totales ni tiene avisos de pago."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistré comme gratuit : il n'est pas compté dans vos totaux et n'a pas de rappels de paiement."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvato come gratuito: non conta nei totali e non ha promemoria di pagamento."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvats coms gratuits: non conts nei totals e non ha promemoris di pagaments."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opgeslagen als gratis: telt niet mee in je totalen en heeft geen betaalherinneringen."
+          }
+        }
+      }
+    },
+    "Downloading emails…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mails werden geladen …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargando correos…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement des e-mails…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaricamento email…"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scaricaments email…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mails downloaden…"
+          }
+        }
+      }
+    },
+    "Apple Intelligence is reading…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence liest …"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence está leyendo…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence lit…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence sta leggendo…"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence sta leggends…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence leest…"
+          }
+        }
+      }
+    },
+    "Emails Ready to Read" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mails bereit zum Lesen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correos listos para leer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mails prêts à être lus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email pronte da leggere"
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email pronts da leggers"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mails klaar om te lezen"
+          }
+        }
+      }
+    },
+    "Open %@ to let Apple Intelligence read them: iOS doesn't allow it while the app is in the background." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffne %@, damit Apple Intelligence sie liest: iOS erlaubt das nicht, solange die App im Hintergrund ist."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre %@ para que Apple Intelligence los lea: iOS no lo permite con la app en segundo plano."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez %@ pour qu'Apple Intelligence les lise : iOS ne le permet pas quand l'app est en arrière-plan."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri %@ per farle leggere ad Apple Intelligence: iOS non lo permette con l'app in background."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprs %@ per farls leggers ad Apple Intelligence: iOS non lo permetts con l'app in background."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open %@ zodat Apple Intelligence ze kan lezen: iOS staat dat niet toe als de app op de achtergrond staat."
+          }
+        }
+      }
+    },
+    "It can take a few minutes. If you switch to other apps, it keeps downloading emails, with the progress in the Dynamic Island and on the Lock Screen; Apple Intelligence reads them when you come back, since iOS doesn't allow it in the background." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das kann ein paar Minuten dauern. Wenn du zu anderen Apps wechselst, werden die E-Mails weiter geladen, mit dem Fortschritt in der Dynamic Island und auf dem Sperrbildschirm; Apple Intelligence liest sie, wenn du zurückkommst, da iOS das im Hintergrund nicht erlaubt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puede tardar unos minutos. Si cambias a otras apps, sigue descargando los correos, con el progreso en la Dynamic Island y en la pantalla bloqueada; Apple Intelligence los lee cuando vuelves, porque iOS no lo permite en segundo plano."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cela peut prendre quelques minutes. Si vous passez à d'autres apps, le téléchargement des e-mails continue, avec la progression dans la Dynamic Island et sur l'écran verrouillé ; Apple Intelligence les lit à votre retour, car iOS ne le permet pas en arrière-plan."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Può richiedere qualche minuto. Se passi ad altre app continua a scaricare le email, con l'avanzamento nella Dynamic Island e sulla schermata di blocco; Apple Intelligence le legge quando torni, perché iOS non lo permette in background."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Può richieders qualchs minuts. Se passs ad altrs app continus a scaricars le email, con l'avanzaments nells Dynamic Island e sulls schermats di bloccs; Apple Intelligence le leggs quands torns, perché iOS non lo permetts in background."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit kan een paar minuten duren. Als je naar andere apps gaat, worden de e-mails verder gedownload, met de voortgang in het Dynamic Island en op het toegangsscherm; Apple Intelligence leest ze als je terugkomt, omdat iOS dat op de achtergrond niet toestaat."
+          }
+        }
+      }
+    },
+    "Apple Intelligence is looking for subscriptions and free trials, bills and taxes, orders you can still return, warranties and pagoPA notices, on this device. If you switch app, emails keep downloading and are read when you come back." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence sucht auf diesem Gerät nach Abos und Gratis-Testphasen, Rechnungen und Steuern, noch zurücksendbaren Bestellungen, Garantien und pagoPA-Zahlungsaufforderungen. Wenn du die App wechselst, werden die E-Mails weiter geladen und gelesen, sobald du zurückkommst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence está buscando suscripciones y pruebas gratuitas, facturas e impuestos, pedidos que aún puedes devolver, garantías y avisos pagoPA, en este dispositivo. Si cambias de app, los correos se siguen descargando y se leen cuando vuelves."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence recherche abonnements et essais gratuits, factures et impôts, commandes encore retournables, garanties et avis pagoPA, sur cet appareil. Si vous changez d'app, les e-mails continuent d'être téléchargés et sont lus à votre retour."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence sta cercando abbonamenti e prove gratuite, bollette e tasse, ordini ancora restituibili, garanzie e avvisi pagoPA, su questo dispositivo. Se cambi app, le email continuano a essere scaricate e vengono lette quando torni."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence sta cercands abbonaments e provs gratuits, bolletts e tasss, ordins ancors restituibils, garanzis e avviss pagoPA, su quests dispositivs. Se cambs app, le email continuans a essers scaricats e vengons letts quands torns."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence zoekt op dit apparaat naar abonnementen en proefperiodes, rekeningen en belastingen, bestellingen die je nog kunt retourneren, garanties en pagoPA-betaalberichten. Als je van app wisselt, worden de e-mails verder gedownload en gelezen zodra je terugkomt."
+          }
+        }
+      }
+    },
+    "Checks up to %lld emails about payments, orders and pagoPA per account from the last 13 months. Ads, newsletters and repeats are recognized by sender and subject and skipped; Apple Intelligence reads the rest: up to %lld billing emails, %lld orders and %lld pagoPA notices per account." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prüft bis zu %lld E-Mails zu Zahlungen, Bestellungen und pagoPA pro Account aus den letzten 13 Monaten. Werbung, Newsletter und Wiederholungen werden an Absender und Betreff erkannt und übersprungen; Apple Intelligence liest den Rest: bis zu %lld Rechnungs-E-Mails, %lld Bestellungen und %lld pagoPA-Zahlungsaufforderungen pro Account."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revisa hasta %lld correos sobre pagos, pedidos y pagoPA por cuenta de los últimos 13 meses. Anuncios, boletines y repeticiones se reconocen por remitente y asunto y se omiten; Apple Intelligence lee el resto: hasta %lld correos de facturación, %lld pedidos y %lld avisos pagoPA por cuenta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifie jusqu'à %lld e-mails de paiements, commandes et pagoPA par compte sur les 13 derniers mois. Publicités, newsletters et doublons sont reconnus par l'expéditeur et l'objet et ignorés ; Apple Intelligence lit le reste : jusqu'à %lld e-mails de facturation, %lld commandes et %lld avis pagoPA par compte."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla fino a %lld email su pagamenti, ordini e pagoPA per account degli ultimi 13 mesi. Pubblicità, newsletter e doppioni vengono riconosciuti da mittente e oggetto e saltati; Apple Intelligence legge il resto: fino a %lld email di pagamento, %lld ordini e %lld avvisi pagoPA per account."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlls fins a %lld email su pagaments, ordins e pagoPA per account degls ultims 13 mess. Pubblicità, newsletter e doppions vengons riconosciuts da mittents e oggetts e saltats; Apple Intelligence leggs il rests: fins a %lld email di pagaments, %lld ordins e %lld avviss pagoPA per account."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controleert per account tot %lld e-mails over betalingen, bestellingen en pagoPA uit de afgelopen 13 maanden. Advertenties, nieuwsbrieven en herhalingen worden herkend aan afzender en onderwerp en overgeslagen; Apple Intelligence leest de rest: tot %lld factuurmails, %lld bestellingen en %lld pagoPA-betaalberichten per account."
           }
         }
       }

@@ -228,6 +228,8 @@ final class Subscription {
     /// End of a free trial: the first charge is on this day (it's also `anchorDate`).
     /// `nil` when it isn't a trial. See `isInTrial`.
     var trialEndDate: Date?
+    /// Confirmed by the user at 0: a free plan. It's set up (not "Needs Setup") but has no charges.
+    var isFree: Bool = false
 
     @Relationship(deleteRule: .cascade, inverse: \UsageEntry.subscription)
     var usageEntries: [UsageEntry]? = []
@@ -277,7 +279,10 @@ final class Subscription {
     var displayColorName: String { tint?.rawValue ?? category.colorName }
 
     /// Added from onboarding but still missing a price or a payment date.
-    var needsSetup: Bool { price <= 0 || anchorDate == nil }
+    var needsSetup: Bool { !isFree && (price <= 0 || anchorDate == nil) }
+
+    /// Set up and actually charged: free plans have no payments to show or remind about.
+    var hasCharges: Bool { !needsSetup && price > 0 }
 
     /// What it costs a month now: 0 once its last installment is behind us, so a finished plan
     /// drops out of every total, average and budget.

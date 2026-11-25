@@ -54,6 +54,7 @@ struct HomeSummary {
         // Up next: payments in the coming two weeks, soonest first.
         self.upcoming = Array(
             configured
+                .filter(\.hasCharges)
                 .compactMap { subscription -> Upcoming? in
                     guard let date = subscription.nextPayment(after: now, calendar: calendar) else { return nil }
                     let days = BillingMath.daysBetween(now, date, calendar: calendar)

@@ -122,7 +122,7 @@ struct MonthSchedule {
         let todayStart = calendar.startOfDay(for: today)
         var byDay: [Date: [ScheduledPayment]] = [:]
 
-        for subscription in subscriptions where !subscription.needsSetup {
+        for subscription in subscriptions where subscription.hasCharges {
             // Don't invent history: show past charges only from when tracking began.
             let from = max(month.start, subscription.trackingStart(calendar: calendar))
 
