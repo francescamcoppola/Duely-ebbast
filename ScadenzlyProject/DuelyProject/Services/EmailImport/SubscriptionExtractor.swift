@@ -119,27 +119,12 @@ nonisolated struct SubscriptionExtractor: Sendable {
 
     /// `nil` when the email isn't about a recurring subscription, or the model couldn't read it.
     func analyze(_ email: EmailMessage) async -> EmailSubscriptionAnalysis? {
-        for limit in Self.bodyLimits {
-            let session = LanguageModelSession(model: .default, instructions: Self.instructions)
-            do {
-                let response = try await session.respond(
-                    to: Self.prompt(for: email, bodyLimit: limit),
-                    generating: EmailSubscriptionAnalysis.self,
-                    options: GenerationOptions(samplingMode: .greedy)
-                )
-                let analysis = response.content
-                guard analysis.isRecurringSubscription,
-                      !analysis.serviceName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                    return nil
-                }
-                return analysis
-            } catch {
-                // Too long for the model: retry once with a shorter body. Anything else: skip.
-                if Self.isContextOverflow(error) { continue }
-                return nil
-            }
-        }
-        return nil
+        let prompts = Self.bodyLimits.map { Self.prompt(for: email, bodyLimit: $0) }
+        guard let analysis = await OnDeviceModel.respond(instructions: Self.instructions, prompts: prompts,
+                                                         generating: EmailSubscriptionAnalysis.self),
+              analysis.isRecurringSubscription,
+              !analysis.serviceName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
+        return analysis
     }
 
     /// The error type changed in iOS 27, and the app supports iOS 26.

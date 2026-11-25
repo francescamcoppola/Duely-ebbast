@@ -21,7 +21,7 @@ struct EmailScanCard: View {
                     .foregroundStyle(.tint)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Finding Your Subscriptions")
+                    Text("Searching Your Email")
                         .font(.headline)
                     status
                         .font(.subheadline)
@@ -41,7 +41,7 @@ struct EmailScanCard: View {
         case .failed(let message):
             Text(message)
         default:
-            Text("Apple Intelligence is reading your billing emails on this device. Keep \(AppInfo.name) open; you'll review what it finds.")
+            Text("Apple Intelligence is looking for subscriptions and free trials, bills and taxes, orders you can still return, warranties and pagoPA notices, on this device. You can use other apps meanwhile: you'll get a notification when it's done.")
         }
     }
 
@@ -57,7 +57,7 @@ struct EmailScanCard: View {
                 }
             case .reading:
                 ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
-                    Text("Reading billing emails…").font(.caption)
+                    Text("Reading emails…").font(.caption)
                 } currentValueLabel: {
                     Text("\(progress.done) of \(progress.total)").font(.caption)
                 }

@@ -43,9 +43,7 @@ struct DetectedSubscription: Identifiable, Equatable {
 
     /// True when this candidate refers to the same service as an existing subscription name in the app.
     func matches(serviceName existingName: String) -> Bool {
-        let candidateKey = id
-        let existingKey = Self.matchKey(existingName)
-        return !candidateKey.isEmpty && candidateKey == existingKey
+        Self.sameService(name, existingName)
     }
 }
 
@@ -126,6 +124,11 @@ extension DetectedSubscription {
         let suffixes = [
             " premium", " plus", " subscription", " membership",
             " abbonamento", " mensile", " annuale", " italia",
+            // Plan names: "Spotify Premium Family" is still Spotify.
+            " family", " famiglia", " duo", " individual", " individuale", " student", " studenti",
+            " studente", " standard", " basic", " base", " essential", " con pubblicita",
+            " with ads", " monthly", " yearly", " annual", " plan", " piano", " free trial",
+            " prova gratuita", " trial",
             " ab", " inc", " llc", " ltd", " gmbh", " s.r.l.", " srl", " s.l.", " s.p.a.", " spa"
         ]
 
@@ -141,14 +144,35 @@ extension DetectedSubscription {
         return key.filter { $0.isLetter || $0.isNumber }
     }
 
+    /// Brands that sell several different services: "Apple" alone mustn't swallow "Apple TV+".
+    private static let umbrellaBrands: Set<String> = [
+        "apple", "google", "amazon", "microsoft", "paypal", "adobe", "samsung", "sky", "tim",
+    ]
+
+    /// True when two names are the same service: same catalog entry (with its aliases, e.g.
+    /// "Disney Plus" and "Disney+"), same key, or one is the other plus plan words
+    /// ("Spotify" and "Spotify Premium Family", "NOW" and "NOW Entertainment").
+    static func sameService(_ first: String, _ second: String, catalog: PlanCatalogStore = .shared) -> Bool {
+        let a = matchKey(first)
+        let b = matchKey(second)
+        guard !a.isEmpty, !b.isEmpty else { return false }
+        if a == b { return true }
+        if let one = catalog.service(matching: first), let other = catalog.service(matching: second) {
+            return one.id == other.id
+        }
+        let (short, long) = a.count <= b.count ? (a, b) : (b, a)
+        return short.count >= 4 && !umbrellaBrands.contains(short) && long.hasPrefix(short)
+    }
+
     /// One candidate per service. The most recent email wins, but missing price, cycle,
     /// payment date or category are filled in from an older email about the same service.
     static func merged(_ candidates: [DetectedSubscription]) -> [DetectedSubscription] {
         var byKey: [String: DetectedSubscription] = [:]
         var order: [String] = []
         for candidate in candidates.sorted(by: { $0.emailDate > $1.emailDate }) {
-            let key = candidate.id
-            guard !key.isEmpty else { continue }
+            guard !candidate.id.isEmpty else { continue }
+            // The group of an earlier candidate for the same service, if any.
+            let key = order.first { sameService(byKey[$0]?.name ?? "", candidate.name) } ?? candidate.id
             guard var existing = byKey[key] else {
                 byKey[key] = candidate
                 order.append(key)

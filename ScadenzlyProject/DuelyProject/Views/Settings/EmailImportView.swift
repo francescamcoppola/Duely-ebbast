@@ -32,6 +32,8 @@ struct EmailImportView: View {
         }
         .navigationTitle("Import from Email")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { model.isImportScreenVisible = true }
+        .onDisappear { model.isImportScreenVisible = false }
         .confirmationDialog(
             Text("Disconnect \(accountToDisconnect ?? "")?"),
             isPresented: isConfirmingDisconnect,
@@ -72,7 +74,7 @@ struct EmailImportView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Label("Find Recurring Payments in Your Email", systemImage: "envelope.badge")
                     .font(.headline)
-                Text("\(AppInfo.name) checks every receipt, renewal, bill, tax notice and tuition email of the last 13 months, skips ads, newsletters and repeats, and Apple Intelligence reads the rest on this device. Connect several accounts to find everything. You choose what to add.")
+                Text("\(AppInfo.name) looks through the last 13 months of email for subscriptions and free trials, bills, taxes and tuition, online orders you can still return or that are under warranty, and pagoPA notices to pay. It skips ads, newsletters and repeats; Apple Intelligence reads the rest on this device. Connect several accounts to find everything. You choose what to add.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -191,7 +193,7 @@ struct EmailImportView: View {
         } else if case .failed(let message) = model.phase {
             Text(message).foregroundStyle(.red)
         } else if model.isScanning {
-            Text("Keep \(AppInfo.name) open while it scans. It can take a few minutes.")
+            Text("It can take a few minutes. You can switch to other apps: the progress stays in the Dynamic Island and on the Lock Screen, and you'll get a notification when it's done.")
         } else if let lastScan = model.lastScan, let summary = model.lastSummary {
             VStack(alignment: .leading, spacing: 4) {
                 if let addedCount, addedCount > 0 {
@@ -202,7 +204,7 @@ struct EmailImportView: View {
         } else if let addedCount, addedCount > 0 {
             Text("^[\(addedCount) payment](inflect: true) added.")
         } else {
-            Text("Checks up to \(EmailImportModel.searchLimit) billing-related emails per account from the last 13 months. Ads, newsletters and repeat receipts are recognized by sender and subject and skipped; Apple Intelligence reads the rest (up to \(EmailImportModel.readLimit) per account). Keep the app open while it runs.")
+            Text("Checks up to \(EmailImportModel.searchLimit) emails about payments, orders and pagoPA per account from the last 13 months. Ads, newsletters and repeats are recognized by sender and subject and skipped; Apple Intelligence reads the rest: up to \(EmailImportModel.readLimit) billing emails, \(EmailImportModel.ordersReadLimit) orders and \(EmailImportModel.noticesReadLimit) pagoPA notices per account. It keeps going if you switch to another app.")
         }
     }
 
@@ -220,7 +222,7 @@ struct EmailImportView: View {
             )
             PrivacyPoint(
                 title: "Nothing is kept",
-                detail: "Emails are held in memory only during a scan. Ads and newsletters are skipped from their sender and subject, without being opened. Only the payments you choose to add are saved.",
+                detail: "Emails are held in memory only during a scan. Ads and newsletters are skipped from their sender and subject, without being opened. Only what you choose to add is saved.",
                 systemImage: "tray"
             )
             PrivacyPoint(
@@ -268,7 +270,7 @@ private struct ScanProgressView: View {
                 }
             case .reading:
                 ProgressView(value: Double(progress.done), total: Double(max(progress.total, 1))) {
-                    Text("Reading billing emails…")
+                    Text("Reading emails…")
                 } currentValueLabel: {
                     Text("\(progress.done) of \(progress.total)")
                 }

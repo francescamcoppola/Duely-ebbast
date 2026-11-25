@@ -63,24 +63,12 @@ nonisolated struct PurchaseExtractor: Sendable {
     """
 
     func analyze(_ email: EmailMessage) async -> EmailPurchaseAnalysis? {
-        for limit in Self.bodyLimits {
-            let session = LanguageModelSession(model: .default, instructions: Self.instructions)
-            do {
-                let response = try await session.respond(
-                    to: SubscriptionExtractor.prompt(for: email, bodyLimit: limit),
-                    generating: EmailPurchaseAnalysis.self,
-                    options: GenerationOptions(samplingMode: .greedy)
-                )
-                let analysis = response.content
-                guard analysis.isOrder,
-                      !analysis.productName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
-                return analysis
-            } catch {
-                if SubscriptionExtractor.isContextOverflow(error) { continue }
-                return nil
-            }
-        }
-        return nil
+        let prompts = Self.bodyLimits.map { SubscriptionExtractor.prompt(for: email, bodyLimit: $0) }
+        guard let analysis = await OnDeviceModel.respond(instructions: Self.instructions, prompts: prompts,
+                                                         generating: EmailPurchaseAnalysis.self),
+              analysis.isOrder,
+              !analysis.productName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
+        return analysis
     }
 }
 

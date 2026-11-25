@@ -127,6 +127,18 @@ final class EmailImportModel {
     var aiStatus: AppleIntelligenceStatus = .current
 
     private var scanTask: Task<Void, Never>?
+    /// Set when the user stops the scan from its Live Activity (or iOS ends it): the scan stops
+    /// reading and shows what it found so far.
+    private(set) var isStopRequested = false
+    /// Apple Intelligence is limited while the app is in the background: the scan waits for the
+    /// user to open the app again.
+    private(set) var isWaitingForForeground = false
+    /// Settings › Import from Email is on screen (it shows the results itself).
+    var isImportScreenVisible = false
+    /// For the Live Activity: which account of how many, and how much was found so far.
+    private var accountIndex = 0
+    private var accountCount = 1
+    private var foundSoFar = 0
     /// Extra time iOS grants if the user leaves the app mid-scan.
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
 
@@ -261,16 +273,65 @@ final class EmailImportModel {
         let targets = accounts ?? connectedEmails
         guard !targets.isEmpty else { return }
         // Services already set up are skipped; ones still in "Needs Setup" can be completed.
-        let existingKeys = Set(existing.filter { !$0.needsSetup }.map { DetectedSubscription.matchKey($0.name) })
+        let existingKeys = existing.filter { !$0.needsSetup }.map(\.name)
         let known = KnownItems(context: Persistence.container.mainContext)
+        isStopRequested = false
+        isWaitingForForeground = false
+        // Keeps going if the user switches app, with a Live Activity showing the progress.
+        ScanBackgroundActivity.shared.begin(subtitle: String(appLocalized: "Searching the last 13 months…")) { [weak self] in
+            self?.isStopRequested = true
+        }
+        // The notification when it's done is the natural moment to ask (first time only).
+        Task { await NotificationService.requestAuthorizationIfNeeded() }
         scanTask = Task { await scan(accounts: targets, skipping: existingKeys, known: known) }
     }
 
     func cancelScan() {
         scanTask?.cancel()
         scanTask = nil
+        ScanBackgroundActivity.shared.end(success: false)
         if isScanning { phase = .idle }
         presentsResultsOnHome = false
+    }
+
+    /// A tap on the "finished" notification: shows the results on Home unless the import screen
+    /// that started the scan is open and shows them itself.
+    func revealResults() {
+        guard case .review = phase, !isImportScreenVisible else { return }
+        presentsResultsOnHome = true
+    }
+
+    func setWaitingForForeground(_ waiting: Bool) {
+        guard waiting != isWaitingForForeground else { return }
+        isWaitingForForeground = waiting
+        if waiting { ScanBackgroundActivity.shared.notifyPaused() }
+        if case .scanning(let progress) = phase { report(progress) }
+    }
+
+    /// Updates the screen and the Live Activity.
+    private func report(_ progress: ScanProgress) {
+        phase = .scanning(progress)
+        let ratio = progress.total > 0 ? Double(progress.done) / Double(progress.total) : 0
+        let stage: Double = switch progress.stage {
+        case .searching: 0.02
+        case .filtering: 0.05 + 0.2 * ratio
+        case .reading: 0.25 + 0.75 * ratio
+        }
+        let fraction = (Double(accountIndex) + stage) / Double(max(accountCount, 1))
+        let subtitle: String
+        if isWaitingForForeground {
+            subtitle = String(appLocalized: "Paused: open \(AppInfo.name) to continue")
+        } else {
+            switch progress.stage {
+            case .searching:
+                subtitle = String(appLocalized: "Searching the last 13 months…")
+            case .filtering:
+                subtitle = String(appLocalized: "Checking senders: \(progress.done) of \(progress.total)")
+            case .reading:
+                subtitle = String(appLocalized: "Reading \(progress.done) of \(progress.total) · found: \(foundSoFar)")
+            }
+        }
+        ScanBackgroundActivity.shared.update(fraction: fraction, subtitle: subtitle)
     }
 
     func dismissReview() {
@@ -301,8 +362,12 @@ final class EmailImportModel {
         var summary = ScanSummary()
     }
 
-    private func scan(accounts: [String], skipping existingKeys: Set<String>, known: KnownItems) async {
-        phase = .scanning(ScanProgress(account: accounts.first, stage: .searching))
+    /// `existingKeys`: names of subscriptions already set up, which aren't suggested again.
+    private func scan(accounts: [String], skipping existingKeys: [String], known: KnownItems) async {
+        accountIndex = 0
+        accountCount = accounts.count
+        foundSoFar = 0
+        report(ScanProgress(account: accounts.first, stage: .searching))
         accountErrors = [:]
         beginKeepingAlive()
         defer { endKeepingAlive() }
@@ -315,10 +380,12 @@ final class EmailImportModel {
         var summary = ScanSummary()
         var scannedAny = false
 
-        for account in accounts {
+        for (index, account) in accounts.enumerated() {
+            guard !isStopRequested else { break }
+            accountIndex = index
             var didRefresh = false
             do {
-                phase = .scanning(ScanProgress(account: account, stage: .searching))
+                report(ScanProgress(account: account, stage: .searching))
                 let auth = try await validAccessToken(for: account)
                 didRefresh = auth.refreshed
                 let result = try await scanAccount(account, accessToken: auth.token, extractor: extractor)
@@ -330,6 +397,7 @@ final class EmailImportModel {
             } catch is CancellationError {
                 phase = .idle
                 scanTask = nil
+                ScanBackgroundActivity.shared.end(success: false)
                 return
             } catch GmailAuthError.signedOut where !didRefresh {
                 // Access token may have been invalidated early (HTTP 401); try refreshing once before signing out.
@@ -344,6 +412,7 @@ final class EmailImportModel {
                 } catch is CancellationError {
                     phase = .idle
                     scanTask = nil
+                    ScanBackgroundActivity.shared.end(success: false)
                     return
                 } catch GmailAuthError.signedOut {
                     GmailAuth.deleteStoredTokens(for: account)
@@ -364,7 +433,9 @@ final class EmailImportModel {
 
         if scannedAny {
             let results = ScanResults(
-                subscriptions: DetectedSubscription.merged(found).filter { !existingKeys.contains($0.id) },
+                subscriptions: DetectedSubscription.merged(found).filter { candidate in
+                    !existingKeys.contains { candidate.matches(serviceName: $0) }
+                },
                 // Only orders that can still be returned or are still under warranty.
                 purchases: DetectedPurchase.merged(foundPurchases).filter {
                     !known.orderKeys.contains($0.id)
@@ -376,9 +447,15 @@ final class EmailImportModel {
             UserDefaults.standard.set(summary.dictionary, forKey: EmailImportKeys.lastSummary)
             lastSummary = summary
             phase = .review(results)
+            ScanBackgroundActivity.shared.end(success: true, subtitle: results.isEmpty
+                ? String(appLocalized: "Nothing new was found.")
+                : String(appLocalized: "Found: \(results.count). Open \(AppInfo.name) to review."))
+            ScanBackgroundActivity.shared.notifyFinished(results)
         } else {
             phase = .failed(accountErrors.values.first ?? String(appLocalized: "Something went wrong. Try again."))
+            ScanBackgroundActivity.shared.end(success: false)
         }
+        isWaitingForForeground = false
         scanTask = nil
     }
 
@@ -413,7 +490,7 @@ final class EmailImportModel {
         var seen = Set<String>()
         let ids = (billingIDs + orderIDs + noticeIDs).filter { seen.insert($0).inserted }
 
-        phase = .scanning(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
+        report(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
         let headers = try await api.metadata(for: ids) { [weak self] done in
             await self?.updateFiltering(account: account, done: done, total: ids.count)
         }
@@ -451,8 +528,9 @@ final class EmailImportModel {
         )
         result.summary.skippedNotBilling = max(0, result.summary.skippedNotBilling)
 
-        phase = .scanning(ScanProgress(account: account, stage: .reading, done: 0, total: routes.count))
+        report(ScanProgress(account: account, stage: .reading, done: 0, total: routes.count))
         let purchaseExtractor = PurchaseExtractor()
+        let foundBefore = foundSoFar
         var unreadable = 0
         var consecutiveFailures = 0
         var processed = 0
@@ -461,6 +539,8 @@ final class EmailImportModel {
 
         for (id, route) in routes {
             try Task.checkCancellation()
+            // Stopped from the Live Activity: keep what was found so far.
+            if isStopRequested { break }
             do {
                 // A long scan can outlast Google's one-hour access token: refresh it when needed.
                 api = GmailAPI(accessToken: try await validAccessToken(for: account).token)
@@ -511,7 +591,8 @@ final class EmailImportModel {
                 }
             }
             processed += 1
-            phase = .scanning(ScanProgress(account: account, stage: .reading, done: processed, total: routes.count))
+            foundSoFar = foundBefore + result.subscriptions.count + result.purchases.count + result.notices.count
+            report(ScanProgress(account: account, stage: .reading, done: processed, total: routes.count))
         }
 
         // What was found is always kept; the account row explains what's missing.
@@ -551,7 +632,7 @@ final class EmailImportModel {
 
     private func updateFiltering(account: String, done: Int, total: Int) {
         guard isScanning else { return }
-        phase = .scanning(ScanProgress(account: account, stage: .filtering, done: done, total: total))
+        report(ScanProgress(account: account, stage: .filtering, done: done, total: total))
     }
 
     private func validAccessToken(for account: String, forceRefresh: Bool = false) async throws -> (token: String, refreshed: Bool) {
@@ -604,13 +685,17 @@ final class EmailImportModel {
     /// instead of duplicated. Returns how many were added or completed.
     @discardableResult
     func add(_ candidates: [DetectedSubscription], existing: [Subscription], into context: ModelContext) -> Int {
-        var pendingByKey: [String: Subscription] = [:]
-        for subscription in existing where subscription.needsSetup {
-            pendingByKey[DetectedSubscription.matchKey(subscription.name)] = subscription
-        }
+        // Still in "Needs Setup", or added since the scan started (another device, a double tap).
+        let pendingOrNew = existing.filter(\.needsSetup)
+        let configured = existing.filter { !$0.needsSetup }
+        var addedNow: [Subscription] = []
 
         for candidate in candidates {
-            if let pending = pendingByKey[candidate.id] {
+            if configured.contains(where: { candidate.matches(serviceName: $0.name) })
+                || addedNow.contains(where: { candidate.matches(serviceName: $0.name) }) {
+                continue
+            }
+            if let pending = pendingOrNew.first(where: { candidate.matches(serviceName: $0.name) }) {
                 if let price = candidate.price { pending.price = price }
                 pending.cycle = candidate.cycle
                 pending.anchorDate = candidate.paymentDate
@@ -630,6 +715,7 @@ final class EmailImportModel {
                 subscription.websiteDomain = candidate.senderDomain
                 subscription.trialEndDate = candidate.trialEndDate
                 context.insert(subscription)
+                addedNow.append(subscription)
             }
         }
 

@@ -28,7 +28,7 @@ struct EmailStepView: View {
             step: .email,
             symbol: "envelope.badge",
             title: "Find your subscriptions automatically",
-            subtitle: "Connect Gmail and Apple Intelligence will find your subscriptions, bills and taxes in your receipts, on this device. You choose what to add.",
+            subtitle: "Connect Gmail and Apple Intelligence will find your subscriptions and free trials, bills and taxes, orders you can return, warranties and pagoPA notices, on this device. You choose what to add.",
             onSkip: onManual
         ) {
             VStack(alignment: .leading, spacing: 18) {

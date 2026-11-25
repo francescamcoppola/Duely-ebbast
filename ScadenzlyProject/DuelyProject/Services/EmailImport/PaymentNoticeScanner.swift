@@ -140,9 +140,7 @@ enum PaymentNoticeScanner {
 
         \(EmailText.truncated(EmailText.normalized(text), limit: 2500))
         """
-        let session = LanguageModelSession(model: .default, instructions: instructions)
-        return try? await session.respond(to: prompt, generating: NoticeAnalysis.self,
-                                          options: GenerationOptions(samplingMode: .greedy)).content
+        return await OnDeviceModel.respond(instructions: instructions, prompts: [prompt], generating: NoticeAnalysis.self)
     }
 
     private static func candidates(codes: [PagoPACode], analysis: NoticeAnalysis?,

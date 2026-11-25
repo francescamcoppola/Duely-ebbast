@@ -26,6 +26,10 @@ final class AppRouter {
             selectedTab = .calendar
         } else if identifier.hasPrefix(NotificationIDs.deadlinePrefix) {
             selectedTab = .deadlines
+        } else if identifier == ScanBackgroundActivity.finishedNotificationID {
+            let model = EmailImportModel.shared
+            model.revealResults()
+            if model.presentsResultsOnHome { selectedTab = .home }
         }
     }
 }
