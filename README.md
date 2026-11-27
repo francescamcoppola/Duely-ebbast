@@ -38,7 +38,7 @@ candidate merging, scan flow), `Views/Settings/EmailImportView.swift` and `Impor
    Google accounts that may sign in as test users.
 3. Create an **OAuth client ID** of type **iOS** with bundle ID `com.diegotamez.DuelyProject`.
 4. Paste the client ID into `GmailConfiguration.clientID`
-   (`DuelyProject/Services/Gmail/GmailConfiguration.swift`). Until it's set, the feature shows as
+   (`MyDues/Services/Gmail/GmailConfiguration.swift`). Until it's set, the feature shows as
    unavailable. No URL scheme needs to be added to Info.plist: `WebAuthenticationSession` catches
    the redirect.
 
@@ -89,7 +89,7 @@ without a price. Plans with `eligibility` (e.g. students) are never suggested as
 
 ## Widgets and Screen Time (app extensions)
 
-The project has three targets: the app (`Scadenzsly`), `MyDuesWidgets` (Home Screen and Lock
+The project has three targets: the app (`MyDues`), `MyDuesWidgets` (Home Screen and Lock
 Screen widgets) and `UsageMonitor` (Screen Time / DeviceActivity monitor). Code shared by all three
 is in `MyDuesShared/` and talks through the App Group `group.com.francescamariacoppola.Duely`.
 
