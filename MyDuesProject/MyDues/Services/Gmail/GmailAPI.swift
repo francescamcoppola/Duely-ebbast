@@ -41,12 +41,23 @@ nonisolated struct GmailAPI: Sendable {
     newer_than:13m -in:chats -in:spam -in:trash -in:sent -in:drafts -category:promotions -category:social (category:purchases OR subject:(\
     subscription OR subscribed OR renewal OR renews OR renewed OR "auto-renew" OR "free trial" OR trial OR \
     receipt OR invoice OR membership OR "your plan" OR billing OR payment OR "direct debit" OR sepa OR \
+    "purchase confirmation" OR "your purchase" OR "thanks for your purchase" OR "season ticket" OR \
     bill OR statement OR "amount due" OR tax OR tuition OR rent OR insurance OR \
     suscripción OR renovación OR recibo OR factura OR membresía OR pago OR impuesto OR matrícula OR \
     abbonamento OR rinnovo OR ricevuta OR fattura OR pagamento OR addebito OR domiciliazione OR \
     "prova gratuita" OR bolletta OR bollette OR utenza OR utenze OR "avviso di pagamento" OR pagopa OR \
     tari OR imu OR tassa OR tasse OR tributo OR tributi OR "bollo auto" OR rata OR scadenza OR \
-    condominio OR affitto OR canone OR polizza OR assicurazione OR "contribuzione studentesca" OR iscrizione))
+    condominio OR affitto OR canone OR polizza OR assicurazione OR "contribuzione studentesca" OR iscrizione OR \
+    "conferma acquisto" OR "conferma di acquisto" OR "conferma d'acquisto" OR "acquisto confermato" OR \
+    "grazie per il tuo acquisto" OR carnet OR tessera))
+    """
+
+    /// Every email from services paid mostly by subscription or pass (Claude, ChatGPT, Trenitalia,
+    /// Italo…), whose receipts may have no billing word in the subject. Same exclusions as
+    /// `searchQuery`, so their ads stay out.
+    static let knownSendersQuery = """
+    newer_than:13m -in:chats -in:spam -in:trash -in:sent -in:drafts -category:promotions -category:social (\
+    \(KnownBillingSenders.gmailFromTerms))
     """
 
     /// Online orders, shipping and deliveries (Amazon and other stores), for return windows and

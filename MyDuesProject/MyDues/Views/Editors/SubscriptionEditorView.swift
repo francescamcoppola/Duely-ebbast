@@ -44,6 +44,11 @@ struct SubscriptionEditorView: View {
     @State private var catalog = PlanCatalogStore.shared
     @State private var didLoad = false
     @State private var isConfirmingDelete = false
+    /// Turned on by the first tap on Add/Save with something missing: from then on each problem is
+    /// shown under its field until it's fixed.
+    @State private var showsErrors = false
+    /// Bumped on every refused save, for the error haptic.
+    @State private var failedSaves = 0
     @FocusState private var focusedField: Field?
 
     private enum Field { case name, price }
@@ -58,6 +63,23 @@ struct SubscriptionEditorView: View {
     private var canSave: Bool { !trimmedName.isEmpty && (price ?? -1) >= 0 && (endRule != .onDate || paymentsUntilLastDate > 0) }
     private var isFree: Bool { price == 0 }
     private var isNew: Bool { subscription == nil }
+
+    // MARK: Validation
+
+    private var nameError: LocalizedStringKey? {
+        trimmedName.isEmpty ? "Enter the subscription's name." : nil
+    }
+
+    private var priceError: LocalizedStringKey? {
+        if priceText.isEmpty { return "Enter the price. Use 0 for a free plan." }
+        if (price ?? -1) < 0 { return "Enter a valid price, like 9.99." }
+        return nil
+    }
+
+    private var lastPaymentError: LocalizedStringKey? {
+        endRule == .onDate && paymentsUntilLastDate == 0
+            ? "The last payment can't be before the next one." : nil
+    }
 
     var body: some View {
         NavigationStack {
@@ -74,6 +96,10 @@ struct SubscriptionEditorView: View {
                             .submitLabel(.next)
                             .focused($focusedField, equals: .name)
                             .onSubmit { focusedField = .price }
+                    }
+
+                    if showsErrors, let nameError {
+                        FieldErrorRow(message: nameError)
                     }
 
                     ForEach(nameSuggestions) { service in
@@ -112,6 +138,7 @@ struct SubscriptionEditorView: View {
                 Section {
                     HStack {
                         Text("Price")
+                            .foregroundStyle(showsErrors && priceError != nil ? AnyShapeStyle(.red) : AnyShapeStyle(.primary))
                         Spacer(minLength: 16)
                         TextField("0", text: $priceText)
                             .keyboardType(.decimalPad)
@@ -119,6 +146,10 @@ struct SubscriptionEditorView: View {
                             .focused($focusedField, equals: .price)
                         Text(currency.code)
                             .foregroundStyle(.secondary)
+                    }
+
+                    if showsErrors, let priceError {
+                        FieldErrorRow(message: priceError)
                     }
 
                     Picker("Billing Cycle", selection: $cycle) {
@@ -173,7 +204,7 @@ struct SubscriptionEditorView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     SheetConfirmButton(title: confirmTitle,
                                        systemImage: isNew || isLastStep ? "checkmark" : "arrow.right",
-                                       isEnabled: canSave, action: save)
+                                       action: save)
                 }
             }
             .confirmationDialog(
@@ -190,6 +221,7 @@ struct SubscriptionEditorView: View {
                 if clean != newValue { priceText = clean }
             }
             .onChange(of: endRule) { oldRule, newRule in syncEndRule(from: oldRule, to: newRule) }
+            .sensoryFeedback(.error, trigger: failedSaves)
             .onAppear(perform: load)
             .task {
                 guard isNew else { return }
@@ -226,6 +258,9 @@ struct SubscriptionEditorView: View {
                 DatePicker("Last Payment", selection: $lastPayment,
                            in: Calendar.current.startOfDay(for: nextPayment)...,
                            displayedComponents: .date)
+                if showsErrors, let lastPaymentError {
+                    FieldErrorRow(message: lastPaymentError)
+                }
             }
         } footer: {
             switch endRule {
@@ -352,7 +387,9 @@ struct SubscriptionEditorView: View {
         } header: {
             Text("\(service.name) Plans")
         } footer: {
-            if priced.isEmpty {
+            if service.plans.isEmpty {
+                Text("The price depends on your plan or route: check it on \(service.name)'s website, then enter it below.")
+            } else if priced.isEmpty {
                 Text("Plan prices aren't available in \(currency.name). Pick a plan to set its billing cycle, then enter the price.")
             } else {
                 Text("Choose a plan to fill in the price and billing cycle. Typical prices as of \(catalogDate); check the current price with the provider.")
@@ -453,7 +490,10 @@ struct SubscriptionEditorView: View {
     }
 
     private func save() {
-        guard canSave, let price else { return }
+        guard canSave, let price else {
+            showErrors()
+            return
+        }
 
         let target: Subscription
         if let subscription {
@@ -492,6 +532,19 @@ struct SubscriptionEditorView: View {
         }
     }
 
+    /// Shows what's missing and moves to the first field to fix.
+    private func showErrors() {
+        withAnimation(.smooth(duration: 0.2)) { showsErrors = true }
+        failedSaves += 1
+        if nameError != nil {
+            focusedField = .name
+        } else if priceError != nil {
+            focusedField = .price
+        } else {
+            focusedField = nil
+        }
+    }
+
     private func delete() {
         guard let subscription else { return }
         context.delete(subscription)
@@ -502,6 +555,18 @@ struct SubscriptionEditorView: View {
 }
 
 // MARK: - Rows
+
+/// A problem with the field above it, shown after a save was refused.
+private struct FieldErrorRow: View {
+    let message: LocalizedStringKey
+
+    var body: some View {
+        Label(message, systemImage: "exclamationmark.circle.fill")
+            .font(.footnote)
+            .foregroundStyle(.red)
+            .transition(.opacity)
+    }
+}
 
 private struct ServiceSuggestionRow: View {
     let service: CatalogService

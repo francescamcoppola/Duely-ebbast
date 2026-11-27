@@ -89,7 +89,8 @@ extension DetectedSubscription {
         let notTheService = ["apple.com", "icloud.com", "me.com", "google.com", "gmail.com", "googlemail.com",
                              "paypal.com", "paypal.it", "outlook.com", "hotmail.com", "hotmail.it", "live.com",
                              "live.it", "yahoo.com", "yahoo.it", "libero.it", "virgilio.it", "tiscali.it",
-                             "stripe.com", "pec.it"]
+                             "stripe.com", "paddle.com", "paddle.net", "lemonsqueezy.com",
+                             "fastspring.com", "pec.it"]
         guard root.contains("."), !notTheService.contains(root) else { return nil }
         return root
     }
@@ -129,7 +130,7 @@ extension DetectedSubscription {
             " studente", " standard", " basic", " base", " essential", " con pubblicita",
             " with ads", " monthly", " yearly", " annual", " plan", " piano", " free trial",
             " prova gratuita", " trial",
-            " ab", " inc", " llc", " ltd", " gmbh", " s.r.l.", " srl", " s.l.", " s.p.a.", " spa"
+            " ab", " inc", " llc", " ltd", " pbc", " corp", " gmbh", " s.r.l.", " srl", " s.l.", " s.p.a.", " spa"
         ]
 
         var removedSuffix = true

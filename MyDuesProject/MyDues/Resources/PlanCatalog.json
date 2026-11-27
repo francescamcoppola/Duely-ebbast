@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-25",
+  "updated": "2026-11-27",
   "region": "IT",
   "note": "Indicative list prices for Italy. Edit this file (or the hosted copy) to update plans without an app release.",
   "services": [
@@ -1072,6 +1072,217 @@
           "details": "Up to 6 people"
         }
       ]
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "work",
+      "groups": [
+        "ai"
+      ],
+      "aliases": [
+        "Anthropic",
+        "Claude Pro",
+        "Claude Max",
+        "Claude.ai"
+      ],
+      "website": "https://claude.com/pricing",
+      "cancelURL": "https://claude.ai/settings/billing",
+      "plans": [
+        {
+          "id": "pro",
+          "name": "Pro",
+          "cycle": "monthly",
+          "prices": {
+            "EUR": "21.96"
+          }
+        },
+        {
+          "id": "pro-yearly",
+          "name": "Pro (yearly)",
+          "cycle": "yearly",
+          "prices": {
+            "EUR": "219.60"
+          }
+        },
+        {
+          "id": "max-5x",
+          "name": "Max 5x",
+          "cycle": "monthly",
+          "prices": {
+            "EUR": "109.80"
+          },
+          "details": "5× the usage of Pro"
+        },
+        {
+          "id": "max-20x",
+          "name": "Max 20x",
+          "cycle": "monthly",
+          "prices": {
+            "EUR": "219.60"
+          },
+          "details": "20× the usage of Pro"
+        }
+      ]
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "work",
+      "groups": [
+        "ai"
+      ],
+      "aliases": [
+        "Perplexity Pro"
+      ],
+      "website": "https://www.perplexity.ai/pro",
+      "plans": []
+    },
+    {
+      "id": "trenitalia",
+      "name": "Trenitalia",
+      "category": "other",
+      "groups": [
+        "train"
+      ],
+      "aliases": [
+        "Trenitalia Abbonamento",
+        "Frecciarossa"
+      ],
+      "website": "https://www.trenitalia.com/",
+      "plans": []
+    },
+    {
+      "id": "italo",
+      "name": "Italo",
+      "category": "other",
+      "groups": [
+        "train"
+      ],
+      "aliases": [
+        "Italo Treno",
+        "Italotreno"
+      ],
+      "website": "https://www.italotreno.com/",
+      "plans": []
+    },
+    {
+      "id": "trenord",
+      "name": "Trenord",
+      "category": "other",
+      "groups": [
+        "train"
+      ],
+      "website": "https://www.trenord.it/",
+      "plans": []
+    },
+    {
+      "id": "atm-milano",
+      "name": "ATM Milano",
+      "category": "other",
+      "groups": [
+        "transit"
+      ],
+      "aliases": [
+        "ATM"
+      ],
+      "website": "https://www.atm.it/",
+      "plans": []
+    },
+    {
+      "id": "audible",
+      "name": "Audible",
+      "category": "music",
+      "groups": [
+        "audiobooks"
+      ],
+      "website": "https://www.audible.it/",
+      "plans": [
+        {
+          "id": "standard",
+          "name": "Standard",
+          "cycle": "monthly",
+          "prices": {
+            "EUR": "9.99"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kindle-unlimited",
+      "name": "Kindle Unlimited",
+      "category": "leisure",
+      "groups": [
+        "ebooks"
+      ],
+      "aliases": [
+        "Kindle"
+      ],
+      "website": "https://www.amazon.it/kindle-dbs/hz/subscribe/ku",
+      "plans": [
+        {
+          "id": "standard",
+          "name": "Kindle Unlimited",
+          "cycle": "monthly",
+          "prices": {
+            "EUR": "9.99"
+          }
+        }
+      ]
+    },
+    {
+      "id": "now-tv",
+      "name": "NOW",
+      "category": "filmTV",
+      "groups": [
+        "video"
+      ],
+      "aliases": [
+        "NOW TV",
+        "NOW Entertainment"
+      ],
+      "website": "https://www.nowtv.it/",
+      "plans": []
+    },
+    {
+      "id": "sky",
+      "name": "Sky",
+      "category": "filmTV",
+      "groups": [
+        "video"
+      ],
+      "aliases": [
+        "Sky TV",
+        "Sky Italia"
+      ],
+      "website": "https://www.sky.it/",
+      "plans": []
+    },
+    {
+      "id": "timvision",
+      "name": "TIMVISION",
+      "category": "filmTV",
+      "groups": [
+        "video"
+      ],
+      "aliases": [
+        "TIM Vision"
+      ],
+      "website": "https://www.timvision.it/",
+      "plans": []
+    },
+    {
+      "id": "hbo-max",
+      "name": "HBO Max",
+      "category": "filmTV",
+      "groups": [
+        "video"
+      ],
+      "aliases": [
+        "HBO"
+      ],
+      "website": "https://www.hbomax.com/",
+      "plans": []
     }
   ]
 }

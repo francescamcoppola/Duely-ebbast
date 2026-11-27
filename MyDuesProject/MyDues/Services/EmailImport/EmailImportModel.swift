@@ -108,6 +108,8 @@ final class EmailImportModel {
     /// Billing-like emails checked per account (by sender and subject only), newest first.
     /// Covers the 13-month search window for almost any inbox.
     static let searchLimit = 500
+    /// Emails from `KnownBillingSenders` checked per account, on top of `searchLimit`.
+    static let knownSendersSearchLimit = 200
     /// Most emails Apple Intelligence reads per account, after ads, newsletters and repeats are
     /// skipped. Keeps a scan to a few minutes.
     static let readLimit = 150
@@ -511,7 +513,8 @@ final class EmailImportModel {
         case billing
     }
 
-    /// 1. Search: billing-like, order and pagoPA emails of the last 13 months (IDs only).
+    /// 1. Search: billing-like, known-subscription-sender, order and pagoPA emails of the last
+    ///    13 months (IDs only).
     /// 2. Filter: fetch just sender and subject, skip ads, newsletters, security notices, review
     ///    requests and older repeats of the same receipt or order.
     /// 3. Download: only what's left, in full; the PDFs of pagoPA emails are scanned for their
@@ -537,6 +540,8 @@ final class EmailImportModel {
         report(ScanProgress(account: account, stage: .searching))
         let billingIDs = try await call { try await $0.searchMessageIDs(limit: Self.searchLimit) }
         try Task.checkCancellation()
+        let knownIDs = try await call { try await $0.searchMessageIDs(query: GmailAPI.knownSendersQuery, limit: Self.knownSendersSearchLimit) }
+        try Task.checkCancellation()
         let orderIDs = try await call { try await $0.searchMessageIDs(query: GmailAPI.ordersQuery, limit: Self.searchLimit) }
         try Task.checkCancellation()
         let noticeIDs = try await call { try await $0.searchMessageIDs(query: GmailAPI.pagoPAQuery, limit: Self.noticesReadLimit * 2) }
@@ -544,7 +549,7 @@ final class EmailImportModel {
 
         // Newest first, each email once.
         var seen = Set<String>()
-        let ids = (billingIDs + orderIDs + noticeIDs).filter { seen.insert($0).inserted }
+        let ids = (billingIDs + knownIDs + orderIDs + noticeIDs).filter { seen.insert($0).inserted }
 
         report(ScanProgress(account: account, stage: .filtering, done: 0, total: ids.count))
         let headers = try await call { api in

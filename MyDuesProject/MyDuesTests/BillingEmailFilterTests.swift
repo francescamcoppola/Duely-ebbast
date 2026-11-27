@@ -42,6 +42,29 @@ struct BillingEmailFilterTests {
         #expect(BillingEmailFilter.verdict(for: email("Google <no-reply@accounts.google.com>", "Avviso di sicurezza: nuovo accesso")) == .notBilling)
     }
 
+    @Test("Passes and AI plans are read, even without billing words", arguments: [
+        ("Trenitalia <noreply@trenitalia.it>", "Conferma acquisto", true),
+        ("Trenitalia <noreply@trenitalia.it>", "Il tuo viaggio", true),
+        ("Anthropic <invoice+statements@mail.anthropic.com>", "Your receipt from Anthropic, PBC #2841-1234", false),
+        ("Claude <no-reply@mail.anthropic.com>", "Welcome to Claude Pro", true),
+        ("Italo <noreply@italotreno.com>", "Grazie per il tuo acquisto", true),
+    ])
+    func knownSenders(from: String, subject: String, unsubscribe: Bool) {
+        #expect(BillingEmailFilter.verdict(for: email(from, subject, unsubscribe: unsubscribe)) == .billing)
+    }
+
+    @Test("Known senders' ads are still skipped")
+    func knownSenderAds() {
+        #expect(BillingEmailFilter.verdict(for: email("Trenitalia <news@trenitalia.it>", "Offerte Frecciarossa: sconto 30% 🚄", unsubscribe: true)) == .advertising)
+        #expect(!KnownBillingSenders.contains("Fake <billing@notanthropic.com>"))
+        #expect(KnownBillingSenders.contains("Anthropic <invoice@mail.anthropic.com>"))
+    }
+
+    @Test("Legal suffixes don't split a service")
+    func legalSuffixes() {
+        #expect(DetectedSubscription.matchKey("Anthropic, PBC") == DetectedSubscription.matchKey("Anthropic"))
+    }
+
     @Test("Short tokens match whole words only")
     func wholeWords() {
         #expect(BillingEmailFilter.containsWord("avviso tari 2026", ["tari"]))

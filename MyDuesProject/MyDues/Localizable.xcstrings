@@ -23235,6 +23235,206 @@
           }
         }
       }
+    },
+    "Enter the subscription's name." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib den Namen des Abos ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe el nombre de la suscripción."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisissez le nom de l'abonnement."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserisci il nome dell'abbonamento."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inseriscs il noms dell'abbonaments."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vul de naam van het abonnement in."
+          }
+        }
+      }
+    },
+    "Enter the price. Use 0 for a free plan." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib den Preis ein. Für ein kostenloses Abo 0 eingeben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe el precio. Usa 0 para un plan gratuito."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisissez le prix. Indiquez 0 pour une offre gratuite."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserisci il prezzo. Usa 0 per un piano gratuito."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inseriscs il prezzs. Usa 0 per un pians gratuits."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vul de prijs in. Gebruik 0 voor een gratis abonnement."
+          }
+        }
+      }
+    },
+    "Enter a valid price, like 9.99." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib einen gültigen Preis ein, zum Beispiel 9,99."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe un precio válido, por ejemplo 9,99."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisissez un prix valide, par exemple 9,99."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserisci un prezzo valido, ad esempio 9,99."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inseriscs un prezzs valids, ad esempio 9,99."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vul een geldige prijs in, bijvoorbeeld 9,99."
+          }
+        }
+      }
+    },
+    "The last payment can't be before the next one." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die letzte Zahlung kann nicht vor der nächsten liegen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El último pago no puede ser anterior al próximo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le dernier paiement ne peut pas précéder le prochain."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'ultimo pagamento non può essere prima del prossimo."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'ultims pagaments non può essers prims del prossims."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De laatste betaling kan niet vóór de volgende liggen."
+          }
+        }
+      }
+    },
+    "The price depends on your plan or route: check it on %@'s website, then enter it below." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Preis hängt von deinem Tarif oder deiner Strecke ab: Sieh ihn auf der Website von %@ nach und gib ihn unten ein."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El precio depende de tu plan o trayecto: consúltalo en el sitio web de %@ y escríbelo abajo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le prix dépend de votre offre ou de votre trajet : vérifiez-le sur le site de %@, puis saisissez-le ci-dessous."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il prezzo dipende dal tuo piano o dalla tua tratta: controllalo sul sito di %@, poi inseriscilo qui sotto."
+          }
+        },
+        "it-VA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il prezzs dipends dal tuo pians o dalls tua tratts: controllals sul sits di %@, poi inseriscils qui sotts."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De prijs hangt af van je abonnement of traject: bekijk hem op de website van %@ en vul hem hieronder in."
+          }
+        }
+      }
     }
   },
   "version" : "1.3"

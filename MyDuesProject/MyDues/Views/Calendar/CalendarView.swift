@@ -2,7 +2,8 @@
 //  CalendarView.swift
 //  MyDues
 //
-//  The full payment schedule: month grid → selected day's payments → the month's real charges.
+//  The full payment schedule: the month's deadlines → month grid → selected day's payments →
+//  the month's real charges.
 //
 
 import SwiftUI
@@ -35,13 +36,22 @@ struct CalendarView: View {
         let schedule = MonthSchedule(subscriptions: subscriptions, month: month, calendar: calendar)
         let deadlines = DeadlineList.items(purchases: purchases, notices: notices,
                                            subscriptions: subscriptions, calendar: calendar)
-        let dayDeadlines = deadlines.filter { item in
-            item.date.map { calendar.isDate($0, inSameDayAs: selectedDay) } ?? false
+        // The whole month's, not just the selected day's: above the grid, a list that changed with
+        // every tap would push the grid around under the finger.
+        let monthDeadlines = deadlines.filter { item in
+            item.date.map { month.contains($0, calendar: calendar) } ?? false
         }
 
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
+                    if !monthDeadlines.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            SectionHeader(title: "Deadlines", actionTitle: "Show All") { router.selectedTab = .deadlines }
+                            DeadlinesCard(items: monthDeadlines, currencyCode: currencyCode) { router.selectedTab = .deadlines }
+                        }
+                    }
+
                     MonthGridView(month: month, schedule: schedule, deadlines: deadlines, selectedDay: $selectedDay) { offset in
                         showMonth(month.adding(months: offset, calendar: calendar))
                     }
@@ -51,13 +61,6 @@ struct CalendarView: View {
                         payments: schedule.payments(on: selectedDay, calendar: calendar),
                         currencyCode: currencyCode
                     ) { detailSubscription = $0 }
-
-                    if !dayDeadlines.isEmpty {
-                        VStack(alignment: .leading, spacing: 10) {
-                            SectionHeader(title: "Deadlines", actionTitle: "Show All") { router.selectedTab = .deadlines }
-                            DeadlinesCard(items: dayDeadlines, currencyCode: currencyCode) { router.selectedTab = .deadlines }
-                        }
-                    }
 
                     if schedule.paymentCount > 0 {
                         MonthSummaryCard(schedule: schedule, monthlyAverage: monthlyAverage,

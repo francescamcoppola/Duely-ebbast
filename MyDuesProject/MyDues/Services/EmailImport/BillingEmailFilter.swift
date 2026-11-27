@@ -44,6 +44,10 @@ nonisolated enum BillingEmailFilter {
             return .advertising
         }
         if containsWord(subject, weakSubjectTokens) { return .billing }
+        // Services that are mostly paid by subscription (Claude, Trenitalia passes…): their
+        // receipts often say just "Conferma acquisto" or "Welcome to Pro". The model then
+        // tells a monthly pass from a single ticket.
+        if KnownBillingSenders.contains(email.from) { return .billing }
 
         // Found only through Gmail's Purchases category, with no billing words: keep it unless it
         // looks like a mailing (one-off orders are then rejected by the model).
@@ -133,12 +137,13 @@ nonisolated enum BillingEmailFilter {
         "ricevuta", "fattura", "bolletta", "bollette", "pagopa", "avviso di pagamento", "addebito",
         "domiciliazione", "quietanza", "estratto conto", "conferma di pagamento", "pagamento ricevuto",
         "pagamento effettuato", "pagamento riuscito", "pagamento non riuscito", "rinnovo", "rinnovato",
-        "il tuo abbonamento", "tasse universitarie", "contribuzione studentesca", "tari", "imu",
+        "il tuo abbonamento", "abbonamento mensile", "abbonamento annuale", "tasse universitarie", "contribuzione studentesca", "tari", "imu",
         "bollo auto", "polizza", "premio assicurativo",
         // English
         "receipt", "invoice", "renewal", "renews", "renewed", "auto-renew", "payment received",
         "payment confirmation", "payment failed", "your payment", "amount due", "direct debit",
         "billing statement", "your subscription", "your membership", "your bill", "tuition",
+        "your receipt", "payment receipt", "subscription confirmed", "subscription renewed",
         // Spanish
         "recibo", "factura", "renovacion", "tu suscripcion", "tu factura", "matricula",
     ]
@@ -147,8 +152,12 @@ nonisolated enum BillingEmailFilter {
     private static let weakSubjectTokens = [
         "abbonamento", "pagamento", "scadenza", "rata", "canone", "tassa", "tasse", "tributo",
         "iscrizione", "affitto", "condominio", "assicurazione", "utenza", "prova gratuita", "piano",
+        "conferma acquisto", "conferma di acquisto", "conferma d'acquisto", "acquisto confermato",
+        "grazie per il tuo acquisto", "grazie per l'acquisto", "carnet", "tessera",
         "subscription", "payment", "billing", "statement", "membership", "free trial", "trial",
-        "plan", "tax", "rent", "insurance", "premium",
+        "plan", "tax", "rent", "insurance", "premium", "purchase confirmation", "your purchase",
+        "thanks for your purchase", "thank you for your purchase", "season ticket",
+        "upgraded", "welcome to pro", "welcome to plus", "welcome to premium", "welcome to max",
         "suscripcion", "pago", "impuesto", "plan",
     ]
 
